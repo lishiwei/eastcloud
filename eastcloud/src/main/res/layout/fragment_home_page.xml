@@ -1,0 +1,27 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.orientalfinance.eastcloud.fragment.FragmentHomePage">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_Homepage"
+            android:layout_width="match_parent"
+            app:tabSelectedTextColor="@color/colorAccent"
+            android:layout_height="50dp">
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_HomePage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+
+
+
+    </LinearLayout>
+</layout>

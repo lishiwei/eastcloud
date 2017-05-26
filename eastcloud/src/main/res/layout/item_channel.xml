@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="channel"
+            type="com.orientalfinance.eastcloud.module.Channel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="horizontal"
+        android:paddingRight="8dp">
+
+        <ImageView
+            android:id="@+id/iv_channelbg"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            app:imageUrl="@{channel.currentProgramBg}"/>
+
+        <ImageView
+            android:id="@+id/iv_channel_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="30dp"
+            app:imageUrl="@{channel.channelLogo}"
+            android:layout_toRightOf="@id/iv_channelbg"
+            />
+
+        <TextView
+            android:id="@+id/tv_channeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/iv_channel_logo"
+            android:gravity="left"
+            android:text="@={channel.channelName}"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_channel_logo"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/iv_channelbg"
+            android:background="@drawable/oval"
+            android:gravity="left"
+            android:text="@={channel.programTime}"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_channel_logo"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/time"
+            android:gravity="left"
+            android:text="@={channel.currentProgram}"
+            android:textSize="12sp"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/video"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</layout>

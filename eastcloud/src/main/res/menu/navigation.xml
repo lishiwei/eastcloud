@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_recommend" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_channel" />
+    <item
+        android:id="@+id/navigation_remotecontrol"
+        android:icon="@drawable/ic_remote_control"
+        android:title="@string/title_remote_control" />
+
+    <item
+        android:id="@+id/navigation_application"
+        android:icon="@drawable/ic_channel"
+        android:title="@string/title_application" />
+
+    <item
+        android:id="@+id/navigation_myself"
+        android:icon="@drawable/ic_myself"
+        android:title="@string/title_myself" />
+
+</menu>
