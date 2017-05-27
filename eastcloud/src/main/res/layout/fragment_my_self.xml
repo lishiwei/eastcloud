@@ -1,13 +1,130 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.orientalfinance.eastcloud.fragment.FragmentMySelf">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="avatarUrl"
+            type="String"/>
+    </data>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="myself" />
+        tools:context="com.orientalfinance.eastcloud.fragment.FragmentMySelf">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/iv_UserAvatar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            app:circleImageUrl="@{avatarUrl}"/>
+
+        <TextView
+            android:id="@+id/tv_UserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_UserAvatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="Angle Carson"/>
+
+        <TextView
+            android:id="@+id/tv_UserLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_UserName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@drawable/vip"
+            android:drawablePadding="12dp"
+            android:text="Angle Carson"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_UserLevel"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/fl_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:background="@drawable/setting"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="4dp"
+                    android:text="设置"/>
+            </FrameLayout>
+
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="4dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="#30000000">
+
+            </View>
+
+            <FrameLayout
+                android:id="@+id/fl_Home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:background="@drawable/setting"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="4dp"
+                    android:text="设置"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@id/ll_setting"
+            android:layout_margin="12dp"
+            android:background="#20000000"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_Myself"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_below="@id/line1">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</ScrollView>
+</layout>

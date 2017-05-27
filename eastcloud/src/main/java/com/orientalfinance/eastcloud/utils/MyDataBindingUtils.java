@@ -28,4 +28,14 @@ public class MyDataBindingUtils {
     {
         ImageLoaders.displayImage(imageView,url);
     }
+    @BindingAdapter({"circleImageUrl"})
+    public static void loadCircleImage(ImageView imageView,String url)
+    {
+        ImageLoaders.displayCircleImage(imageView,url);
+    }
+    @BindingAdapter({"imageSrc"})
+    public static void loadSrcImage(ImageView imageView,Integer src)
+    {
+        ImageLoaders.displayImage(imageView,src);
+    }
 }

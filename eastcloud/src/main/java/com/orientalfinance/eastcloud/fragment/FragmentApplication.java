@@ -29,7 +29,7 @@ import javax.inject.Inject;
  * Use the {@link FragmentApplication#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentApplication extends BaseFragment<ApplicationComponent,ApplicationView,ApplicationPresenter>implements ApplicationView {
+public class FragmentApplication extends BaseFragment<ApplicationComponent, ApplicationView, ApplicationPresenter> implements ApplicationView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,10 +38,11 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent,Appli
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-//
-@Inject
-HotApplicationRvAdapter mHotApplicationRvAdapter;
-FragmentApplicationBinding mFragmentApplicationBinding;
+    //
+    @Inject
+    HotApplicationRvAdapter mHotApplicationRvAdapter;
+    FragmentApplicationBinding mFragmentApplicationBinding;
+
     public FragmentApplication() {
         // Required empty public constructor
     }
@@ -76,9 +77,9 @@ FragmentApplicationBinding mFragmentApplicationBinding;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-mFragmentApplicationBinding = (FragmentApplicationBinding) mViewDataBinding;
+        mFragmentApplicationBinding = (FragmentApplicationBinding) mViewDataBinding;
         mFragmentApplicationBinding.rvHotApplication.setAdapter(mHotApplicationRvAdapter);
-        mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true));
+        mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override

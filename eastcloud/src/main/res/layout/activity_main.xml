@@ -10,7 +10,7 @@
 <android.support.v7.widget.Toolbar
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
+    android:background="#ffffff"
     android:id="@+id/toolbar"
     >
     <LinearLayout
@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
             android:textSize="20sp"
+            android:id="@+id/tv_title"
             android:text="东方遥控宝"/>
         <ImageView
             android:layout_width="40dp"

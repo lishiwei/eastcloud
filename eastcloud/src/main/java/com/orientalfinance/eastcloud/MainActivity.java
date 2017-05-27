@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static String DASHBOARD = "dashboard";
     public static String HOMEPAGE = "homepage";
     public static String REMOTECONTROL = "remotecontrol";
-    private TextView mTextMessage;
+    private TextView mTitle;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -41,22 +41,30 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentHomePage);
                     fragmentTransaction.commitAllowingStateLoss();
+                    mTitle.setText("东方掌中宝");
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_channel:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentHomePage).hide(mFragmentMySelf).show(mFragmentDashBoard);
                     fragmentTransaction.commitAllowingStateLoss();
+                    mTitle.setText(getString(R.string.title_channel));
                     return true;
                 case R.id.navigation_application:
                     fragmentTransaction.hide(mFragmentHomePage).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentApplication);
                     fragmentTransaction.commitAllowingStateLoss();
+                    mTitle.setText(getString(R.string.title_application));
+
                     return true;
                 case R.id.navigation_remotecontrol:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentHomePage).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentRemoteControl);
                     fragmentTransaction.commitAllowingStateLoss();
+                    mTitle.setText(getString(R.string.title_remote_control));
+
                     return true;
                 case R.id.navigation_myself:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
                     fragmentTransaction.commitAllowingStateLoss();
+                    mTitle.setText(getString(R.string.title_myself));
+
                     return true;
             }
 
@@ -72,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mTitle = (TextView) toolbar.findViewById(R.id.tv_title);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
