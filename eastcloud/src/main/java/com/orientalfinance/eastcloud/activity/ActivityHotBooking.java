@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.TextView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityHotBookingBinding;
@@ -36,12 +37,16 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mActivityHotBookingBinding = DataBindingUtil.setContentView(this, R.layout.activity_hot_booking);
         mActivityHotBookingBinding.rvHotMovie.setLayoutManager(new FullyGridLayoutManager(this,3, LinearLayoutManager.VERTICAL,false));
         mActivityHotBookingBinding.rvHotMovie.setAdapter(mHotMovieRvAdpter);
         mActivityHotBookingBinding.rvHotVariety.setLayoutManager(new FullyGridLayoutManager(this,3, LinearLayoutManager.VERTICAL,false));
         mActivityHotBookingBinding.rvHotVariety.setAdapter(mHotVarietyRvAdpter);
-
+        ((TextView) mActivityHotBookingBinding.toolbar.findViewById(R.id.textView)).setText("热门预约");
+        setSupportActionBar(mActivityHotBookingBinding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

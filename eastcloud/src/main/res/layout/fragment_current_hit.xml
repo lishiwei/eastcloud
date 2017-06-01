@@ -41,6 +41,7 @@
                         android:background="@drawable/oval"
                         android:hint="欢乐颂第二季"
                         android:inputType="text"
+                        android:onClick="@{utils.onSearchClick}"
                         android:paddingBottom="8dp"
                         android:paddingTop="8dp"
                         android:textSize="14sp"/>

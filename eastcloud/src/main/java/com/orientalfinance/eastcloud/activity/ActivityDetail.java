@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityDetailBinding;
@@ -34,6 +35,10 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Activi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityDetailBinding = DataBindingUtil.setContentView(this,getLayoutId());
+        setSupportActionBar(mActivityDetailBinding.toolbar);
+        ((TextView)mActivityDetailBinding.toolbar.findViewById(R.id.tv_toolbar)).setText("影视详情");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mActivityDetailBinding.toolbar.setTitle("");
         getPresenter().start();
         mActivityDetailBinding.rvDetailComment.setAdapter(mDetailRVAdapter);
         mActivityDetailBinding.rvDetailComment.setLayoutManager(new FullyLinearLayoutManager(ActivityDetail.this));

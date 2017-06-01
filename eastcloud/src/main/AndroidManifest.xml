@@ -17,6 +17,7 @@
             android:name=".eastcloud.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,11 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityDetail">
+        <activity android:name=".eastcloud.activity.ActivityDetail"
+                  android:parentActivityName=".eastcloud.MainActivity" >
+            >
+
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityTVPlayDetail">
+        <activity android:name=".eastcloud.activity.ActivityTVPlayDetail"
+                  android:parentActivityName=".eastcloud.MainActivity">
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityHotBooking">
+        <activity android:name=".eastcloud.activity.ActivityHotBooking"
+                  android:parentActivityName=".eastcloud.MainActivity"
+            >
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivitySearch"
+                  android:parentActivityName=".eastcloud.MainActivity">
         </activity>
     </application>
 

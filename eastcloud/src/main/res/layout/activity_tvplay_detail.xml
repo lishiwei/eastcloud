@@ -10,23 +10,49 @@
             type="com.orientalfinance.eastcloud.module.Detail"/>
     </data>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.orientalfinance.eastcloud.activity.ActivityDetail">
 
-        <LinearLayout
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:id="@+id/toolbar"
+            >
 
-            <android.support.v7.widget.Toolbar
+            <TextView
+                android:id="@+id/tv_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#ffffff"
-                >
-            </android.support.v7.widget.Toolbar>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电视详情"/>
+        </android.support.v7.widget.Toolbar>
 
+        <ScrollView
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            tools:context="com.orientalfinance.eastcloud.activity.ActivityDetail">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:orientation="vertical">
+
+
+                <com.anton46.stepsview.StepsView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/stepsView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -35,36 +61,41 @@
                     app:imageUrl="@{detail.url}"/>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rectangle"
-                android:gravity="center"
-                android:text="预约提醒"
-                android:textSize="16sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="简介"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@={detail.profile}"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="评论"/>
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/rv_Detail_Comment"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rectangle"
+                    android:gravity="center"
+                    android:text="预约提醒"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="简介"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={detail.profile}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="评论"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_Detail_Comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 
 import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
+import com.orientalfinance.eastcloud.activity.ActivitySearch;
 import com.orientalfinance.eastcloud.module.ImageLoaders;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,6 +25,10 @@ public class MyDataBindingUtils {
 
     public void onClick(View view) {
         Intent intent = new Intent(view.getContext(), ActivityHotBooking.class);
+        view.getContext().startActivity(intent);
+    }
+    public void onSearchClick(View view) {
+        Intent intent = new Intent(view.getContext(), ActivitySearch.class);
         view.getContext().startActivity(intent);
     }
 
