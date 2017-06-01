@@ -2,6 +2,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="utils"
+            type="com.orientalfinance.eastcloud.utils.MyDataBindingUtils"/>
+
+
+    </data>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -44,6 +53,7 @@
                         android:paddingBottom="8dp"
                         android:paddingTop="8dp"
                         android:text="预约"
+                        android:onClick="@{utils.onClick}"
                         android:textSize="14sp"/>
                 </LinearLayout>
 

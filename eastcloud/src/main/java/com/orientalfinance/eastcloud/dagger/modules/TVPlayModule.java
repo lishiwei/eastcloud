@@ -1,7 +1,16 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
-import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
+import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
+import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
+import com.orientalfinance.eastcloud.adapter.TVPlayRvAdapter;
+import com.orientalfinance.eastcloud.dagger.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.LiveVideo;
+import com.orientalfinance.eastcloud.dagger.PerFragment;
 import com.orientalfinance.eastcloud.module.Channel;
+import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +19,10 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by 29435 on 2017/5/25.
+ * Created by 29435 on 2017/5/26.
  */
 @Module
-public class ShangHaiModules {
+public class TVPlayModule {
 
     @Provides
     public List<String> getImages() {
@@ -25,10 +34,9 @@ public class ShangHaiModules {
     }
 
     @Provides
-    public ChannelRvAdapter getAdapter(List<Channel> channels) {
-        return new ChannelRvAdapter(channels);
+    public TVPlayRvAdapter getadapter(List<Channel> channels) {
+        return new TVPlayRvAdapter(channels);
     }
-
     @Provides
     public List<Channel> getChannels() {
         List<Channel> channels = new ArrayList<>();

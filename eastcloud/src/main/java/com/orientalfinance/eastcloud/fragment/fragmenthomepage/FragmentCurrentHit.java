@@ -23,6 +23,7 @@ import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 import com.orientalfinance.eastcloud.utils.GlideImageLoader;
+import com.orientalfinance.eastcloud.utils.MyDataBindingUtils;
 
 import java.util.List;
 
@@ -113,6 +114,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         super.onActivityCreated(savedInstanceState);
 
         mFragmentCurrentHitBinding = (FragmentCurrentHitBinding) mViewDataBinding;
+        mFragmentCurrentHitBinding.setUtils(new MyDataBindingUtils());
         mFragmentCurrentHitBinding.banner.setImageLoader(new GlideImageLoader());
         mFragmentCurrentHitBinding.banner.setImages(mImageUrl);
         mFragmentCurrentHitBinding.banner.start();

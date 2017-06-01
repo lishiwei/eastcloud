@@ -2,19 +2,39 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.orientalfinance.R;
+import com.orientalfinance.databinding.FragmentTvplayBinding;
+import com.orientalfinance.eastcloud.adapter.TVPlayRvAdapter;
+import com.orientalfinance.eastcloud.dagger.component.AppComponent;
+import com.orientalfinance.eastcloud.dagger.component.DaggerTvPlayComponent;
+import com.orientalfinance.eastcloud.dagger.component.TvPlayComponent;
+import com.orientalfinance.eastcloud.dagger.modules.TVPlayModule;
+import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
+import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
+import com.orientalfinance.eastcloud.mvp.View.TVPlayView;
+import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
+import com.orientalfinance.eastcloud.mvp.presenter.TVPlayPresenter;
+import com.orientalfinance.eastcloud.utils.DensityUtils;
+import com.orientalfinance.eastcloud.utils.GlideImageLoader;
+import com.youth.banner.Banner;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentTVPlay#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTVPlay extends Fragment {
+public class FragmentTVPlay extends BaseFragment<TvPlayComponent,TVPlayView,TVPlayPresenter>implements TVPlayView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,7 +44,11 @@ public class FragmentTVPlay extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+@Inject
+    List<String>  mStringList;
+@Inject
+    TVPlayRvAdapter mTVPlayRvAdapter;
+    FragmentTvplayBinding mFragmentTvplayBinding;
     public FragmentTVPlay() {
         // Required empty public constructor
     }
@@ -57,10 +81,29 @@ public class FragmentTVPlay extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tvplay, container, false);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mFragmentTvplayBinding = (FragmentTvplayBinding) mViewDataBinding;
+
+        mFragmentTvplayBinding.rvPlay.setAdapter(mTVPlayRvAdapter);
+mFragmentTvplayBinding.rvPlay.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
+        Banner banner= new Banner(getActivity());
+        banner.setPadding(0,0,0, DensityUtils.dp2px(12));
+        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtils.dp2px(200)));
+        banner.setImageLoader(new GlideImageLoader());
+        banner.setImages(mStringList);
+        banner.start();
+mTVPlayRvAdapter.setHeaderView(banner);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_tvplay;
+    }
+
+    @Override
+    protected TvPlayComponent constructComponent(AppComponent appComponent) {
+        return DaggerTvPlayComponent.builder().appComponent(appComponent).tVPlayModule(new TVPlayModule()).build();
     }
 
 }

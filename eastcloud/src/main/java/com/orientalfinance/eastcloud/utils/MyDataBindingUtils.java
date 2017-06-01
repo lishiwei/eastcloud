@@ -1,10 +1,12 @@
 package com.orientalfinance.eastcloud.utils;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
 
 
+import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
 import com.orientalfinance.eastcloud.module.ImageLoaders;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,21 +23,22 @@ public class MyDataBindingUtils {
     }
 
     public void onClick(View view) {
+        Intent intent = new Intent(view.getContext(), ActivityHotBooking.class);
+        view.getContext().startActivity(intent);
+    }
 
-    }
     @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView imageView,String url)
-    {
-        ImageLoaders.displayImage(imageView,url);
+    public static void loadImage(ImageView imageView, String url) {
+        ImageLoaders.displayImage(imageView, url);
     }
+
     @BindingAdapter({"circleImageUrl"})
-    public static void loadCircleImage(ImageView imageView,String url)
-    {
-        ImageLoaders.displayCircleImage(imageView,url);
+    public static void loadCircleImage(ImageView imageView, String url) {
+        ImageLoaders.displayCircleImage(imageView, url);
     }
+
     @BindingAdapter({"imageSrc"})
-    public static void loadSrcImage(ImageView imageView,Integer src)
-    {
-        ImageLoaders.displayImage(imageView,src);
+    public static void loadSrcImage(ImageView imageView, Integer src) {
+        ImageLoaders.displayImage(imageView, src);
     }
 }

@@ -6,17 +6,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.orientalfinance.R;
+import com.orientalfinance.databinding.FragmentCurrentHitBinding;
 import com.orientalfinance.databinding.FragmentShangHaiBinding;
 import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.component.ShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ShangHaiModules;
+import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ShangHaiPresenter;
+import com.orientalfinance.eastcloud.utils.DensityUtils;
+import com.orientalfinance.eastcloud.utils.GlideImageLoader;
+import com.youth.banner.Banner;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,6 +51,8 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent,ShangHaiVie
 FragmentShangHaiBinding mFragmentShangHaiBinding;
     @Inject
     ChannelRvAdapter mChannelRvAdapter;
+    @Inject
+    List<String> mStringList;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -71,8 +83,8 @@ FragmentShangHaiBinding mFragmentShangHaiBinding;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-mFragmentShangHaiBinding = (FragmentShangHaiBinding) mViewDataBinding;
-mFragmentShangHaiBinding.rvShanghai.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,true));
+        mFragmentShangHaiBinding = (FragmentShangHaiBinding) mViewDataBinding;
+        mFragmentShangHaiBinding.rvShanghai.setLayoutManager(new FullyLinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         mFragmentShangHaiBinding.rvShanghai.setAdapter(mChannelRvAdapter);
     }
 

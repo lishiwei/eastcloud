@@ -26,6 +26,10 @@
         </activity>
         <activity android:name=".eastcloud.activity.ActivityDetail">
         </activity>
+        <activity android:name=".eastcloud.activity.ActivityTVPlayDetail">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityHotBooking">
+        </activity>
     </application>
 
 </manifest>
