@@ -4,7 +4,9 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
@@ -15,6 +17,7 @@ import com.orientalfinance.eastcloud.dagger.component.CurrentHitComponent;
 
 import com.orientalfinance.eastcloud.dagger.component.DaggerCurrentHitComponent;
 import com.orientalfinance.eastcloud.dagger.modules.CurrentHitModule;
+import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -89,8 +92,26 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     }
 
     @Override
+    public void showView(List<Movie> movies) {
+        mCurrentHitRvAdpter.setMovieList(movies);
+        mLiveVideoRvAdapter.setMovieList(movies);
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mFragmentCurrentHitBinding = (FragmentCurrentHitBinding) mViewDataBinding;
         mFragmentCurrentHitBinding.banner.setImageLoader(new GlideImageLoader());
         mFragmentCurrentHitBinding.banner.setImages(mImageUrl);
@@ -99,5 +120,28 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.ryCurrentHit.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
         mFragmentCurrentHitBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false));
+        mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_red_light,android.R.color.holo_orange_light,
+                android.R.color.holo_green_light);
+//        mFragmentCurrentHitBinding.ryCurrentHit.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                int topRowVerticalPosition = (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
+//                mFragmentCurrentHitBinding.scrollview.setEnabled(topRowVerticalPosition >= 0);
+//            }
+//        });
+
+        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPresenter().start();
+            }
+        });
+        getPresenter().start();
     }
 }

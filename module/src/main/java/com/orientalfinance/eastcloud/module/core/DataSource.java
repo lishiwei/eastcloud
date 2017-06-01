@@ -9,7 +9,7 @@ import io.reactivex.Flowable;
  * Created by lishiwei on 16/5/17.
  */
 public interface DataSource < T > {
-    Flowable<List<T>> getDatas(int pageSize, int pageNo);
+    Flowable<List<T>> getDatas(RequestParam requestParam);
 
     public void saveData(T data);
 

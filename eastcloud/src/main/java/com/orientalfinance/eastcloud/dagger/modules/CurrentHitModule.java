@@ -4,7 +4,12 @@ import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
 import com.orientalfinance.eastcloud.dagger.CurrentHit;
 import com.orientalfinance.eastcloud.dagger.LiveVideo;
+import com.orientalfinance.eastcloud.dagger.PerFragment;
 import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRepository;
+import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +33,18 @@ public class CurrentHitModule {
     }
 
     @Provides
-    public CurrentHitRvAdpter getadapter( @CurrentHit List<Movie> movies) {
-        return new CurrentHitRvAdpter(movies);
+    public CurrentHitRvAdpter getadapter() {
+        return new CurrentHitRvAdpter(new ArrayList<Movie>());
     }
-
+@Provides
+@PerFragment
+public MovieRepository getRespository()
+{
+    return new MovieRepository(new MovieLocalDataSource(),new MovieRemoteDataSource());
+}
     @Provides
-    public LiveVideoRvAdapter getLiveVideoDapter( @LiveVideo List<Movie> movies) {
-        return new LiveVideoRvAdapter(movies);
+    public LiveVideoRvAdapter getLiveVideoDapter() {
+        return new LiveVideoRvAdapter(new ArrayList<Movie>());
     }
 
     @Provides

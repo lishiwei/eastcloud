@@ -15,9 +15,12 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 29435 on 2017/5/27.
@@ -29,6 +32,7 @@ public class MovieRepository implements DataSource<Movie> {
     MovieRemoteDataSource mMovieRemoteDataSource;
     List<Movie> mMovieList;
 
+
     public MovieRepository(MovieLocalDataSource movieLocalDataSource, MovieRemoteDataSource movieRemoteDataSource) {
         mMovieLocalDataSource = movieLocalDataSource;
         mMovieRemoteDataSource = movieRemoteDataSource;
@@ -36,11 +40,10 @@ public class MovieRepository implements DataSource<Movie> {
     }
 
     @Override
-    public Flowable<List<Movie>> getDatas(int pageSize, int pageNo) {
+    public Flowable<List<Movie>> getDatas(RequestParam requestParam) {
         if (mMovieList.size() == 0) {
-            return getAndSaveRemoteMovie();
-        }
-        else {
+            return getAndSaveRemoteMovie(requestParam);
+        } else {
             return Flowable.create(new FlowableOnSubscribe<List<Movie>>() {
                 @Override
                 public void subscribe(FlowableEmitter<List<Movie>> e) throws Exception {
@@ -48,6 +51,9 @@ public class MovieRepository implements DataSource<Movie> {
                 }
             }, BackpressureStrategy.BUFFER);
         }
+//        else {
+//            return Flowable.concat(mMovieLocalDataSource.getDatas(pageSize,pageNo),mMovieRemoteDataSource.getDatas(pageSize,pageNo)).first().toFlowable();
+//        }
     }
 
     @Override
@@ -55,25 +61,17 @@ public class MovieRepository implements DataSource<Movie> {
 
     }
 
-    private Flowable<List<Movie>> getAndSaveRemoteMovie() {
-
-        return mMovieRemoteDataSource.getDatas(0, 0).flatMap(new Function<List<Movie>, Publisher<List<Movie>>>() {
+    private Flowable<List<Movie>> getAndSaveRemoteMovie(RequestParam requestParam) {
+        return mMovieRemoteDataSource.getDatas(requestParam).flatMap(new Function<List<Movie>, Flowable<List<Movie>>>() {
             @Override
-            public Publisher<List<Movie>> apply(List<Movie> movies) throws Exception {
-
-                return (Publisher<List<Movie>>) Flowable.fromIterable(movies).doOnNext(new Consumer<Movie>() {
+            public Flowable<List<Movie>> apply(List<Movie> movies) throws Exception {
+                return Flowable.fromIterable(movies).doOnNext(new Consumer<Movie>() {
                     @Override
                     public void accept(Movie movie) throws Exception {
-                        Log.d(TAG, "accept: ");
                         mMovieLocalDataSource.saveData(movie);
                         mMovieList.add(movie);
                     }
-                }).toList();
-            }
-        }).doOnComplete(new Action() {
-            @Override
-            public void run() throws Exception {
-
+                }).toList().toFlowable();
             }
         });
     }

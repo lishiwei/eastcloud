@@ -21,7 +21,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField("boolean", "LOG_DEBUG", "false")
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("boolean", "LOG_DEBUG", "true")
         }
     }
 }
@@ -35,15 +39,15 @@ dependencies {
     compile "com.android.support:design:$versions.supportLibrariesVersion"
     compile "com.android.support:support-vector-drawable:$versions.supportLibrariesVersion"
     compile "com.android.support:support-v4:$versions.supportLibrariesVersion"
-    testCompile 'junit:junit:4.12'
-    compile 'com.youth.banner:banner:1.4.9'
     compile "com.hannesdorfmann.mosby:mvp:$versions.mosbyMvpVersion"
     compile "com.hannesdorfmann.mosby:viewstate:$versions.mosbyMvpVersion"
-    compile "io.reactivex.rxjava2:rxandroid:$versions.rxAndroidVersion"
     compile "com.google.dagger:dagger:$versions.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$versions.daggercompiler"
-    compile 'com.jakewharton:butterknife:7.0.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
     compile "com.github.bumptech.glide:glide:$versions.glideversion"
     compile project(':module')
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }

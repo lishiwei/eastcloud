@@ -32,6 +32,11 @@ public class LiveVideoRvAdapter extends RecyclerView.Adapter<LiveVideoRvAdapter.
         return videoViewHolder;
     }
 
+    public void setMovieList(List<Movie> movieList) {
+        mMovieList = movieList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(LiveVideoViewHolder holder, int position) {
 holder.mViewDataBinding.setVariable(BR.movie,mMovieList.get(position));

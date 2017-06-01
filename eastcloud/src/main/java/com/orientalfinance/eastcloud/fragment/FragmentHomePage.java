@@ -16,6 +16,7 @@ import com.orientalfinance.eastcloud.adapter.CurrentHitPageAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerHomePageComponent;
 import com.orientalfinance.eastcloud.dagger.component.HomePageComponent;
+import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
@@ -85,12 +86,12 @@ public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageVi
         }
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-mFragmentHomePageBinding = (FragmentHomePageBinding) mViewDataBinding;
-      mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager()));
+        mFragmentHomePageBinding = (FragmentHomePageBinding) mViewDataBinding;
+        mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager()));
         mFragmentHomePageBinding.tabHomepage.setTabMode(TabLayout.MODE_FIXED);
         mFragmentHomePageBinding.tabHomepage.setupWithViewPager(mFragmentHomePageBinding.vpHomePage);
     }
