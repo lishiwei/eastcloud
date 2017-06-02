@@ -47,6 +47,7 @@ public class CurrentHitRvAdpter extends RecyclerView.Adapter<CurrentHitRvAdpter.
 
     @Override
     public void onBindViewHolder(CurrentHitViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder: "+mMovieList.get(position));
         holder.mViewDataBinding.setVariable(BR.movie, mMovieList.get(position));
     }
 

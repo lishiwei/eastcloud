@@ -8,35 +8,21 @@ public class Movie {
     String imageUrl;
     String title;
     String tag;
-
+int progress;
     public Movie(String imageUrl, String title, String tag) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.tag = tag;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Movie)) return false;
-
-        Movie movie = (Movie) o;
-
-        if (getImageUrl() != null ? !getImageUrl().equals(movie.getImageUrl()) : movie.getImageUrl() != null)
-            return false;
-        if (getTitle() != null ? !getTitle().equals(movie.getTitle()) : movie.getTitle() != null)
-            return false;
-        return getTag() != null ? getTag().equals(movie.getTag()) : movie.getTag() == null;
-
+    public Movie(String imageUrl, String title, String tag, int progress) {
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.tag = tag;
+        this.progress = progress;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getImageUrl() != null ? getImageUrl().hashCode() : 0;
-        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + (getTag() != null ? getTag().hashCode() : 0);
-        return result;
-    }
+
 
     @Override
     public String toString() {
@@ -44,7 +30,16 @@ public class Movie {
                 "imageUrl='" + imageUrl + '\'' +
                 ", title='" + title + '\'' +
                 ", tag='" + tag + '\'' +
+                ", progress='" + progress + '\'' +
                 '}';
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public int getProgress() {
+        return progress;
     }
 
     public String getImageUrl() {

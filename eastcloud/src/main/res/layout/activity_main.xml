@@ -18,24 +18,34 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_gravity="center"
-            android:layout_height="30dp"
+            android:id="@+id/iv_ScanCode"
+            android:layout_height="20dp"
             android:background="@drawable/scancode"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
             android:textSize="20sp"
+            android:gravity="center"
             android:id="@+id/tv_title"
             android:text="东方遥控宝"/>
         <ImageView
-            android:layout_width="40dp"
-            android:layout_marginLeft="100dp"
+            android:layout_width="30dp"
+            android:layout_marginLeft="70dp"
+            android:background="@drawable/history"
             android:layout_gravity="center"
+            android:id="@+id/iv_History"
+            android:layout_height="30dp"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/iv_Email"
             android:background="@drawable/email"
-            android:layout_height="40dp"/>
+            android:layout_height="30dp"/>
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

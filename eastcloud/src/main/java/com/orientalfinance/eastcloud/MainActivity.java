@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,9 +9,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
 import com.orientalfinance.eastcloud.fragment.FragmentApplication;
 import com.orientalfinance.eastcloud.fragment.FragmentChannel;
 import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
@@ -85,6 +88,29 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initFragment();
+        initView();
+    }
+
+    private void initView() {
+        findViewById(R.id.iv_Email).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.iv_History).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ActivityPlayRecord.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initFragment() {

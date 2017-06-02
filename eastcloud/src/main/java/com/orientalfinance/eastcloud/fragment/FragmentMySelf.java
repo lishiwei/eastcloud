@@ -1,13 +1,17 @@
 package com.orientalfinance.eastcloud.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
+import com.orientalfinance.eastcloud.activity.ActivityLogin;
+import com.orientalfinance.eastcloud.activity.ActivitySetting;
 import com.orientalfinance.eastcloud.adapter.RVAdapter;
 
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
@@ -88,8 +92,22 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentMySelfBinding = (FragmentMySelfBinding) mViewDataBinding;
-        mFragmentMySelfBinding.setAvatarUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495868225264&di=adafe75c2dcda203bded7c4acd72cb25&imgtype=0&src=http%3A%2F%2Fnpic7.fangtoo.com%2Fcn%2Fzixun%2Fzh-chs%2F2017-04%2F17%2F126105-30_170417115300_1_lit.jpg");
+        mFragmentMySelfBinding.setAvatarUrl(""+R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
         mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, true));
+ mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
+     @Override
+     public void onClick(View v) {
+         Intent intent  = new Intent(getActivity(), ActivitySetting.class);
+         startActivity(intent);
+     }
+ }); mFragmentMySelfBinding.tvUserName.setOnClickListener(new View.OnClickListener() {
+     @Override
+     public void onClick(View v) {
+         Intent intent  = new Intent(getActivity(), ActivityLogin.class);
+         startActivity(intent);
+     }
+ });
+
     }
 }

@@ -12,6 +12,8 @@ import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
+import com.orientalfinance.eastcloud.dagger.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.LiveVideo;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.CurrentHitComponent;
 
@@ -47,8 +49,10 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     @Inject
     List<String> mImageUrl;
     @Inject
+    @CurrentHit
     CurrentHitRvAdpter mCurrentHitRvAdpter;
     @Inject
+    @LiveVideo
     LiveVideoRvAdapter mLiveVideoRvAdapter;
 
     public FragmentCurrentHit() {
@@ -94,19 +98,19 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 
     @Override
     public void showView(List<Movie> movies) {
-        mCurrentHitRvAdpter.setMovieList(movies);
-        mLiveVideoRvAdapter.setMovieList(movies);
-        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+//        mCurrentHitRvAdpter.setMovieList(movies);
+//        mLiveVideoRvAdapter.setMovieList(movies);
+//        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
     public void showLoading() {
-        mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
+//        mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+//        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
@@ -123,7 +127,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
         mFragmentCurrentHitBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
-                android.R.color.holo_red_light,android.R.color.holo_orange_light,
+                android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
 //        mFragmentCurrentHitBinding.ryCurrentHit.setOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
@@ -138,12 +142,12 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 //            }
 //        });
 
-        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getPresenter().start();
-            }
-        });
-        getPresenter().start();
+//        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getPresenter().start();
+//            }
+//        });
+//        getPresenter().start();
     }
 }

@@ -35,10 +35,11 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Activi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityDetailBinding = DataBindingUtil.setContentView(this,getLayoutId());
+        mActivityDetailBinding.toolbar.setTitle("");
         setSupportActionBar(mActivityDetailBinding.toolbar);
         ((TextView)mActivityDetailBinding.toolbar.findViewById(R.id.tv_toolbar)).setText("影视详情");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mActivityDetailBinding.toolbar.setTitle("");
+
         getPresenter().start();
         mActivityDetailBinding.rvDetailComment.setAdapter(mDetailRVAdapter);
         mActivityDetailBinding.rvDetailComment.setLayoutManager(new FullyLinearLayoutManager(ActivityDetail.this));

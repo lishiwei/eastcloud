@@ -25,20 +25,43 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityDetail"
-                  android:parentActivityName=".eastcloud.MainActivity" >
-            >
-
-        </activity>
-        <activity android:name=".eastcloud.activity.ActivityTVPlayDetail"
-                  android:parentActivityName=".eastcloud.MainActivity">
-        </activity>
-        <activity android:name=".eastcloud.activity.ActivityHotBooking"
-                  android:parentActivityName=".eastcloud.MainActivity"
+        <activity
+            android:name=".eastcloud.activity.ActivityDetail"
+            android:parentActivityName=".eastcloud.MainActivity">
             >
         </activity>
-        <activity android:name=".eastcloud.activity.ActivitySearch"
-                  android:parentActivityName=".eastcloud.MainActivity">
+        <activity
+            android:name=".eastcloud.activity.ActivityTVPlayDetail"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityHotBooking"
+            android:launchMode="singleTask"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivitySearch"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityPlayRecord"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityBookingDetail"
+            android:parentActivityName=".eastcloud.activity.ActivityHotBooking">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivitySetting"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityLogin">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityForgetPassWord">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivitySettingPassword">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityRegister">
         </activity>
     </application>
 

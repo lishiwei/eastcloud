@@ -8,9 +8,6 @@ import android.widget.ImageView;
 
 import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
 import com.orientalfinance.eastcloud.activity.ActivitySearch;
-import com.orientalfinance.eastcloud.module.ImageLoaders;
-
-import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 

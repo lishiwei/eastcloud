@@ -1,6 +1,7 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
+import com.orientalfinance.eastcloud.adapter.HotBookingRvAdpter;
 import com.orientalfinance.eastcloud.adapter.TVPlayRvAdapter;
 import com.orientalfinance.eastcloud.dagger.CurrentHit;
 import com.orientalfinance.eastcloud.dagger.HotMovie;
@@ -8,6 +9,9 @@ import com.orientalfinance.eastcloud.dagger.HotVariety;
 import com.orientalfinance.eastcloud.dagger.LiveVideo;
 import com.orientalfinance.eastcloud.module.Channel;
 import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
+import com.orientalfinance.eastcloud.module.core.MovieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +27,19 @@ public class HotBookingModule {
 
     @Provides
     @HotMovie
-    public CurrentHitRvAdpter getHotMovieAdapter(@CurrentHit List<Movie> movies) {
-        return new CurrentHitRvAdpter(movies);
+    public HotBookingRvAdpter getHotMovieAdapter(@CurrentHit List<Movie> movies) {
+        return new HotBookingRvAdpter(movies);
     }
 
     @Provides
     @HotVariety
-    public CurrentHitRvAdpter getHotVarietyAdapter(@CurrentHit List<Movie> movies) {
-        return new CurrentHitRvAdpter(movies);
+    public HotBookingRvAdpter getHotVarietyAdapter(@CurrentHit List<Movie> movies) {
+        return new HotBookingRvAdpter(movies);
+    }
+
+    @Provides
+    public MovieRepository getRespository() {
+        return new MovieRepository(new MovieLocalDataSource(), new MovieRemoteDataSource());
     }
 
     @Provides

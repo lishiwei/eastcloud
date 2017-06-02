@@ -36,7 +36,10 @@ public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityTvplayDetailBinding = DataBindingUtil.setContentView(this, getLayoutId());
+
+        mActivityTvplayDetailBinding.toolbar.setTitle("");
         setSupportActionBar(mActivityTvplayDetailBinding.toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getPresenter().start();
         mActivityTvplayDetailBinding.rvDetailComment.setAdapter(mDetailRVAdapter);
@@ -45,12 +48,12 @@ public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TV
         strings.add("17:00 \n 中华养生");
         strings.add("18:40 \n 欢乐喜剧人");
         strings.add("20:40 \n  思美人");
-    mActivityTvplayDetailBinding.stepsView.setLabels(strings.toArray(new String[strings.size()]))
-            .setBarColorIndicator(getResources().getColor(R.color.material_blue_grey_800))
-            .setProgressColorIndicator(Color.GRAY)
-            .setLabelColorIndicator(Color.GRAY)
-            .setCompletedPosition(0)
-            .drawView();
+        mActivityTvplayDetailBinding.stepsView.setLabels(strings.toArray(new String[strings.size()]))
+                .setBarColorIndicator(getResources().getColor(R.color.material_blue_grey_800))
+                .setProgressColorIndicator(Color.GRAY)
+                .setLabelColorIndicator(Color.GRAY)
+                .setCompletedPosition(0)
+                .drawView();
     }
 
     @Override

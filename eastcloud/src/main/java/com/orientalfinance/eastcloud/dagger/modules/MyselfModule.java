@@ -20,28 +20,26 @@ import dagger.Provides;
 public class MyselfModule {
 
     @Provides
-    public List<ItemMyself> getImages()
-    {
+    public List<ItemMyself> getImages() {
         List<ItemMyself> itemMyselfs = new ArrayList<>();
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting,"足迹"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "足迹"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "评论"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "会员"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "缴费"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "优惠"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "购物"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "收录"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "类目"));
         return itemMyselfs;
     }
+
     @Provides
-    public MyselfRvAdapter getAdapter(List<ItemMyself> itemMyselfs)
-    {
+    public MyselfRvAdapter getAdapter(List<ItemMyself> itemMyselfs) {
         return new MyselfRvAdapter(itemMyselfs);
     }
 
     @Provides
-    public RVAdapter getMyAdapter(List<ItemMyself> itemMyselfs)
-    {
-        return new RVAdapter<ItemMyself>(BR.item,R.layout.item_myself,itemMyselfs);
+    public RVAdapter getMyAdapter(List<ItemMyself> itemMyselfs) {
+        return new RVAdapter<ItemMyself>(BR.item, R.layout.item_myself, itemMyselfs);
     }
 }

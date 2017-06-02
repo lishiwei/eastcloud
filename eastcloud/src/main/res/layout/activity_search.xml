@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -27,27 +28,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="搜搜看您下要的视频吧"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="搜索历史"/>
-        <android.support.v7.widget.RecyclerView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_margin="12dp"
-            android:id="@+id/rv_History"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="搜索历史"/>
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_margin="12dp"
-            android:id="@+id/rv_Searched"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="搜索历史"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_History"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp">
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="搜索历史"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_Searched"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </LinearLayout>
 </layout>

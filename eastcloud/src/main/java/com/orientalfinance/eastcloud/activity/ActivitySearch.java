@@ -1,9 +1,11 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
@@ -65,6 +67,15 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     @Override
     public void showLoading() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
+        if (imm.isActive()) {//如果开启
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+        }
     }
 
     @Override
