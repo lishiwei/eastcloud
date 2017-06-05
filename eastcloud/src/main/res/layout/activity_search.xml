@@ -27,6 +27,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:hint="搜搜看您下要的视频吧"/>
 
         <LinearLayout

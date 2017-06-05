@@ -126,9 +126,9 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.ryCurrentHit.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
         mFragmentCurrentHitBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false));
-        mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
-                android.R.color.holo_red_light, android.R.color.holo_orange_light,
-                android.R.color.holo_green_light);
+//        mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
+//                android.R.color.holo_red_light, android.R.color.holo_orange_light,
+//                android.R.color.holo_green_light);
 //        mFragmentCurrentHitBinding.ryCurrentHit.setOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

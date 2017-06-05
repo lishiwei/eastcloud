@@ -34,8 +34,6 @@ public class ImageLoaders {
         Log.d(TAG, "displayCircleImage: ");
         try {
             Glide.with(imageView.getContext()).load(Integer.valueOf(url)).transform(new GlideCircleTransform(imageView.getContext())).into(imageView);
-
-
         }
         catch (Exception e)
         {
