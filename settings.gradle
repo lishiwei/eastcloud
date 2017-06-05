@@ -1,1 +1,1 @@
-include ':eastcloud'
+include ':eastcloud', ':module', ':library'
