@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentHomePage);
                     fragmentTransaction.commitAllowingStateLoss();
-                    mTitle.setText("东方掌中宝");
+                    mTitle.setText("东方遥控宝");
                     return true;
                 case R.id.navigation_channel:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentHomePage).hide(mFragmentMySelf).show(mFragmentDashBoard);

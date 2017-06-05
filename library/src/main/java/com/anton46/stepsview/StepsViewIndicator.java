@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StepsViewIndicator extends View {
 
-    private static final int THUMB_SIZE = 50;
+    private static final int THUMB_SIZE = 25;
 
     private Paint paint = new Paint();
     private Paint selectedPaint = new Paint();

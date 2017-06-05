@@ -46,20 +46,26 @@
                         android:layout_margin="12dp"
                         android:text="热门影视"
                         android:textSize="18sp"/>
-
+<View
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"/>
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center"
                         android:layout_marginRight="12dp"
                         android:gravity="end"
                         android:text="换一批"
+                        android:drawablePadding="4dp"
+                        android:drawableLeft="@drawable/refresh"
                         />
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_hotMovie"
                     android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
 
@@ -74,13 +80,18 @@
                         android:layout_margin="12dp"
                         android:text="热门综艺"
                         android:textSize="18sp"/>
-
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center"
                         android:layout_marginRight="12dp"
                         android:gravity="end"
+                        android:drawablePadding="4dp"
+                        android:drawableLeft="@drawable/refresh"
                         android:text="换一批"/>
 
                 </LinearLayout>
@@ -89,6 +100,8 @@
                     android:id="@+id/rv_hotVariety"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+
                     android:minHeight="500dp">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>

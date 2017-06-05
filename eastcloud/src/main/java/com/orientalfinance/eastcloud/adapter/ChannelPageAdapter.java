@@ -31,10 +31,10 @@ public class ChannelPageAdapter extends FragmentPagerAdapter {
         mTabNames.add("央视");
         mTabNames.add("高清");
 
-        mFragmentList.add(FragmentShangHai.newInstance("",""));
-        mFragmentList.add(FragmentCCTV.newInstance("",""));
-        mFragmentList.add(FragmentSatelliteTV.newInstance("",""));
-        mFragmentList.add(FragmentHighDefinition.newInstance("",""));
+        mFragmentList.add(FragmentShangHai.newInstance("1",""));
+        mFragmentList.add(FragmentShangHai.newInstance("2",""));
+        mFragmentList.add(FragmentShangHai.newInstance("3",""));
+        mFragmentList.add(FragmentShangHai.newInstance("4",""));
 
     }
 

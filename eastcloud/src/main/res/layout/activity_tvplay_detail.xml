@@ -17,10 +17,10 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#ffffff"
-            android:id="@+id/toolbar"
             >
 
             <TextView
@@ -28,20 +28,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="电视详情"/>
+                android:text="电视详情"
+                android:textSize="20sp"/>
         </android.support.v7.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"
-
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context="com.orientalfinance.eastcloud.activity.ActivityDetail">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:focusableInTouchMode="true"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
+
                 android:orientation="vertical">
 
 
@@ -56,7 +57,6 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@drawable/moyu"
                     app:imageUrl="@{detail.url}"/>
 
 
@@ -64,15 +64,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/rectangle"
+                    android:background="@drawable/bg_booking"
                     android:gravity="center"
                     android:text="预约提醒"
+                    android:textColor="#ffffff"
                     android:textSize="16sp"/>
 
                 <TextView
+                    style="@style/Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="简介"
@@ -82,9 +84,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:text="@={detail.profile}"/>
 
                 <TextView
+                    style="@style/Indicator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="评论"/>
@@ -92,7 +97,9 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Detail_Comment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:nestedScrollingEnabled="false">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>

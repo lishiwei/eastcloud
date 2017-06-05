@@ -15,10 +15,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="95dp"
+            android:layout_width="90dp"
             android:id="@+id/iv_moviebg"
             app:imageUrl="@{application.url}"
-            android:layout_height="95dp"/>
+            android:layout_height="90dp"/>
 
         <TextView
             android:layout_width="wrap_content"
