@@ -6,6 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -24,11 +26,11 @@
                 android:textSize="20sp"/>
         </android.support.v7.widget.Toolbar>
 
-        <EditText
+        <com.orientalfinance.eastcloud.mvp.View.ClearEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:hint="搜搜看您下要的视频吧"/>
+            android:hint="搜搜看您下要的视频吧"
+            android:maxLines="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,29 +38,33 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
                 android:text="搜索历史"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_History"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp">
+
+                android:layout_margin="12dp"
+                android:nestedScrollingEnabled="false">
             </android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:text="搜索历史"/>
+                style="@style/Indicator"
+                android:text="大家都在搜"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_Searched"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp">
+                android:layout_margin="12dp"
+                android:nestedScrollingEnabled="false">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>

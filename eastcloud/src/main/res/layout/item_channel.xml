@@ -30,7 +30,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="26dp"
             app:imageUrl="@{channel.channelLogo}"
             android:layout_toRightOf="@id/iv_channelbg"
             />
@@ -39,7 +39,7 @@
             android:id="@+id/tv_channeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/iv_channel_logo"
             android:gravity="left"
@@ -74,8 +74,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/video"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="340dp"
+           />
     </RelativeLayout>
 </layout>

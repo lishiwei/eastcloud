@@ -39,9 +39,9 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivitySearchBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        mActivitySearchBinding.rvHistory.setLayoutManager(new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false));
+        mActivitySearchBinding.rvHistory.setLayoutManager(new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false));
         mActivitySearchBinding.rvHistory.setAdapter(mSearchedRvAdapter);
-        mActivitySearchBinding.rvSearched.setLayoutManager(new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false));
+        mActivitySearchBinding.rvSearched.setLayoutManager(new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false));
         mActivitySearchBinding.rvSearched.setAdapter(mSearchedRvAdapter);
         ((TextView)mActivitySearchBinding.toolbar.findViewById(R.id.textView)).setText("搜索");
         setSupportActionBar(mActivitySearchBinding.toolbar);

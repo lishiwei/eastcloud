@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/moyu"/>
+                android:background="@drawable/jinpailicai"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,6 +52,7 @@
                 android:layout_gravity="center"
                 android:text="金牌理财专家"
                 android:textColor="#ffffff"
+                android:visibility="gone"
                 android:textSize="23sp"
                 android:textStyle="bold"/>
 
@@ -61,6 +62,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="80dp"
                 android:text="MarShall Islands"
+                android:visibility="gone"
+
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
         </FrameLayout>
@@ -72,7 +75,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/moyu"/>
+                android:background="@drawable/dianshigouwu"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,6 +83,8 @@
                 android:layout_gravity="center"
                 android:text="电视购物中心"
                 android:textColor="#ffffff"
+                android:visibility="gone"
+
                 android:textSize="23sp"
                 android:textStyle="bold"/>
 
@@ -87,6 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+
                 android:layout_marginTop="80dp"
                 android:text="Howellhaven"
                 android:textColor="#ffffff"
@@ -100,13 +107,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/moyu"/>
+                android:background="@drawable/dianshigouwu"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="电视购物中心"
+                android:visibility="gone"
+
                 android:textColor="#ffffff"
                 android:textSize="23sp"
                 android:textStyle="bold"/>
@@ -118,6 +127,8 @@
                 android:layout_marginTop="80dp"
                 android:text="Howellhaven"
                 android:textColor="#ffffff"
+                android:visibility="gone"
+
                 android:textSize="20sp"/>
         </FrameLayout>
     </LinearLayout>

@@ -29,9 +29,9 @@ public class CurrentHitPageAdapter extends FragmentPagerAdapter {
         mTabNames.add("电视台");
         mFragmentList.add(FragmentCurrentHit.newInstance("",""));
         mFragmentList.add(FragmentTVPlay.newInstance("",""));
-        mFragmentList.add(FragmentSpecialTopic.newInstance("",""));
-        mFragmentList.add(FragmentVariety.newInstance("",""));
-        mFragmentList.add(FragmentTVStation.newInstance("",""));
+        mFragmentList.add(FragmentTVPlay.newInstance("1",""));
+        mFragmentList.add(FragmentTVPlay.newInstance("2",""));
+        mFragmentList.add(FragmentTVPlay.newInstance("3",""));
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityDetailBinding;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
 import static java.security.AccessController.getContext;
 
 public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TVPlayDetailView, TVPlayDetailPresenter, TVPlayDetailViewState> implements TVPlayDetailView {
+    private static final String TAG = ActivityTVPlayDetail.class.getSimpleName();
     ActivityTvplayDetailBinding mActivityTvplayDetailBinding;
     @Inject
     DetailRVAdapter mDetailRVAdapter;
@@ -52,7 +54,7 @@ public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TV
                 .setBarColorIndicator(getResources().getColor(R.color.material_blue_grey_800))
                 .setProgressColorIndicator(Color.GRAY)
                 .setLabelColorIndicator(Color.GRAY)
-                .setCompletedPosition(0)
+                .setCompletedPosition(1)
                 .drawView();
     }
 
@@ -68,6 +70,7 @@ public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TV
 
     @Override
     public void showView(Detail detail) {
+        Log.d(TAG, "showView: "+detail.getComments().size());
         mActivityTvplayDetailBinding.setDetail(detail);
         mDetailRVAdapter.setComments(detail.getComments());
     }
