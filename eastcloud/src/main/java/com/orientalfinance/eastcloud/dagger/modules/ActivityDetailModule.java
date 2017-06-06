@@ -1,10 +1,7 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
-import android.support.v7.app.AppCompatActivity;
-
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
-import com.orientalfinance.eastcloud.dagger.PerActivity;
 import com.orientalfinance.eastcloud.module.Comment;
 import com.orientalfinance.eastcloud.module.Detail;
 

@@ -3,14 +3,13 @@ package com.orientalfinance.eastcloud.dagger.modules;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
-import com.orientalfinance.eastcloud.dagger.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.LiveVideo;
-import com.orientalfinance.eastcloud.dagger.PerFragment;
+import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
+import com.orientalfinance.eastcloud.dagger.qualifier.PerFragment;
 import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
 import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
 import com.orientalfinance.eastcloud.module.core.MovieRepository;
-import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,10 @@ package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
+import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
+import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
 import com.orientalfinance.eastcloud.module.Channel;
+import com.orientalfinance.eastcloud.module.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,21 @@ import dagger.Provides;
  */
 @Module
 public class ShangHaiModules {
+    @Provides
+    public LiveVideoRvAdapter getLiveVideoDapter(List<Movie> movies) {
+        return new LiveVideoRvAdapter(movies);
+    }
+
+    @Provides
+
+    public List<Movie> getLiveVideoMovie() {
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie(R.drawable.taiguoezuojvzhiwen + "", "泰国恶作剧之吻", "小清新二次元恋爱奋斗史"));
+        movies.add(new Movie(+R.drawable.gujianqitan + "", "古剑奇谭3", "李易峰今晚8:00决战大开始"));
+        movies.add(new Movie(R.drawable.qipashuo + "", "奇葩说", "单亲妈妈到底是利还是弊"));
+        movies.add(new Movie(R.drawable.benpaobaxiongdi + "", "奔跑吧兄弟2", "神秘嘉宾叫嚣大黑牛李晨"));
+        return movies;
+    }
 
     @Provides
     public List<String> getImages() {
@@ -33,12 +51,12 @@ public class ShangHaiModules {
     @Provides
     public List<Channel> getChannels() {
         List<Channel> channels = new ArrayList<>();
-        channels.add(new Channel(R.drawable.dongfangweishi+"", "东方卫视", "欢乐颂-第54集", R.drawable.shanghai+"", "19:37"));
-        channels.add(new Channel(R.drawable.dongfangyouxian+"", "东方有线", "美国19届环球音乐奖盛典", R.drawable.shanghai+"", "19:37"));
-        channels.add(new Channel(R.drawable.chengshiyule+"", "城市娱乐", "上海滩大佬们的新生活", R.drawable.shanghai+"", "19:37"));
-        channels.add(new Channel(R.drawable.dongwushijie+"", "动物世界欢乐多", "野外的生物链", R.drawable.shanghai+"", "19:37"));
-        channels.add(new Channel(R.drawable.doushiliren+"", "都市丽人", "天天健身打造迷人人鱼线",R.drawable.shanghai+"", "19:37"));
-        channels.add(new Channel(R.drawable.xinwenbadiandang+"", "新闻八点档", "欢乐颂", R.drawable.shanghai+"", "19:37"));
+        channels.add(new Channel(R.drawable.dongfangweishi + "", "东方卫视", "欢乐颂-第54集", R.drawable.shanghai + "", "19:37"));
+        channels.add(new Channel(R.drawable.dongfangyouxian + "", "东方有线", "美国19届环球音乐奖盛典", R.drawable.shanghai + "", "19:37"));
+        channels.add(new Channel(R.drawable.chengshiyule + "", "城市娱乐", "上海滩大佬们的新生活", R.drawable.shanghai + "", "19:37"));
+        channels.add(new Channel(R.drawable.dongwushijie + "", "动物世界欢乐多", "野外的生物链", R.drawable.shanghai + "", "19:37"));
+        channels.add(new Channel(R.drawable.doushiliren + "", "都市丽人", "天天健身打造迷人人鱼线", R.drawable.shanghai + "", "19:37"));
+        channels.add(new Channel(R.drawable.xinwenbadiandang + "", "新闻八点档", "欢乐颂", R.drawable.shanghai + "", "19:37"));
         return channels;
     }
 }

@@ -4,8 +4,6 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -16,12 +14,11 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerTvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.component.TvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.modules.TVPlayModule;
-import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.TVPlayPresenter;
-import com.orientalfinance.eastcloud.utils.DensityUtils;
+import com.orientalfinance.eastcloud.utils.DensityUtil;
 import com.orientalfinance.eastcloud.utils.GlideImageLoader;
 import com.youth.banner.Banner;
 
@@ -88,8 +85,8 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent,TVPlayView,TVPl
         mFragmentTvplayBinding.rvPlay.setAdapter(mTVPlayRvAdapter);
 mFragmentTvplayBinding.rvPlay.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
         Banner banner= new Banner(getActivity());
-        banner.setPadding(0,0,0, DensityUtils.dp2px(12));
-        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtils.dp2px(200)));
+        banner.setPadding(0,0,0, DensityUtil.dp2px(12));
+        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(200)));
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(mStringList);
         banner.start();

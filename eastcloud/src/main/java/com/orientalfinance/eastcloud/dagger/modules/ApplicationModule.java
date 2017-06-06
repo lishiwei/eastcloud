@@ -1,15 +1,9 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.App;
 
-import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.HotApplicationRvAdapter;
-import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
-import com.orientalfinance.eastcloud.dagger.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.LiveVideo;
 import com.orientalfinance.eastcloud.module.Application;
-import com.orientalfinance.eastcloud.module.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

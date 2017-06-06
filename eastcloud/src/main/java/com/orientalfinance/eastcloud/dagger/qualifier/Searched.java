@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.dagger;
+package com.orientalfinance.eastcloud.dagger.qualifier;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,5 +11,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface HotMovie {
+public @interface Searched {
 }

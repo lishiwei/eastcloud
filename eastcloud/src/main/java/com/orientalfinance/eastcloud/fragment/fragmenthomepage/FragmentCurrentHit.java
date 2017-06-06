@@ -4,16 +4,14 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
-import com.orientalfinance.eastcloud.dagger.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.LiveVideo;
+import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.CurrentHitComponent;
 
@@ -27,6 +25,7 @@ import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 import com.orientalfinance.eastcloud.utils.GlideImageLoader;
 import com.orientalfinance.eastcloud.utils.MyDataBindingUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,6 +53,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     @Inject
     @LiveVideo
     LiveVideoRvAdapter mLiveVideoRvAdapter;
+    List<String> mStringList = new ArrayList<>();
 
     public FragmentCurrentHit() {
         // Required empty public constructor
@@ -116,7 +116,10 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        mStringList.add("aaaaaaa");
+        mStringList.add("bbbbbbbbbbbb");
+        mStringList.add("cccccccccccccc");
+        mStringList.add("dddddddddd");
         mFragmentCurrentHitBinding = (FragmentCurrentHitBinding) mViewDataBinding;
         mFragmentCurrentHitBinding.setUtils(new MyDataBindingUtils());
         mFragmentCurrentHitBinding.banner.setImageLoader(new GlideImageLoader());
@@ -149,5 +152,20 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 //            }
 //        });
 //        getPresenter().start();
+        mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mStringList);
+        mFragmentCurrentHitBinding.atvAdvertisement.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mFragmentCurrentHitBinding.atvAdvertisement.stop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mFragmentCurrentHitBinding.atvAdvertisement.start();
+
     }
 }

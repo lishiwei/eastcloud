@@ -20,6 +20,7 @@ import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
 import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 import com.orientalfinance.eastcloud.fragment.FragmentRemoteControl;
 import com.orientalfinance.eastcloud.utils.BottomNavigationViewHelper;
+import com.orientalfinance.eastcloud.utils.FragmentIndicator;
 
 public class MainActivity extends AppCompatActivity {
     FragmentApplication mFragmentApplication;
@@ -109,6 +110,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        ((FragmentIndicator) findViewById(R.id.fi_indicator)).setOnIndicateListener(new FragmentIndicator.OnIndicateListener() {
+            @Override
+            public void onIndicate(View v, int which) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                switch (which) {
+                    case 0:
+                        fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentHomePage);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText("东方遥控宝");
+                        break;
+                    case 1:
+                        fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentHomePage).hide(mFragmentMySelf).show(mFragmentDashBoard);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText(getString(R.string.title_channel));
+                        break;
+                    case 2:
+                        fragmentTransaction.hide(mFragmentApplication).hide(mFragmentHomePage).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentRemoteControl);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText(getString(R.string.title_remote_control));
+                        break;
+                    case 3:
+                        fragmentTransaction.hide(mFragmentHomePage).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentApplication);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText(getString(R.string.title_application));
+                        break;
+                    case 4:
+                        fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText(getString(R.string.title_myself));
+                        break;
+                }
             }
         });
     }

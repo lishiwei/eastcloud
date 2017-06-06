@@ -1,13 +1,10 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
-import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.HotBookingRvAdpter;
-import com.orientalfinance.eastcloud.adapter.TVPlayRvAdapter;
-import com.orientalfinance.eastcloud.dagger.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.HotMovie;
-import com.orientalfinance.eastcloud.dagger.HotVariety;
-import com.orientalfinance.eastcloud.dagger.LiveVideo;
-import com.orientalfinance.eastcloud.module.Channel;
+import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
+import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
+import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
 import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
 import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;

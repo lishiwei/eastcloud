@@ -3,26 +3,26 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/tab_home_normal"
         android:title="@string/title_recommend" />
 
     <item
         android:id="@+id/navigation_channel"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/tab_channel_normal"
         android:title="@string/title_channel" />
     <item
         android:id="@+id/navigation_remotecontrol"
-        android:icon="@drawable/ic_remote_control"
+        android:icon="@drawable/tab_remote_normal"
         android:title="@string/title_remote_control" />
 
     <item
         android:id="@+id/navigation_application"
-        android:icon="@drawable/ic_channel"
+        android:icon="@drawable/tab_application_normal"
         android:title="@string/title_application" />
 
     <item
         android:id="@+id/navigation_myself"
-        android:icon="@drawable/ic_myself"
+        android:icon="@drawable/tab_my_normal"
         android:title="@string/title_myself" />
 
 </menu>

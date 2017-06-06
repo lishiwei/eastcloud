@@ -1,11 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
-import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
 import com.orientalfinance.eastcloud.adapter.SearchRvAdapter;
-import com.orientalfinance.eastcloud.dagger.HotSearch;
-import com.orientalfinance.eastcloud.dagger.Searched;
-import com.orientalfinance.eastcloud.module.Comment;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.dagger.qualifier.HotSearch;
+import com.orientalfinance.eastcloud.dagger.qualifier.Searched;
 
 import java.util.ArrayList;
 import java.util.List;

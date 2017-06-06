@@ -1,13 +1,21 @@
 package com.orientalfinance.eastcloud.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.luck.picture.lib.model.FunctionOptions;
+import com.luck.picture.lib.model.PictureConfig;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
@@ -22,8 +30,20 @@ import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.MyselfPresenter;
+import com.orientalfinance.eastcloud.utils.ImageLoaders;
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.entity.LocalMedia;
+import com.yuyh.library.imgsel.ImageLoader;
+import com.yuyh.library.imgsel.ImgSelActivity;
+import com.yuyh.library.imgsel.ImgSelConfig;
+
+
+import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +57,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = FragmentMySelf.class.getSimpleName();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,22 +113,58 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentMySelfBinding = (FragmentMySelfBinding) mViewDataBinding;
-        mFragmentMySelfBinding.setAvatarUrl(""+R.drawable.myself);
+        mFragmentMySelfBinding.setAvatarUrl("" + R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
         mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, true));
- mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View v) {
-         Intent intent  = new Intent(getActivity(), ActivitySetting.class);
-         startActivity(intent);
-     }
- }); mFragmentMySelfBinding.tvUserName.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View v) {
-         Intent intent  = new Intent(getActivity(), ActivityLogin.class);
-         startActivity(intent);
-     }
- });
+        mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivitySetting.class);
+                startActivity(intent);
+            }
+        });
+        mFragmentMySelfBinding.tvUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(intent);
+            }
+        });
+        final FunctionOptions functionOptions = new FunctionOptions.Builder().setEnableCrop(true).setMaxSelectNum(1).create();
+        mFragmentMySelfBinding.ivUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PictureConfig.getInstance().init(functionOptions).openPhoto(getActivity(), resultCallback);
+            }
+        });
 
     }
+
+    private PictureConfig.OnSelectResultCallback resultCallback = new PictureConfig.OnSelectResultCallback() {
+        @Override
+        public void onSelectSuccess(List<LocalMedia> resultList) {
+
+            // 多选回调
+            String path;
+            LocalMedia media = resultList.get(0);
+            if (media.isCut() && !media.isCompressed()) {
+                // 裁剪过
+                path = media.getCutPath();
+            } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
+                // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
+                path = media.getCompressPath();
+            } else {
+                // 原图地址
+                path = media.getPath();
+            }
+            ImageLoaders.displayCircleImage(mFragmentMySelfBinding.ivUserAvatar,path);
+
+        }
+
+        @Override
+        public void onSelectSuccess(LocalMedia media) {
+
+        }
+    };
+
 }

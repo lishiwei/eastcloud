@@ -1,10 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.component;
 
 import com.orientalfinance.eastcloud.dagger.BaseFragmentComponent;
-import com.orientalfinance.eastcloud.dagger.PerFragment;
-import com.orientalfinance.eastcloud.dagger.modules.ChannelModules;
+import com.orientalfinance.eastcloud.dagger.qualifier.PerFragment;
 import com.orientalfinance.eastcloud.dagger.modules.MyselfModule;
-import com.orientalfinance.eastcloud.fragment.FragmentChannel;
 import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 
 import dagger.Component;

@@ -1,9 +1,10 @@
-package com.orientalfinance.eastcloud.dagger;
+package com.orientalfinance.eastcloud.dagger.qualifier;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Qualifier;
+import javax.inject.Scope;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -11,5 +12,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Searched {
+public @interface CurrentHit {
 }

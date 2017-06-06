@@ -1,17 +1,15 @@
 package com.orientalfinance.eastcloud.activity;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityHotBookingBinding;
-import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.HotBookingRvAdpter;
-import com.orientalfinance.eastcloud.dagger.HotMovie;
-import com.orientalfinance.eastcloud.dagger.HotVariety;
+import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
+import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerHotBookingComponent;
 import com.orientalfinance.eastcloud.dagger.component.HotBookingComponent;

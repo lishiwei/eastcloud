@@ -3,7 +3,7 @@ package com.orientalfinance.eastcloud.dagger.modules;
 import android.support.v7.app.AppCompatActivity;
 
 
-import com.orientalfinance.eastcloud.dagger.PerActivity;
+import com.orientalfinance.eastcloud.dagger.qualifier.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;

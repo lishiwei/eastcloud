@@ -1,10 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.component;
 
-import com.orientalfinance.eastcloud.activity.ActivityDetail;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
 import com.orientalfinance.eastcloud.dagger.BaseActivityComponent;
-import com.orientalfinance.eastcloud.dagger.PerActivity;
-import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
+import com.orientalfinance.eastcloud.dagger.qualifier.PerActivity;
 import com.orientalfinance.eastcloud.dagger.modules.PlayRecordModule;
 
 import dagger.Component;

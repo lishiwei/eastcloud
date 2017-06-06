@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.dagger;
+package com.orientalfinance.eastcloud.dagger.qualifier;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
