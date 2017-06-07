@@ -22,14 +22,15 @@ public class MyselfModule {
     @Provides
     public List<ItemMyself> getImages() {
         List<ItemMyself> itemMyselfs = new ArrayList<>();
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "足迹"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "评论"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "会员"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "缴费"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "优惠"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "购物"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "收录"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "类目"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "观看历史"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的预约"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的收藏"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的地址"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的订单"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "绑定银行卡"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "分享好友"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的电视"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "意见反馈"));
         return itemMyselfs;
     }
 

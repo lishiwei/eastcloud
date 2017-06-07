@@ -47,7 +47,6 @@ public class App extends Application {
                 .setGrade(Luban.THIRD_GEAR)
                 .create();
         PictureConfig.getInstance().init(options);
-
     }
 
     public AppComponent getAppComponent() {

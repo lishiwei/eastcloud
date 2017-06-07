@@ -20,7 +20,8 @@ import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
 import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 import com.orientalfinance.eastcloud.fragment.FragmentRemoteControl;
 import com.orientalfinance.eastcloud.utils.BottomNavigationViewHelper;
-import com.orientalfinance.eastcloud.utils.FragmentIndicator;
+import com.orientalfinance.eastcloud.view.FragmentIndicator;
+
 
 public class MainActivity extends AppCompatActivity {
     FragmentApplication mFragmentApplication;

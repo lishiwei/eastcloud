@@ -63,7 +63,7 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
-<com.orientalfinance.eastcloud.utils.FragmentIndicator
+<com.orientalfinance.eastcloud.view.FragmentIndicator
     android:id="@+id/fi_indicator"
     android:layout_width="match_parent"
     android:visibility="gone"

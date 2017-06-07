@@ -63,13 +63,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
-            <com.orientalfinance.eastcloud.utils.AutoTextView
-                android:id="@+id/atv_Advertisement"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp">
+                android:orientation="horizontal">
 
-            </com.orientalfinance.eastcloud.utils.AutoTextView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/louder"/>
+
+                <com.orientalfinance.eastcloud.view.AutoTextView
+                    android:id="@+id/atv_Advertisement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp">
+
+                </com.orientalfinance.eastcloud.view.AutoTextView>
+            </LinearLayout>
+
 
             <TextView
                 style="@style/Indicator"

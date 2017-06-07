@@ -115,7 +115,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
         mFragmentMySelfBinding = (FragmentMySelfBinding) mViewDataBinding;
         mFragmentMySelfBinding.setAvatarUrl("" + R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
-        mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, true));
+        mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, true));
         mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +157,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
                 // 原图地址
                 path = media.getPath();
             }
-            ImageLoaders.displayCircleImage(mFragmentMySelfBinding.ivUserAvatar,path);
+            ImageLoaders.displayCircleImage(mFragmentMySelfBinding.ivUserAvatar, path);
 
         }
 

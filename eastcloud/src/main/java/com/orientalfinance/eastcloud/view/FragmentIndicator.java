@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.utils;
+package com.orientalfinance.eastcloud.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.utils.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;

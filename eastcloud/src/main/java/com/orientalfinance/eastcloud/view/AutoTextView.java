@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.utils;
+package com.orientalfinance.eastcloud.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
