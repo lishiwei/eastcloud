@@ -19,9 +19,8 @@
             android:id="@+id/tv_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="登陆"
-            android:textSize="20sp"/>
+            style="@style/tv_Toolbar"
+            android:text="登陆"/>
     </android.support.v7.widget.Toolbar>
 
     <TextView
