@@ -1,11 +1,15 @@
 package com.orientalfinance.eastcloud.fragment;
 
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.orientalfinance.R;
 
@@ -60,7 +64,56 @@ public class FragmentRemoteControl extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_remote_control, container, false);
+        View view = inflater.inflate(R.layout.fragment_remote_control, container, false);
+        RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
+        startPropertyAnim(controllerMenu);
+        initViews(view);
+
+        return view;
+    }
+
+    private void initViews(View view) {
+        view.findViewById(R.id.img_top).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Top", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.img_right).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.img_bottom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "bottom", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.img_left).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.img_center).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "center", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void startPropertyAnim(View view) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(view, "rotation", 0f, 45f);
+        anim.setDuration(10);
+        anim.start();
     }
 
 }

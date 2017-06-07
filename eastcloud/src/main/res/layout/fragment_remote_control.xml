@@ -41,98 +41,60 @@
                 android:textColor="#ffffff" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="#00000000"
-            android:gravity="center">
 
-            <FrameLayout
+        <FrameLayout
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/rlout"
                 android:layout_width="240dp"
-                android:layout_height="240dp">
+                android:layout_height="240dp"
+                android:gravity="center">
+
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/controller_1" />
-
-                <Button
+                    android:id="@+id/img_top"
                     android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:background="#00000000" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="240dp"
-                android:layout_height="240dp">
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/top" />
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/controller_2" />
-
-                <Button
+                    android:id="@+id/img_right"
                     android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|top"
-                    android:layout_marginTop="10dp"
-                    android:background="#00000000" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="240dp"
-                android:layout_height="240dp">
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/img_top"
+                    android:background="@drawable/c_right" />
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/controller_3" />
-
-                <Button
+                    android:id="@+id/img_left"
                     android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginLeft="10dp"
-                    android:background="#00000000" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="240dp"
-                android:layout_height="240dp">
+                    android:layout_height="80dp"
+                    android:layout_below="@id/img_top"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/left" />
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/controller_4" />
-
-                <Button
+                    android:id="@+id/img_bottom"
                     android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginBottom="10dp"
-                    android:background="#00000000" />
-            </FrameLayout>
+                    android:layout_height="80dp"
+                    android:layout_below="@id/img_right"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/img_left"
+                    android:background="@drawable/bottom" />
+            </RelativeLayout>
 
-            <FrameLayout
-                android:layout_width="240dp"
-                android:layout_height="240dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/copntroller_5" />
-
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:background="#00000000" />
-            </FrameLayout>
-
-        </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/img_center"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="#ff0000"
+                app:civ_border_color="#FF000000" />
+        </FrameLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
