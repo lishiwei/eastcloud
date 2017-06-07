@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="20sp"
                 android:text="预约详情"/>
         </android.support.v7.widget.Toolbar>
 
@@ -75,9 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="简介"
-                    android:layout_margin="12dp"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
+                    style="@style/Indicator"
                     />
 
                 <TextView
@@ -89,10 +88,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/Indicator"
                     android:text="评论"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Detail_Comment"
+                    android:nestedScrollingEnabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </android.support.v7.widget.RecyclerView>

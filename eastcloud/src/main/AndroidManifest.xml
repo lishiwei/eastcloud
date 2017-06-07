@@ -80,7 +80,9 @@
             android:name=".eastcloud.activity.ActivitySetting"
             android:parentActivityName=".eastcloud.MainActivity">
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityLogin">
+        <activity android:name=".eastcloud.activity.ActivityLogin"
+                  android:launchMode="singleTask"
+                  android:parentActivityName=".eastcloud.MainActivity">
         </activity>
         <activity android:name=".eastcloud.activity.ActivityForgetPassWord">
         </activity>
@@ -123,10 +125,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

@@ -82,5 +82,5 @@ dependencies {
     compile files('libs/IflyUtil.jar')
     compile files('libs/Msc.jar')
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v1.5.7'
-
+    compile files('libs/bcprov-jdk14-140.jar')
 }
