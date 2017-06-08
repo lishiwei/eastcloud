@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="movie"
-            type="com.orientalfinance.eastcloud.module.Movie"/>
+            type="com.orientalfinance.eastcloud.module.Movie" />
     </data>
 
     <LinearLayout
@@ -24,31 +23,31 @@
                 android:id="@+id/iv_moviebg"
                 android:layout_width="200dp"
                 android:layout_height="180dp"
-                app:imageUrl="@{movie.imageUrl}"/>
+                app:imageUrl="@{movie.imageUrl}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|top"
-                android:paddingTop="8dp"
-android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
                 android:background="#40000000"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="#ffffff"
-                    android:text="预约"/>
+                    android:text="预约"
+                    android:textColor="#ffffff" />
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/star"/>
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/star" />
             </LinearLayout>
         </FrameLayout>
 
@@ -58,13 +57,13 @@ android:paddingLeft="16dp"
             android:layout_height="20dp"
             android:gravity="left"
             android:text="@={movie.title}"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:gravity="left"
             android:text="@={movie.tag}"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 </layout>

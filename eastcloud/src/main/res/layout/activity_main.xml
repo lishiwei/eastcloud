@@ -7,54 +7,58 @@
     android:orientation="vertical"
     tools:context="com.orientalfinance.eastcloud.MainActivity">
 
-<android.support.v7.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="#ffffff"
-    android:id="@+id/toolbar"
-    >
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/iv_ScanCode"
-            android:layout_height="20dp"
-            android:background="@drawable/scancode"/>
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:id="@+id/tv_title"
-            android:text="东方遥控宝"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginLeft="70dp"
-            android:background="@drawable/history"
-            android:layout_gravity="center"
-            android:id="@+id/iv_History"
-            android:layout_height="30dp"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/iv_Email"
-            android:background="@drawable/email"
-            android:layout_height="30dp"/>
-    </LinearLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
 
-</android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_ScanCode"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/scancode" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="100dp"
+                android:gravity="center"
+                android:text="东方遥控宝"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_History"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="70dp"
+                android:background="@drawable/history" />
+
+            <ImageView
+                android:id="@+id/iv_Email"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/email" />
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
+        android:layout_weight="1"></FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -63,10 +67,10 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
-<com.orientalfinance.eastcloud.view.FragmentIndicator
-    android:id="@+id/fi_indicator"
-    android:layout_width="match_parent"
-    android:visibility="gone"
-    android:layout_height="wrap_content"
-    />
+
+    <com.orientalfinance.eastcloud.view.FragmentIndicator
+        android:id="@+id/fi_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 </LinearLayout>

@@ -1,16 +1,22 @@
 package com.orientalfinance.eastcloud;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
@@ -21,6 +27,7 @@ import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 import com.orientalfinance.eastcloud.fragment.FragmentRemoteControl;
 import com.orientalfinance.eastcloud.utils.BottomNavigationViewHelper;
 import com.orientalfinance.eastcloud.view.FragmentIndicator;
+import com.orientalfinance.eastcloud.zxing.ScannerActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                scanCode();
             }
         });
         ((FragmentIndicator) findViewById(R.id.fi_indicator)).setOnIndicateListener(new FragmentIndicator.OnIndicateListener() {
@@ -187,4 +195,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    private void scanCode() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            //权限还没有授予，需要在这里写申请权限的代码
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CAMERA}, 60);
+        } else {
+            //权限已经被授予，在这里直接写要执行的相应方法即可
+            ScannerActivity.gotoActivity(MainActivity.this,
+                    false, 0);
+        }
+    }
 }
