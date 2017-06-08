@@ -2,14 +2,16 @@ package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
-import com.orientalfinance.eastcloud.module.Comment;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
+
+
 
 /**
  * Created by lishiwei on 2017/3/31.

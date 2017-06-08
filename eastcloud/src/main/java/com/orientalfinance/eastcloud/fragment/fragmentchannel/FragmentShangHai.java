@@ -2,7 +2,6 @@ package com.orientalfinance.eastcloud.fragment.fragmentchannel;
 
 
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,7 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.component.ShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ShangHaiModules;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;

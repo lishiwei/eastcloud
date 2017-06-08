@@ -3,18 +3,17 @@ package com.orientalfinance.eastcloud.activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
-import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.mvp.View.ActivityLoginView;
+import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
+import com.orientalfinance.eastcloud.module.javabean.User;
+import com.orientalfinance.eastcloud.mvp.View.LoginView;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityLoginPresenter;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.umeng.socialize.UMAuthListener;
@@ -24,17 +23,18 @@ import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.Map;
 
-public class ActivityLogin extends MvpActivity<ActivityLoginView,ActivityLoginPresenter> implements View.OnClickListener {
+public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter> implements LoginView, View.OnClickListener {
     private static final java.lang.String TAG = ActivityLogin.class.getSimpleName();
     boolean isQQauthed;
     boolean isWechatauthed;
     boolean isWeiboAuthed;
     Dialog mDialog;
+    CommonRequestParam mCommonRequestParam;
     private UMAuthListener mUMAuthListener = new UMAuthListener() {
         @Override
         public void onStart(SHARE_MEDIA platform) {
             //授权开始的回调
-            Log.d(TAG, "onStart: ");
+
             SocializeUtils.safeShowDialog(mDialog);
         }
 
@@ -49,20 +49,18 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView,ActivityLoginPr
             for (String in : data.keySet()) {
                 //map.keySet()返回的是所有key的值
                 String str = data.get(in);//得到每个key多对用value的值
-                LogUtils.d(TAG, "key     " + in + "value:   " + str);
             }
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            LogUtils.d(TAG, action + "aaaaa" + t.getMessage());
+
             SocializeUtils.safeCloseDialog(mDialog);
             Toast.makeText(ActivityLogin.this, "c出错啦!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            LogUtils.d(TAG, action + "bbbbbbb" + action);
             SocializeUtils.safeCloseDialog(mDialog);
             Toast.makeText(ActivityLogin.this, "取消啦!", Toast.LENGTH_SHORT).show();
             Toast.makeText(ActivityLogin.this, "取消啦!", Toast.LENGTH_SHORT).show();
@@ -87,7 +85,7 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView,ActivityLoginPr
         findViewById(R.id.iv_QQ).setOnClickListener(this);
         findViewById(R.id.iv_Weibo).setOnClickListener(this);
         findViewById(R.id.iv_WeChat).setOnClickListener(this);
-
+        mCommonRequestParam = new CommonRequestParam("", "");
     }
 
     @Override
@@ -119,10 +117,10 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView,ActivityLoginPr
         switch (v.getId()) {
             case R.id.iv_QQ:
                 if (isQQauthed) {
-                    Log.d(TAG, "onClick: true ");
+
                     UMShareAPI.get(ActivityLogin.this).deleteOauth(ActivityLogin.this, SHARE_MEDIA.QQ, mUMAuthListener);
                 } else {
-                    Log.d(TAG, "onClick: false ");
+
 
                     UMShareAPI.get(ActivityLogin.this).doOauthVerify(ActivityLogin.this, SHARE_MEDIA.QQ, mUMAuthListener);
 
@@ -146,15 +144,32 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView,ActivityLoginPr
                 break;
             case R.id.button:
 
+                getPresenter().login(mCommonRequestParam);
                 break;
             case R.id.tv_register:
                 Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
                 startActivity(intent);
                 break;
             case R.id.tv_ForgetPassWord:
-                Intent intent1 = new Intent(ActivityLogin.this, ActivityForgetPassWord.class);
+                Intent intent1 = new Intent(ActivityLogin.this, ActivityVerificationCode.class);
                 startActivity(intent1);
+                LogUtils.d(TAG, "onClick: ");
                 break;
         }
+    }
+
+    @Override
+    public void showLogin() {
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+        Toast.makeText(this, "您的账号密码不正确", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginSucceed(User user) {
+
     }
 }

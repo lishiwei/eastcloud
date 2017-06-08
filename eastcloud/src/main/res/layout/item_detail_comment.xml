@@ -6,7 +6,7 @@
 
         <variable
             name="comment"
-            type="com.orientalfinance.eastcloud.module.Comment"/>
+            type="com.orientalfinance.eastcloud.module.javabean.Comment"/>
     </data>
 
     <LinearLayout

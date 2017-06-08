@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.module;
+package com.orientalfinance.eastcloud.module.javabean;
 
 /**
  * Created by 29435 on 2017/5/31.

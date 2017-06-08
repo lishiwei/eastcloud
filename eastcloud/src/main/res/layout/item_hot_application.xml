@@ -5,7 +5,7 @@
     <data>
         <variable
             name="application"
-            type="com.orientalfinance.eastcloud.module.Application"/>
+            type="com.orientalfinance.eastcloud.module.javabean.Application"/>
     </data>
 
     <LinearLayout

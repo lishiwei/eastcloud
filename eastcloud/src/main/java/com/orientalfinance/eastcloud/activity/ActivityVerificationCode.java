@@ -6,9 +6,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.orientalfinance.R;
 
-import org.bouncycastle.asn1.pkcs.RSAPrivateKeyStructure;
 
-public class ActivityForgetPassWord extends AppCompatActivity {
+
+public class ActivityVerificationCode extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

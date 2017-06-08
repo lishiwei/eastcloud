@@ -1,31 +1,27 @@
 package com.orientalfinance.eastcloud.activity;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityDetailBinding;
 import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
-import com.orientalfinance.eastcloud.dagger.BaseActivityComponent;
 import com.orientalfinance.eastcloud.dagger.component.ActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.View.ActivityDetailViewState;
-import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityDetailPresenter;
 
 import javax.inject.Inject;
 
-public class ActivityDetail extends BaseActivity<ActivityDetailComponent, ActivityDetailView, ActivityDetailPresenter, ActivityDetailViewState> implements ActivityDetailView {
+public class ActivityDetail extends BaseActivity<ActivityDetailComponent, DetailView, ActivityDetailPresenter, ActivityDetailViewState> implements DetailView {
     private static final String TAG = ActivityDetail.class.getSimpleName();
     ActivityDetailBinding mActivityDetailBinding;
     @Inject

@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.module;
+package com.orientalfinance.eastcloud.module.javabean;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

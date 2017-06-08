@@ -1,9 +1,5 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import android.util.Log;
-
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
 import com.orientalfinance.eastcloud.mvp.View.SearchView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 

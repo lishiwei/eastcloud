@@ -2,10 +2,8 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import android.util.Log;
 
-import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
-import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
 import javax.inject.Inject;
@@ -14,7 +12,7 @@ import javax.inject.Inject;
  * Created by 29435 on 2017/5/26.
  */
 
-public class ActivityDetailPresenter extends MvpNullObjectBasePresenter<ActivityDetailView> {
+public class ActivityDetailPresenter extends MvpNullObjectBasePresenter<DetailView> {
     private static final String TAG = ActivityDetailPresenter.class.getSimpleName();
     Detail mDetail;
 

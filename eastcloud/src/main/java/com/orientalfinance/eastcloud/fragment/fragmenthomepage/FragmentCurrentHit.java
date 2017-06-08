@@ -11,14 +11,13 @@ import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
-import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.CurrentHitComponent;
-
 import com.orientalfinance.eastcloud.dagger.component.DaggerCurrentHitComponent;
 import com.orientalfinance.eastcloud.dagger.modules.CurrentHitModule;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
+import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;

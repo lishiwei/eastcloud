@@ -1,37 +1,24 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import android.util.Log;
 
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.Retrofit.EastcloudRetrofit;
 import com.orientalfinance.eastcloud.module.Retrofit.MyTransform;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
-import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
-import com.orientalfinance.eastcloud.mvp.View.ActivityLoginView;
+import com.orientalfinance.eastcloud.module.javabean.User;
+import com.orientalfinance.eastcloud.mvp.View.LoginView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
-import org.reactivestreams.Publisher;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 29435 on 2017/5/26.
  */
 
-public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<ActivityLoginView> {
+public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<LoginView> {
     private static final String TAG = ActivityLoginPresenter.class.getSimpleName();
 
     @Override
-    public void attachView(ActivityLoginView view) {
+    public void attachView(LoginView view) {
 
     }
 
@@ -40,18 +27,17 @@ public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<ActivityL
 
     }
 
-    public void login() {
+    public void login(CommonRequestParam commonRequestParam) {
         getView().showLogin();
-        CommonRequestParam commonRequestParam = new CommonRequestParam("", "");
-        EastcloudRetrofit.getRetrofitService().getMovies(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<Movie>()).doOnError(new Consumer<Throwable>() {
+        EastcloudRetrofit.getRetrofitService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                getView().showError();
+                getView().showError(throwable);
             }
-        }).subscribe(new Consumer<List<Movie>>() {
+        }).subscribe(new Consumer<User>() {
             @Override
-            public void accept(List<Movie> movies) throws Exception {
-                getView().setUser(movies.get(0));
+            public void accept(User user) throws Exception {
+                getView().loginSucceed(user);
             }
         });
     }

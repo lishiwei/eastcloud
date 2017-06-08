@@ -2,10 +2,9 @@ package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.adapter.RVAdapter;
-
 import com.orientalfinance.eastcloud.adapter.MyselfRvAdapter;
-import com.orientalfinance.eastcloud.module.ItemMyself;
+import com.orientalfinance.eastcloud.adapter.RVAdapter;
+import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 
 import java.util.ArrayList;
 import java.util.List;

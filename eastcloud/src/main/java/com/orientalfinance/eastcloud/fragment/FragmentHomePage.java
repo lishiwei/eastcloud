@@ -1,14 +1,10 @@
 package com.orientalfinance.eastcloud.fragment;
 
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentHomePageBinding;
@@ -16,11 +12,9 @@ import com.orientalfinance.eastcloud.adapter.CurrentHitPageAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerHomePageComponent;
 import com.orientalfinance.eastcloud.dagger.component.HomePageComponent;
-import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
-import com.orientalfinance.eastcloud.utils.GlideImageLoader;
 
 import java.util.List;
 

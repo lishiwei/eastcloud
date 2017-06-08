@@ -1,10 +1,8 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import android.util.Log;
-
-import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.core.MovieRepository;
 import com.orientalfinance.eastcloud.module.core.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -39,8 +37,6 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
             public void accept(List<Movie> movies) throws Exception {
                 getView().showView(movies);
                 getView().hideLoading();
-                Log.d(TAG, "accept: "+movies.toString());
-                Log.d(TAG, "accept: "+movies.size());
             }
         });
     }

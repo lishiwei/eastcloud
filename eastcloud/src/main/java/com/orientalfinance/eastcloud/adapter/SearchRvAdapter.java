@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.Channel;
+
 
 import java.util.List;
 
