@@ -1,8 +1,7 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.List;
 

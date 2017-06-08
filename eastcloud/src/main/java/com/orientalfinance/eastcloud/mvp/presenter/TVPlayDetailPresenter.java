@@ -1,7 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayDetailView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 

@@ -1,12 +1,6 @@
 package com.orientalfinance.eastcloud.module.core;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import com.orientalfinance.eastcloud.module.Application;
-import com.orientalfinance.eastcloud.module.Movie;
-
-import org.reactivestreams.Publisher;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +9,8 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 29435 on 2017/5/27.

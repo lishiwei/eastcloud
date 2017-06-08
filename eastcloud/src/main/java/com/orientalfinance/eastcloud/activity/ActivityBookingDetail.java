@@ -2,7 +2,6 @@ package com.orientalfinance.eastcloud.activity;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.orientalfinance.R;
@@ -11,11 +10,9 @@ import com.orientalfinance.eastcloud.adapter.BookingDetailRVAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.BookingDetailComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerBookingDetailComponent;
-import com.orientalfinance.eastcloud.dagger.component.DaggerHotBookingComponent;
 import com.orientalfinance.eastcloud.dagger.modules.BookingDetailModule;
-import com.orientalfinance.eastcloud.dagger.modules.HotBookingModule;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.BookingDetailView;
 import com.orientalfinance.eastcloud.mvp.View.BookingDetailViewState;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;

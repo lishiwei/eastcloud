@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.orientalfinance.eastcloud.module.ItemMyself"/>
+            type="com.orientalfinance.eastcloud.module.javabean.ItemMyself"/>
     </data>
 
     <LinearLayout

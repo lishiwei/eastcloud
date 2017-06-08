@@ -5,10 +5,10 @@ import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
 import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
-import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
 import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
 import com.orientalfinance.eastcloud.module.core.MovieRepository;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

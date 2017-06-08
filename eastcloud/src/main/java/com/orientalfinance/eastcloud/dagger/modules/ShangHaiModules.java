@@ -3,9 +3,8 @@ package com.orientalfinance.eastcloud.dagger.modules;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
-import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
-import com.orientalfinance.eastcloud.module.Channel;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.List;
 

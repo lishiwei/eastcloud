@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.Application;
-
+import com.orientalfinance.eastcloud.module.javabean.Application;
 
 import java.util.List;
 

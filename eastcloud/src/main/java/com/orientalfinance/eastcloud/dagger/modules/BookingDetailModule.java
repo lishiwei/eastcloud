@@ -1,8 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.eastcloud.adapter.BookingDetailRVAdapter;
-import com.orientalfinance.eastcloud.module.Comment;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
 
 import java.util.ArrayList;
 import java.util.List;

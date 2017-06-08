@@ -1,8 +1,6 @@
 package com.orientalfinance.eastcloud.module.core;
 
-import android.support.annotation.NonNull;
-
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,6 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by 29435 on 2017/5/27.

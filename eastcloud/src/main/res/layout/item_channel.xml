@@ -7,7 +7,7 @@
 
         <variable
             name="channel"
-            type="com.orientalfinance.eastcloud.module.Channel"/>
+            type="com.orientalfinance.eastcloud.module.javabean.Channel"/>
     </data>
 
     <RelativeLayout

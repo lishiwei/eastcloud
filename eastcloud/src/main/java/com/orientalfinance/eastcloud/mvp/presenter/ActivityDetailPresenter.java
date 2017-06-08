@@ -2,10 +2,8 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import android.util.Log;
 
-import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
-import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
 import javax.inject.Inject;

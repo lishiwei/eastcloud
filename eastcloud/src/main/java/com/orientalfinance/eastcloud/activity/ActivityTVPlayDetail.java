@@ -2,19 +2,17 @@ package com.orientalfinance.eastcloud.activity;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.orientalfinance.R;
-import com.orientalfinance.databinding.ActivityDetailBinding;
 import com.orientalfinance.databinding.ActivityTvplayDetailBinding;
 import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerTVPlayDetailComponent;
 import com.orientalfinance.eastcloud.dagger.component.TVPlayDetailComponent;
 import com.orientalfinance.eastcloud.dagger.modules.TVPlayDetailModule;
-import com.orientalfinance.eastcloud.module.Detail;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayDetailView;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayDetailViewState;
@@ -25,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static java.security.AccessController.getContext;
 
 public class ActivityTVPlayDetail extends BaseActivity<TVPlayDetailComponent, TVPlayDetailView, TVPlayDetailPresenter, TVPlayDetailViewState> implements TVPlayDetailView {
     private static final String TAG = ActivityTVPlayDetail.class.getSimpleName();

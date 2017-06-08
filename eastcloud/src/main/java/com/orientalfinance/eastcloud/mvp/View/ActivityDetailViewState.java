@@ -1,11 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.module.Movie;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

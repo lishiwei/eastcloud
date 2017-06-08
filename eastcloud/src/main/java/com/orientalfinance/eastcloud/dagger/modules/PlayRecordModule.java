@@ -1,11 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
 import com.orientalfinance.eastcloud.adapter.PlayRecordRvAdpter;
-import com.orientalfinance.eastcloud.module.Comment;
-import com.orientalfinance.eastcloud.module.Detail;
-import com.orientalfinance.eastcloud.module.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

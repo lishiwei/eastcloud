@@ -1,9 +1,9 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import com.orientalfinance.eastcloud.module.Movie;
+
 import com.orientalfinance.eastcloud.module.core.MovieRepository;
+import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.HotBookingView;
-import com.orientalfinance.eastcloud.mvp.View.TVPlayView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
 import java.util.ArrayList;

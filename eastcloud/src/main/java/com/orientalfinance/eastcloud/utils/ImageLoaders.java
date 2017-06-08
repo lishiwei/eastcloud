@@ -6,7 +6,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.GlideCircleTransform;
+import com.orientalfinance.eastcloud.module.javabean.GlideCircleTransform;
+
 
 /**
  * Created by 29435 on 2017/5/25.

@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.orientalfinance.eastcloud.module.Movie" />
+            type="com.orientalfinance.eastcloud.module.javabean.Movie" />
     </data>
 
     <LinearLayout

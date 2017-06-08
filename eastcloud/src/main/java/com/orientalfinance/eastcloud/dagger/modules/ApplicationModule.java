@@ -1,9 +1,8 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
-
 import com.orientalfinance.eastcloud.adapter.HotApplicationRvAdapter;
-import com.orientalfinance.eastcloud.module.Application;
+import com.orientalfinance.eastcloud.module.javabean.Application;
 
 import java.util.ArrayList;
 import java.util.List;
