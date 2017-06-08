@@ -13,7 +13,7 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
-import com.orientalfinance.eastcloud.mvp.View.ActivityLoginView;
+import com.orientalfinance.eastcloud.mvp.View.LoginView;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityLoginPresenter;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.umeng.socialize.UMAuthListener;
@@ -23,7 +23,7 @@ import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.Map;
 
-public class ActivityLogin extends MvpActivity<ActivityLoginView, ActivityLoginPresenter> implements ActivityLoginView, View.OnClickListener {
+public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter> implements LoginView, View.OnClickListener {
     private static final java.lang.String TAG = ActivityLogin.class.getSimpleName();
     boolean isQQauthed;
     boolean isWechatauthed;
@@ -151,7 +151,7 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView, ActivityLoginP
                 startActivity(intent);
                 break;
             case R.id.tv_ForgetPassWord:
-                Intent intent1 = new Intent(ActivityLogin.this, ActivityForgetPassWord.class);
+                Intent intent1 = new Intent(ActivityLogin.this, ActivityVerificationCode.class);
                 startActivity(intent1);
                 LogUtils.d(TAG, "onClick: ");
                 break;
@@ -164,7 +164,7 @@ public class ActivityLogin extends MvpActivity<ActivityLoginView, ActivityLoginP
     }
 
     @Override
-    public void showError() {
+    public void showError(Throwable throwable) {
         Toast.makeText(this, "您的账号密码不正确", Toast.LENGTH_SHORT).show();
     }
 

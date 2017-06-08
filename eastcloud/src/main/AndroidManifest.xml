@@ -26,27 +26,27 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59256f67cae7e761a1000cc0"></meta-data>
-        <!--<provider-->
-        <!--android:name="android.support.v4.content.FileProvider"-->
-        <!--android:authorities="${applicationId}.provider"-->
-        <!--android:exported="false"-->
-        <!--android:grantUriPermissions="true">-->
-        <!--<meta-data-->
-        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-        <!--android:resource="@xml/file_paths" />-->
-        <!--</provider>-->
+            android:value="59256f67cae7e761a1000cc0"/>
+        <!-- <provider -->
+        <!-- android:name="android.support.v4.content.FileProvider" -->
+        <!-- android:authorities="${applicationId}.provider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/file_paths" /> -->
+        <!-- </provider> -->
         <receiver
             android:name=".eastcloud.receiver.JpushReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!--Required  用户注册SDK的intent-->
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!--Required  用户接收SDK消息的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!--Required  用户接收SDK通知栏信息的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!--Required  用户打开自定义通知栏的intent-->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
-                <action android:name="cn.jpush.android.intent.CONNECTION"/><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <category android:name="com.hdl.jpushdemo"/>
             </intent-filter>
         </receiver>
@@ -71,53 +71,43 @@
         <activity
             android:name=".eastcloud.activity.ActivityTVPlayDetail"
             android:parentActivityName=".eastcloud.MainActivity">
-
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityHotBooking"
             android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.MainActivity">
-
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivitySearch"
             android:parentActivityName=".eastcloud.MainActivity">
-
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityPlayRecord"
             android:parentActivityName=".eastcloud.MainActivity">
-
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityBookingDetail"
             android:parentActivityName=".eastcloud.activity.ActivityHotBooking">
-
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivitySetting"
             android:parentActivityName=".eastcloud.MainActivity">
-
         </activity>
         <activity android:name=".eastcloud.activity.ActivityLogin">
-
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityForgetPassWord">
-
+        <activity android:name=".eastcloud.activity.ActivityVerificationCode">
         </activity>
         <activity android:name=".eastcloud.activity.ActivitySettingPassword">
-
         </activity>
         <activity android:name=".eastcloud.activity.ActivityRegister">
-
         </activity>
-
         <activity
             android:name=".eastcloud.WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
@@ -127,12 +117,10 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -142,30 +130,28 @@
                 <data android:scheme="tencent100424468"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.umeng.qq.tencent.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-
         <activity
             android:name=".eastcloud.zxing.ScannerActivity"
             android:parentActivityName=".eastcloud.MainActivity">
             <intent-filter>
                 <action android:name="com.mylhyl.zxing.scanner.client.android.SCAN"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".eastcloud.zxing.result.UriActivity"
             android:parentActivityName=".eastcloud.MainActivity"/>
         <activity
             android:name=".eastcloud.zxing.result.TextActivity"
             android:parentActivityName=".eastcloud.MainActivity"/>
-
-
+        <activity android:name=".eastcloud.activity.ActivityModifyPassWord">
+        </activity>
     </application>
 
 </manifest>

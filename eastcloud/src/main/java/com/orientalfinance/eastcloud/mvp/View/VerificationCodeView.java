@@ -8,11 +8,13 @@ import com.orientalfinance.eastcloud.module.javabean.User;
  * Created by 29435 on 2017/5/26.
  */
 
-public interface ActivityLoginView extends MvpView{
+public interface VerificationCodeView extends MvpView {
 
 
-    public void showLogin();
-    public void showError();
-public void loginSucceed(User movie);
+    public void showgGetCode();
+
+    public void showError(Throwable throwable);
+
+    public void getCodeSucceed(User movie);
 
 }

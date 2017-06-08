@@ -13,7 +13,7 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
-import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
+import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.View.ActivityDetailViewState;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
@@ -21,7 +21,7 @@ import com.orientalfinance.eastcloud.mvp.presenter.ActivityDetailPresenter;
 
 import javax.inject.Inject;
 
-public class ActivityDetail extends BaseActivity<ActivityDetailComponent, ActivityDetailView, ActivityDetailPresenter, ActivityDetailViewState> implements ActivityDetailView {
+public class ActivityDetail extends BaseActivity<ActivityDetailComponent, DetailView, ActivityDetailPresenter, ActivityDetailViewState> implements DetailView {
     private static final String TAG = ActivityDetail.class.getSimpleName();
     ActivityDetailBinding mActivityDetailBinding;
     @Inject
