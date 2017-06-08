@@ -51,7 +51,8 @@ import com.orientalfinance.eastcloud.mvp.noop.NoOp;
  */
 public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
-    @Nullable private WeakReference<V> view;
+    @Nullable
+    private WeakReference<V> view;
     private final V nullView;
 
     @SuppressWarnings("checkstyle:illegalcatch")
@@ -59,7 +60,7 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
 
         try {
             // Scan the inheritance hierarchy until we reached MvpNullObjectBasePresenter
-             Class<V> viewClass = null;
+            Class<V> viewClass = null;
             Class<?> currentClass = getClass();
 
             while (viewClass == null) {
@@ -98,7 +99,6 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
      * Scans the interface inheritance hierarchy and checks if on the root is MvpView.class.
      *
      * @param klass The leaf interface where to begin to scan
-     *
      * @return true if subtype of MvpView, otherwise false
      */
     private boolean isSubTypeOfMvpView(Class<?> klass) {
@@ -126,7 +126,7 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
     protected V getView() {
 
         if (view != null) {
-             V realView = view.get();
+            V realView = view.get();
             if (realView != null) {
                 return realView;
             }
@@ -135,6 +135,7 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
         return nullView;
     }
 
+    public abstract void start();
     @Override
     @UiThread
     public void detachView(boolean retainInstance) {

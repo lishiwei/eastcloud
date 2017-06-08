@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.umeng.socialize.UMAuthListener;

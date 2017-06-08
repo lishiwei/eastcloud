@@ -13,4 +13,9 @@ public class ChannelPresenter extends MvpNullObjectBasePresenter<ChannelView> {
     @Inject
     public ChannelPresenter() {
     }
+
+    @Override
+    public void start() {
+
+    }
 }

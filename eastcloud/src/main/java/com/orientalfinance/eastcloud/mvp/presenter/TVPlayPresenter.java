@@ -12,6 +12,11 @@ import javax.inject.Inject;
 
 public class TVPlayPresenter extends MvpNullObjectBasePresenter<TVPlayView> {
 
+    @Override
+    public void start() {
+
+    }
+
     @Inject
     public TVPlayPresenter() {
     }

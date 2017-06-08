@@ -21,29 +21,29 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitView> {
-//    private static final String TAG = CurrentHitPresenter.class.getSimpleName();
-//    MovieRepository mMovieRepository;
+    private static final String TAG = CurrentHitPresenter.class.getSimpleName();
+    MovieRepository mMovieRepository;
 
-//    @Inject
-//    public CurrentHitPresenter(MovieRepository movieRepository) {
-////        mMovieRepository = movieRepository;
-//    }
-@Inject
-    public CurrentHitPresenter() {
-//        mMovieRepository = movieRepository;
+    @Inject
+    public CurrentHitPresenter(MovieRepository movieRepository) {
+        mMovieRepository = movieRepository;
     }
-//    public void start() {
-//        getView().showLoading();
-//        mMovieRepository.getDatas(new MovieRequestParam(0,0) ).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<List<Movie>>() {
-//            @Override
-//            public void accept(List<Movie> movies) throws Exception {
-//                getView().showView(movies);
-//                getView().hideLoading();
-//                Log.d(TAG, "accept: "+movies.toString());
-//                Log.d(TAG, "accept: "+movies.size());
-//            }
-//        });
+//@Inject
+//    public CurrentHitPresenter() {
+//        mMovieRepository = movieRepository;
 //    }
+    public void start() {
+        getView().showLoading();
+        mMovieRepository.getDatas(new MovieRequestParam(0,0) ).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<List<Movie>>() {
+            @Override
+            public void accept(List<Movie> movies) throws Exception {
+                getView().showView(movies);
+                getView().hideLoading();
+                Log.d(TAG, "accept: "+movies.toString());
+                Log.d(TAG, "accept: "+movies.size());
+            }
+        });
+    }
 
     @Override
     public void attachView(CurrentHitView view) {

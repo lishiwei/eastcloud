@@ -20,7 +20,7 @@ import com.orientalfinance.eastcloud.dagger.modules.ActivityModule;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import butterknife.ButterKnife;
+
 
 public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW extends MvpView, PRESENTER extends MvpPresenter<VIEW>,
         VIEW_STATE extends ViewState<VIEW>> extends AppCompatActivity implements ActivityMvpViewStateDelegateCallback<VIEW, PRESENTER> {
@@ -59,7 +59,7 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
         {
             setContentView(getLayoutId());
         }
-        ButterKnife.bind(this);
+
         COMPONENT component = constructComponent(getAppComponent());
         component.inject(this);
         getMvpDelegate().onCreate(savedInstanceState);

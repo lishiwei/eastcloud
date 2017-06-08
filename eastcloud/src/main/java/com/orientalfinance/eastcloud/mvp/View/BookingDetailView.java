@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public interface BookingDetailView extends MvpView{
-
+public void getDetail(String detailId);
     public void showView(Detail details);
     public void showLoading();
     public void hideLoading();

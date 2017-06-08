@@ -4,6 +4,7 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.orientalfinance.R;
@@ -98,19 +99,19 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 
     @Override
     public void showView(List<Movie> movies) {
-//        mCurrentHitRvAdpter.setMovieList(movies);
-//        mLiveVideoRvAdapter.setMovieList(movies);
-//        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+        mCurrentHitRvAdpter.setMovieList(movies);
+        mLiveVideoRvAdapter.setMovieList(movies);
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
     public void showLoading() {
-//        mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-//        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
@@ -129,9 +130,9 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.ryCurrentHit.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
         mFragmentCurrentHitBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false));
-//        mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
-//                android.R.color.holo_red_light, android.R.color.holo_orange_light,
-//                android.R.color.holo_green_light);
+        mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_red_light, android.R.color.holo_orange_light,
+                android.R.color.holo_green_light);
 //        mFragmentCurrentHitBinding.ryCurrentHit.setOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -145,13 +146,13 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 //            }
 //        });
 
-//        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                getPresenter().start();
-//            }
-//        });
-//        getPresenter().start();
+        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPresenter().start();
+            }
+        });
+        getPresenter().start();
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
     }

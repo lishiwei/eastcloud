@@ -20,6 +20,11 @@ import io.reactivex.functions.Consumer;
 public class HotBookingPresenter extends MvpNullObjectBasePresenter<HotBookingView> {
     MovieRepository mMovieRepository;
 
+    @Override
+    public void start() {
+
+    }
+
     public List<Movie> getLiveVideoMovie() {
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495789067895&di=d9384b70b7a09110f641283579a68059&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1221%2F20161221024159122.jpg", "思美人", "虐心古装大戏"));

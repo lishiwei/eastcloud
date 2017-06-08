@@ -1,8 +1,5 @@
 package com.orientalfinance.eastcloud.module.Retrofit;
 
-import android.content.Context;
-
-
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EastcloudRetrofit {
     public static String BaseUrl = "";
-    public static EastcloudRetrofit getRetrofitService() {
+    public static EastCloudService getRetrofitService() {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -25,14 +22,14 @@ public class EastcloudRetrofit {
                 .readTimeout(20, TimeUnit.SECONDS);
 
         OkHttpClient mOkHttpClient=builder.build();
-
         Retrofit retrofit = new Retrofit.Builder().client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BaseUrl)
                 .build();
-        EastcloudRetrofit retrofitService = retrofit.create(EastcloudRetrofit.class);
+        EastCloudService retrofitService = retrofit.create(EastCloudService.class);
 
         return retrofitService;
 
     }
+
 }
