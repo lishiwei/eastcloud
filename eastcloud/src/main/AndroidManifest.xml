@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.orientalfinance">
+          package="com.orientalfinance">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".eastcloud.App"
@@ -36,6 +36,20 @@
         <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
         <!--android:resource="@xml/file_paths" />-->
         <!--</provider>-->
+        <receiver
+            android:name=".eastcloud.receiver.JpushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.hdl.jpushdemo"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".eastcloud.MainActivity"
@@ -44,9 +58,9 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -56,35 +70,55 @@
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityTVPlayDetail"
-            android:parentActivityName=".eastcloud.MainActivity"></activity>
+            android:parentActivityName=".eastcloud.MainActivity">
+
+        </activity>
         <activity
             android:name=".eastcloud.activity.ActivityHotBooking"
             android:launchMode="singleTask"
-            android:parentActivityName=".eastcloud.MainActivity"></activity>
+            android:parentActivityName=".eastcloud.MainActivity">
+
+        </activity>
         <activity
             android:name=".eastcloud.activity.ActivitySearch"
-            android:parentActivityName=".eastcloud.MainActivity"></activity>
+            android:parentActivityName=".eastcloud.MainActivity">
+
+        </activity>
         <activity
             android:name=".eastcloud.activity.ActivityPlayRecord"
-            android:parentActivityName=".eastcloud.MainActivity"></activity>
+            android:parentActivityName=".eastcloud.MainActivity">
+
+        </activity>
         <activity
             android:name=".eastcloud.activity.ActivityBookingDetail"
-            android:parentActivityName=".eastcloud.activity.ActivityHotBooking"></activity>
+            android:parentActivityName=".eastcloud.activity.ActivityHotBooking">
+
+        </activity>
         <activity
             android:name=".eastcloud.activity.ActivitySetting"
-            android:parentActivityName=".eastcloud.MainActivity"></activity>
-        <activity android:name=".eastcloud.activity.ActivityLogin"></activity>
-        <activity android:name=".eastcloud.activity.ActivityForgetPassWord"></activity>
-        <activity android:name=".eastcloud.activity.ActivitySettingPassword"></activity>
-        <activity android:name=".eastcloud.activity.ActivityRegister"></activity>
+            android:parentActivityName=".eastcloud.MainActivity">
+
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityLogin">
+
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityForgetPassWord">
+
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivitySettingPassword">
+
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityRegister">
+
+        </activity>
 
         <activity
             android:name=".eastcloud.WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
@@ -92,7 +126,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
@@ -100,12 +134,12 @@
             android:noHistory="true">
 
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="tencent100424468" />
+                <data android:scheme="tencent100424468"/>
             </intent-filter>
         </activity>
 
@@ -113,23 +147,25 @@
             android:name="com.umeng.qq.tencent.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name=".eastcloud.zxing.ScannerActivity"
             android:parentActivityName=".eastcloud.MainActivity">
             <intent-filter>
-                <action android:name="com.mylhyl.zxing.scanner.client.android.SCAN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.mylhyl.zxing.scanner.client.android.SCAN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".eastcloud.zxing.result.UriActivity"
-            android:parentActivityName=".eastcloud.MainActivity" />
+            android:parentActivityName=".eastcloud.MainActivity"/>
         <activity
             android:name=".eastcloud.zxing.result.TextActivity"
-            android:parentActivityName=".eastcloud.MainActivity" />
+            android:parentActivityName=".eastcloud.MainActivity"/>
+
+
     </application>
 
 </manifest>

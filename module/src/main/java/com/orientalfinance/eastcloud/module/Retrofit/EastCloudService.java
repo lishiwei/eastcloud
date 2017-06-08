@@ -16,14 +16,14 @@ import retrofit2.http.GET;
 public interface EastCloudService {
 
     @GET("users/{user}/repos")
-    Flowable<List<Movie>> getMovies(RequestParam requestParam);
+    Flowable<List<Movie>> getMovies(String s ,String  sn);
     @GET("users/{user}/repos")
-    Flowable<List<Movie>> login(RequestParam requestParam);
+    Flowable<List<Movie>> login(String s ,String  sn);
     @GET("users/{user}/repos")
-    Flowable<List<Movie>> changePassword(RequestParam requestParam);
+    Flowable<List<Movie>> changePassword(String s ,String  sn);
     @GET("users/{user}/repos")
-    Flowable<List<Movie>> regist(RequestParam requestParam);
+    Flowable<List<Movie>> regist(String s ,String  sn);
     @GET("users/{user}/repos")
-    Flowable<List<Movie>> getDedail(RequestParam requestParam);
+    Flowable<List<Movie>> getDedail(String s ,String  sn);
 
 }
