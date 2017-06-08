@@ -33,6 +33,8 @@ public class BookingDetailPresenter extends MvpNullObjectBasePresenter<BookingDe
 
     public void start()
     {
+        getView().showLoading();
+
         getView().showView(mDetail);
     }
     @Override

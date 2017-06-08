@@ -11,7 +11,13 @@ import javax.inject.Inject;
  */
 
 public class MyselfPresenter extends MvpNullObjectBasePresenter<MyselfView> {
+    @Override
+    public void start() {
+
+    }
+
     @Inject
     public MyselfPresenter() {
     }
 }
+

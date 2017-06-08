@@ -14,4 +14,9 @@ public class ApplicationPresenter extends MvpNullObjectBasePresenter<Application
     @Inject
     public ApplicationPresenter() {
     }
+
+    @Override
+    public void start() {
+
+    }
 }
