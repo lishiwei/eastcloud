@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.multidex.MultiDex;
 import android.widget.ImageView;
 
 
@@ -20,6 +21,11 @@ import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
 
 import static com.umeng.socialize.utils.DeviceConfig.context;
 
@@ -47,6 +53,18 @@ public class App extends Application {
                 .setGrade(Luban.THIRD_GEAR)
                 .create();
         PictureConfig.getInstance().init(options);
+        JPushInterface.setDebugMode(true);//正式版的时候设置false，关闭调试
+        JPushInterface.init(this);
+        //建议添加tag标签，发送消息的之后就可以指定tag标签来发送了
+        Set<String> set = new HashSet<>();
+        set.add("lishiwei");//名字任意，可多添加几个
+        JPushInterface.setTags(this, set, null);//设置标签
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public AppComponent getAppComponent() {

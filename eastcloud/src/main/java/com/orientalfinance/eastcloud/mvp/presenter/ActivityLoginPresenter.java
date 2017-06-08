@@ -7,6 +7,7 @@ import com.orientalfinance.eastcloud.module.Detail;
 import com.orientalfinance.eastcloud.module.Movie;
 import com.orientalfinance.eastcloud.module.Retrofit.EastcloudRetrofit;
 import com.orientalfinance.eastcloud.module.Retrofit.MyTransform;
+import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.mvp.View.ActivityDetailView;
 import com.orientalfinance.eastcloud.mvp.View.ActivityLoginView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
@@ -41,10 +42,11 @@ public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<ActivityL
 
     public void login() {
         getView().showLogin();
-        EastcloudRetrofit.getRetrofitService().getMovies(1, 1).compose(new MyTransform<Movie>()).doOnError(new Consumer<Throwable>() {
+        CommonRequestParam commonRequestParam = new CommonRequestParam("", "");
+        EastcloudRetrofit.getRetrofitService().getMovies(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<Movie>()).doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-
+                getView().showError();
             }
         }).subscribe(new Consumer<List<Movie>>() {
             @Override

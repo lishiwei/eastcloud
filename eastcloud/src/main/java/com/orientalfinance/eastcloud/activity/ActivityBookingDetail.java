@@ -84,6 +84,11 @@ public class ActivityBookingDetail extends BaseActivity<BookingDetailComponent, 
     }
 
     @Override
+    public void getDetail(String detailId) {
+
+    }
+
+    @Override
     public void showExchange() {
 
     }
