@@ -14,9 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.iv_Email).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
         findViewById(R.id.iv_History).setOnClickListener(new View.OnClickListener() {
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void initFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
