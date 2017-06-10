@@ -1,6 +1,12 @@
 package com.orientalfinance.eastcloud.module.Retrofit;
 
 
+import android.support.annotation.NonNull;
+
+import com.orientalfinance.eastcloud.module.Retrofit.configration.API;
+import com.orientalfinance.eastcloud.module.Retrofit.encrypt.DecryptionInterceptor;
+import com.orientalfinance.eastcloud.module.Retrofit.log.LogParamsInterceptor;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -13,23 +19,53 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class EastcloudRetrofit {
-    public static String BaseUrl = "";
-    public static EastCloudService getRetrofitService() {
+    public static EastcloudRetrofit eastcloudRetrofit;
+    private static final Object objectLock = new Object();
+    private static Retrofit retrofit;
 
+    private EastcloudRetrofit() {
+        retrofit = initRetrofit();
+    }
+
+    private Retrofit initRetrofit() {
+        OkHttpClient mOkHttpClient = getOkHttpClient();
+        retrofit = new Retrofit.Builder().client(mOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(API.BASE_URL)
+                .build();
+        return retrofit;
+    }
+
+    public static EastcloudRetrofit getInstance() {
+        if (eastcloudRetrofit == null) {
+            synchronized (objectLock) {
+                if (eastcloudRetrofit == null) {
+                    eastcloudRetrofit = new EastcloudRetrofit();
+                }
+            }
+        }
+        return eastcloudRetrofit;
+    }
+
+    public EastCloudService getEastCloudService() {
+        if (retrofit == null) {
+            retrofit = initRetrofit();
+        }
+
+        return retrofit.create(EastCloudService.class);
+    }
+
+    @NonNull
+    private static OkHttpClient getOkHttpClient() {
+        LogParamsInterceptor log = new LogParamsInterceptor.Builder().showLog(true).build();
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS);
+                .readTimeout(20, TimeUnit.SECONDS)
+                .addInterceptor(log)
+                .addInterceptor(new DecryptionInterceptor());
 
-        OkHttpClient mOkHttpClient=builder.build();
-        Retrofit retrofit = new Retrofit.Builder().client(mOkHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BaseUrl)
-                .build();
-        EastCloudService retrofitService = retrofit.create(EastCloudService.class);
-
-        return retrofitService;
-
+        return builder.build();
     }
 
 }

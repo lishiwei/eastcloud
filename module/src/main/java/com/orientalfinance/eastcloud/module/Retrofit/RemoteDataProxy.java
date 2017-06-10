@@ -6,6 +6,6 @@ package com.orientalfinance.eastcloud.module.Retrofit;
  * email:lizy@oriental-finance.com
  */
 
-public class RemoteDataManager {
+public class RemoteDataProxy {
 
 }
