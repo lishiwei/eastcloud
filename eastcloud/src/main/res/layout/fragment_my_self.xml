@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="90dp"
                     android:layout_marginTop="4dp"
-                    android:text="设置"/>
+                    android:text="家庭成员"/>
             </FrameLayout>
 
 
@@ -101,11 +101,12 @@
                     android:background="@drawable/setting"/>
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="90dp"
                     android:layout_marginTop="4dp"
-                    android:text="家庭"/>
+                    android:text="我的订单"/>
             </FrameLayout>
         </LinearLayout>
 

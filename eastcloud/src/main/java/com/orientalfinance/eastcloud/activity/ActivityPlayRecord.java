@@ -1,9 +1,7 @@
 package com.orientalfinance.eastcloud.activity;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityPlayRecordBinding;
@@ -24,6 +22,16 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     @Inject
     PlayRecordRvAdpter mPlayRecordRvAdpter;
     ActivityPlayRecordBinding mActivityPlayRecordBinding;
+
+    @Override
+    public boolean hasToolBar() {
+        return false;
+    }
+
+    @Override
+    public String getToolBarTitle() {
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

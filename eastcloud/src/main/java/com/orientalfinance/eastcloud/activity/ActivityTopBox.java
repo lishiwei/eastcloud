@@ -1,18 +1,15 @@
 package com.orientalfinance.eastcloud.activity;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 import com.orientalfinance.R;
-@Deprecated
-/*ActivitySettingPassWord
 
-* */
-public class ActivityModifyPassWord extends AppCompatActivity {
+public class ActivityTopBox extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_pass_word);
+        setContentView(R.layout.activity_top_box);
     }
 }

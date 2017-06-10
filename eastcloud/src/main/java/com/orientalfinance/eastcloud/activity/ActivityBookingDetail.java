@@ -30,6 +30,16 @@ public class ActivityBookingDetail extends BaseActivity<BookingDetailComponent, 
     ActivityBookingDetailBinding mActivityBookingDetailBinding;
 
     @Override
+    public boolean hasToolBar() {
+        return false;
+    }
+
+    @Override
+    public String getToolBarTitle() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityBookingDetailBinding = DataBindingUtil.setContentView(this, getLayoutId());

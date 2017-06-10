@@ -30,6 +30,16 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     @HotSearch
     SearchRvAdapter mHotSearchRvAdapter;
 
+    @Override
+    public boolean hasToolBar() {
+        return false;
+    }
+
+    @Override
+    public String getToolBarTitle() {
+        return null;
+    }
+
     @Inject
     @Searched
     SearchRvAdapter mSearchedRvAdapter;

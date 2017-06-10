@@ -9,6 +9,9 @@
         <variable
             name="url"
             type="String"/>
+        <variable
+        name="handler"
+        type="com.orientalfinance.eastcloud.activity.ActivitySetting.ClickHandler"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,6 +84,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:id="@+id/ll_RealName"
+
+                    android:onClick="@{handler.onclick}"
                     android:paddingBottom="12dp"
                     android:paddingTop="12dp">
 
@@ -94,11 +100,15 @@
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
+                        android:gravity="end"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="李市伟"
+                        android:id="@+id/tv_RealName"
+
                         android:textColor="#999999"
+
                         android:textSize="16sp"/>
 
                     <ImageView
@@ -118,6 +128,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:id="@+id/ll_NickName"
+
+                    android:onClick="@{handler.onclick}"
                     android:paddingBottom="12dp"
                     android:paddingTop="12dp">
 
@@ -131,9 +144,14 @@
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+
+                        android:id="@+id/tv_NickName"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:gravity="end"
+
+
                         android:text="李市伟"
                         android:textColor="#999999"
                         android:textSize="16sp"/>
@@ -230,6 +248,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingBottom="12dp"
+                    android:id="@+id/ll_PhoneNumber"
+
+                    android:onClick="@{handler.onclick}"
                     android:paddingTop="12dp">
 
                     <TextView
@@ -242,10 +263,13 @@
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
+                        android:gravity="end"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="18601704731"
+                        android:id="@+id/tv_PhoneNumber"
+
                         android:textColor="#999999"
                         android:textSize="16sp"/>
 
@@ -253,6 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+
                         android:layout_margin="12dp"
                         android:background="@drawable/right"/>
                 </LinearLayout>
@@ -279,13 +304,11 @@
                         android:textColor="#333333"
                         android:textSize="18sp"/>
 
-                    <TextView
+                    <ToggleButton
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="李市伟"
-                        android:textColor="#999999"
-                        android:textSize="16sp"/>
+                        android:id="@+id/tb_Message"
+                        android:layout_height="wrap_content">
+                    </ToggleButton>
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud.mvp.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.LinearLayout;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
@@ -21,20 +22,21 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 
-
 public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW extends MvpView, PRESENTER extends MvpPresenter<VIEW>,
         VIEW_STATE extends ViewState<VIEW>> extends AppCompatActivity implements ActivityMvpViewStateDelegateCallback<VIEW, PRESENTER> {
 
     /**
      * Can't inject directly, as the presenter instantiation needs to happen by mosby in {@link this#createPresenter()}.
      */
-    @Inject Provider<PRESENTER> presenterProvider;
+    @Inject
+    Provider<PRESENTER> presenterProvider;
     private PRESENTER presenter;
 
     /**
      * Can't inject directly, as the presenter instantiation needs to happen by mosby in {@link this#createViewState()}.
      */
-    @Inject Provider<VIEW_STATE> viewStateProvider;
+    @Inject
+    Provider<VIEW_STATE> viewStateProvider;
     private VIEW_STATE viewState;
 
     /**
@@ -46,24 +48,45 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
      * Instead of extending {@link MvpActivity} or {@link MvpViewStateActivity} we are using a mosby's delegate. To do that we need to
      * propagate certain activity lifecycle methods to the delegate.
      */
-    @Nullable protected ActivityMvpDelegate mvpDelegate;
+    @Nullable
+    protected ActivityMvpDelegate mvpDelegate;
 
     private boolean viewStateRestoreInProgress;
+    LinearLayout mLinearLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         this.retainInstance = true;
         super.onCreate(savedInstanceState);
-        if (getLayoutId()!=0)
-        {
-            setContentView(getLayoutId());
+        if (getLayoutId() != 0) {
+//            if (hasToolBar()) {
+//                mLinearLayout = new LinearLayout(this);
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                mLinearLayout.setLayoutParams(layoutParams);
+//                Toolbar toolbar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.mytoolbar, null);
+//                mLinearLayout.addView(toolbar);
+//                setSupportActionBar(toolbar);
+//                getSupportActionBar().setTitle("");
+//                ((TextView) toolbar.findViewById(R.id.tv_toolbar)).setText(getToolBarTitle());
+//                mLinearLayout.addView( LayoutInflater.from(this).inflate(getLayoutId(), null));
+//                setContentView(mLinearLayout);
+//
+//            } else {
+                setContentView(getLayoutId());
+//            }
+
         }
 
         COMPONENT component = constructComponent(getAppComponent());
         component.inject(this);
         getMvpDelegate().onCreate(savedInstanceState);
     }
+
+    public abstract boolean hasToolBar();
+
+    public abstract String getToolBarTitle();
+
     public ActivityModule getActivityModule() {
         return new ActivityModule(this);
     }
@@ -71,6 +94,7 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
     public AppComponent getAppComponent() {
         return ((App) getApplication()).getAppComponent();
     }
+
     protected abstract int getLayoutId();
 
     protected abstract COMPONENT constructComponent(AppComponent appComponent);

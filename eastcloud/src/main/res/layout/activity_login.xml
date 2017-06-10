@@ -60,7 +60,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/rectangle"
+        android:background="@drawable/yellowrectangle"
         android:text="登录"
         android:textSize="20sp"/>
 

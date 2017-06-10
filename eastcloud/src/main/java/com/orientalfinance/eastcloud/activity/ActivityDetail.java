@@ -28,6 +28,16 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
     DetailRVAdapter mDetailRVAdapter;
 
     @Override
+    public boolean hasToolBar() {
+        return false;
+    }
+
+    @Override
+    public String getToolBarTitle() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityDetailBinding = DataBindingUtil.setContentView(this,getLayoutId());

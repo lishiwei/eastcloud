@@ -1,27 +1,19 @@
 package com.orientalfinance.eastcloud.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.luck.picture.lib.model.FunctionOptions;
 import com.luck.picture.lib.model.PictureConfig;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
+import com.orientalfinance.eastcloud.activity.ActivityFamilyMember;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
-import com.orientalfinance.eastcloud.activity.ActivitySetting;
-import com.orientalfinance.eastcloud.adapter.RVAdapter;
-
+import com.orientalfinance.eastcloud.adapter.MyselfRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerMyselfComponent;
 import com.orientalfinance.eastcloud.dagger.component.MyselfComponent;
@@ -31,19 +23,11 @@ import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.MyselfPresenter;
 import com.orientalfinance.eastcloud.utils.ImageLoaders;
-import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.entity.LocalMedia;
-import com.yuyh.library.imgsel.ImageLoader;
-import com.yuyh.library.imgsel.ImgSelActivity;
-import com.yuyh.library.imgsel.ImgSelConfig;
 
-
-import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +48,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     private String mParam2;
 
     @Inject
-    RVAdapter mMyselfRvAdapter;
+    MyselfRvAdapter mMyselfRvAdapter;
 
     FragmentMySelfBinding mFragmentMySelfBinding;
 
@@ -115,11 +99,11 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
         mFragmentMySelfBinding = (FragmentMySelfBinding) mViewDataBinding;
         mFragmentMySelfBinding.setAvatarUrl("" + R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
-        mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, true));
+        mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivitySetting.class);
+                Intent intent = new Intent(getActivity(), ActivityFamilyMember.class);
                 startActivity(intent);
             }
         });

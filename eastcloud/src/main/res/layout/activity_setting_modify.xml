@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.orientalfinance.eastcloud.activity.ActivitySettingPassword">
+    tools:context="com.orientalfinance.eastcloud.activity.ActivitySettingModify">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,47 +17,38 @@
 
         <TextView
             android:id="@+id/tv_toolbar"
+            style="@style/tv_Toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/tv_Toolbar"
 
-            android:text="设置密码"/>
+            android:text="修改昵称"/>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_margin="12dp"
-        android:gravity="center"
-        android:text="设置你的密码"
-        android:textColor="#000000"/>
+        android:background="#000000">
+    </View>
 
     <com.orientalfinance.eastcloud.mvp.View.ClearEditText
+        android:id="@+id/clearEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:gravity="center"
-        android:hint="6-20位字母,数字组合"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:gravity="center"
-        android:text="确认你的密码"
-        android:textColor="#000000"/>
+        android:hint="请输入您的昵称"/>
 
-    <com.orientalfinance.eastcloud.mvp.View.ClearEditText
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_margin="12dp"
-        android:gravity="center"
-        android:hint="6-20位字母,数字组合"/>
+        android:background="#000000">
+    </View>
+
     <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/yellowrectangle"
-        android:text="注册"
-        android:textSize="20sp"/>
+        android:id="@+id/btn_confirm"
+        android:text="确定"
+        android:background="@drawable/yellowrectangle"/>
 </LinearLayout>

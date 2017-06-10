@@ -106,7 +106,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/rectangle"
+                    android:background="@drawable/yellowrectangle"
                     android:gravity="center"
                     android:text="在电视上播放"
                     android:textSize="16sp"/>

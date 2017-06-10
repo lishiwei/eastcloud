@@ -32,6 +32,16 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     HotBookingRvAdpter mHotMovieRvAdpter;
 
     @Override
+    public boolean hasToolBar() {
+        return false;
+    }
+
+    @Override
+    public String getToolBarTitle() {
+        return null;
+    }
+
+    @Override
     public void showExchange() {
 
     }
