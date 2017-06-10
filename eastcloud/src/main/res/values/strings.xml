@@ -10,4 +10,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Zxing-->
     <string name="msg_default_status">将扫描框对准二维码，即可自动扫描</string>
+
+    <!--App update-->
+    <string name="update_app_model_prepare">准备下载</string>
+    <string name="update_app_model_progress">已下载 %1$d%2$s</string>
+    <string name="update_app_model_success">下载成功(点击完成安装)</string>
+    <string name="update_app_model_error">下载失败(点击使用浏览器下载)</string>
+
 </resources>
