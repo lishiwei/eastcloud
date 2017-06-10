@@ -29,7 +29,7 @@ public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<LoginView
 
     public void login(CommonRequestParam commonRequestParam) {
         getView().showLogin();
-        EastcloudRetrofit.getRetrofitService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
+        EastcloudRetrofit.getInstance().getEastCloudService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 getView().showError(throwable);

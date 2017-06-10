@@ -29,7 +29,7 @@ public class ModifyPassWordPresenter extends MvpNullObjectBasePresenter<ModifyPa
 
     public void login(CommonRequestParam commonRequestParam) {
         getView().showgModifyPassWord();
-        EastcloudRetrofit.getRetrofitService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
+        EastcloudRetrofit.getInstance().getEastCloudService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 getView().showError(throwable);
