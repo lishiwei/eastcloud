@@ -16,6 +16,7 @@ import com.luck.picture.lib.model.PictureConfig;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerAppComponent;
 import com.orientalfinance.eastcloud.dagger.modules.AppModules;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -36,6 +37,7 @@ import static com.umeng.socialize.utils.DeviceConfig.context;
 public class App extends Application {
     AppComponent mAppComponent;
     static App mApp;
+    private RemoteDataProxy remoteDataProxy;
 
     @Override
     public void onCreate() {
@@ -59,6 +61,8 @@ public class App extends Application {
         Set<String> set = new HashSet<>();
         set.add("lishiwei");//名字任意，可多添加几个
         JPushInterface.setTags(this, set, null);//设置标签
+
+        remoteDataProxy = RemoteDataProxy.getRemoteDataProxy(this);
     }
 
     @Override

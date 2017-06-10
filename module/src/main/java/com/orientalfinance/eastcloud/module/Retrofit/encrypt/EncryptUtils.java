@@ -32,5 +32,11 @@ public class EncryptUtils {
         //产生签名
         return SignUtils.sign(s, privateKey);
     }
-    
+
+    public static String getZip(Object requestData) {
+        Gson gson = new Gson();
+        String reqStr = gson.toJson(requestData);
+        return ZipUtils.gzip(reqStr);
+    }
+
 }

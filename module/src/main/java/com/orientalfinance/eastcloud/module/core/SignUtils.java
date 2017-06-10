@@ -1,7 +1,8 @@
 package com.orientalfinance.eastcloud.module.core;
 
-import org.apache.commons.codec.binary.Base64;
 
+
+import android.util.Base64;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -35,7 +36,7 @@ public class SignUtils {
             signature.update(content.getBytes(DEFAULT_CHARSET));
 
             byte[] signed = signature.sign();
-            return Base64.encodeBase64String(signed);
+            return Base64.encodeToString(signed,Base64.DEFAULT);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,16 +45,17 @@ public class SignUtils {
     }
 
     public static boolean doCheck(String content, String sign, String publicKey) {
+
         try {
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
-            byte[] encodedKey = Base64.decodeBase64(publicKey);
+            byte[] encodedKey = Base64.decode(publicKey,Base64.DEFAULT);
             PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
             java.security.Signature signature = java.security.Signature.getInstance(SIGN_ALGORITHMS);
 
             signature.initVerify(pubKey);
 
             signature.update(content.getBytes("utf-8"));
-            boolean bVerify = signature.verify(Base64.decodeBase64(sign));
+            boolean bVerify = signature.verify(Base64.decode(publicKey,Base64.DEFAULT));
             return bVerify;
         } catch (Exception e) {
             e.printStackTrace();
