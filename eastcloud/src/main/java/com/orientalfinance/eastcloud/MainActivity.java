@@ -1,7 +1,6 @@
 package com.orientalfinance.eastcloud;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -13,24 +12,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
-import com.orientalfinance.Register;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
 import com.orientalfinance.eastcloud.fragment.FragmentApplication;
 import com.orientalfinance.eastcloud.fragment.FragmentChannel;
 import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
 import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 import com.orientalfinance.eastcloud.fragment.FragmentRemoteControl;
-import com.orientalfinance.eastcloud.module.ModuleContext;
-import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
-import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
-import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.utils.BottomNavigationViewHelper;
 import com.orientalfinance.eastcloud.view.FragmentIndicator;
 import com.orientalfinance.eastcloud.zxing.ScannerActivity;

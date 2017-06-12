@@ -1,15 +1,16 @@
 package com.orientalfinance.eastcloud.adapter;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivityTopBox;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class MyTVRvAdpter extends RecyclerView.Adapter<MyTVRvAdpter.MyTVViewHold
         myTVViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(v.getContext(), ActivityTopBox.class);
+                v.getContext().startActivity(intent);
             }
         });
         return myTVViewHolder;
@@ -42,12 +44,12 @@ public class MyTVRvAdpter extends RecyclerView.Adapter<MyTVRvAdpter.MyTVViewHold
 
     @Override
     public void onBindViewHolder(MyTVViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: "+mMovieList.get(position));
+
         holder.mViewDataBinding.setVariable(BR.item, mMovieList.get(position));
     }
 
     public void setMovieList(List<TV> movieList) {
-        Log.d(TAG, "setMovieList: "+movieList.size());
+
         mMovieList = movieList;
         notifyDataSetChanged();
     }

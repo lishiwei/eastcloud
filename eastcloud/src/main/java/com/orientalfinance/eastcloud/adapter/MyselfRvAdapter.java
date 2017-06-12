@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 import com.orientalfinance.eastcloud.utils.LogUtils;
@@ -22,7 +23,8 @@ import java.util.List;
 
 public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMyselfViewHolder> {
     List<ItemMyself> mItemMyselfs;
-public static String TAG = MyselfRvAdapter.class.getSimpleName();
+    public static String TAG = MyselfRvAdapter.class.getSimpleName();
+
     public MyselfRvAdapter(List<ItemMyself> itemMyselfs) {
         mItemMyselfs = itemMyselfs;
     }
@@ -35,23 +37,32 @@ public static String TAG = MyselfRvAdapter.class.getSimpleName();
         itemMyselfViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.d(TAG, "onClick: "+itemMyselfViewHolder.getLayoutPosition());
+                LogUtils.d(TAG, "onClick: " + itemMyselfViewHolder.getLayoutPosition());
                 switch (itemMyselfViewHolder.getLayoutPosition()) {
                     case 0:
                         break;
                     case 1:
-                        LogUtils.d(TAG, "onClick: ");
                         break;
                     case 2:
+
                         break;
                     case 3:
                         break;
                     case 4:
-                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
 
                         break;
                     case 5:
+                        Intent intent = new Intent(v.getContext(), ActivityMyBankCard.class);
+                        v.getContext().startActivity(intent);
                         break;
+                    case 6:
+                        break;
+                    case 7:
+                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
+                        break;
+                    case 8:
+                        break;
+
                 }
             }
         });

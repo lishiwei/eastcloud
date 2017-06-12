@@ -19,11 +19,11 @@ public class ImageLoaders {
 
     public static void displayImage(ImageView imageView, String url) {
         try {
-            Glide.with(imageView.getContext()).load(Integer.valueOf(url)).centerCrop().placeholder(R.drawable.placeholder).into(imageView);
+            Glide.with(imageView.getContext()).load(Integer.valueOf(url)).centerCrop().placeholder(R.drawable.loading).into(imageView);
         }
         catch (Exception e)
         {
-            Glide.with(imageView.getContext()).load(url).centerCrop().placeholder(R.drawable.placeholder).into(imageView);
+            Glide.with(imageView.getContext()).load(url).centerCrop().placeholder(R.drawable.loading).into(imageView);
 
         }
     }

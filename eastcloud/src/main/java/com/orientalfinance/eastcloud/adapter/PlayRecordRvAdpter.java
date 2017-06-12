@@ -49,7 +49,7 @@ public class PlayRecordRvAdpter extends RecyclerView.Adapter<PlayRecordRvAdpter.
     }
 
     public void setMovieList(List<Movie> movieList) {
-        Log.d(TAG, "setMovieList: "+movieList.size());
+        Log.d(TAG, "setMovieList: " + movieList.size());
         mMovieList = movieList;
         notifyDataSetChanged();
     }

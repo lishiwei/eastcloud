@@ -163,6 +163,7 @@
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityMyTV"
+            android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.MainActivity">
         </activity>
         <activity
@@ -171,11 +172,26 @@
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityFamilyMember"
+            android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.MainActivity">
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityConnectTV">
+        <activity
+            android:name=".eastcloud.activity.ActivityConnectTV"
+            android:launchMode="singleTask"
+            android:parentActivityName=".eastcloud.activity.ActivityTopBox">
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityTopBox">
+        <activity
+            android:name=".eastcloud.activity.ActivityTopBox"
+            android:launchMode="singleTask"
+            android:parentActivityName=".eastcloud.activity.ActivityMyTV">
+        </activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityMyBankCard"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityAddBankCard">
+        </activity>
+        <activity android:name=".eastcloud.activity.ActivityMyOrder">
         </activity>
     </application>
 
