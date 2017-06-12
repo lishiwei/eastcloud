@@ -29,4 +29,8 @@
         <item name="android:textSize">15sp</item>
 
     </style>
+    <!--toggleButton -->
+    <style name="MyToggleButton" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@drawable/setting_checkbox_button</item>
+    </style>
 </resources>
