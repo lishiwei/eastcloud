@@ -193,6 +193,10 @@
         </activity>
         <activity android:name=".eastcloud.activity.ActivityMyOrder">
         </activity>
+        <activity android:name=".eastcloud.activity.ActivityManagerAddress"
+            android:parentActivityName=".eastcloud.MainActivity"/>
+        <activity android:name=".eastcloud.activity.ActivityEditAddress"
+            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
     </application>
 
 </manifest>
