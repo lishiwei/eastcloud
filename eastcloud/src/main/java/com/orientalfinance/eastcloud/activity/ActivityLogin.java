@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
+import com.orientalfinance.eastcloud.module.core.ACache;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.LoginView;
@@ -170,6 +172,7 @@ public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter
 
     @Override
     public void loginSucceed(User user) {
-
+        ACache aCache = ACache.get(this);
+        aCache.put(Constant.USER,user);
     }
 }

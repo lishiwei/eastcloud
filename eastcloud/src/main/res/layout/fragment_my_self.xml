@@ -56,7 +56,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:id="@+id/fl_setting"
+                android:id="@+id/fl_Home"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -88,7 +88,7 @@
             </View>
 
             <FrameLayout
-                android:id="@+id/fl_Home"
+                android:id="@+id/fl_Order"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

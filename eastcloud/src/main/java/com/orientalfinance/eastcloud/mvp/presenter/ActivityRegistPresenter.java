@@ -2,7 +2,7 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 
 import com.orientalfinance.eastcloud.module.Retrofit.EastcloudRetrofit;
-import com.orientalfinance.eastcloud.module.Retrofit.MyTransform;
+import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.RegistView;
@@ -29,7 +29,10 @@ public class ActivityRegistPresenter extends MvpNullObjectBasePresenter<RegistVi
 
     public void login(CommonRequestParam commonRequestParam) {
         getView().showRegist();
-        EastcloudRetrofit.getInstance().getEastCloudService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new MyTransform<User>()).doOnError(new Consumer<Throwable>() {
+        EastcloudRetrofit.getInstance()
+                .getEastCloudService().login(commonRequestParam.getS(), commonRequestParam.getSn())
+                .compose(new ObjectTransform<User>())
+                .doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 getView().showError(throwable);

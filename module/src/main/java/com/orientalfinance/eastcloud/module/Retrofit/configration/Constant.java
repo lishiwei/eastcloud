@@ -11,5 +11,6 @@ public class Constant {
     public static final int  NICKNAME = 0;
     public static final int REALNAME = 1;
     public static final int  PHONENUMBER = 2 ;
+    public static final String  USER = "user" ;
 
 }
