@@ -3,7 +3,8 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import com.orientalfinance.eastcloud.module.Retrofit.EastcloudRetrofit;
 import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
-import com.orientalfinance.eastcloud.module.Retrofit.MyTransform;
+
+import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
@@ -50,7 +51,7 @@ public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<LoginView
         });
         EastcloudRetrofit.getInstance().getEastCloudService()
                 .login(commonRequestParam.getS(), commonRequestParam.getSn())
-                .compose(new MyTransform<User>())
+                .compose(new ObjectTransform<User>())
                 .doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {

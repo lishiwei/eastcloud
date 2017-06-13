@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingPassWordView;
 import com.orientalfinance.eastcloud.mvp.presenter.SettingPassWordPresenter;
 
@@ -46,12 +47,17 @@ public class ActivitySettingPassword extends MvpActivity<SettingPassWordView,Set
     }
 
     @Override
-    public void showgSettingPassWord() {
+    public void showRegist() {
 
     }
 
     @Override
-    public void SettingPassWordSucceed() {
+    public void hideRegist() {
+
+    }
+
+    @Override
+    public void registSucceed(User user) {
 
     }
 }

@@ -1,7 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.orientalfinance.eastcloud.module.javabean.User;
 
 
 /**
@@ -11,10 +10,11 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 public interface VerificationCodeView extends MvpView {
 
 
-    public void showgGetCode();
+    public void showGetCode();
+    public void hideGetCode();
 
     public void showError(Throwable throwable);
 
-    public void getCodeSucceed(User movie);
+    public void getCodeSucceed();
 
 }

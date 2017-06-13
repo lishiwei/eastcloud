@@ -5,7 +5,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.EastcloudRetrofit;
 import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
-import com.orientalfinance.eastcloud.mvp.View.VerificationCodeView;
+import com.orientalfinance.eastcloud.mvp.View.ModifyPassWordView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
 import io.reactivex.functions.Consumer;
@@ -14,29 +14,28 @@ import io.reactivex.functions.Consumer;
  * Created by 29435 on 2017/5/26.
  */
 
-public class ActivityVerificationCodePresenter extends MvpNullObjectBasePresenter<VerificationCodeView> {
-    private static final String TAG = ActivityVerificationCodePresenter.class.getSimpleName();
+public class ModifyPassWordPresenter extends MvpNullObjectBasePresenter<ModifyPassWordView> {
+    private static final String TAG = ModifyPassWordPresenter.class.getSimpleName();
 
 
-    public void sendVerificationCode(CommonRequestParam commonRequestParam) {
-        getView().showGetCode();
+    public void regist(CommonRequestParam commonRequestParam) {
+        getView().showModify();
         EastcloudRetrofit.getInstance().getEastCloudService().login(commonRequestParam.getS(), commonRequestParam.getSn()).compose(new ObjectTransform<User>()).doOnError(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                getView().hideGetCode();
+                getView().hideModify();
                 getView().showError(throwable);
             }
         }).subscribe(new Consumer<User>() {
             @Override
             public void accept(User user) throws Exception {
-                getView().hideGetCode();
-                getView().getCodeSucceed();
+                getView().ModifySucceed(user);
             }
         });
     }
 
+    @Override
     public void start() {
-        sendVerificationCode(null);
 
     }
 }

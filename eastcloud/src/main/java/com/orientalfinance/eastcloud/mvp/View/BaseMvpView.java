@@ -5,4 +5,7 @@ package com.orientalfinance.eastcloud.mvp.View;
  */
 
 public interface BaseMvpView {
+    public void showLoading();
+    public void hideLoading();
+    public void showError(Throwable throwable);
 }

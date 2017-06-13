@@ -1,6 +1,7 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.orientalfinance.eastcloud.module.javabean.User;
 
 
 /**
@@ -10,10 +11,12 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 public interface SettingPassWordView extends MvpView {
 
 
-    public void showgSettingPassWord();
+    public void showRegist();
+
+    public void hideRegist();
 
     public void showError(Throwable throwable);
 
-    public void SettingPassWordSucceed();
+    public void registSucceed(User user);
 
 }

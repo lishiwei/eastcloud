@@ -10,8 +10,10 @@ public class Constant {
     public static final String REQUEST_CODE = "value";
     public static final int NICKNAME = 0;
     public static final int REALNAME = 1;
-    public static final int PHONENUMBER = 2;
-
+    public static final int  PHONENUMBER = 2 ;
+    public static final String  USER = "user" ;
+    public static final String  MODIFYPWD = "pwd" ;
+    public static final String  REGIST = "regist" ;
     public static class IType {
         public static final int REGISTER = 301;
         public static final int CODE_SEND = 302;

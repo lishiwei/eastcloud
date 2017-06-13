@@ -8,12 +8,15 @@ import com.orientalfinance.eastcloud.module.javabean.User;
  * Created by 29435 on 2017/5/26.
  */
 
-public interface LoginView extends MvpView{
+public interface ModifyPassWordView extends MvpView {
 
 
-    public void showLogin();
-    public void hideLogin();
+    public void showModify();
+
+    public void hideModify();
+
     public void showError(Throwable throwable);
-public void loginSucceed(User movie);
+
+    public void ModifySucceed(User user);
 
 }

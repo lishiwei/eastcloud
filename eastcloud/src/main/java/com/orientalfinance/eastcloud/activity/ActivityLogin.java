@@ -9,15 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.MainActivity;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
-import com.orientalfinance.eastcloud.module.core.ACache;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.LoginView;
+import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityLoginPresenter;
-import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -25,7 +25,7 @@ import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.Map;
 
-public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter> implements LoginView, View.OnClickListener {
+public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPresenter> implements LoginView, View.OnClickListener {
     private static final java.lang.String TAG = ActivityLogin.class.getSimpleName();
     boolean isQQauthed;
     boolean isWechatauthed;
@@ -64,7 +64,6 @@ public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
             SocializeUtils.safeCloseDialog(mDialog);
-            Toast.makeText(ActivityLogin.this, "取消啦!", Toast.LENGTH_SHORT).show();
             Toast.makeText(ActivityLogin.this, "取消啦!", Toast.LENGTH_SHORT).show();
         }
     };
@@ -123,7 +122,6 @@ public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter
                     UMShareAPI.get(ActivityLogin.this).deleteOauth(ActivityLogin.this, SHARE_MEDIA.QQ, mUMAuthListener);
                 } else {
 
-
                     UMShareAPI.get(ActivityLogin.this).doOauthVerify(ActivityLogin.this, SHARE_MEDIA.QQ, mUMAuthListener);
 
                 }
@@ -149,13 +147,16 @@ public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter
                 getPresenter().login(mCommonRequestParam);
                 break;
             case R.id.tv_register:
-                Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
+                Intent intent = new Intent(ActivityLogin.this,ActivityVerificationCode.class);
+                intent.putExtra(Constant.VALUE,Constant.REGIST);
+
                 startActivity(intent);
                 break;
             case R.id.tv_ForgetPassWord:
                 Intent intent1 = new Intent(ActivityLogin.this, ActivityVerificationCode.class);
+                intent1.putExtra(Constant.VALUE,Constant.MODIFYPWD);
                 startActivity(intent1);
-                LogUtils.d(TAG, "onClick: ");
+
                 break;
         }
     }
@@ -163,16 +164,24 @@ public class ActivityLogin extends MvpActivity<LoginView, ActivityLoginPresenter
     @Override
     public void showLogin() {
 
+        mDialog.show();
     }
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this, "您的账号密码不正确", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.pwd_error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void hideLogin() {
+        mDialog.hide();
+        mDialog.cancel();
+        mDialog = null;
     }
 
     @Override
     public void loginSucceed(User user) {
-        ACache aCache = ACache.get(this);
-        aCache.put(Constant.USER,user);
+        AcacheUtil.getInstance().putUser(user);
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

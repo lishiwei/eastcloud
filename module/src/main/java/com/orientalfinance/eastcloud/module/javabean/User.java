@@ -1,10 +1,14 @@
 package com.orientalfinance.eastcloud.module.javabean;
 
+import java.io.Serializable;
+
 /**
  * Created by 29435 on 2017/6/8.
  */
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -6091530420906090649L;
+
     /**
      * 1. phone 手机号
      * 2. name 真实姓名

@@ -2,12 +2,7 @@ package com.orientalfinance.eastcloud;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.multidex.MultiDex;
-import android.widget.ImageView;
-
-
-import com.bumptech.glide.Glide;
 
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.model.FunctionConfig;
@@ -17,18 +12,15 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerAppComponent;
 import com.orientalfinance.eastcloud.dagger.modules.AppModules;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
-import com.yuyh.library.imgsel.ImageLoader;
-import com.yuyh.library.imgsel.ImgSelConfig;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
-
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by 29435 on 2017/5/25.
@@ -61,8 +53,8 @@ public class App extends Application {
         Set<String> set = new HashSet<>();
         set.add("lishiwei");//名字任意，可多添加几个
         JPushInterface.setTags(this, set, null);//设置标签
-
         remoteDataProxy = RemoteDataProxy.getRemoteDataProxy(this);
+        AcacheUtil.getInstance().init(this);
     }
 
     @Override
