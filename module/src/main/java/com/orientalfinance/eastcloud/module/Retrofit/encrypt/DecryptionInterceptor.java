@@ -2,13 +2,15 @@ package com.orientalfinance.eastcloud.module.Retrofit.encrypt;
 
 import android.util.Log;
 
-import com.orientalfinance.eastcloud.module.core.ZipUtils;
+import com.orientalfinance.eastcloud.module.util.ZipUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -23,8 +25,41 @@ public class DecryptionInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Response response = chain.proceed(chain.request());
+        Request request = chain.request();
+        //  Request request1 = encryptRequest(request);
+        Response response = chain.proceed(request);
         return getDecryptionResponse(response);
+    }
+
+    private Request encryptRequest(Request request) {
+        FormBody body = (FormBody) request.body();
+        FormBody.Builder newFormBuilder = new FormBody.Builder();
+        if (body.size() > 0) {
+            //封装参数
+            for (int i = 0; i < body.size(); i++) {
+                Log.e(TAG, body.encodedName(i) + " >>>> " + body.encodedValue(i));
+                Log.e(TAG, body.name(i) + " >>>> " + body.value(i));
+                switch (body.name(i)) {
+                    case "s":
+                        String zip = EncryptUtils.getZip( body.value(i));
+                        newFormBuilder.add(body.name(i), zip);
+                        break;
+                    case "sign":
+                        String encrypt = EncryptUtils.encrypt(body.value(i));
+                        newFormBuilder.add(body.name(i), encrypt);
+                        break;
+                }
+
+            }
+        }
+
+
+//        newFormBuilder.add("s","");
+//        newFormBuilder.addEncoded(PARAMS_DATA, CryptUtil.enCryPto(params));
+        Request.Builder builder = request.newBuilder();
+        builder.url(request.url());
+        builder.method(request.method(), newFormBuilder.build());
+        return builder.build();
     }
 
 
@@ -33,7 +68,7 @@ public class DecryptionInterceptor implements Interceptor {
         Log.e(TAG, "Response解密前======》" + new String(decryptBeforeBytes, Charset.defaultCharset()));
         String decrypt = ZipUtils.gunzip(new String(decryptBeforeBytes));
         Log.e(TAG, "Response解密后======》" + decrypt);
-        MediaType mediaType = response.body().contentType();
+        MediaType mediaType = MediaType.parse("UTF-8");
         if (decrypt == null) {
             return response;
         }

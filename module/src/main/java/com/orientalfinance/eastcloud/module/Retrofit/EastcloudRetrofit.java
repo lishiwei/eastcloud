@@ -59,9 +59,9 @@ public class EastcloudRetrofit {
     private static OkHttpClient getOkHttpClient() {
         LogParamsInterceptor log = new LogParamsInterceptor.Builder().showLog(true).build();
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(15000, TimeUnit.SECONDS)
+                .writeTimeout(20000, TimeUnit.SECONDS)
+                .readTimeout(20000, TimeUnit.SECONDS)
                 .addInterceptor(log)
                 .addInterceptor(new DecryptionInterceptor());
 

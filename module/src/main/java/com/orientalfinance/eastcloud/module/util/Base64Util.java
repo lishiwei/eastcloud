@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.module.core;
+package com.orientalfinance.eastcloud.module.util;
 
 import java.io.UnsupportedEncodingException;
 

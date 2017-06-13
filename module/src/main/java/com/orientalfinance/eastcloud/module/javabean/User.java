@@ -21,6 +21,15 @@ public class User {
     private boolean msg_push;
     private String sign_url;
     private String token;
+    private String pwd;
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 
     public String getName() {
         return name;
@@ -88,6 +97,7 @@ public class User {
                 ", msg_push=" + msg_push +
                 ", sign_url='" + sign_url + '\'' +
                 ", token='" + token + '\'' +
+                ", pwd='" + pwd + '\'' +
                 '}';
     }
 }

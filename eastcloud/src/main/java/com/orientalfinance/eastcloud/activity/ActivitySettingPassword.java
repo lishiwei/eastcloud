@@ -25,6 +25,8 @@ public class ActivitySettingPassword extends MvpActivity<SettingPassWordView,Set
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivitySettingPassword.this, "创建成功", Toast.LENGTH_SHORT).show();
+                getPresenter().register();
+
             }
         });
     }

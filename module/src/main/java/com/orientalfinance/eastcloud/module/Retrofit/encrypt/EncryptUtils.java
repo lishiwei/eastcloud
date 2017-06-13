@@ -1,8 +1,8 @@
 package com.orientalfinance.eastcloud.module.Retrofit.encrypt;
 
 import com.google.gson.Gson;
-import com.orientalfinance.eastcloud.module.core.SignUtils;
-import com.orientalfinance.eastcloud.module.core.ZipUtils;
+import com.orientalfinance.eastcloud.module.util.SignUtils;
+import com.orientalfinance.eastcloud.module.util.ZipUtils;
 
 /**
  * Created by lzy on 2017/6/9.

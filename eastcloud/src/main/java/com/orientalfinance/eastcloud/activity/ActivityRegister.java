@@ -25,8 +25,9 @@ public class ActivityRegister extends MvpActivity<RegistView, ActivityRegistPres
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityRegister.this, ActivitySettingPassword.class);
-                startActivity(intent);
+
+              getPresenter().codeSend();
+
             }
         });
     }

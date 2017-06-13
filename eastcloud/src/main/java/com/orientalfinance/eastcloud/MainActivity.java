@@ -29,6 +29,7 @@ import com.orientalfinance.eastcloud.zxing.ScannerActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     FragmentApplication mFragmentApplication;
     FragmentMySelf mFragmentMySelf;
     FragmentChannel mFragmentDashBoard;
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+    private final static String[] MULTI_PERMISSIONS = new String[]{
+
+            Manifest.permission.READ_PHONE_STATE,
+    };
 
 
     @Override
@@ -91,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_PHONE_STATE}, 70);
         mTitle = (TextView) toolbar.findViewById(R.id.tv_title);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -207,5 +215,12 @@ public class MainActivity extends AppCompatActivity {
             ScannerActivity.gotoActivity(MainActivity.this,
                     false, 0);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
     }
 }

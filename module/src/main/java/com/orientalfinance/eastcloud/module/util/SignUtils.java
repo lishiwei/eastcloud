@@ -1,8 +1,11 @@
-package com.orientalfinance.eastcloud.module.core;
+package com.orientalfinance.eastcloud.module.util;
 
 
 
 import android.util.Base64;
+
+import com.orientalfinance.eastcloud.module.util.Base64Util;
+
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;

@@ -3,7 +3,10 @@ package com.orientalfinance.eastcloud.module.Retrofit.log;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.orientalfinance.eastcloud.module.util.ZipUtils;
+
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import okhttp3.Headers;
@@ -80,6 +83,7 @@ public class LogParamsInterceptor implements Interceptor {
             logForRequest(request);
         }
         Response response = chain.proceed(request);
+
         if (showLog) {
             return logForResponse(response);
         } else {
@@ -95,8 +99,12 @@ public class LogParamsInterceptor implements Interceptor {
         }
     }
 
-    private Response logForResponse(Response response) {
+    private Response logForResponse(Response responseOrigin) {
+        Response response = null;
         try {
+            response = getDecryptionResponse(responseOrigin);
+
+
             //===>response log
             Log.e(tag, "========response'log=======");
             Response.Builder builder = response.newBuilder();
@@ -109,8 +117,10 @@ public class LogParamsInterceptor implements Interceptor {
             }
 
             ResponseBody body = clone.body();
+
+
             if (body != null) {
-                MediaType mediaType = body.contentType();
+                MediaType mediaType = MediaType.parse("UTF-8");
                 if (mediaType != null) {
                     Log.e(tag, "responseBody's contentType : " + mediaType.toString());
                     if (isText(mediaType)) {
@@ -186,5 +196,18 @@ public class LogParamsInterceptor implements Interceptor {
         } catch (final IOException e) {
             return "something error when show requestBody.";
         }
+    }
+
+    private Response getDecryptionResponse(Response response) throws IOException {
+        byte[] decryptBeforeBytes = response.body().bytes();
+        Log.e(TAG, "Response解密前======》" + new String(decryptBeforeBytes, Charset.defaultCharset()));
+        String decrypt = ZipUtils.gunzip(new String(decryptBeforeBytes));
+        Log.e(TAG, "Response解密后======》" + decrypt);
+        MediaType mediaType = response.body().contentType();
+        if (decrypt == null) {
+            return response;
+        }
+        ResponseBody responseBody = ResponseBody.create(mediaType, decrypt);
+        return response.newBuilder().body(responseBody).build();
     }
 }

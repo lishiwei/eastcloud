@@ -13,6 +13,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -44,44 +46,44 @@ public interface EastCloudService {
     /**
      * 方法描述：注册
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("registerUser")
-    Call<RequestResult<User>> register(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> register(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：发送验证码
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("codeSend")
-    Call<RequestResult<User>> codeSend(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> codeSend(@Field("s") String zip, @Field("sign") String sign);
 
     /**
-     * 方法描述：校验验证码
+     * 方法描述：校验验证码(itype=303)
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("vailadCode")
-    Call<RequestResult<User>> validateCode(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> validateCode(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：用户登录
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("userLogin")
-    Call<RequestResult<User>> userLogin(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> userLogin(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：忘记密码
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("userLogin")
-    Call<RequestResult<User>> forgetPwd(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> forgetPwd(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：修改密码
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("userLogin")
-    Call<RequestResult<User>> updatePwd(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Call<RequestResult<User>> updatePwd(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：头像上传
