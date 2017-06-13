@@ -3,21 +3,18 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
 import com.orientalfinance.eastcloud.module.javabean.User;
-import com.orientalfinance.eastcloud.module.util.ModuleLog;
+import com.orientalfinance.eastcloud.module.util.DeviceUtil;
 
 import java.io.File;
 import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-
-import static com.orientalfinance.eastcloud.module.Retrofit.configration.Constant.IType.AVATAR_UPLOAD;
 
 /**
  * 类描述：业务层与后台数据IO入口类
