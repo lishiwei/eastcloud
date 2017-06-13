@@ -10,13 +10,11 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -28,10 +26,9 @@ import retrofit2.http.PartMap;
 
 public interface EastCloudService {
 
-    @GET("users/{user}/repos")
-    Flowable<List<Movie>> getMovies(String s, String sn);
 
-    @GET("users/{user}/repos")
+
+    @POST("users/{user}/repos")
     Flowable<User> login(String s, String sn);
 
     @GET("users/{user}/repos")

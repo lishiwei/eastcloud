@@ -13,6 +13,7 @@ import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
 import com.orientalfinance.eastcloud.activity.ActivityFamilyMember;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
+import com.orientalfinance.eastcloud.activity.ActivityMyOrder;
 import com.orientalfinance.eastcloud.adapter.MyselfRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerMyselfComponent;
@@ -100,7 +101,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
         mFragmentMySelfBinding.setAvatarUrl("" + R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
         mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
-        mFragmentMySelfBinding.flSetting.setOnClickListener(new View.OnClickListener() {
+        mFragmentMySelfBinding.flHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityFamilyMember.class);
@@ -111,6 +112,13 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(intent);
+            }
+        });
+        mFragmentMySelfBinding.flOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityMyOrder.class);
                 startActivity(intent);
             }
         });

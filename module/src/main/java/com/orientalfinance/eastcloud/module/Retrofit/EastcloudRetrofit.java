@@ -63,6 +63,7 @@ public class EastcloudRetrofit {
                 .writeTimeout(20000, TimeUnit.SECONDS)
                 .readTimeout(20000, TimeUnit.SECONDS)
                 .addInterceptor(log)
+
                 .addInterceptor(new DecryptionInterceptor());
 
         return builder.build();
