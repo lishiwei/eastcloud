@@ -4,6 +4,7 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -31,7 +32,7 @@ import javax.inject.Inject;
  * Use the {@link FragmentTVPlay#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTVPlay extends BaseFragment<TvPlayComponent,TVPlayView,TVPlayPresenter>implements TVPlayView {
+public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TVPlayPresenter> implements TVPlayView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,11 +42,12 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent,TVPlayView,TVPl
     private String mParam1;
     private String mParam2;
 
-@Inject
-    List<String>  mStringList;
-@Inject
+    @Inject
+    List<String> mStringList;
+    @Inject
     TVPlayRvAdapter mTVPlayRvAdapter;
     FragmentTvplayBinding mFragmentTvplayBinding;
+
     public FragmentTVPlay() {
         // Required empty public constructor
     }
@@ -83,14 +85,21 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent,TVPlayView,TVPl
         mFragmentTvplayBinding = (FragmentTvplayBinding) mViewDataBinding;
 
         mFragmentTvplayBinding.rvPlay.setAdapter(mTVPlayRvAdapter);
-mFragmentTvplayBinding.rvPlay.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
-        Banner banner= new Banner(getActivity());
-        banner.setPadding(0,0,0, DensityUtil.dp2px(12));
+        mFragmentTvplayBinding.rvPlay.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
+        Banner banner = new Banner(getActivity());
+        banner.setPadding(0, 0, 0, DensityUtil.dp2px(12));
         banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(200)));
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(mStringList);
         banner.start();
-mTVPlayRvAdapter.setHeaderView(banner);
+        mTVPlayRvAdapter.setHeaderView(banner);
+
+        mFragmentTvplayBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPresenter().start();
+            }
+        });
     }
 
     @Override
@@ -102,7 +111,6 @@ mTVPlayRvAdapter.setHeaderView(banner);
     protected TvPlayComponent constructComponent(AppComponent appComponent) {
         return DaggerTvPlayComponent.builder().appComponent(appComponent).tVPlayModule(new TVPlayModule()).build();
     }
-
 
 
 }

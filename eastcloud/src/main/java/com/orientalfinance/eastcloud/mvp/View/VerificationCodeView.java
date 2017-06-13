@@ -11,10 +11,12 @@ public interface VerificationCodeView extends MvpView {
 
 
     public void showGetCode();
+
     public void hideGetCode();
 
-    public void showError(Throwable throwable);
+    public void showError(String errorMsg);
 
-    public void getCodeSucceed();
+    public void getCodeSucceed(String code);
 
+    public void verificateSucceed();
 }

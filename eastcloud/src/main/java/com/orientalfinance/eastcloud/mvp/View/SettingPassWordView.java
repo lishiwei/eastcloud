@@ -15,7 +15,7 @@ public interface SettingPassWordView extends MvpView {
 
     public void hideRegist();
 
-    public void showError(Throwable throwable);
+    public void showError(String msg);
 
     public void registSucceed(User user);
 

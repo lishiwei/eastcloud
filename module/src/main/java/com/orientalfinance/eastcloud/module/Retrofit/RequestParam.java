@@ -57,6 +57,13 @@ public class RequestParam<T> {
         this.data = data;
     }
 
+    public RequestParam(T data) {
+        this.data = data;
+    }
+
+    public RequestParam() {
+    }
+
     @Override
     public String toString() {
         return "RequestParam{" +

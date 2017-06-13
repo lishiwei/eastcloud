@@ -15,7 +15,7 @@ public interface ModifyPassWordView extends MvpView {
 
     public void hideModify();
 
-    public void showError(Throwable throwable);
+    public void showError(String  errorMsg);
 
     public void ModifySucceed(User user);
 

@@ -100,9 +100,17 @@
         <activity
             android:name=".eastcloud.activity.ActivitySetting"
             android:parentActivityName=".eastcloud.MainActivity"/>
-        <activity android:name=".eastcloud.activity.ActivityLogin"/>
-        <activity android:name=".eastcloud.activity.ActivityVerificationCode"/>
-        <activity android:name=".eastcloud.activity.ActivitySettingPassword"/>
+        <activity
+            android:name=".eastcloud.activity.ActivityLogin"
+            android:launchMode="singleTask"
+            android:parentActivityName=".eastcloud.MainActivity"/>
+        <activity
+            android:name=".eastcloud.activity.ActivityVerificationCode"
+            android:parentActivityName=".eastcloud.activity.ActivityLogin"/>
+        <activity
+            android:name=".eastcloud.activity.ActivitySettingPassword"
+            android:launchMode="singleTask"
+            android:parentActivityName=".eastcloud.activity.ActivityVerificationCode"/>
         <activity android:name=".eastcloud.activity.ActivityRegister"/>
         <activity
             android:name=".eastcloud.WBShareActivity"
@@ -193,9 +201,11 @@
         </activity>
         <activity android:name=".eastcloud.activity.ActivityMyOrder">
         </activity>
-        <activity android:name=".eastcloud.activity.ActivityManagerAddress"
+        <activity
+            android:name=".eastcloud.activity.ActivityManagerAddress"
             android:parentActivityName=".eastcloud.MainActivity"/>
-        <activity android:name=".eastcloud.activity.ActivityEditAddress"
+        <activity
+            android:name=".eastcloud.activity.ActivityEditAddress"
             android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
     </application>
 

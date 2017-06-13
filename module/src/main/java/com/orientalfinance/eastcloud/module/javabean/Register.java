@@ -9,6 +9,11 @@ public class Register {
     private String phone;
     private String pwd;
 
+    public Register(String phone, String pwd) {
+        this.phone = phone;
+        this.pwd = pwd;
+    }
+
     public String getPhone() {
         return phone;
     }

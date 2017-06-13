@@ -1,6 +1,11 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
 
+import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Register;
+import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingPassWordView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -11,18 +16,29 @@ import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 public class SettingPassWordPresenter extends MvpNullObjectBasePresenter<SettingPassWordView> {
     private static final String TAG = SettingPassWordPresenter.class.getSimpleName();
 
-    @Override
-    public void attachView(SettingPassWordView view) {
 
-    }
+    public void register(String phone, String pwd) {
 
-    @Override
-    public void detachView(boolean retainInstance) {
+        getView().showRegist();
+        Register register = new Register(phone, pwd);
+        RemoteDataProxy.register(new RequestParam<Register>(register), new HttpCallBack<User>() {
+            @Override
+            public void OnSuccess(User data) {
+                getView().hideRegist();
+                getView().registSucceed(data);
+            }
 
-    }
+            @Override
+            public void onFailure(String errorMsg) {
+                getView().hideRegist();
+                getView().showError(errorMsg);
+            }
 
-    public void register() {
+            @Override
+            public void onCompleted() {
 
+            }
+        });
 
     }
 

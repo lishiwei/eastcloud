@@ -1,18 +1,23 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;
+import com.orientalfinance.databinding.ActivitySettingPasswordBinding;
+import com.orientalfinance.eastcloud.MainActivity;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingPassWordView;
+import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.SettingPassWordPresenter;
 
-public class ActivitySettingPassword extends MvpActivity<SettingPassWordView,SettingPassWordPresenter> implements SettingPassWordView{
+public class ActivitySettingPassword extends BaseMVPActivity<SettingPassWordView, SettingPassWordPresenter> implements SettingPassWordView {
+    ActivitySettingPasswordBinding mActivitySettingPasswordBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +30,7 @@ public class ActivitySettingPassword extends MvpActivity<SettingPassWordView,Set
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivitySettingPassword.this, "创建成功", Toast.LENGTH_SHORT).show();
-                getPresenter().register();
+                getPresenter().register(AcacheUtil.getInstance().getUser().getPhone(), mActivitySettingPasswordBinding.cetPwd.getText().toString());
 
             }
         });
@@ -39,25 +43,24 @@ public class ActivitySettingPassword extends MvpActivity<SettingPassWordView,Set
     }
 
 
-
-
     @Override
-    public void showError(Throwable throwable) {
-
+    public void showError(String throwable) {
+        Toast.makeText(this, throwable, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showRegist() {
-
+        mEastCloudDialog.show();
     }
 
     @Override
     public void hideRegist() {
-
+        mEastCloudDialog.hide();
     }
 
     @Override
     public void registSucceed(User user) {
-
+        AcacheUtil.getInstance().putUser(user);
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

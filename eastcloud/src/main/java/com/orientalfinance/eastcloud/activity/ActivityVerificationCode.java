@@ -1,32 +1,84 @@
 package com.orientalfinance.eastcloud.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
+import com.orientalfinance.databinding.ActivityForgetPassWordBinding;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
+import com.orientalfinance.eastcloud.module.javabean.VerificationCode;
 import com.orientalfinance.eastcloud.mvp.View.VerificationCodeView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityVerificationCodePresenter;
+import com.orientalfinance.eastcloud.view.MSGCountTimeView;
 
 
 public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeView, ActivityVerificationCodePresenter> implements VerificationCodeView {
-
+    ActivityForgetPassWordBinding mActivityForgetPassWordBinding;
+    String mCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_forget_pass_word);
+        mActivityForgetPassWordBinding = DataBindingUtil.setContentView(this, R.layout.activity_forget_pass_word);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getPresenter().start();
 
+
+        mActivityForgetPassWordBinding.tvGetCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getPresenter().sendVerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString());
+            }
+        });
+        mActivityForgetPassWordBinding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getPresenter().verificateCode(new VerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString(), mCode));
+            }
+        });
+
+        mActivityForgetPassWordBinding.tvGetCode.setTotaltime(10000);
+        mActivityForgetPassWordBinding.tvGetCode.isAllowRun(true);
+        mActivityForgetPassWordBinding.tvGetCode.onDownTime(new MSGCountTimeView.onDownTime() {
+
+
+            @Override
+            public void onClick() {
+                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.grey_rectangle));
+
+            }
+
+            @Override
+            public void onCount() {
+            }
+
+            @Override
+            public void onFinish() {
+                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.bg_movieproperty));
+            }
+        });
+
+    }
+
+    @Override
+    public void verificateSucceed() {
+        if (getIntent().getStringExtra(Constant.VALUE).equals(Constant.MODIFYPWD)) {
+            Intent intent = new Intent(ActivityVerificationCode.this, ActivityModifyPassWord.class);
+            startActivity(intent);
+        } else if (getIntent().getStringExtra(Constant.VALUE).equals(Constant.REGIST)) {
+            Intent intent = new Intent(ActivityVerificationCode.this, ActivitySettingPassword.class);
+            startActivity(intent);
+        }
     }
 
     @NonNull
@@ -41,8 +93,8 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
     }
 
     @Override
-    public void showError(Throwable throwable) {
-        Toast.makeText(this, getResources().getString(R.string.req_error), Toast.LENGTH_SHORT).show();
+    public void showError(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -51,13 +103,7 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
     }
 
     @Override
-    public void getCodeSucceed() {
-        if (getIntent().getStringExtra(Constant.VALUE).equals(Constant.MODIFYPWD)) {
-            Intent intent = new Intent(this, ActivityModifyPassWord.class);
-            startActivity(intent);
-        } else if (getIntent().getStringExtra(Constant.VALUE).equals(Constant.REGIST)) {
-            Intent intent = new Intent(this, ActivitySettingPassword.class);
-            startActivity(intent);
-        }
+    public void getCodeSucceed(String code) {
+        this.mCode = code;
     }
 }
