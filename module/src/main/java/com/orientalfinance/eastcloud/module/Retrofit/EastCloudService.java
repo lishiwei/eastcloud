@@ -121,7 +121,7 @@ public interface EastCloudService {
     //itype:355
     @FormUrlEncoded
     @POST(".")
-    Flowable<ResponseBody<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
 
 
 

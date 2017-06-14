@@ -158,7 +158,7 @@ public class RemoteDataProxy {
      * 方法描述：显示已绑定的机顶盒
      * itype 355
      */
-    public static Flowable<ResponseBody<TV>> showTvBoxList(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<TV>> showTvBoxList(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()

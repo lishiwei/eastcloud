@@ -3,7 +3,7 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.Retrofit.ResponseBody;
+import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.mvp.View.MyTVView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
@@ -32,9 +32,9 @@ public class MyTvPresenter extends MvpNullObjectBasePresenter<MyTVView> {
     public void showTVBox(RequestParam requestParam) {
 
 
-        RemoteDataProxy.showTvBoxList(requestParam).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).map(new Function<ResponseBody<TV>, List<TV>>() {
+        RemoteDataProxy.showTvBoxList(requestParam).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).map(new Function<EastCloudResponseBody<TV>, List<TV>>() {
             @Override
-            public List<TV> apply(ResponseBody<TV> tvResponseBody) throws Exception {
+            public List<TV> apply(EastCloudResponseBody<TV> tvResponseBody) throws Exception {
                 return tvResponseBody.getResult();
             }
         }).doOnError(new Consumer<Throwable>() {

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by 29435 on 2017/6/14.
  */
 
-public class ResponseBody<T> {
+public class EastCloudResponseBody<T> {
 
     /**
      * code : 10
