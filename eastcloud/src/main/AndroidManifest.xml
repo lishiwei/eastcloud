@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.orientalfinance">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.orientalfinance">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".eastcloud.App"
@@ -192,12 +192,9 @@
             android:parentActivityName=".eastcloud.activity.ActivityMyTV"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityMyBankCard"
-            android:parentActivityName=".eastcloud.MainActivity">
-        </activity>
-        <activity android:name=".eastcloud.activity.ActivityAddBankCard">
-        </activity>
-        <activity android:name=".eastcloud.activity.ActivityMyOrder">
-        </activity>
+            android:parentActivityName=".eastcloud.MainActivity"></activity>
+        <activity android:name=".eastcloud.activity.ActivityAddBankCard"></activity>
+        <activity android:name=".eastcloud.activity.ActivityMyOrder"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityManagerAddress"
             android:parentActivityName=".eastcloud.MainActivity" />
@@ -206,10 +203,12 @@
             android:parentActivityName=".eastcloud.activity.ActivityManagerAddress" />
         <activity
             android:name=".eastcloud.activity.ActivityMyAddress"
-            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
+            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress" />
+        <activity
+            android:name=".eastcloud.activity.ActivityAddAddress"
+            android:parentActivityName=".eastcloud.activity.ActivityMyAddress" />
 
-        <activity android:name=".eastcloud.zxing.DeCodeActivity">
-        </activity>
+        <activity android:name=".eastcloud.zxing.DeCodeActivity"></activity>
     </application>
 
 </manifest>

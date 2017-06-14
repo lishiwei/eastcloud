@@ -10,11 +10,19 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivityManagerAddress;
+import com.orientalfinance.eastcloud.activity.ActivityMyAddress;
+import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
+import com.orientalfinance.eastcloud.activity.ActivityMyTV;
+import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
+import com.orientalfinance.eastcloud.utils.LogUtils;
+import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -35,7 +43,6 @@ String TAG = MyselfRvAdapter.class.getSimpleName();
         itemMyselfViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.d(TAG, "onClick: " + itemMyselfViewHolder.getLayoutPosition());
                 switch (itemMyselfViewHolder.getLayoutPosition()) {
                     case 0:
                         break;
@@ -47,6 +54,7 @@ String TAG = MyselfRvAdapter.class.getSimpleName();
                     case 3:
                         break;
                     case 4:
+                        v.getContext().startActivity(new Intent(v.getContext(), ActivityMyAddress.class));
 
                         break;
                     case 5:
