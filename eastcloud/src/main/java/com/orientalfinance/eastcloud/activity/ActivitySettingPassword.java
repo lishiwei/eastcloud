@@ -30,8 +30,9 @@ public class ActivitySettingPassword extends BaseMVPActivity<SettingPassWordView
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPresenter().register(AcacheUtil.getInstance().getUser().getPhone(), mActivitySettingPasswordBinding.cetPwd.getText().toString());
-
+//                getPresenter().register(AcacheUtil.getInstance().getUser().getPhone(), mActivitySettingPasswordBinding.cetPwd.getText().toString());
+                getPresenter().register("18601704731", "123456");
+//
             }
         });
     }

@@ -3,18 +3,20 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
+import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
-import com.orientalfinance.eastcloud.module.util.DeviceUtil;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
+import io.reactivex.Flowable;
+import okhttp3.*;
 
 /**
  * 类描述：业务层与后台数据IO入口类
@@ -152,7 +154,22 @@ public class RemoteDataProxy {
                 .updateUserInfo(requestParamWrap(requestParam, 352))
                 .enqueue(httpCallBack);
     }
-
+    /**
+     * 方法描述：显示已绑定的机顶盒
+     * itype 355
+     */
+    public static Flowable<List<TV>> showTvBoxList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showTvBoxList(sendRequest.getS(), sendRequest.getSign());
+    }
+    public static Flowable<okhttp3.ResponseBody> showTvBoxList1(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showTvBoxList1(sendRequest.getS(), sendRequest.getSign());
+    }
 
     public static RequestBody toRequestBody(String value) {
         return RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), value);
@@ -165,8 +182,10 @@ public class RemoteDataProxy {
         String version = DeviceUtil.getVersion();
         String deviceId = DeviceUtil.getDeviceId();
         requestParam.setVersion(version);
-        requestParam.setDeviceId(deviceId);
+        requestParam.setDeviceId("aaaaa");
+        requestParam.setToken("SDRzSUFBQUFBQUFBQUt0V0tzMU1VYkpTTWpFd3NyQXdURXd5VFU0MFNUUzBORE13aExITUVnMkFRRWxIS1NXMUxETTUxUk9rT2hFRWdFS3BGUVdaUmFrdWlTV3BRRUVqQTBOelhRTXpYU05EcFZvQVRzRGJZRmNBQUFBPQ====");
         requestParam.setItype(itype);
+//        requestParam.setUid("402881ab5ca4a196015ca4a1966a0000");
         Log.e("OKHTTP", "请求参数：" + requestParam.toString());
         return new SendRequest(EncryptUtils.getZip(requestParam), EncryptUtils.encrypt(requestParam));
     }

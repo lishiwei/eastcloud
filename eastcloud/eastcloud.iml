@@ -166,9 +166,9 @@
     <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
     <orderEntry type="module" module-name="module" exported="" />
     <orderEntry type="module" module-name="library" exported="" />
-    <orderEntry type="library" exported="" name="okhttp-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="rxjava-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="commons-codec-1.4" level="project" />
+    <orderEntry type="library" exported="" name="adapter-rxjava2-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.13.0" level="project" />
     <orderEntry type="library" exported="" name="retrofit-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="converter-gson-2.3.0" level="project" />

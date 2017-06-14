@@ -8,10 +8,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResultType;
 import com.mylhyl.zxing.scanner.decode.QRDecode;
+import com.orientalfinance.eastcloud.activity.ActivityTopBoxDetail;
 import com.orientalfinance.eastcloud.zxing.result.TextActivity;
 import com.orientalfinance.eastcloud.zxing.result.UriActivity;
 
@@ -45,11 +45,13 @@ public class DeCodeActivity extends BasicScannerActivity {
             case SMS:
                 break;
         }
+
         if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;
         }
-        finish();
+        Intent intent = new Intent(DeCodeActivity.this, ActivityTopBoxDetail.class);
+        startActivity(intent);
     }
 
     private ProgressDialog progressDialog;

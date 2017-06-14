@@ -10,18 +10,11 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.activity.ActivityManagerAddress;
-import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
-import com.orientalfinance.eastcloud.activity.ActivityMyTV;
-import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
-import com.orientalfinance.eastcloud.utils.LogUtils;
-import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -29,7 +22,7 @@ import java.util.Map;
 
 public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMyselfViewHolder> {
     List<ItemMyself> mItemMyselfs;
-
+String TAG = MyselfRvAdapter.class.getSimpleName();
     public MyselfRvAdapter(List<ItemMyself> itemMyselfs) {
         mItemMyselfs = itemMyselfs;
     }
@@ -39,23 +32,33 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
         ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_myself, null, false);
         final ItemMyselfViewHolder itemMyselfViewHolder = new ItemMyselfViewHolder(viewDataBinding.getRoot());
         itemMyselfViewHolder.setViewDataBinding(viewDataBinding);
-        viewDataBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+        itemMyselfViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LogUtils.d(TAG, "onClick: " + itemMyselfViewHolder.getLayoutPosition());
                 switch (itemMyselfViewHolder.getLayoutPosition()) {
                     case 0:
                         break;
                     case 1:
+                        LogUtils.d(TAG, "onClick: ");
                         break;
                     case 2:
                         break;
                     case 3:
                         break;
                     case 4:
-                        v.getContext().startActivity(new Intent(v.getContext(), ActivityManagerAddress.class));
+
                         break;
                     case 5:
                         break;
+                    case 6:
+                        break;
+                    case 7:
+                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
+                        break;
+                    case 8:
+                        break;
+
                 }
             }
         });

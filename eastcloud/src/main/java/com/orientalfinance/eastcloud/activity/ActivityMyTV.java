@@ -10,11 +10,15 @@ import com.orientalfinance.eastcloud.dagger.component.ActivityMyTVComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityMyTVComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityMyTVModule;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyTVView;
 import com.orientalfinance.eastcloud.mvp.View.MyTVViewViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.MyTvPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,6 +33,8 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
         mActivityMyTvBinding = DataBindingUtil.setContentView(this, getLayoutId());
         mActivityMyTvBinding.rvMyTV.setAdapter(mMyTVRvAdpter);
         mActivityMyTvBinding.rvMyTV.setLayoutManager(new FullyLinearLayoutManager(this));
+        TV.ShowTVRequestParam requestParam = new TV.ShowTVRequestParam(0, 10);
+        getPresenter().showTVBox(new RequestParam<TV.ShowTVRequestParam>(requestParam));
     }
 
     @Override
@@ -44,6 +50,27 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
     @Override
     public String getToolBarTitle() {
         return null;
+    }
+
+    @Override
+    public void showTVBox(List<TV> list) {
+        mMyTVRvAdpter.setMovieList(list);
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
     }
 
     @Override

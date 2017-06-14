@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -31,7 +32,8 @@ public class EastcloudRetrofit {
         OkHttpClient mOkHttpClient = getOkHttpClient();
         retrofit = new Retrofit.Builder().client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(API.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(API.BASE_URL01)
                 .build();
         return retrofit;
     }
@@ -62,6 +64,7 @@ public class EastcloudRetrofit {
                 .connectTimeout(15000, TimeUnit.SECONDS)
                 .writeTimeout(20000, TimeUnit.SECONDS)
                 .readTimeout(20000, TimeUnit.SECONDS)
+
                 .addInterceptor(log)
 
                 .addInterceptor(new DecryptionInterceptor());

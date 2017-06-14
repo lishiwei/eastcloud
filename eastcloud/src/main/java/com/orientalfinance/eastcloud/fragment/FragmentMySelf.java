@@ -95,6 +95,12 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentMySelfBinding = (FragmentMySelfBinding) mViewDataBinding;
