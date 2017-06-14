@@ -1,13 +1,7 @@
 package com.orientalfinance.eastcloud.activity;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.orientalfinance.R;

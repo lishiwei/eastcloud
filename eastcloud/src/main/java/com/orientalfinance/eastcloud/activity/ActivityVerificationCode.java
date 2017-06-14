@@ -37,7 +37,10 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(ActivityVerificationCode.this, ActivitySettingPassword.class);
+                startActivity(intent);
 //                getPresenter().verificateCode(new VerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString(), mCode));
+
             }
         });
 

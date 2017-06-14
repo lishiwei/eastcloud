@@ -1,6 +1,6 @@
 package com.orientalfinance.eastcloud.view;
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
@@ -8,12 +8,13 @@ import android.content.Context;
  */
 
 public class EastCloudDialog {
-    Dialog mDialog;
+    ProgressDialog mDialog;
 //    Context mContext;
 
     public EastCloudDialog(Context context) {
 //        mContext = context;
-        mDialog = new Dialog(context);
+        mDialog = new ProgressDialog(context);
+        mDialog.setTitle("加载中...");
     }
 
     public void setTitle(String title) {
