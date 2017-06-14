@@ -22,29 +22,29 @@ import com.orientalfinance.eastcloud.zxing.result.UriActivity;
 public class DeCodeActivity extends BasicScannerActivity {
     @Override
     void onResultActivity(Result result, ParsedResultType type, Bundle bundle) {
-        switch (type) {
-//            case ADDRESSBOOK:
-//                AddressBookActivity.gotoActivity(DeCodeActivity.this, bundle);
+//        switch (type) {
+////            case ADDRESSBOOK:
+////                AddressBookActivity.gotoActivity(DeCodeActivity.this, bundle);
+////                break;
+////            case PRODUCT:
+////                BarcodeActivity.gotoActivity(DeCodeActivity.this, bundle);
+////                break;
+////            case ISBN:
+////                BarcodeActivity.gotoActivity(DeCodeActivity.this, bundle);
+////                break;
+//            case URI:
+//                UriActivity.gotoActivity(DeCodeActivity.this, bundle);
 //                break;
-//            case PRODUCT:
-//                BarcodeActivity.gotoActivity(DeCodeActivity.this, bundle);
+//            case TEXT:
+//                TextActivity.gotoActivity(DeCodeActivity.this, bundle);
 //                break;
-//            case ISBN:
-//                BarcodeActivity.gotoActivity(DeCodeActivity.this, bundle);
+//            case GEO:
 //                break;
-            case URI:
-                UriActivity.gotoActivity(DeCodeActivity.this, bundle);
-                break;
-            case TEXT:
-                TextActivity.gotoActivity(DeCodeActivity.this, bundle);
-                break;
-            case GEO:
-                break;
-            case TEL:
-                break;
-            case SMS:
-                break;
-        }
+//            case TEL:
+//                break;
+//            case SMS:
+//                break;
+//        }
 
         if (progressDialog != null) {
             progressDialog.dismiss();
