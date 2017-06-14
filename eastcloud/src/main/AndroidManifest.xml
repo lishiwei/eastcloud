@@ -183,28 +183,43 @@
             android:name=".eastcloud.activity.ActivityConnectTV"
             android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.activity.ActivityTopBoxDetail">
+
         </activity>
+
         <activity
             android:name=".eastcloud.activity.ActivityTopBoxDetail"
             android:launchMode="singleTask"
-            android:parentActivityName=".eastcloud.activity.ActivityMyTV"/>
+            android:parentActivityName=".eastcloud.activity.ActivityMyTV"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityMyBankCard"
             android:parentActivityName=".eastcloud.MainActivity"/>
         <activity android:name=".eastcloud.activity.ActivityAddBankCard"/>
         <activity android:name=".eastcloud.activity.ActivityMyOrder"/>
+            android:parentActivityName=".eastcloud.MainActivity"></activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCard"
+            android:parentActivityName=".eastcloud.activity.ActivityMyBankCard"></activity>
+        <activity android:name=".eastcloud.activity.ActivityMyOrder"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityManagerAddress"
             android:parentActivityName=".eastcloud.MainActivity"/>
         <activity
             android:name=".eastcloud.activity.ActivityEditAddress"
-            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
+            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress" />
         <activity
             android:name=".eastcloud.activity.ActivityMyAddress"
-            android:launchMode="singleTask"
-            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
+            android:parentActivityName=".eastcloud.activity.ActivityManagerAddress" />
         <activity
             android:name=".eastcloud.activity.ActivityAddAddress"
+            android:parentActivityName=".eastcloud.activity.ActivityMyAddress" />
+
+        <activity android:name=".eastcloud.zxing.DeCodeActivity"></activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCardValidateCode"
+            android:parentActivityName=".eastcloud.activity.ActivityAddBankCard" />
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCardSuccess"
+            android:parentActivityName=".eastcloud.activity.ActivityMyBankCard" />
             android:parentActivityName=".eastcloud.activity.ActivityMyAddress"/>
         <activity android:name=".eastcloud.zxing.DeCodeActivity"/>
         <activity android:name=".eastcloud.activity.ActivitySuggestReport">
