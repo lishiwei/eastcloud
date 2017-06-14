@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.module.Retrofit;
+package com.orientalfinance.eastcloud.module.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -31,9 +31,11 @@ public class DeviceUtil {
         }
     }
 
+    /**
+     * 方法描述：获取手机的IMEI号
+     */
     public static String getDeviceId() {
         TelephonyManager tm = (TelephonyManager) ModuleContext.getInstance().getModuleContext().getSystemService(Context.TELEPHONY_SERVICE);
-        Log.e("TAG", "设置ID:" + tm.getDeviceId());
         return tm.getDeviceId();
     }
 }

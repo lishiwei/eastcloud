@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
