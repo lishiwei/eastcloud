@@ -97,6 +97,19 @@ public class TV {
         return status;
     }
 
+    @Override
+    public String toString() {
+        return "TV{" +
+                "id='" + id + '\'' +
+                ", location='" + location + '\'' +
+                ", userName='" + userName + '\'' +
+                ", registAddress='" + registAddress + '\'' +
+                ", macAddress='" + macAddress + '\'' +
+                ", status='" + status + '\'' +
+                ", property='" + property + '\'' +
+                '}';
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
