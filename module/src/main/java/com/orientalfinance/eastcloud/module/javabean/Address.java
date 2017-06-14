@@ -12,6 +12,7 @@ public class Address implements Serializable {
     private String userPhone;
     private String address;
     private String zone;
+    private String street;
     private boolean isDefault;
 
     public Address() {
@@ -23,6 +24,14 @@ public class Address implements Serializable {
         this.address = address;
         this.zone = zone;
         this.isDefault = isDefault;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getZone() {
@@ -71,6 +80,8 @@ public class Address implements Serializable {
                 "userName='" + userName + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", address='" + address + '\'' +
+                ", zone='" + zone + '\'' +
+                ", street='" + street + '\'' +
                 ", isDefault=" + isDefault +
                 '}';
     }

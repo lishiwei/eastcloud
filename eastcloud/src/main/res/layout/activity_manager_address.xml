@@ -39,13 +39,20 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="#EDECEA" />
+        android:layout_height="match_parent"
+        android:background="#ECECEC"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_all_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <ListView
+            android:id="@+id/lv_all_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff" />
+    </LinearLayout>
 </LinearLayout>

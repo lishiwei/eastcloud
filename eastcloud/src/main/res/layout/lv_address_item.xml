@@ -25,7 +25,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:text="13818832455"
-            android:textColor="#EDECEA" />
+            android:textColor="#999999" />
     </RelativeLayout>
 
     <RelativeLayout
