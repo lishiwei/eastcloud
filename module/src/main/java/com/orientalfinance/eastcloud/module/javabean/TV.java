@@ -23,7 +23,6 @@ public class TV {
     String macAddress;
 
 
-
     @SerializedName("box_Status")
     String status;
 
@@ -113,7 +112,8 @@ public class TV {
     public void setStatus(String status) {
         this.status = status;
     }
-    public static class ShowTVRequestParam{
+
+    public static class ShowTVRequestParam {
         int start;
         int length;
 
@@ -144,6 +144,22 @@ public class TV {
                     "start=" + start +
                     ", length=" + length +
                     '}';
+        }
+    }
+
+    public static class DelTVRequestParam {
+        public DelTVRequestParam(String box_id) {
+            this.box_id = box_id;
+        }
+
+        String box_id;
+    }
+
+    public static class ScanTVRequestParam {
+        String box_mac;
+
+        public ScanTVRequestParam(String box_mac) {
+            this.box_mac = box_mac;
         }
     }
 }

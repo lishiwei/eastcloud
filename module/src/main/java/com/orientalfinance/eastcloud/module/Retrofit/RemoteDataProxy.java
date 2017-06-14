@@ -164,6 +164,26 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .showTvBoxList(sendRequest.getS(), sendRequest.getSign());
     }
+    /**
+     * 方法描述：删除已绑定的机顶盒
+     * itype 356
+     */
+    public static Flowable<EastCloudResponseBody>delTvBox(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_TV_BOX);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .delTvBox(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：扫描已绑定的机顶盒
+     * itype 356
+     */
+    public static Flowable<EastCloudResponseBody<TV>> scanTvBox(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SCAN_SHOW_TV_BOX_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .scanTvBox(sendRequest.getS(), sendRequest.getSign());
+    }
 
     public static RequestBody toRequestBody(String value) {
         return RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), value);

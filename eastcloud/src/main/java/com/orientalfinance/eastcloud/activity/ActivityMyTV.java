@@ -33,8 +33,15 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
         mActivityMyTvBinding = DataBindingUtil.setContentView(this, getLayoutId());
         mActivityMyTvBinding.rvMyTV.setAdapter(mMyTVRvAdpter);
         mActivityMyTvBinding.rvMyTV.setLayoutManager(new FullyLinearLayoutManager(this));
-        TV.ShowTVRequestParam requestParam = new TV.ShowTVRequestParam(0, 10);
-        getPresenter().showTVBox(new RequestParam<TV.ShowTVRequestParam>(requestParam));
+//        TV.ShowTVRequestParam requestParam = new TV.ShowTVRequestParam(0, 10);
+//        getPresenter().showTVBox(new RequestParam<TV.ShowTVRequestParam>(requestParam));
+
+//
+//        TV.DelTVRequestParam delTVRequestParam = new TV.DelTVRequestParam("12");
+//        getPresenter().delTVBox(new RequestParam<TV.DelTVRequestParam>(delTVRequestParam));
+
+        TV.ScanTVRequestParam scanTVRequestParam = new TV.ScanTVRequestParam("5");
+        getPresenter().scanTVBox(new RequestParam<TV.ScanTVRequestParam>(scanTVRequestParam));
     }
 
     @Override

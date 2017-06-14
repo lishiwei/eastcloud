@@ -29,7 +29,6 @@ import retrofit2.http.PartMap;
 public interface EastCloudService {
 
 
-
     @POST("users/{user}/repos")
     Flowable<User> login(String s, String sn);
 
@@ -39,11 +38,10 @@ public interface EastCloudService {
     @GET("users/{user}/repos")
     Flowable<List<Movie>> regist(String s, String sn);
 
-//获取TV列表
+    //获取TV列表
     @FormUrlEncoded
     @POST(".")
     Flowable<List<TV>> getTVPlay(@Field("s") String zip, @Field("sign") String sign);
-
 
 
     /**
@@ -117,12 +115,19 @@ public interface EastCloudService {
     Call<ResponseResult> feedback(@Body SendRequest request);
 
 
-
-    //itype:355
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
 
+    //itype:356
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> delTvBox(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 357
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<TV>> scanTvBox(@Field("s") String zip, @Field("sign") String sign);
 
 
 }
