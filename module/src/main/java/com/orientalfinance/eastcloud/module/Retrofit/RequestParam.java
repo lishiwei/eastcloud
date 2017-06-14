@@ -5,7 +5,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
  * email:lizy@oriental-finance.com
  */
 
-public class RequestParam<T> {
+public class RequestParam<T> implements com.orientalfinance.eastcloud.module.core.RequestParam {
     //    itype:业务方法值 num型  00-30
 //    deviceId: 设备的唯一码 安卓可以是IMEI , IOS可以是广告标识符
 //    data:业务对象{object}
@@ -15,7 +15,16 @@ public class RequestParam<T> {
     private String deviceId;
     String token;
     String version;
+    String uid;
     T data;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public int getItype() {
         return itype;
@@ -72,6 +81,7 @@ public class RequestParam<T> {
                 ", token='" + token + '\'' +
                 ", version='" + version + '\'' +
                 ", data=" + data +
+                ", uid=" + uid +
                 '}';
     }
 }

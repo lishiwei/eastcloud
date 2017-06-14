@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.MainActivity;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
@@ -86,6 +85,7 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
         findViewById(R.id.iv_QQ).setOnClickListener(this);
         findViewById(R.id.iv_Weibo).setOnClickListener(this);
         findViewById(R.id.iv_WeChat).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
         mCommonRequestParam = new CommonRequestParam("", "");
     }
 
@@ -145,6 +145,8 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
             case R.id.button:
 
                 getPresenter().login(mCommonRequestParam);
+
+
                 break;
             case R.id.tv_register:
                 Intent intent = new Intent(ActivityLogin.this,ActivityVerificationCode.class);
@@ -182,6 +184,7 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
     @Override
     public void loginSucceed(User user) {
         AcacheUtil.getInstance().putUser(user);
-        startActivity(new Intent(this, MainActivity.class));
+//        startActivity(new Intent(this, MainActivity.class));
+
     }
 }

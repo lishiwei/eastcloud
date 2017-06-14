@@ -2,14 +2,12 @@ package com.orientalfinance.eastcloud;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,18 +16,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivityConnectTV;
+import com.orientalfinance.eastcloud.activity.ActivityLogin;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
 import com.orientalfinance.eastcloud.fragment.FragmentApplication;
 import com.orientalfinance.eastcloud.fragment.FragmentChannel;
 import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
 import com.orientalfinance.eastcloud.fragment.FragmentMySelf;
 import com.orientalfinance.eastcloud.fragment.FragmentRemoteControl;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.utils.BottomNavigationViewHelper;
 import com.orientalfinance.eastcloud.view.FragmentIndicator;
-import com.orientalfinance.eastcloud.zxing.ScannerActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
 
 import io.reactivex.functions.Consumer;
 
@@ -78,9 +77,17 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_myself:
-                    fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
-                    fragmentTransaction.commitAllowingStateLoss();
-                    mTitle.setText(getString(R.string.title_myself));
+                    if (AcacheUtil.getInstance().getUser()==null)
+                    {
+                        Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        mTitle.setText(getString(R.string.title_myself));
+                    }
+
 
                     return true;
             }
@@ -132,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scanCode();
+//                scanCode();
+                Intent intent = new Intent(MainActivity.this, ActivityConnectTV.class);
+                startActivity(intent);
             }
         });
         ((FragmentIndicator) findViewById(R.id.fi_indicator)).setOnIndicateListener(new FragmentIndicator.OnIndicateListener() {
@@ -211,19 +220,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void scanCode() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            //权限还没有授予，需要在这里写申请权限的代码
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.CAMERA}, 60);
-        } else {
-            //权限已经被授予，在这里直接写要执行的相应方法即可
-            ScannerActivity.gotoActivity(MainActivity.this,
-                    false, 0);
-        }
-    }
+
 
     private void requestPermissions() {
         RxPermissions rxPermissions = new RxPermissions(this);

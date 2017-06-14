@@ -186,10 +186,10 @@
         <activity
             android:name=".eastcloud.activity.ActivityConnectTV"
             android:launchMode="singleTask"
-            android:parentActivityName=".eastcloud.activity.ActivityTopBox">
+            android:parentActivityName=".eastcloud.activity.ActivityTopBoxDetail">
         </activity>
         <activity
-            android:name=".eastcloud.activity.ActivityTopBox"
+            android:name=".eastcloud.activity.ActivityTopBoxDetail"
             android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.activity.ActivityMyTV">
         </activity>
@@ -207,6 +207,9 @@
         <activity
             android:name=".eastcloud.activity.ActivityEditAddress"
             android:parentActivityName=".eastcloud.activity.ActivityManagerAddress"/>
+
+        <activity android:name=".eastcloud.zxing.DeCodeActivity">
+        </activity>
     </application>
 
 </manifest>

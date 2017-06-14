@@ -13,13 +13,13 @@ import retrofit2.Response;
  * Created by lzy on 2017/6/10.
  * email:lizy@oriental-finance.com
  */
-public abstract class HttpCallBack<T> implements Callback<RequestResult<T>> {
+public abstract class HttpCallBack<T> implements Callback<ResponseResult<T>> {
 
     @Override
-    public void onResponse(Call<RequestResult<T>> call, Response<RequestResult<T>> response) {
+    public void onResponse(Call<ResponseResult<T>> call, Response<ResponseResult<T>> response) {
         Log.e("TAG", response.headers().toString());
         if (response.isSuccessful()) {
-            RequestResult<T> body = response.body();
+            ResponseResult<T> body = response.body();
             int statusCode = body.getCode();
             if (statusCode > 0) {
                 if (statusCode == HttpCode.SUCCESS) {
@@ -38,7 +38,7 @@ public abstract class HttpCallBack<T> implements Callback<RequestResult<T>> {
     }
 
     @Override
-    public void onFailure(Call<RequestResult<T>> call, Throwable t) {
+    public void onFailure(Call<ResponseResult<T>> call, Throwable t) {
         String localizedMessage = t.getLocalizedMessage();
         onFailure(localizedMessage);
         onCompleted();

@@ -7,6 +7,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.VerificationCode;
 import com.orientalfinance.eastcloud.mvp.View.VerificationCodeView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 /**
@@ -18,6 +19,7 @@ public class ActivityVerificationCodePresenter extends MvpNullObjectBasePresente
 
 
     public void sendVerificationCode(String phone) {
+        LogUtils.d(TAG, "sendVerificationCode: "+phone);
         getView().showGetCode();
         if (!ValidateUtils.isMobileNO(phone)) {
             getView().showError("您的手机号输入有误!");
@@ -26,13 +28,14 @@ public class ActivityVerificationCodePresenter extends MvpNullObjectBasePresente
         RemoteDataProxy.codeSend(new RequestParam<String>(phone), new HttpCallBack<String>() {
             @Override
             public void OnSuccess(String data) {
+                LogUtils.d(TAG, "OnSuccess: "+data);
                 getView().hideGetCode();
                 getView().getCodeSucceed(data);
             }
 
             @Override
             public void onFailure(String errorMsg) {
-
+                LogUtils.d(TAG, "onFailure: "+errorMsg);
                 getView().hideGetCode();
                 getView().showError(errorMsg);
             }

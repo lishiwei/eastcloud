@@ -11,16 +11,17 @@ import android.widget.Toast;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityForgetPassWordBinding;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
-import com.orientalfinance.eastcloud.module.javabean.VerificationCode;
 import com.orientalfinance.eastcloud.mvp.View.VerificationCodeView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityVerificationCodePresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.orientalfinance.eastcloud.view.MSGCountTimeView;
 
 
 public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeView, ActivityVerificationCodePresenter> implements VerificationCodeView {
     ActivityForgetPassWordBinding mActivityForgetPassWordBinding;
     String mCode;
+    String TAG = ActivityVerificationCode.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +33,11 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        mActivityForgetPassWordBinding.tvGetCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getPresenter().sendVerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString());
-            }
-        });
         mActivityForgetPassWordBinding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                getPresenter().verificateCode(new VerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString(), mCode));
+//                getPresenter().verificateCode(new VerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString(), mCode));
             }
         });
 
@@ -54,8 +48,11 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
 
             @Override
             public void onClick() {
-                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.grey_rectangle));
 
+                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.grey_rectangle));
+                LogUtils.d(TAG, "onClick: ");
+
+                getPresenter().sendVerificationCode(mActivityForgetPassWordBinding.etPhoneNumber.getText().toString());
             }
 
             @Override

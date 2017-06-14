@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.activity.ActivityTopBox;
+import com.orientalfinance.eastcloud.activity.ActivityTopBoxDetail;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class MyTVRvAdpter extends RecyclerView.Adapter<MyTVRvAdpter.MyTVViewHold
         myTVViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityTopBox.class);
+                Intent intent = new Intent(v.getContext(), ActivityTopBoxDetail.class);
                 v.getContext().startActivity(intent);
             }
         });

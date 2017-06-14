@@ -5,7 +5,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
  * Created by lzy on 2017/6/10.
  * email:lizy@oriental-finance.com
  */
-public class RequestResult<T> {
+public class ResponseResult<T> {
     private int code;
     private String msg;
     private T result;

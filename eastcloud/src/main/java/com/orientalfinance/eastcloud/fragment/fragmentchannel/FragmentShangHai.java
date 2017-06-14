@@ -15,7 +15,6 @@ import com.orientalfinance.eastcloud.dagger.component.DaggerShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.component.ShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ShangHaiModules;
 import com.orientalfinance.eastcloud.module.javabean.Movie;
-import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -87,8 +86,8 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent, ShangHaiVi
         mFragmentShangHaiBinding = (FragmentShangHaiBinding) mViewDataBinding;
         mFragmentShangHaiBinding.rvShanghai.setLayoutManager(new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mFragmentShangHaiBinding.rvShanghai.setAdapter(mChannelRvAdapter);
-        mFragmentShangHaiBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
-        mFragmentShangHaiBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
+//        mFragmentShangHaiBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
+//        mFragmentShangHaiBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
     }
 
     @Override

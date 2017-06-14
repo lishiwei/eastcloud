@@ -7,4 +7,5 @@ package com.orientalfinance.eastcloud.module.Retrofit.configration;
 
 public class API {
     public static final String BASE_URL = "http://192.168.1.43:8080/app/gateway/";
+    public static final String BASE_URL01 = "http://192.168.1.79:8080/app/gateway/";
 }
