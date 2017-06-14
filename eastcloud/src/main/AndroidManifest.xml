@@ -193,7 +193,9 @@
         <activity
             android:name=".eastcloud.activity.ActivityMyBankCard"
             android:parentActivityName=".eastcloud.MainActivity"></activity>
-        <activity android:name=".eastcloud.activity.ActivityAddBankCard"></activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCard"
+            android:parentActivityName=".eastcloud.activity.ActivityMyBankCard"></activity>
         <activity android:name=".eastcloud.activity.ActivityMyOrder"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityManagerAddress"
@@ -209,6 +211,12 @@
             android:parentActivityName=".eastcloud.activity.ActivityMyAddress" />
 
         <activity android:name=".eastcloud.zxing.DeCodeActivity"></activity>
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCardValidateCode"
+            android:parentActivityName=".eastcloud.activity.ActivityAddBankCard" />
+        <activity
+            android:name=".eastcloud.activity.ActivityAddBankCardSuccess"
+            android:parentActivityName=".eastcloud.activity.ActivityMyBankCard" />
     </application>
 
 </manifest>

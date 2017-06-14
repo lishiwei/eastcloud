@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,16 +59,16 @@ public class ActivityMyBankCard extends BaseActivity<ActivityBankCardComponent, 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflate = getMenuInflater();
 
-        menuInflate.inflate(R.menu.addbankcard,menu);
+        menuInflate.inflate(R.menu.addbankcard, menu);
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==R.id.menu_addBankCard)
-        {
-//            startActivity();
+        if (item.getItemId() == R.id.menu_addBankCard) {
+            Intent intent = new Intent(ActivityMyBankCard.this, ActivityAddBankCard.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
