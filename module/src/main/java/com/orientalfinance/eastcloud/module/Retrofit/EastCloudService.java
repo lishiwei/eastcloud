@@ -11,6 +11,7 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import okhttp3.*;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -120,10 +121,8 @@ public interface EastCloudService {
     //itype:355
     @FormUrlEncoded
     @POST(".")
-    Flowable<List<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
-    @FormUrlEncoded
-    @POST(".")
-    Flowable<okhttp3.ResponseBody> showTvBoxList1(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<ResponseBody<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
+
 
 
 }

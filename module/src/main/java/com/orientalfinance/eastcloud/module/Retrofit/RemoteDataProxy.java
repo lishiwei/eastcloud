@@ -3,20 +3,20 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
+import com.orientalfinance.eastcloud.module.util.DeviceUtil;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 
 import io.reactivex.Flowable;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 类描述：业务层与后台数据IO入口类
@@ -158,17 +158,11 @@ public class RemoteDataProxy {
      * 方法描述：显示已绑定的机顶盒
      * itype 355
      */
-    public static Flowable<List<TV>> showTvBoxList(RequestParam requestParam) {
+    public static Flowable<ResponseBody<TV>> showTvBoxList(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showTvBoxList(sendRequest.getS(), sendRequest.getSign());
-    }
-    public static Flowable<okhttp3.ResponseBody> showTvBoxList1(RequestParam requestParam) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
-        return EastcloudRetrofit.getInstance()
-                .getEastCloudService()
-                .showTvBoxList1(sendRequest.getS(), sendRequest.getSign());
     }
 
     public static RequestBody toRequestBody(String value) {
