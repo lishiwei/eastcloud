@@ -12,24 +12,14 @@ import javax.inject.Inject;
 
 public class FamilyMemberPresenter extends MvpNullObjectBasePresenter<FamilyMemberView> {
     private static final String TAG = FamilyMemberPresenter.class.getSimpleName();
-@Inject
+
+    @Inject
     public FamilyMemberPresenter() {
-    }
-
-    @Override
-    public void attachView(FamilyMemberView view) {
 
     }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-
-    }
-
 
 
     public void start() {
-
 
     }
 }

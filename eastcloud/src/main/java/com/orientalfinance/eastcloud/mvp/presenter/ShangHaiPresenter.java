@@ -14,7 +14,7 @@ public class ShangHaiPresenter extends MvpNullObjectBasePresenter<ShangHaiView> 
     public ShangHaiPresenter() {
     }
 
-    @Override
+
     public void start() {
 
     }

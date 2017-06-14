@@ -19,6 +19,7 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerMyselfComponent;
 import com.orientalfinance.eastcloud.dagger.component.MyselfComponent;
 import com.orientalfinance.eastcloud.dagger.modules.MyselfModule;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -97,6 +98,11 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     @Override
     public void onResume() {
         super.onResume();
+        if (AcacheUtil.getInstance().getUser()!=null)
+        {
+            mFragmentMySelfBinding.tvUserName.setText(AcacheUtil.getInstance().getUser().getName() == null ? AcacheUtil.getInstance().getUser().getPhone() : AcacheUtil.getInstance().getUser().getName());
+
+        }
 
     }
 

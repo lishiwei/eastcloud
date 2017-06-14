@@ -14,7 +14,6 @@ public class HomePagePresenter extends MvpNullObjectBasePresenter<HomepageView> 
     public HomePagePresenter() {
     }
 
-    @Override
     public void start() {
 
     }

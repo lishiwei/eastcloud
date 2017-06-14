@@ -13,6 +13,7 @@ import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityMyAddress;
 import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
+import com.orientalfinance.eastcloud.activity.ActivitySuggestReport;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 
@@ -24,7 +25,8 @@ import java.util.List;
 
 public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMyselfViewHolder> {
     List<ItemMyself> mItemMyselfs;
-String TAG = MyselfRvAdapter.class.getSimpleName();
+    String TAG = MyselfRvAdapter.class.getSimpleName();
+
     public MyselfRvAdapter(List<ItemMyself> itemMyselfs) {
         mItemMyselfs = itemMyselfs;
     }
@@ -49,7 +51,6 @@ String TAG = MyselfRvAdapter.class.getSimpleName();
                         break;
                     case 4:
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyAddress.class));
-
                         break;
                     case 5:
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyBankCard.class));
@@ -60,6 +61,7 @@ String TAG = MyselfRvAdapter.class.getSimpleName();
                         parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
                         break;
                     case 8:
+                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivitySuggestReport.class));
                         break;
 
                 }

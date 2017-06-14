@@ -17,6 +17,7 @@ import com.orientalfinance.eastcloud.App;
 import com.orientalfinance.eastcloud.dagger.BaseActivityComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityModule;
+import com.orientalfinance.eastcloud.view.EastCloudDialog;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -31,7 +32,7 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
     @Inject
     Provider<PRESENTER> presenterProvider;
     private PRESENTER presenter;
-
+public EastCloudDialog mEastCloudDialog;
     /**
      * Can't inject directly, as the presenter instantiation needs to happen by mosby in {@link this#createViewState()}.
      */
@@ -81,6 +82,7 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
         COMPONENT component = constructComponent(getAppComponent());
         component.inject(this);
         getMvpDelegate().onCreate(savedInstanceState);
+        mEastCloudDialog = new EastCloudDialog(this);
     }
 
     public abstract boolean hasToolBar();
@@ -115,6 +117,7 @@ public abstract class BaseActivity<COMPONENT extends BaseActivityComponent, VIEW
 
         super.onDestroy();
         getMvpDelegate().onDestroy();
+        mEastCloudDialog.dismiss();
     }
 
     @Override

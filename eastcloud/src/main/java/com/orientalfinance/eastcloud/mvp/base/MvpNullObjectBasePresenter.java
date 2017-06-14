@@ -20,16 +20,13 @@ package com.orientalfinance.eastcloud.mvp.base;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
-
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
-
+import com.orientalfinance.eastcloud.mvp.noop.NoOp;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
-import com.orientalfinance.eastcloud.mvp.noop.NoOp;
 
 /**
  * A {@link MvpPresenter} implementation that implements the Null Object Pattern' for the attached mvp view. So whenever the view gets
@@ -135,7 +132,7 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
         return nullView;
     }
 
-    public abstract void start();
+
     @Override
     @UiThread
     public void detachView(boolean retainInstance) {

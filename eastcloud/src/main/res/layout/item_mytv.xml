@@ -4,60 +4,95 @@
 
     <data>
 
+        <import type="com.orientalfinance.eastcloud.utils.MyDataBindingUtils"/>
+
         <variable
             name="item"
             type="com.orientalfinance.eastcloud.module.javabean.TV"/>
     </data>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        >
+        android:id="@+id/item_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/item_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/tv"
-            />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tv"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="24dp"
+                        android:text="@{item.location + item.userName}"/>
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@{item.status}"
+                        android:textColor="@{MyDataBindingUtils.getStatusColor(item.status)}"/>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+
+                <TextView
+                    android:id="@+id/tv_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_connect"
+                    android:text="@{MyDataBindingUtils.getStatus(item.status)}"
+                    android:textColor="#FFA500"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bar_grey"/>
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="24dp"
-            android:text="@{item.userName}"/>
-
-        <TextView
+            android:id="@+id/item_delete"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="24dp"
-            android:text="@{item.property}"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"></View>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/bg_connect"
-            android:text="连接"
-            android:textColor="#FFA500"/>
+            android:layout_height="match_parent"
+            android:background="#88ff0000"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/bar_grey"/>
-</LinearLayout>
-
 </layout>

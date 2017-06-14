@@ -23,13 +23,13 @@
                 android:text="我的电视"/>
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
+        <com.orientalfinance.eastcloud.view.ItemRemoveRecyclerView
             android:id="@+id/rv_MyTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="com.orientalfinance.eastcloud.activity.ActivityMyTV">
 
-        </android.support.v7.widget.RecyclerView>
+        </com.orientalfinance.eastcloud.view.ItemRemoveRecyclerView>
     </LinearLayout>
 
 </layout>

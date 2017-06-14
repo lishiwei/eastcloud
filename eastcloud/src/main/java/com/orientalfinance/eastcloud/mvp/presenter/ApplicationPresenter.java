@@ -1,7 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
 import com.orientalfinance.eastcloud.mvp.View.ApplicationView;
-import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
 import javax.inject.Inject;
@@ -15,7 +14,6 @@ public class ApplicationPresenter extends MvpNullObjectBasePresenter<Application
     public ApplicationPresenter() {
     }
 
-    @Override
     public void start() {
 
     }

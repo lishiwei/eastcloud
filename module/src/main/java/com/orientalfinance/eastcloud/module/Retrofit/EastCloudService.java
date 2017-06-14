@@ -1,8 +1,9 @@
 package com.orientalfinance.eastcloud.module.Retrofit;
 
 
+import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
 
@@ -10,13 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Flowable;
-import okhttp3.*;
-
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -29,27 +28,13 @@ import retrofit2.http.PartMap;
 public interface EastCloudService {
 
 
-    @POST("users/{user}/repos")
-    Flowable<User> login(String s, String sn);
-
-    @GET("users/{user}/repos")
-    Flowable<List<Movie>> changePassword(String s, String sn);
-
-    @GET("users/{user}/repos")
-    Flowable<List<Movie>> regist(String s, String sn);
-
-    //获取TV列表
-    @FormUrlEncoded
-    @POST(".")
-    Flowable<List<TV>> getTVPlay(@Field("s") String zip, @Field("sign") String sign);
-
-
     /**
      * 方法描述：注册
      */
     @FormUrlEncoded
     @POST(".")
-    Call<ResponseResult<User>> register(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<User>> register(@Field("s") String zip, @Field("sign") String sign);
+
 
     /**
      * 方法描述：发送验证码
@@ -117,7 +102,7 @@ public interface EastCloudService {
 
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody<TV>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<TV>>> showTvBoxList(@Field("s") String zip, @Field("sign") String sign);
 
     //itype:356
     @FormUrlEncoded
@@ -127,7 +112,56 @@ public interface EastCloudService {
     //itype 357
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody<TV>> scanTvBox(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<TV>>> scanTvBox(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 359
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> reportSuggest(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 360
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Address>>> getAddress(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 361
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> addAddress(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 362
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> editAddress(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 363
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> deleteAddress(@Field("s") String zip, @Field("sign") String sign);
+
+
+
+
+
+  //itype 365
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<FamilyMember>>> showFamilyList(@Field("s") String zip, @Field("sign") String sign);
+
+  //itype 366
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> addFamily(@Field("s") String zip, @Field("sign") String sign);
+
+  //itype 367
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> editFamily(@Field("s") String zip, @Field("sign") String sign);
+
+  //itype 368
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> deleteFamily(@Field("s") String zip, @Field("sign") String sign);
 
 
 }

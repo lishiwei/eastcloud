@@ -1,7 +1,5 @@
 package com.orientalfinance.eastcloud.module.Retrofit;
 
-import java.util.List;
-
 /**
  * Created by 29435 on 2017/6/14.
  */
@@ -16,7 +14,7 @@ public class EastCloudResponseBody<T> {
 
     private String code;
     private String msg;
-    private List<T> result;
+    private T result;
 
     public String getCode() {
         return code;
@@ -34,11 +32,11 @@ public class EastCloudResponseBody<T> {
         this.msg = msg;
     }
 
-    public List<T> getResult() {
+    public T getResult() {
         return result;
     }
 
-    public void setResult(List<T> result) {
+    public void setResult(T result) {
         this.result = result;
     }
 

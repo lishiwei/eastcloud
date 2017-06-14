@@ -153,6 +153,10 @@ public class TV {
         }
 
         String box_id;
+
+        public String getBox_id() {
+            return box_id;
+        }
     }
 
     public static class ScanTVRequestParam {

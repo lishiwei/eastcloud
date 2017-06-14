@@ -1,24 +1,31 @@
 package com.orientalfinance.eastcloud.module.Retrofit;
 
 
-
 import org.reactivestreams.Publisher;
-
-import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 29435 on 2017/6/7.
  */
 
-public class ListTransform<T extends Object> implements FlowableTransformer<List<T>, List<T>> {
+public class ListTransform<T extends Object> implements FlowableTransformer<EastCloudResponseBody<T>, T> {
     @Override
-    public Publisher<List<T>> apply(Flowable<List<T>> upstream) {
+    public Publisher<T> apply(Flowable<EastCloudResponseBody<T>> upstream) {
 
-        return upstream.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread());
+        return upstream.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).map(new Function<EastCloudResponseBody<T>, T>() {
+            @Override
+            public T apply(EastCloudResponseBody<T> tEastCloudResponseBody) throws Exception {
+                if (tEastCloudResponseBody.getResult() == null) {
+                    Object object = new Object();
+                    return (T) object;
+                }
+                return tEastCloudResponseBody.getResult();
+            }
+        });
     }
 }

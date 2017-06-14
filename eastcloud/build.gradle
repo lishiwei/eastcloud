@@ -98,6 +98,6 @@ dependencies {
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v1.5.7'
     compile 'com.android.support:multidex:1.0.1'
     compile 'cn.jiguang:jpush:2.1.8'
-    testCompile 'junit:junit:4.12'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    testCompile 'junit:junit:4.12'
 }

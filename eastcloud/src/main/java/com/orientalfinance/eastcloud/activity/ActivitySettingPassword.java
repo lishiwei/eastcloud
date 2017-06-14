@@ -15,8 +15,10 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingPassWordView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.SettingPassWordPresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 
 public class ActivitySettingPassword extends BaseMVPActivity<SettingPassWordView, SettingPassWordPresenter> implements SettingPassWordView {
+    private static final java.lang.String TAG = ActivitySettingPassword.class.getSimpleName();
     ActivitySettingPasswordBinding mActivitySettingPasswordBinding;
 
     @Override
@@ -62,6 +64,7 @@ public class ActivitySettingPassword extends BaseMVPActivity<SettingPassWordView
     @Override
     public void registSucceed(User user) {
         AcacheUtil.getInstance().putUser(user);
+        LogUtils.d(TAG, "registSucceed: "+user.toString());
         startActivity(new Intent(this, MainActivity.class));
     }
 }

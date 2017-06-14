@@ -31,9 +31,15 @@ public class Constant {
         public static final int USER_FEEDBACK = 359;
 
         public static final int SHOW_MY_ADDRESS_LIST = 360;
-        public static final int UPDATE_MY_ADDRESS_LIST = 361;
+        public static final int ADD_MY_ADDRESS_LIST = 361;
         public static final int EDIT_MY_ADDRESS_LIST = 362;
         public static final int DELETE_MY_ADDRESS_LIST = 363;
+        public static final int SHOW_FAMILY_LIST = 365;
+        public static final int ADD_FAMILY = 366;
+        public static final int EDIT_FAMILY = 367;
+        public static final int DELETE_FAMILY = 368;
+
+
 
         public static final int SHOW_WATCH_HISTORY = 451;
 

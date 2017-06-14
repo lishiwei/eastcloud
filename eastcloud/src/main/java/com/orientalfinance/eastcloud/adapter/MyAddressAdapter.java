@@ -34,6 +34,11 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
         return viewHolder;
     }
 
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mViewDataBinding.setVariable(BR.address, addresses.get(position));

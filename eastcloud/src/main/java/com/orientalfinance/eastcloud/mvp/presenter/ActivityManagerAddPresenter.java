@@ -9,7 +9,7 @@ import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
  */
 
 public class ActivityManagerAddPresenter extends MvpNullObjectBasePresenter<ManagerAddressView> {
-    @Override
+
     public void start() {
 
     }

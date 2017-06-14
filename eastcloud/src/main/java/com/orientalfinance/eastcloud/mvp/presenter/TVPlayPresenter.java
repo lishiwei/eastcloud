@@ -13,7 +13,6 @@ import javax.inject.Inject;
 public class TVPlayPresenter extends MvpNullObjectBasePresenter<TVPlayView> {
     public static String TAG = TVPlayPresenter.class.getSimpleName();
 
-    @Override
     public void start() {
 
     }

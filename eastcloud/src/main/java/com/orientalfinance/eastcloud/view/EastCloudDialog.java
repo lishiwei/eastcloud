@@ -28,4 +28,8 @@ public class EastCloudDialog {
     public void hide() {
         mDialog.hide();
     }
+
+    public void dismiss() {
+        mDialog.dismiss();
+    }
 }

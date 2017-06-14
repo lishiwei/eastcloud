@@ -17,4 +17,6 @@ public interface MyTVView extends MvpView {
     public void hideLoading();
 
     public void showError(String errorMsg);
+    public void showDelectTVBox();
+    public void delectSucceed();
 }

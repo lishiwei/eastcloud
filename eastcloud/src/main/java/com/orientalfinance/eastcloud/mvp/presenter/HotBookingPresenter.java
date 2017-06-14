@@ -20,7 +20,7 @@ import io.reactivex.functions.Consumer;
 public class HotBookingPresenter extends MvpNullObjectBasePresenter<HotBookingView> {
     MovieRepository mMovieRepository;
 
-    @Override
+
     public void start() {
 
     }

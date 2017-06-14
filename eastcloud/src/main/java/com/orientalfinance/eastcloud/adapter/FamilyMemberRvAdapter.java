@@ -26,6 +26,11 @@ public static String TAG = FamilyMemberRvAdapter.class.getSimpleName();
         mFamilyMembers = familyMembers;
     }
 
+    public void setFamilyMembers(List<FamilyMember> familyMembers) {
+        mFamilyMembers = familyMembers;
+        notifyDataSetChanged();
+    }
+
     @Override
     public FamilyMemberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_family_member, null, false);

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.ManagerAddressAdapter;
 import com.orientalfinance.eastcloud.module.javabean.Address;
@@ -38,6 +37,11 @@ public class ActivityManagerAddress extends MvpActivity<ManagerAddressView, Acti
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void initViews() {

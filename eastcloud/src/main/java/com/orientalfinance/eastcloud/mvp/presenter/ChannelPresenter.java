@@ -14,7 +14,7 @@ public class ChannelPresenter extends MvpNullObjectBasePresenter<ChannelView> {
     public ChannelPresenter() {
     }
 
-    @Override
+
     public void start() {
 
     }

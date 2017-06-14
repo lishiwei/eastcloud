@@ -1,6 +1,9 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.orientalfinance.eastcloud.module.javabean.Address;
+
+import java.util.List;
 
 /**
  * Created by lzy on 2017/6/14.
@@ -9,9 +12,10 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 
 public interface ActivityMyAddressView extends MvpView {
 
-    void loadData();
+    void showLoading();
 
-    void showSuccess();
+    void showSuccess(List<Address> addressList);
 
-    void showError();
+    void showError(String errorMsg);
+    void hideLoading();
 }

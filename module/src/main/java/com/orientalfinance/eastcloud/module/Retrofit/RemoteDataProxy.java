@@ -6,6 +6,8 @@ import android.util.Log;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
+import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
@@ -13,6 +15,7 @@ import com.orientalfinance.eastcloud.module.util.DeviceUtil;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Flowable;
 import okhttp3.MediaType;
@@ -46,12 +49,12 @@ public class RemoteDataProxy {
     /**
      * 方法描述：注册(itype=301)
      */
-    public static void register(RequestParam requestParam, HttpCallBack<User> httpCallBack) {
+    public static Flowable<EastCloudResponseBody<User>> register(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.REGISTER);
-        EastcloudRetrofit.getInstance()
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .register(sendRequest.getS(), sendRequest.getSign())
-                .enqueue(httpCallBack);
+                .register(sendRequest.getS(), sendRequest.getSign());
+
     }
 
     /**
@@ -154,36 +157,139 @@ public class RemoteDataProxy {
                 .updateUserInfo(requestParamWrap(requestParam, 352))
                 .enqueue(httpCallBack);
     }
+
     /**
      * 方法描述：显示已绑定的机顶盒
      * itype 355
      */
-    public static Flowable<EastCloudResponseBody<TV>> showTvBoxList(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<TV>>> showTvBoxList(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_TV_BOX_LIST);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showTvBoxList(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：删除已绑定的机顶盒
      * itype 356
      */
-    public static Flowable<EastCloudResponseBody>delTvBox(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody> delTvBox(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_TV_BOX);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .delTvBox(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：扫描已绑定的机顶盒
-     * itype 356
+     * itype 357
      */
-    public static Flowable<EastCloudResponseBody<TV>> scanTvBox(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<TV>>> scanTvBox(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SCAN_SHOW_TV_BOX_LIST);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .scanTvBox(sendRequest.getS(), sendRequest.getSign());
     }
+
+    /**
+     * 方法描述：意见反馈
+     * itype 359
+     */
+    public static Flowable<EastCloudResponseBody> reportSuggest(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_FEEDBACK);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .reportSuggest(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：获取地址
+     * itype 360
+     */
+    public static Flowable<EastCloudResponseBody<List<Address>>> getAddress(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_ADDRESS_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .getAddress(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：添加地址
+     * itype 361
+     */
+    public static Flowable<EastCloudResponseBody> addAddress(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.ADD_MY_ADDRESS_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .addAddress(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：添加地址
+     * itype 362
+     */
+    public static Flowable<EastCloudResponseBody> editAddress(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.EDIT_MY_ADDRESS_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .editAddress(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：删除地址
+     * itype 363
+     */
+    public static Flowable<EastCloudResponseBody> deleteAddress(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_MY_ADDRESS_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .deleteAddress(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：显示家庭成员
+     * itype 365
+     */
+    public static Flowable<EastCloudResponseBody<List<FamilyMember>>> showFamilyList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_FAMILY_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showFamilyList(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：显示家庭成员
+     * itype 366
+     */
+    public static Flowable<EastCloudResponseBody> addFamily(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.ADD_FAMILY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .addFamily(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：编辑家庭成员
+     * itype 367
+     */
+    public static Flowable<EastCloudResponseBody> editFamily(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.EDIT_FAMILY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .editFamily(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：编辑家庭成员
+     * itype 368
+     */
+    public static Flowable<EastCloudResponseBody> deleteFamily(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_FAMILY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .deleteFamily(sendRequest.getS(), sendRequest.getSign());
+    }
+
 
     public static RequestBody toRequestBody(String value) {
         return RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), value);

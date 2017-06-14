@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityFamilyMemberBinding;
@@ -13,10 +14,13 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerFamilyMemberComponent;
 import com.orientalfinance.eastcloud.dagger.component.FamilyMemberComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityFamilyMemberModules;
+import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.mvp.View.FamilyMemberView;
 import com.orientalfinance.eastcloud.mvp.View.FamilyMemberViewViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.FamilyMemberPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,6 +28,7 @@ public class ActivityFamilyMember extends BaseActivity<FamilyMemberComponent, Fa
     ActivityFamilyMemberBinding mActivityFamilyMemberBinding;
     @Inject
     FamilyMemberRvAdapter mFamilyMemberRvAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,26 @@ public class ActivityFamilyMember extends BaseActivity<FamilyMemberComponent, Fa
     @Override
     protected int getLayoutId() {
         return R.layout.activity_family_member;
+    }
+
+    @Override
+    public void showDialog() {
+mEastCloudDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+mEastCloudDialog.hide();
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showFamilyMember(List<FamilyMember> familyMembers) {
+        mFamilyMemberRvAdapter.setFamilyMembers(familyMembers);
     }
 
     @Override
