@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -61,9 +62,19 @@ public class ActivityManagerAddress extends MvpActivity<ManagerAddressView, Acti
         ivAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityManagerAddress.this, ActivityAddAddress.class));
+                skipActivity();
             }
         });
+        listViewAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                skipActivity();
+            }
+        });
+    }
+
+    private void skipActivity() {
+        startActivity(new Intent(ActivityManagerAddress.this, ActivityAddAddress.class));
     }
 
     @NonNull
