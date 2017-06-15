@@ -119,6 +119,20 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody> reportSuggest(@Field("s") String zip, @Field("sign") String sign);
 
+
+    /**
+     * test
+     * TODO:
+     *
+     * @param zip
+     * @param sign
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(".")
+    Call<ResponseResult> reportSuggest2(@Field("s") String zip, @Field("sign") String sign);
+
+
     //itype 360
     @FormUrlEncoded
     @POST(".")
@@ -140,25 +154,22 @@ public interface EastCloudService {
     Flowable<EastCloudResponseBody> deleteAddress(@Field("s") String zip, @Field("sign") String sign);
 
 
-
-
-
-  //itype 365
+    //itype 365
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<FamilyMember>>> showFamilyList(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 366
+    //itype 366
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> addFamily(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 367
+    //itype 367
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> editFamily(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 368
+    //itype 368
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> deleteFamily(@Field("s") String zip, @Field("sign") String sign);

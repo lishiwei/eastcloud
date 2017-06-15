@@ -78,9 +78,8 @@
         </activity>
         <activity
             android:name=".eastcloud.activity.ActivityDetail"
-            android:parentActivityName=".eastcloud.MainActivity">
-            >
-        </activity>
+            android:parentActivityName=".eastcloud.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name=".eastcloud.activity.ActivityTVPlayDetail"
             android:parentActivityName=".eastcloud.MainActivity" />
