@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.API;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.DecryptionInterceptor;
 import com.orientalfinance.eastcloud.module.Retrofit.log.HttpLoggingInterceptor;
-import com.orientalfinance.eastcloud.module.Retrofit.log.LogParamsInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +62,7 @@ public class EastcloudRetrofit {
         // LogParamsInterceptor log = new LogParamsInterceptor.Builder().showLog(true).build();
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 //  .addInterceptor(httpLoggingInterceptor)

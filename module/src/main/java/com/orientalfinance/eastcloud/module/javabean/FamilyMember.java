@@ -7,8 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class FamilyMember {
+
     @SerializedName("sign_url")
     String userAvatar;
+
     String relation;
     String name;
     String id;

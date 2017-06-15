@@ -14,6 +14,7 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerFamilyMemberComponent;
 import com.orientalfinance.eastcloud.dagger.component.FamilyMemberComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityFamilyMemberModules;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.mvp.View.FamilyMemberView;
 import com.orientalfinance.eastcloud.mvp.View.FamilyMemberViewViewState;
@@ -41,6 +42,8 @@ public class ActivityFamilyMember extends BaseActivity<FamilyMemberComponent, Fa
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mActivityFamilyMemberBinding.rvFamilyMember.setAdapter(mFamilyMemberRvAdapter);
         mActivityFamilyMemberBinding.rvFamilyMember.setLayoutManager(new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
+        RequestParam requestParam= new RequestParam();
+        getPresenter().getFamily(requestParam);
     }
 
     @Override

@@ -32,6 +32,11 @@ public class ManagerAddressAdapter extends BaseAdapter {
         layoutInflater = LayoutInflater.from(mContext);
     }
 
+    public void setList(List<Address> list) {
+        mList = list;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mList == null ? 0 : mList.size();

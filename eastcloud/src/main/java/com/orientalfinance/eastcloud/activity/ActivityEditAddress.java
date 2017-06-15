@@ -52,7 +52,7 @@ public class ActivityEditAddress extends BaseMVPActivity<ActivityEditAddressView
                 Address.EditRequestParam editRequestParam = new Address.EditRequestParam(address.getId(), binding.etUserName.getText().toString(),
                         binding.etUserPhone.getText().toString(),
                         "", "", binding.etDetailAddress.getText().toString(),
-                        isDefault);
+                        isDefault+"");
                 getPresenter().editAddress(new RequestParam<Address.EditRequestParam>(editRequestParam));
             }
         });

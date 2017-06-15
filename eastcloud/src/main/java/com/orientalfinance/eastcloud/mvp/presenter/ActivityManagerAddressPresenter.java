@@ -5,7 +5,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Address;
-import com.orientalfinance.eastcloud.mvp.View.ActivityMyAddressView;
+import com.orientalfinance.eastcloud.mvp.View.ManagerAddressView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 
@@ -15,18 +15,12 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by lzy on 2017/6/14.
+ * Created by lzy on 2017/6/12.
  * email:lizy@oriental-finance.com
  */
 
-public class ActivityMyAddressPresenter extends MvpNullObjectBasePresenter<ActivityMyAddressView> {
-    static String TAG = ActivityMyAddressPresenter.class.getSimpleName();
-
-    public void start() {
-
-    }
-
-
+public class ActivityManagerAddressPresenter extends MvpNullObjectBasePresenter<ManagerAddressView> {
+public static String TAG = ActivityManagerAddressPresenter.class.getSimpleName();
     public void getAddress(RequestParam requestParam) {
         LogUtils.e(TAG, "getAddress: ");
         getView().showLoading();

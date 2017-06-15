@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.orientalfinance.R;
-
 import com.orientalfinance.databinding.FragmentApplicationBinding;
 import com.orientalfinance.eastcloud.adapter.HotApplicationRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
@@ -20,7 +16,6 @@ import com.orientalfinance.eastcloud.dagger.modules.ApplicationModule;
 import com.orientalfinance.eastcloud.mvp.View.ApplicationView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ApplicationPresenter;
-import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
 
 import javax.inject.Inject;
 
@@ -80,6 +75,10 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
         mFragmentApplicationBinding = (FragmentApplicationBinding) mViewDataBinding;
         mFragmentApplicationBinding.rvHotApplication.setAdapter(mHotApplicationRvAdapter);
         mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mFragmentApplicationBinding.rvAllApplication.setAdapter(mHotApplicationRvAdapter);
+        mFragmentApplicationBinding.rvAllApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mFragmentApplicationBinding.rvMyApplication.setAdapter(mHotApplicationRvAdapter);
+        mFragmentApplicationBinding.rvMyApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override

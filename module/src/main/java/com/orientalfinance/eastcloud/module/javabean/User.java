@@ -104,4 +104,105 @@ public class User implements Serializable {
                 ", pwd='" + pwd + '\'' +
                 '}';
     }
+    public  static  class UserLoginRequestParam{
+        String phone;
+
+        @Override
+        public String toString() {
+            return "UserLoginRequestParam{" +
+                    "phone='" + phone + '\'' +
+                    ", pwd='" + pwd + '\'' +
+                    '}';
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getPwd() {
+            return pwd;
+        }
+
+        public void setPwd(String pwd) {
+            this.pwd = pwd;
+        }
+
+        public UserLoginRequestParam(String phone, String pwd) {
+
+            this.phone = phone;
+            this.pwd = pwd;
+        }
+
+        String pwd;
+    }
+    public static class SendCodeRequestParam{
+      public   String phone;
+
+        public SendCodeRequestParam(String phone) {
+            this.phone = phone;
+        }
+
+        @Override
+        public String toString() {
+            return "VerificateCode{" +
+                    "phone='" + phone + '\'' +
+                    '}';
+        }
+    }
+    public static class VerificateCodeRequestParam extends SendCodeRequestParam{
+        String code;
+        String msgId;
+        public VerificateCodeRequestParam(String phone, String code, String msgId
+        ) {
+            super(phone);
+            this.code = code;
+            this.msgId = msgId;
+        }
+
+        @Override
+        public String toString() {
+            return "VerificateCodeRequestParam{" +
+                    "code='" + code + '\'' +
+                    "phone='" + phone + '\'' +
+                    "msgId='" + msgId + '\'' +
+                    '}';
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getMsgId() {
+            return msgId;
+        }
+
+        public void setMsgId(String msgId) {
+            this.msgId = msgId;
+        }
+    }
+    public static class RegistRequestParam extends SendCodeRequestParam{
+        String pwd ;
+
+        public RegistRequestParam(String phone, String pwd) {
+            super(phone);
+            this.pwd = pwd;
+        }
+
+        @Override
+        public String toString() {
+            return "RegistRequestParam{" +
+                    "pwd='" + pwd + '\'' +
+                    "phone='" + phone + '\'' +
+                    '}';
+        }
+    }
+
 }

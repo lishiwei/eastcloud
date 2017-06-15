@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.MainActivity;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.core.CommonRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
+import com.orientalfinance.eastcloud.mvp.View.ClearEditText;
 import com.orientalfinance.eastcloud.mvp.View.LoginView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityLoginPresenter;
@@ -31,6 +33,8 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
     boolean isWechatauthed;
     boolean isWeiboAuthed;
     Dialog mDialog;
+    ClearEditText mPhone;
+    ClearEditText mPwd;
     CommonRequestParam mCommonRequestParam;
     private UMAuthListener mUMAuthListener = new UMAuthListener() {
         @Override
@@ -87,6 +91,8 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
         findViewById(R.id.iv_Weibo).setOnClickListener(this);
         findViewById(R.id.iv_WeChat).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
+        mPhone = (ClearEditText) findViewById(R.id.et_UserName);
+        mPwd = (ClearEditText) findViewById(R.id.et_PassWord);
         mCommonRequestParam = new CommonRequestParam("", "");
     }
 
@@ -100,6 +106,7 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+        mDialog.dismiss();
     }
 
     @Override
@@ -144,8 +151,9 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
                 }
                 break;
             case R.id.button:
-
-                getPresenter().login(mCommonRequestParam);
+                User.UserLoginRequestParam userLoginRequestParam =new User.UserLoginRequestParam(mPhone.getText().toString(),mPwd.getText().toString());
+                RequestParam<User.UserLoginRequestParam> requestParam = new RequestParam<User.UserLoginRequestParam>(userLoginRequestParam);
+                getPresenter().login(requestParam);
 
 
                 break;
@@ -157,7 +165,7 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
                 break;
             case R.id.tv_ForgetPassWord:
                 Intent intent1 = new Intent(ActivityLogin.this, ActivityVerificationCode.class);
-                intent1.putExtra(Constant.VALUE,Constant.MODIFYPWD);
+                intent1.putExtra(Constant.VALUE,Constant.FORGET);
                 startActivity(intent1);
 
                 break;
@@ -171,15 +179,14 @@ public class ActivityLogin extends BaseMVPActivity<LoginView, ActivityLoginPrese
     }
 
     @Override
-    public void showError(Throwable throwable) {
-        Toast.makeText(this, getResources().getString(R.string.pwd_error), Toast.LENGTH_SHORT).show();
+    public void showError(String throwable) {
+        Toast.makeText(this, throwable, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideLogin() {
         mDialog.hide();
-        mDialog.cancel();
-        mDialog = null;
+
     }
 
     @Override

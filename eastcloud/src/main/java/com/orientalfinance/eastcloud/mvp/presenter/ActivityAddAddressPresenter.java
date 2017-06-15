@@ -7,6 +7,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.mvp.View.ActivityAddAddressView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -22,24 +23,23 @@ public class ActivityAddAddressPresenter extends MvpNullObjectBasePresenter<Acti
 
     public void addAddress(RequestParam requestParam) {
         getView().showDialog();
-        RemoteDataProxy.addAddress(requestParam).compose(new NullTransform()).doOnError(new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                getView().hideDialog();
-                getView().showError(throwable.getMessage());
-            }
-        }).subscribe(new Consumer<EastCloudResponseBody>() {
+        RemoteDataProxy.addAddress(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override
             public void accept(EastCloudResponseBody eastCloudResponseBody) throws Exception {
                 if (Integer.valueOf(eastCloudResponseBody.getCode()) < 0) {
                     getView().hideDialog();
                     getView().showError(eastCloudResponseBody.getMsg());
 
-                }
-                else {
+                } else {
                     getView().hideDialog();
                     getView().commitSucceed();
                 }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                getView().hideDialog();
+                getView().showError("网络连接失败");
             }
         });
     }

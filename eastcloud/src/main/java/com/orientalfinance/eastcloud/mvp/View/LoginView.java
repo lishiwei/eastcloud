@@ -13,7 +13,7 @@ public interface LoginView extends MvpView{
 
     public void showLogin();
     public void hideLogin();
-    public void showError(Throwable throwable);
-public void loginSucceed(User movie);
+    public void showError(String  throwable);
+    public void loginSucceed(User movie);
 
 }

@@ -2,14 +2,12 @@ package com.orientalfinance.eastcloud.utils;
 
 import android.util.Log;
 
-import com.orientalfinance.BuildConfig;
-
 /**
  * Created by 29435 on 2017/5/31.
  */
 
 public class LogUtils {
-    public static boolean debug = BuildConfig.LOG_DEBUG;
+    public static boolean debug =true;
 
     public static void e(String tag, String message) {
         if (debug) {

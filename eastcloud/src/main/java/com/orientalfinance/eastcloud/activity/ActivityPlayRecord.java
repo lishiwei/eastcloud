@@ -10,11 +10,16 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerPlayRecordComponent;
 import com.orientalfinance.eastcloud.dagger.component.PlayRecordComponent;
 import com.orientalfinance.eastcloud.dagger.modules.PlayRecordModule;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordView;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.PlayRecordPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -45,6 +50,10 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
         mActivityPlayRecordBinding.rvBefore.setAdapter(mPlayRecordRvAdpter);
         mActivityPlayRecordBinding.rvToday.setLayoutManager(new FullyLinearLayoutManager(this));
         mActivityPlayRecordBinding.rvToday.setAdapter(mPlayRecordRvAdpter);
+
+        ShowRequestParam showRequestParam = new ShowRequestParam(0, 10);
+        RequestParam requestParam = new RequestParam(showRequestParam);
+        getPresenter().showHistory(requestParam);
     }
 
     @Override
@@ -58,7 +67,22 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     }
 
     @Override
-    public void showView() {
+    public void showDialog() {
+        mEastCloudDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+mEastCloudDialog.hide();
+    }
+
+    @Override
+    public void showHistory(List<Channel> channels) {
+mPlayRecordRvAdpter.setChannelList(channels);
+    }
+
+    @Override
+    public void showError(String errorMsg) {
 
     }
 }

@@ -23,7 +23,7 @@ import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddAddressPresenter;
 public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, ActivityAddAddressPresenter> implements ActivityAddAddressView {
 
     private ActivityAddAddressBinding mAddAddressBinding;
-    private int isDefaultAddress;
+    private int isDefaultAddress = 0;
 
     @NonNull
     @Override
@@ -49,7 +49,7 @@ public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, 
                 Address.AddRequestParam addRequestParam = new Address.AddRequestParam(mAddAddressBinding.etUserName.getText().toString(),
                         mAddAddressBinding.etUserPhone.getText().toString(),
                         "", "", mAddAddressBinding.etDetailAddress.getText().toString(),
-                        isDefaultAddress);
+                        isDefaultAddress+"");
                 RequestParam<Address.AddRequestParam> requestParam = new RequestParam<Address.AddRequestParam>(addRequestParam);
                 getPresenter().addAddress(requestParam);
 

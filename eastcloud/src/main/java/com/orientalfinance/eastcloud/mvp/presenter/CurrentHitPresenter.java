@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -26,17 +27,24 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
     public CurrentHitPresenter(MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
     }
-//@Inject
+
+    //@Inject
 //    public CurrentHitPresenter() {
 //        mMovieRepository = movieRepository;
 //    }
     public void start() {
-        getView().showLoading();
-        mMovieRepository.getDatas(new MovieRequestParam(0,0) ).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<List<Movie>>() {
+        getView().showDialog();
+        mMovieRepository.getDatas(new MovieRequestParam(0, 0)).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<List<Movie>>() {
             @Override
             public void accept(List<Movie> movies) throws Exception {
                 getView().showView(movies);
-                getView().hideLoading();
+                getView().hideDialog();
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                getView().hideDialog();
+                getView().showError(throwable.getMessage());
             }
         });
     }
@@ -51,13 +59,14 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
     }
-public static final class MovieRequestParam implements RequestParam{
-    int pageSize;
-    int pageNum;
 
-    public MovieRequestParam(int pageSize, int pageNum) {
-        this.pageSize = pageSize;
-        this.pageNum = pageNum;
+    public static final class MovieRequestParam implements RequestParam {
+        int pageSize;
+        int pageNum;
+
+        public MovieRequestParam(int pageSize, int pageNum) {
+            this.pageSize = pageSize;
+            this.pageNum = pageNum;
+        }
     }
-}
 }

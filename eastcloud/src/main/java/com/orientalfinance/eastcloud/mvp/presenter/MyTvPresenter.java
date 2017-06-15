@@ -2,6 +2,7 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 
 import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
+import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.TV;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -37,13 +39,6 @@ public class MyTvPresenter extends MvpNullObjectBasePresenter<MyTVView> {
             public List<TV> apply(EastCloudResponseBody<List<TV>> tvResponseBody) throws Exception {
                 return tvResponseBody.getResult();
             }
-        }).doOnError(new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                getView().hideLoading();
-                getView().showError(throwable.getMessage());
-                LogUtils.d(TAG, "accept: " + throwable.getMessage());
-            }
         }).subscribe(new Consumer<List<TV>>() {
                          @Override
                          public void accept(List<TV> list) throws Exception {
@@ -51,61 +46,63 @@ public class MyTvPresenter extends MvpNullObjectBasePresenter<MyTVView> {
                              getView().showTVBox(list);
                          }
                      }
-        );
+                , new MyConsumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        super.accept(throwable);
+                        getView().hideLoading();
+                        LogUtils.e(TAG, "accept: "+throwable.toString());
+                    }
+                });
 
     }
 
     public void delTVBox(final RequestParam requestParam) {
 
-getView().showDelectTVBox();
+        getView().showDelectTVBox();
         RemoteDataProxy.delTvBox(requestParam).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).map(new Function<EastCloudResponseBody, String>() {
             @Override
             public String apply(EastCloudResponseBody eastCloudResponseBody) throws Exception {
                 return eastCloudResponseBody.getCode();
             }
         })
-                .doOnError(new Consumer<Throwable>() {
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        LogUtils.d(TAG, "accept: " + throwable.getMessage());
-                        getView().showError(throwable.getMessage());
+                    public void accept(String s) throws Exception {
+                        getView().hideLoading();
+                        getView().delectSucceed();
                     }
-                }).subscribe(new Consumer<String>() {
-            @Override
-            public void accept(String s) throws Exception {
-                getView().hideLoading();
-                getView().delectSucceed();
-            }
-        });
+                }, new MyConsumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        super.accept(throwable);
+                        getView().hideLoading();
+                    }
+                });
 
     }
 
     public void scanTVBox(RequestParam requestParam) {
 
-
+        getView().showLoading();
         RemoteDataProxy.scanTvBox(requestParam).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).map(new Function<EastCloudResponseBody<List<TV>>, List<TV>>() {
             @Override
             public List<TV> apply(EastCloudResponseBody<List<TV>> tvEastCloudResponseBody) throws Exception {
                 return tvEastCloudResponseBody.getResult();
             }
-        }).doOnError(new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                LogUtils.d(TAG, "accept:throwable " + throwable.toString());
-                LogUtils.d(TAG, "accept: throwable" + throwable.getMessage());
-            }
         }).subscribe(new Consumer<List<TV>>() {
             @Override
             public void accept(List<TV> tvList) throws Exception {
-
-
+                getView().hideLoading();
+                getView().showTVBox(tvList);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideLoading();
             }
         });
     }
 
-
-    public void start() {
-
-
-    }
 }

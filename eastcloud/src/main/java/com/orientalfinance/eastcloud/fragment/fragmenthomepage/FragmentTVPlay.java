@@ -97,7 +97,7 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
         mFragmentTvplayBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPresenter().start();
+
             }
         });
     }

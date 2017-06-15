@@ -131,9 +131,9 @@ public class Address implements Serializable {
         String zonecode;
         String zonename;
         String addr;
-        int isdefault;
+        String isdefault;
 
-        public AddRequestParam(String uname, String phone, String zonecode, String zonename, String addr, int isdefault) {
+        public AddRequestParam(String uname, String phone, String zonecode, String zonename, String addr, String isdefault) {
             this.uname = uname;
             this.phone = phone;
             this.zonecode = zonecode;
@@ -162,9 +162,9 @@ public class Address implements Serializable {
         String zonecode;
         String zonename;
         String addr;
-        int isdefault;
+        String isdefault;
 
-        public EditRequestParam(String id, String uname, String phone, String zonecode, String zonename, String addr, int isdefault) {
+        public EditRequestParam(String id, String uname, String phone, String zonecode, String zonename, String addr, String isdefault) {
             this.uname = uname;
             this.id = id;
             this.phone = phone;

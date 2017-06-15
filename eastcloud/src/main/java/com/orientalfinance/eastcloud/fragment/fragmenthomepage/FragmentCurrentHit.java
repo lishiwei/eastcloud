@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
@@ -104,12 +105,12 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     }
 
     @Override
-    public void showLoading() {
+    public void showDialog() {
         mFragmentCurrentHitBinding.scrollview.setRefreshing(true);
     }
 
     @Override
-    public void hideLoading() {
+    public void hideDialog() {
         mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
@@ -160,6 +161,11 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     public void onPause() {
         super.onPause();
         mFragmentCurrentHitBinding.atvAdvertisement.stop();
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+        Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

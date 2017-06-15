@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class PlayRecordRvAdpter extends RecyclerView.Adapter<PlayRecordRvAdpter.PlayRecordViewHolder> {
     private static final String TAG = PlayRecordRvAdpter.class.getSimpleName();
-    List<Movie> mMovieList;
+    List<Channel> mChannelList;
 
     @Override
     public PlayRecordViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
@@ -39,24 +39,24 @@ public class PlayRecordRvAdpter extends RecyclerView.Adapter<PlayRecordRvAdpter.
         return currentHitViewHolder;
     }
 
-    public PlayRecordRvAdpter(List<Movie> movies) {
-        mMovieList = movies;
+    public PlayRecordRvAdpter(List<Channel> Channels) {
+        mChannelList = Channels;
     }
 
     @Override
     public void onBindViewHolder(PlayRecordViewHolder holder, int position) {
-        holder.mViewDataBinding.setVariable(BR.movie, mMovieList.get(position));
+        holder.mViewDataBinding.setVariable(BR.channel, mChannelList.get(position));
     }
 
-    public void setMovieList(List<Movie> movieList) {
-        Log.d(TAG, "setMovieList: " + movieList.size());
-        mMovieList = movieList;
+    public void setChannelList(List<Channel> ChannelList) {
+        Log.d(TAG, "setChannelList: " + ChannelList.size());
+        mChannelList = ChannelList;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mMovieList.size();
+        return mChannelList.size();
     }
 
     class PlayRecordViewHolder extends RecyclerView.ViewHolder {

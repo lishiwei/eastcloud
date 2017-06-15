@@ -19,4 +19,6 @@ public interface SettingPassWordView extends MvpView {
 
     public void registSucceed(User user);
 
+    public void modifySucceed();
+
 }
