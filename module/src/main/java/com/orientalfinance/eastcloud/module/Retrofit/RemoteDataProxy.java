@@ -6,9 +6,12 @@ import android.util.Log;
 import com.orientalfinance.eastcloud.module.ModuleContext;
 import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
+import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.module.util.DeviceUtil;
@@ -50,7 +53,7 @@ public class RemoteDataProxy {
      * 方法描述：注册(itype=301)
      */
     public static Flowable<EastCloudResponseBody<User>> register(RequestParam requestParam) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.REGISTER);
+        SendRequest sendRequest = requestNoTokenParamWrap(requestParam, Constant.IType.REGISTER);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .register(sendRequest.getS(), sendRequest.getSign());
@@ -60,38 +63,31 @@ public class RemoteDataProxy {
     /**
      * 方法描述：验证码发送(itype=302)
      */
-    public static void codeSend(RequestParam requestParam, HttpCallBack httpCallBack) {
+    public static Flowable<EastCloudResponseBody<Message>> codeSend(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.CODE_SEND);
-        EastcloudRetrofit.getInstance()
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .codeSend(sendRequest.getS(), sendRequest.getSign())
-                .enqueue(httpCallBack);
+                .codeSend(sendRequest.getS(), sendRequest.getSign());
+
     }
 
     /**
      * 方法描述：校验验证码(itype=303)
      */
-    public static void validateCode(RequestParam requestParam, HttpCallBack httpCallBack) {
+    public static Flowable<EastCloudResponseBody> validateCode(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.VALIDATE_CODE);
-//        String version = DeviceUtil.getVersion();
-//        String deviceId = DeviceUtil.getDeviceId();
-//        requestParam.setVersion(version);
-//        requestParam.setDeviceId(deviceId);
-//        requestParam.setItype(303);
-//        String zip = EncryptUtils.getZip(requestParam);
-//        String encrypt = EncryptUtils.encrypt(requestParam);
-        EastcloudRetrofit.getInstance()
+
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .validateCode(sendRequest.getS(), sendRequest.getSign())
-                // .validateCode(new Gson().toJson(requestParam), new Gson().toJson(requestParam))
-                .enqueue(httpCallBack);
+                .validateCode(sendRequest.getS(), sendRequest.getSign());
+        // .validateCode(new Gson().toJson(requestParam), new Gson().toJson(requestParam))
     }
 
     /**
      * 方法描述：登录(itype=304)
      */
     public static void login(RequestParam requestParam, HttpCallBack<User> httpCallBack) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.LOGIN);
+        SendRequest sendRequest = requestNoTokenParamWrap(requestParam, Constant.IType.LOGIN);
         EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .userLogin(sendRequest.getS(), sendRequest.getSign())
@@ -101,23 +97,22 @@ public class RemoteDataProxy {
     /**
      * 方法描述：忘记密码(itype=305)
      */
-    public static void forgetPwd(RequestParam requestParam, HttpCallBack<User> httpCallBack) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.FORGET_PWD);
-        EastcloudRetrofit.getInstance()
+    public static Flowable<EastCloudResponseBody<User>> forgetPwd(RequestParam requestParam) {
+        SendRequest sendRequest = requestNoTokenParamWrap(requestParam, Constant.IType.FORGET_PWD);
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .forgetPwd(sendRequest.getS(), sendRequest.getSign())
-                .enqueue(httpCallBack);
+                .forgetPwd(sendRequest.getS(), sendRequest.getSign());
+
     }
 
     /**
      * 方法描述：修改密码(itype=350)
      */
-    public static void updatePwd(RequestParam requestParam, HttpCallBack httpCallBack) {
+    public static Flowable<EastCloudResponseBody> updatePwd(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.UPDATE_PWD);
-        EastcloudRetrofit.getInstance()
+       return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .updatePwd(sendRequest.getS(), sendRequest.getSign())
-                .enqueue(httpCallBack);
+                .updatePwd(sendRequest.getS(), sendRequest.getSign());
     }
 
     /**
@@ -223,6 +218,17 @@ public class RemoteDataProxy {
     }
 
     /**
+     * 方法描述：获取地址
+     * itype 360
+     */
+    public static void getAddress1(RequestParam requestParam, HttpCallBack<List<Address>> httpCallBack) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_ADDRESS_LIST);
+        EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .getAddress1(sendRequest.getS(), sendRequest.getSign()).enqueue(httpCallBack);
+    }
+
+    /**
      * 方法描述：添加地址
      * itype 361
      */
@@ -297,6 +303,15 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .deleteFamily(sendRequest.getS(), sendRequest.getSign());
+    }  /**
+     * 方法描述：查看历史记录
+     * itype 451
+     */
+    public static Flowable<EastCloudResponseBody<List<Channel>>> showHistory(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_WATCH_HISTORY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showHistory(sendRequest.getS(), sendRequest.getSign());
     }
 
 
@@ -311,10 +326,23 @@ public class RemoteDataProxy {
         String version = DeviceUtil.getVersion();
         String deviceId = DeviceUtil.getDeviceId();
         requestParam.setVersion(version);
-        requestParam.setDeviceId("aaaaa");
-        requestParam.setToken("SDRzSUFBQUFBQUFBQUt0V0tzMU1VYkpTTWpFd3NyQXdURXd5VFU0MFNUUzBORE13aExITUVnMkFRRWxIS1NXMUxETTUxUk9rT2hFRWdFS3BGUVdaUmFrdWlTV3BRRUVqQTBOelhRTXpYU05EcFZvQVRzRGJZRmNBQUFBPQ====");
+        requestParam.setDeviceId(deviceId);
+        requestParam.setToken(AcacheUtil.getInstance().getUser()==null?null:AcacheUtil.getInstance().getUser().getToken());
         requestParam.setItype(itype);
 //        requestParam.setUid("402881ab5ca4a196015ca4a1966a0000");
+        Log.e("OKHTTP", "请求参数：" + requestParam.toString());
+        return new SendRequest(EncryptUtils.getZip(requestParam), EncryptUtils.encrypt(requestParam));
+    }
+
+    /**
+     * 方法描述：重新包装request参数
+     */
+    private static SendRequest requestNoTokenParamWrap(RequestParam requestParam, int itype) {
+        String version = DeviceUtil.getVersion();
+        String deviceId = DeviceUtil.getDeviceId();
+        requestParam.setVersion(version);
+        requestParam.setDeviceId(deviceId);
+        requestParam.setItype(itype);
         Log.e("OKHTTP", "请求参数：" + requestParam.toString());
         return new SendRequest(EncryptUtils.getZip(requestParam), EncryptUtils.encrypt(requestParam));
     }
