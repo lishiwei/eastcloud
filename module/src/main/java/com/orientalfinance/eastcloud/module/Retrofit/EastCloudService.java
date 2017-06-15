@@ -2,8 +2,10 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 
 
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
+import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
 
@@ -38,17 +40,18 @@ public interface EastCloudService {
 
     /**
      * 方法描述：发送验证码
+     * itype 302
      */
     @FormUrlEncoded
     @POST(".")
-    Call<ResponseResult<User>> codeSend(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<Message>> codeSend(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：校验验证码(itype=303)
      */
     @FormUrlEncoded
     @POST(".")
-    Call<ResponseResult<User>> validateCode(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody> validateCode(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：用户登录
@@ -62,14 +65,14 @@ public interface EastCloudService {
      */
     @FormUrlEncoded
     @POST(".")
-    Call<ResponseResult<User>> forgetPwd(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<User>> forgetPwd(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：修改密码
      */
     @FormUrlEncoded
     @POST(".")
-    Call<ResponseResult<User>> updatePwd(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody> updatePwd(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：头像上传
@@ -124,6 +127,11 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody<List<Address>>> getAddress(@Field("s") String zip, @Field("sign") String sign);
 
+    //itype 360
+    @FormUrlEncoded
+    @POST(".")
+    Call<ResponseResult<List<Address>>> getAddress1(@Field("s") String zip, @Field("sign") String sign);
+
     //itype 361
     @FormUrlEncoded
     @POST(".")
@@ -140,28 +148,30 @@ public interface EastCloudService {
     Flowable<EastCloudResponseBody> deleteAddress(@Field("s") String zip, @Field("sign") String sign);
 
 
-
-
-
-  //itype 365
+    //itype 365
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<FamilyMember>>> showFamilyList(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 366
+    //itype 366
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> addFamily(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 367
+    //itype 367
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> editFamily(@Field("s") String zip, @Field("sign") String sign);
 
-  //itype 368
+    //itype 368
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> deleteFamily(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 451
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Channel>>> showHistory(@Field("s") String zip, @Field("sign") String sign);
 
 
 }
