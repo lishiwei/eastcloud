@@ -9,7 +9,7 @@ import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
  */
 
 public class ActivityAddBankCardValidateCodePresenter extends MvpNullObjectBasePresenter<ActivityAddBankCardValidateCodeView> {
-    @Override
+
     public void start() {
 
     }
