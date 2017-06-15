@@ -214,4 +214,11 @@
     <color name="receipt_normal">#3A96FF</color>
     <color name="receipt_pressed">#0364BD</color>
 
+
+    <!--ExpandTextView-->
+    <color name="primary_text">#de000000</color>
+    <color name="secondary_text">#8a000000</color>
+    <color name="hint_text">#61000000</color>
+    <color name="dividers">#1f000000</color>
+
 </resources>

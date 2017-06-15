@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
 import com.orientalfinance.eastcloud.activity.ActivitySearch;
+import com.orientalfinance.eastcloud.view.ExpandTextView;
 
 import javax.inject.Inject;
 
@@ -31,7 +32,10 @@ public class MyDataBindingUtils {
         Intent intent = new Intent(view.getContext(), ActivitySearch.class);
         view.getContext().startActivity(intent);
     }
-
+    @BindingAdapter({"contentText"})
+    public static void settext(ExpandTextView expandTextView, String content) {
+        expandTextView.setContent(content);
+    }
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView imageView, String url) {
         ImageLoaders.displayImage(imageView, url);

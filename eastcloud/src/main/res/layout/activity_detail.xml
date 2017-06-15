@@ -116,16 +116,28 @@
                         android:text="在电视上播放"
                         android:textSize="16sp" />
 
+
                     <TextView
                         style="@style/Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="简介" />
 
-                    <TextView
+                    <com.orientalfinance.eastcloud.view.ExpandTextView
+                        android:id="@+id/etv_profile_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={detail.profile}" />
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        app:contentText="@{detail.profile}"
+                        app:contentTextSize="14sp"
+                        app:expandHint="点击展开"
+                        app:foldHint="点击收回"
+                        app:textContentColor="?android:attr/textColorPrimary"
+                        app:textHintColor="?android:attr/textColorPrimary"
+                        app:textTitleColor="?android:attr/textColorSecondary"
+                        app:titleTextSize="16sp" />
 
                     <TextView
                         style="@style/Indicator"
