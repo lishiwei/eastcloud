@@ -122,6 +122,20 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody> reportSuggest(@Field("s") String zip, @Field("sign") String sign);
 
+
+    /**
+     * test
+     * TODO:
+     *
+     * @param zip
+     * @param sign
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(".")
+    Call<ResponseResult> reportSuggest2(@Field("s") String zip, @Field("sign") String sign);
+
+
     //itype 360
     @FormUrlEncoded
     @POST(".")

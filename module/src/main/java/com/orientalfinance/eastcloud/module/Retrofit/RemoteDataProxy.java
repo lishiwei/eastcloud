@@ -202,6 +202,15 @@ public class RemoteDataProxy {
                 .reportSuggest(sendRequest.getS(), sendRequest.getSign());
     }
 
+    public static void reportSuggestTest(RequestParam requestParam, HttpCallBack httpCallBack) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_FEEDBACK);
+        EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .reportSuggest2(sendRequest.getS(), sendRequest.getSign())
+                .enqueue(httpCallBack);
+
+    }
+
     /**
      * 方法描述：获取地址
      * itype 360

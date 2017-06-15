@@ -12,6 +12,7 @@ import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityMyAddress;
 import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
+import com.orientalfinance.eastcloud.activity.ActivityMyCollection;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
 import com.orientalfinance.eastcloud.activity.ActivitySuggestReport;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
@@ -46,6 +47,7 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
                         LogUtils.d(TAG, "onClick: ");
                         break;
                     case 2:
+                        v.getContext().startActivity(new Intent(v.getContext(), ActivityMyCollection.class));
                         break;
                     case 3:
                         break;
