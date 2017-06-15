@@ -221,4 +221,9 @@
     <color name="hint_text">#61000000</color>
     <color name="dividers">#1f000000</color>
 
+    <color name="red_ff4a57">#ff4a57</color>
+
+
+    <color name="press">#efefef</color>
+    <color name="normal">#ffffff</color>
 </resources>
