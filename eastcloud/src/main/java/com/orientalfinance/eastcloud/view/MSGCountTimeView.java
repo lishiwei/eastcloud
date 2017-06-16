@@ -203,7 +203,6 @@ public class MSGCountTimeView extends android.support.v7.widget.AppCompatTextVie
                 }
             }
         }
-        ;
         return true;
     }
 

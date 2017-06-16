@@ -5,6 +5,6 @@ package com.orientalfinance.eastcloud.mvp.View;
  */
 
 public interface AddFamilyMemberView extends BaseMvpView{
-public void showAddSucceed();
-    public void showCodeSucceed(String msgId);
+void showAddSucceed();
+    void showCodeSucceed(String msgId);
 }

@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface HotBookingView extends MvpView{
 
-    public void showView();
-    public void showLoading();
-    public void hideLoading();
-    public void showExchange();
-    public void stopExchange();
-    public void exchangeHotMovie(List<Movie> movieList);
-    public void exchangeHotVariety(List<Movie> movieList);
+    void showView();
+    void showLoading();
+    void hideLoading();
+    void showExchange();
+    void stopExchange();
+    void exchangeHotMovie(List<Movie> movieList);
+    void exchangeHotVariety(List<Movie> movieList);
 }

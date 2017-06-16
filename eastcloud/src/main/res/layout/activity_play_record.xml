@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,60 +16,48 @@
             android:background="#ffffff">
 
             <TextView
+                style="@style/tv_Toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/tv_Toolbar"
                 android:text="播放记录"
                 />
         </android.support.v7.widget.Toolbar>
 
-        <ScrollView
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_History"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_below="@id/toolbar"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+        </android.support.v7.widget.RecyclerView>
 
+        <LinearLayout
+            android:id="@+id/title_ll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.orientalfinance.eastcloud.activity.ActivityPlayRecord">
+            <Button
+                android:id="@+id/btn_Select_All"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/collection_del"
+                android:text="全选"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="今天"
-                    android:textColor="#000000"
-                    android:textSize="18sp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_Today"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    android:scrollbars="none">
-                </android.support.v7.widget.RecyclerView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="更早"
-                    android:textColor="#000000"
-                    android:textSize="18sp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_Before"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    android:scrollbars="none">
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_DisSelected_All"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/colection_all"
+                android:text="反选"/>
+        </LinearLayout>
+    </RelativeLayout>
 </layout>

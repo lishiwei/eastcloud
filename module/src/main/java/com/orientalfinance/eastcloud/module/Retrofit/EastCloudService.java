@@ -2,6 +2,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 
 
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
@@ -182,10 +183,37 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody> deleteFamily(@Field("s") String zip, @Field("sign") String sign);
 
+
     //itype 451
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<Channel>>> showHistory(@Field("s") String zip, @Field("sign") String sign);
+    //itype 452
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> deleteHistory(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 453
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Appointment>>> showAppiontment(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 454
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> deleteAppiontment(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 455
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Channel>>> showMyCollection(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 456
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> deleteMyCollection(@Field("s") String zip, @Field("sign") String sign);
 
 
 }

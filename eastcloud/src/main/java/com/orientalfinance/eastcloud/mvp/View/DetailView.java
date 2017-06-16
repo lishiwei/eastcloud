@@ -9,7 +9,7 @@ import com.orientalfinance.eastcloud.module.javabean.Detail;
 
 public interface DetailView extends MvpView{
 
-    public void showView(Detail detail);
-    public void showLoading();
-    public void hideLoading();
+    void showView(Detail detail);
+    void showLoading();
+    void hideLoading();
 }

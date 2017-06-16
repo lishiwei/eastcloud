@@ -45,7 +45,7 @@ class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         if (Integer.valueOf(eastCloudResponseBody.getCode()) < 0) {
             value.close();
             throw new ApiException(Integer.valueOf(eastCloudResponseBody.getCode()), eastCloudResponseBody.getMsg());
-        } else if (eastCloudResponseBody.getResult() instanceof List) {
+        } else if (Integer.valueOf(eastCloudResponseBody.getCode()) >0&& eastCloudResponseBody.getResult() instanceof List) {
             if (((List) eastCloudResponseBody.getResult()).size() == 0) {
                 throw new ApiException(ApiErrorCode.ERROR_NO_DATA, ApiErrorCode.ERROR_NO_DATASTRING);
             }

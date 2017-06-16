@@ -177,6 +177,6 @@ public class StepsViewIndicator extends View {
 
     public interface OnDrawListener {
 
-        public void onReady();
+        void onReady();
     }
 }

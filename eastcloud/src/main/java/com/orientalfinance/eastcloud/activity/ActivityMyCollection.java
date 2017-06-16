@@ -9,16 +9,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.CollectionAdapter;
-import com.orientalfinance.eastcloud.module.javabean.TVShowEntity;
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.mvp.View.ActivityMyCollectionView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityMyCollectionPresenter;
+import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by lzy on 2017/6/15.
@@ -26,18 +33,19 @@ import java.util.Iterator;
  */
 
 public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionView, ActivityMyCollectionPresenter>
-        implements AdapterView.OnItemClickListener, View.OnClickListener {
+        implements AdapterView.OnItemClickListener, View.OnClickListener, ActivityMyCollectionView {
 
     private static final String TAG = "zxt";
     private ListView mLv;
 
-    private ArrayList<TVShowEntity> mTvList;
+    private ArrayList<Channel> mChannels = new ArrayList<>();
     private CollectionAdapter collectionAdapter;
     private TextView editButton;
     private Button selectAll;
     private Button invertSelection;
     private LinearLayout title_ll;
     private boolean listViewState = true;//当前界面状态,初始进入为ListView，即非编辑的状态,设为true
+    String mDeleteId;
 
     @NonNull
     @Override
@@ -50,16 +58,19 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_collection);
-        initDatas();
+
+        collectionAdapter = new CollectionAdapter(this, mChannels);
         findViews();
-        collectionAdapter = new CollectionAdapter(this, mTvList);
         mLv.setAdapter(collectionAdapter);
         mLv.setOnItemClickListener(this);
+        ShowRequestParam showRequestParam = new ShowRequestParam(0, 10);
+        RequestParam requestParam = new RequestParam(showRequestParam);
+        getPresenter().showCollection(requestParam);
     }
 
 
     private void findViews() {
-        Toolbar  toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,24 +85,21 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
         invertSelection.setOnClickListener(this);
 
         mLv = (ListView) findViewById(R.id.test);
+        collectionAdapter.setOnSwipeDeleteListener(new OnSwipeDeleteListener() {
+            @Override
+            public void onDeleteListener(SwipeMenuLayout swipeMenuLayout, int position) {
+                mDeleteId = mChannels.get(position).getId();
+                DeleteRequestParam deleteRequestParam = new DeleteRequestParam(mDeleteId);
+                getPresenter().deleteCollection(new RequestParam(deleteRequestParam));
+            }
+        });
     }
 
-
-    private void initDatas() {
-        mTvList = new ArrayList<TVShowEntity>();
-        for (int i = 0; i < 20; i++) {
-            TVShowEntity tvShowEntity = new TVShowEntity();
-            tvShowEntity.setName("城市娱乐" + i);
-            tvShowEntity.setProfile("大型娱乐晚会等你来参与~~~~~~" + i);
-            tvShowEntity.setChecked(false);
-            mTvList.add(tvShowEntity);
-        }
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TVShowEntity tvShowEntity = mTvList.get(position);
-        tvShowEntity.setChecked(!tvShowEntity.isChecked());
+        Channel channel = mChannels.get(position);
+        channel.setChecked(!channel.isChecked());
         collectionAdapter.notifyDataSetChanged();
     }
 
@@ -132,7 +140,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 反选
      */
     private void disSelectedAllData() {
-        for (TVShowEntity tvShowEntity : mTvList) {
+        for (Channel tvShowEntity : mChannels) {
             tvShowEntity.setChecked(!tvShowEntity.isChecked());
         }
         collectionAdapter.notifyDataSetChanged();
@@ -142,7 +150,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 全选
      */
     private void selectAllData() {
-        for (TVShowEntity tvShowEntity : mTvList) {
+        for (Channel tvShowEntity : mChannels) {
             tvShowEntity.setChecked(true);
         }
         collectionAdapter.notifyDataSetChanged();
@@ -152,9 +160,9 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 删除所选
      */
     private void deleteSelectedData() {
-        Iterator<TVShowEntity> it = mTvList.iterator();
+        Iterator<Channel> it = mChannels.iterator();
         while (it.hasNext()) {
-            TVShowEntity tvShowEntity = it.next();
+            Channel tvShowEntity = it.next();
             if (tvShowEntity.isChecked()) {
                 it.remove();
             }
@@ -177,5 +185,32 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
         editButton.setText("删除");
         title_ll.setVisibility(View.VISIBLE);
         listViewState = false;
+    }
+
+    @Override
+    public void showDialog() {
+        mEastCloudDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+        mEastCloudDialog.hide();
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showCollection(List<Channel> channels) {
+        collectionAdapter.setData(channels);
+    }
+
+
+    @Override
+    public void deleteSucceed(int id) {
+        Toast.makeText(this, "删除成功!", Toast.LENGTH_SHORT).show();
+
     }
 }

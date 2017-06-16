@@ -11,14 +11,14 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 public interface SettingPassWordView extends MvpView {
 
 
-    public void showRegist();
+    void showRegist();
 
-    public void hideRegist();
+    void hideRegist();
 
-    public void showError(String msg);
+    void showError(String msg);
 
-    public void registSucceed(User user);
+    void registSucceed(User user);
 
-    public void modifySucceed();
+    void modifySucceed();
 
 }

@@ -11,13 +11,12 @@ import java.net.SocketTimeoutException;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by 29435 on 2017/6/15.
  */
 
 public abstract class MyConsumer<T> implements Consumer<T> {
+    static String TAG = MyConsumer.class.getSimpleName();
 
     @Override
     public void accept(@NonNull T t) throws Exception {

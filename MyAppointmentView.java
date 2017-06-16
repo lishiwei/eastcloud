@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PlayRecordView extends BaseMvpView {
 
-    void showHistory(List<Channel> channels);
+    void showAppointment(List<Appointment> appointmentList);
 
     void deleteSucceed(int position);
     void deleteFailed(int position);

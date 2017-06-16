@@ -7,8 +7,8 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * email:lizy@oriental-finance.com
  */
 public interface ActivityAddAddressView extends MvpView {
-    public void showDialog();
-    public void hideDialog();
-    public void showError(String errorMsg);
-    public void commitSucceed();
+    void showDialog();
+    void hideDialog();
+    void showError(String errorMsg);
+    void commitSucceed();
 }

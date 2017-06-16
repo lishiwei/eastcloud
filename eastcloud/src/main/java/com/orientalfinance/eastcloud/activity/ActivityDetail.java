@@ -232,13 +232,8 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
             int top = leftTop[1] - 50;
             int bottom = top + v.getHeight() + 300;
             int right = left + v.getWidth() + 120;
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
-                // 点击的是输入框区域，保留点击EditText的事件
-                return false;
-            } else {
-                return true;
-            }
+            return !(event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom);
         }
         return false;
     }

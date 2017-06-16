@@ -224,6 +224,10 @@
             android:parentActivityName=".eastcloud.MainActivity" />
         <activity android:name=".eastcloud.activity.ActivitySettingPayPwd" />
         <activity android:name=".eastcloud.activity.ActivityConfirmPayPwd" />
+            android:parentActivityName=".eastcloud.MainActivity"/>
+        <activity android:name=".eastcloud.activity.ActivityMyAppointment"
+            android:parentActivityName=".eastcloud.MainActivity">
+        </activity>
     </application>
 
 </manifest>

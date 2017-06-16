@@ -4,6 +4,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import android.support.annotation.NonNull;
 
 import com.orientalfinance.eastcloud.module.Retrofit.configration.API;
+import com.orientalfinance.eastcloud.module.Retrofit.convert.MyGsonConverterFactory;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.DecryptionInterceptor;
 import com.orientalfinance.eastcloud.module.Retrofit.log.HttpLoggingInterceptor;
 
@@ -12,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -31,7 +31,7 @@ public class EastcloudRetrofit {
     private Retrofit initRetrofit() {
         OkHttpClient mOkHttpClient = getOkHttpClient();
         retrofit = new Retrofit.Builder().client(mOkHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(MyGsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(API.BASE_URL01)
                 .build();

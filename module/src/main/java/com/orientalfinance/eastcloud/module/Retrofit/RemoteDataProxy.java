@@ -8,6 +8,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.Channel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
@@ -313,7 +314,60 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .showHistory(sendRequest.getS(), sendRequest.getSign());
     }
+    /**
+     * 方法描述：删除历史记录
+     * itype 452
+     */
+    public static Flowable<EastCloudResponseBody> deleteHistory(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_WATCH_HISTORY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .deleteHistory(sendRequest.getS(), sendRequest.getSign());
 
+    }
+    /**
+     * 方法描述：显示预约
+     * itype 453
+     */
+    public static Flowable<EastCloudResponseBody<List<Appointment>>> showAppointment(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_APPOINTMENT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showAppiontment(sendRequest.getS(), sendRequest.getSign());
+
+    }   /**
+     * 方法描述：删除预约
+     * itype 454
+     */
+    public static Flowable<EastCloudResponseBody> deleteAppointment(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_MY_APPOINTMENT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .deleteAppiontment(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：显示收藏
+     * itype 455
+     */
+    public static Flowable<EastCloudResponseBody<List<Channel>>> showMyCollection(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_COLLECTION);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showMyCollection(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：删除收藏
+     * itype 456
+     */
+    public static Flowable<EastCloudResponseBody> deleteMyCollection(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.DELETE_MY_COLLECTION);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .deleteMyCollection(sendRequest.getS(), sendRequest.getSign());
+
+    }
 
     public static RequestBody toRequestBody(String value) {
         return RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), value);

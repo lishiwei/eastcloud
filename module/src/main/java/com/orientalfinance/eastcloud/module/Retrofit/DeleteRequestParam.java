@@ -7,6 +7,10 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 public class DeleteRequestParam {
     String id;
 
+    public DeleteRequestParam(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

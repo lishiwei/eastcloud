@@ -11,10 +11,10 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 public interface RegistView extends MvpView {
 
 
-    public void showRegist();
+    void showRegist();
 
-    public void showError(Throwable throwable);
+    void showError(Throwable throwable);
 
-    public void registSucceed(User movie);
+    void registSucceed(User movie);
 
 }

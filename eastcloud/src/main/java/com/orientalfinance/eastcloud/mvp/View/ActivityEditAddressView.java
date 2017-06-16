@@ -8,8 +8,8 @@ package com.orientalfinance.eastcloud.mvp.View;
 public interface ActivityEditAddressView extends BaseMvpView {
 
 
-    public void editSucceed();
+    void editSucceed();
 
-    public void deleteSuccess();
+    void deleteSuccess();
 
 }

@@ -11,7 +11,16 @@ public class Channel {
     @SerializedName("program_id")
     String programId;
 
-    String id ;
+    String id;
+    boolean isChecked;
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
 
     public Channel(String channelLogo, String programId, String id, String currentProgramBg, String channelName, String currentProgram, String programTime) {
         this.channelLogo = channelLogo;
@@ -50,6 +59,16 @@ public class Channel {
 
     @SerializedName("ctime")
     String programTime;
+    @SerializedName("intro")
+String introduction;
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
 
     @Override
     public String toString() {
@@ -71,12 +90,14 @@ public class Channel {
         this.channelLogo = channelLogo;
         this.programTime = programTime;
     }
+
     public Channel(String currentProgramBg, String channelName, String currentProgram, String programTime) {
         this.currentProgramBg = currentProgramBg;
         this.channelName = channelName;
         this.currentProgram = currentProgram;
         this.programTime = programTime;
     }
+
     public String getCurrentProgramBg() {
         return currentProgramBg;
     }
@@ -115,5 +136,20 @@ public class Channel {
 
     public void setProgramTime(String programTime) {
         this.programTime = programTime;
+    }
+
+    public static class DeleteRequestParam {
+        String id;
+
+        public DeleteRequestParam(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return "DeleteRequestParam{" +
+                    "id='" + id + '\'' +
+                    '}';
+        }
     }
 }

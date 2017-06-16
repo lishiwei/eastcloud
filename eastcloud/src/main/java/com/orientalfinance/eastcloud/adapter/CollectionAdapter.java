@@ -12,20 +12,27 @@ import android.widget.TextView;
 
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.javabean.TVShowEntity;
+import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<TVShowEntity> data;
+    private List<Channel> data;
     private boolean isShow = false;
 
-    public CollectionAdapter(Context context, ArrayList<TVShowEntity> data) {
+    public CollectionAdapter(Context context, List<Channel> data) {
         super();
         this.context = context;
         this.data = data;
+    }
+
+    public void setData(List<Channel> data) {
+        this.data = data;
+        notifyDataSetChanged();
+
     }
 
     public boolean isShow() {
@@ -53,7 +60,7 @@ public class CollectionAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+       ViewHolder holder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_collection, null);
             holder = new ViewHolder(convertView);
@@ -62,10 +69,10 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        TVShowEntity tvShowEntity = data.get(position);
-        holder.name.setText(tvShowEntity.getName());
-        holder.time.setText(tvShowEntity.getTime());
-        holder.profile.setText(tvShowEntity.getProfile());
+        Channel tvShowEntity = data.get(position);
+        holder.name.setText(tvShowEntity.getChannelName());
+        holder.time.setText(tvShowEntity.getProgramTime());
+        holder.profile.setText(tvShowEntity.getCurrentProgram());
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -79,9 +86,13 @@ public class CollectionAdapter extends BaseAdapter {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finalHolder.swipeMenuLayout.quickClose();
-                data.remove(position);
-                notifyDataSetChanged();
+                if (getOnSwipeDeleteListener()!=null)
+                {
+                    getOnSwipeDeleteListener().onDeleteListener(finalHolder.swipeMenuLayout,position);
+                }
+//                finalHolder.swipeMenuLayout.quickClose();
+//                data.remove(position);
+//                notifyDataSetChanged();
             }
         });
 
@@ -94,6 +105,15 @@ public class CollectionAdapter extends BaseAdapter {
         holder.checkBox.setChecked(tvShowEntity.isChecked());
 
         return convertView;
+    }
+OnSwipeDeleteListener mOnSwipeDeleteListener;
+
+    public void setOnSwipeDeleteListener(OnSwipeDeleteListener onSwipeDeleteListener) {
+        mOnSwipeDeleteListener = onSwipeDeleteListener;
+    }
+
+    public OnSwipeDeleteListener getOnSwipeDeleteListener() {
+        return mOnSwipeDeleteListener;
     }
 
     /**

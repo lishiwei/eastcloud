@@ -79,6 +79,6 @@ public class ActivitySetting extends AppCompatActivity {
     }
 
     public interface ClickHandler {
-        public void onclick(View v);
+        void onclick(View v);
     }
 }
