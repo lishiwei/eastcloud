@@ -7,14 +7,14 @@ package com.orientalfinance.eastcloud.update;
 
 public interface UpdateProgressListener {
 
-    public void start();
+    void start();
 
 
-    public void update(int progress);
+    void update(int progress);
 
 
-    public void success();
+    void success();
 
 
-    public void error();
+    void error();
 }

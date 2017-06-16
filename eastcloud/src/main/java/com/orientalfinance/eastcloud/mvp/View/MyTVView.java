@@ -10,13 +10,13 @@ import java.util.List;
  */
 
 public interface MyTVView extends MvpView {
-    public void showTVBox(List<TV> list);
+    void showTVBox(List<TV> list);
 
-    public void showLoading();
+    void showLoading();
 
-    public void hideLoading();
+    void hideLoading();
 
-    public void showError(String errorMsg);
-    public void showDelectTVBox();
-    public void delectSucceed();
+    void showError(String errorMsg);
+    void showDelectTVBox();
+    void delectSucceed();
 }

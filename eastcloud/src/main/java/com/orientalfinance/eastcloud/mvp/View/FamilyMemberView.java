@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface FamilyMemberView extends BaseMvpView {
-    public void showFamilyMember(List<FamilyMember> familyMembers);
+    void showFamilyMember(List<FamilyMember> familyMembers);
 }

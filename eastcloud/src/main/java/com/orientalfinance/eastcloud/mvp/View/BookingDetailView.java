@@ -11,12 +11,12 @@ import java.util.List;
  */
 
 public interface BookingDetailView extends MvpView{
-public void getDetail(String detailId);
-    public void showView(Detail details);
-    public void showLoading();
-    public void hideLoading();
-    public void showExchange();
-    public void stopExchange();
-    public void exchangeHotMovie(List<Movie> movieList);
-    public void exchangeHotVariety(List<Movie> movieList);
+void getDetail(String detailId);
+    void showView(Detail details);
+    void showLoading();
+    void hideLoading();
+    void showExchange();
+    void stopExchange();
+    void exchangeHotMovie(List<Movie> movieList);
+    void exchangeHotVariety(List<Movie> movieList);
 }

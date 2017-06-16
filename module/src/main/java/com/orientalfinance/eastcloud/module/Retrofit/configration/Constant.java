@@ -44,6 +44,12 @@ public class Constant {
 
 
         public static final int SHOW_WATCH_HISTORY = 451;
+        public static final int DELETE_WATCH_HISTORY = 452;
+
+        public static final int SHOW_MY_APPOINTMENT = 453;
+        public static final int DELETE_MY_APPOINTMENT = 454;
+        public static final int SHOW_MY_COLLECTION = 455;
+        public static final int DELETE_MY_COLLECTION = 456;
 
 
     }

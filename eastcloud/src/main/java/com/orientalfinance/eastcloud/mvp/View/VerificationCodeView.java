@@ -10,13 +10,13 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 public interface VerificationCodeView extends MvpView {
 
 
-    public void showGetCode();
+    void showGetCode();
 
-    public void hideGetCode();
+    void hideGetCode();
 
-    public void showError(String errorMsg);
+    void showError(String errorMsg);
 
-    public void getCodeSucceed(String code);
+    void getCodeSucceed(String code);
 
-    public void verificateSucceed();
+    void verificateSucceed();
 }

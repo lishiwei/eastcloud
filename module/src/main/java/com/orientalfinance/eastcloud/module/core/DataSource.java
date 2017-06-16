@@ -11,6 +11,6 @@ import io.reactivex.Flowable;
 public interface DataSource < T > {
     Flowable<List<T>> getDatas(RequestParam requestParam);
 
-    public void saveData(T data);
+    void saveData(T data);
 
 }

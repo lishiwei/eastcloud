@@ -11,9 +11,9 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 public interface LoginView extends MvpView{
 
 
-    public void showLogin();
-    public void hideLogin();
-    public void showError(String  throwable);
-    public void loginSucceed(User movie);
+    void showLogin();
+    void hideLogin();
+    void showError(String throwable);
+    void loginSucceed(User movie);
 
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface CurrentHitView extends BaseMvpView{
 
-    public void showView(List<Movie> movies);
+    void showView(List<Movie> movies);
 
 }

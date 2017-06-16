@@ -7,16 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityRecord;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityMyAddress;
+import com.orientalfinance.eastcloud.activity.ActivityMyAppointment;
 import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyCollection;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
 import com.orientalfinance.eastcloud.activity.ActivitySuggestReport;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
-import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.List;
 
@@ -42,9 +43,10 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
             public void onClick(View v) {
                 switch (itemMyselfViewHolder.getLayoutPosition()) {
                     case 0:
+                        v.getContext().startActivity(new Intent(v.getContext(), AccessibilityRecord.class));
                         break;
                     case 1:
-                        LogUtils.d(TAG, "onClick: ");
+                        v.getContext().startActivity(new Intent(v.getContext(), ActivityMyAppointment.class));
                         break;
                     case 2:
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyCollection.class));

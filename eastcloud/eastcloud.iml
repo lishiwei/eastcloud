@@ -154,6 +154,7 @@
     <orderEntry type="library" exported="" name="umeng_social_net" level="project" />
     <orderEntry type="library" exported="" name="javax.inject-1" level="project" />
     <orderEntry type="library" exported="" name="umeng_social_api" level="project" />
+    <orderEntry type="library" exported="" name="SwipeDelMenuLayout-V1.2.5" level="project" />
     <orderEntry type="library" exported="" name="eventbus-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="banner-1.4.9" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />

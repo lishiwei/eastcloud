@@ -61,7 +61,7 @@ protected ViewDataBinding mViewDataBinding;
      */
     public  PRESENTER createPresenter(){
         return presenterProvider.get();
-    };
+    }
 
     /**
      * * Get the mvp delegate. This is internally used for creating presenter, attaching and

@@ -1,7 +1,9 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Channel;
@@ -39,9 +41,28 @@ public class PlayRecordPresenter extends MvpNullObjectBasePresenter<PlayRecordVi
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
-
+                getView().hideDialog();
             }
         });
 
+    }
+
+    public void deleteHistory(RequestParam requestParam) {
+        getView().showDialog();
+        RemoteDataProxy.deleteHistory(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                getView().hideDialog();
+                getView().deleteSucceed(0);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
+                getView().deleteFailed(0);
+
+            }
+        });
     }
 }
