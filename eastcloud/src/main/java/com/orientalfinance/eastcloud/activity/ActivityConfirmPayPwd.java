@@ -72,6 +72,7 @@ public class ActivityConfirmPayPwd extends AppCompatActivity implements GridPass
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        loadingButton.setCompleted();
                         finish();
                     }
                 })
