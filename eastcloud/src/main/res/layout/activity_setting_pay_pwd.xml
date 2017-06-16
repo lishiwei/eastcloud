@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".eastcloud.activity.ActivitySettingPayPwd">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff"
+        app:contentInsetStart="0dp">
+
+        <include layout="@layout/toolbar_item" />
+    </android.support.v7.widget.Toolbar>
+
+    <com.orientalfinance.eastcloud.view.passwordview.GridPasswordView
+        android:id="@+id/grid_password_pay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="20dp" />
+
+    <com.orientalfinance.eastcloud.view.LoadingButton
+        android:id="@+id/btn_add_next"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="32dp"
+        app:button_background_color_normal="#E54B14"
+        app:button_background_color_pressed="#C84B14"
+        app:button_loading_text="检测中..."
+        app:button_text="下一步"
+        app:button_text_size="18sp" />
+
+
+</LinearLayout>
