@@ -67,7 +67,7 @@ public class ActivityAddBankCard extends MvpActivity<ActivityAddBankCardView, Ac
         switch (v.getId()) {
             case R.id.btn_add_bank_card:
                 //TODO:
-                startActivity(new Intent(ActivityAddBankCard.this, ActivityAddBankCardValidateCode.class));
+                startActivity(new Intent(ActivityAddBankCard.this, ActivitySettingPayPwd.class));
                 break;
         }
     }

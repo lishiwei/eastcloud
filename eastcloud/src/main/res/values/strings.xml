@@ -20,4 +20,11 @@
     <string name="update_app_model_success">下载成功(点击完成安装)</string>
     <string name="update_app_model_error">下载失败(点击使用浏览器下载)</string>
 
+    <!--支付密码控件内容类型 -->
+    <string-array name="passwordTypeArr">
+        <item>numberPassword</item>
+        <item>textPassword</item>
+        <item>textVisiblePassword</item>
+        <item>textWebPassword</item>
+    </string-array>
 </resources>

@@ -222,6 +222,8 @@
         <activity
             android:name=".eastcloud.activity.ActivityMyCollection"
             android:parentActivityName=".eastcloud.MainActivity" />
+        <activity android:name=".eastcloud.activity.ActivitySettingPayPwd" />
+        <activity android:name=".eastcloud.activity.ActivityConfirmPayPwd" />
     </application>
 
 </manifest>
