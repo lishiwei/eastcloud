@@ -2,16 +2,26 @@ package com.orientalfinance.eastcloud.fragment;
 
 
 import android.animation.ObjectAnimator;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.App;
+import com.orientalfinance.eastcloud.utils.WeakHandler;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +37,9 @@ public class FragmentRemoteControl extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private View statusView;
+    private WindowManager windowManager;
+    private MyHandler handler;
 
 
     public FragmentRemoteControl() {
@@ -65,6 +78,7 @@ public class FragmentRemoteControl extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_remote_control, container, false);
+        statusView = inflater.inflate(R.layout.header_status, null);
         RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
         startPropertyAnim(controllerMenu);
         initViews(view);
@@ -105,6 +119,7 @@ public class FragmentRemoteControl extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "center", Toast.LENGTH_SHORT).show();
+                showStatus();
             }
         });
 
@@ -114,6 +129,53 @@ public class FragmentRemoteControl extends Fragment {
         ObjectAnimator anim = ObjectAnimator.ofFloat(view, "rotation", 0f, 45f);
         anim.setDuration(10);
         anim.start();
+    }
+
+
+    private void showStatus() {
+        handler = new MyHandler();
+        windowManager = getActivity().getWindowManager();
+        showAnim();
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                        | WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                PixelFormat.TRANSLUCENT);
+
+        params.gravity = Gravity.TOP | Gravity.LEFT;
+        params.y = 0;
+        params.x = 0;
+
+        windowManager.addView(statusView, params);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0x123);
+            }
+        }, 2000);
+    }
+
+    /**
+     * 方法描述：添加动画
+     */
+    private void showAnim() {
+        ObjectAnimator a = ObjectAnimator.ofFloat(statusView, "translationY", -700, 0);
+        a.setDuration(600);
+        a.start();
+    }
+
+    public class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0x123) {
+                windowManager.removeView(statusView);
+            }
+        }
     }
 
 }

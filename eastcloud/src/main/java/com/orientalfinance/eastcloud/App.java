@@ -2,6 +2,7 @@ package com.orientalfinance.eastcloud;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Looper;
 import android.support.multidex.MultiDex;
 
 import com.luck.picture.lib.compress.Luban;
@@ -13,6 +14,7 @@ import com.orientalfinance.eastcloud.dagger.component.DaggerAppComponent;
 import com.orientalfinance.eastcloud.dagger.modules.AppModules;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
+import com.orientalfinance.eastcloud.utils.WeakHandler;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -30,11 +32,13 @@ public class App extends Application {
     AppComponent mAppComponent;
     static App mApp;
     private RemoteDataProxy remoteDataProxy;
+    public static WeakHandler mainHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mApp = this;
+        mainHandler = new WeakHandler(Looper.getMainLooper());
         this.mAppComponent = DaggerAppComponent.builder().appModules(new AppModules(this)).build();
         Config.DEBUG = true;
         PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
@@ -69,5 +73,9 @@ public class App extends Application {
 
     public static App getApp() {
         return mApp;
+    }
+
+    public static WeakHandler getMainHandler() {
+        return mainHandler;
     }
 }

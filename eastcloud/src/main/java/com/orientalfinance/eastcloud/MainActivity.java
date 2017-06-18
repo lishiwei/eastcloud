@@ -2,7 +2,9 @@ package com.orientalfinance.eastcloud;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -77,12 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_myself:
-                    if (AcacheUtil.getInstance().getUser()==null)
-                    {
+                    if (AcacheUtil.getInstance().getUser() == null) {
                         Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
                         fragmentTransaction.commitAllowingStateLoss();
                         mTitle.setText(getString(R.string.title_myself));
@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_PHONE_STATE}, 70);
         mTitle = (TextView) toolbar.findViewById(R.id.tv_title);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -220,15 +217,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private void requestPermissions() {
+
+        if (! Settings.canDrawOverlays(getApplicationContext())) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent,10);
+        }
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions
                 .requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_CALENDAR,
                         Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.SYSTEM_ALERT_WINDOW,
                         Manifest.permission.CAMERA)
                 .subscribe(new Consumer<Permission>() {
                     @Override
