@@ -1,6 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.History;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PlayRecordView extends BaseMvpView {
 
-    void showHistory(List<Channel> channels);
+    void showHistory(List<History> histories);
 
     void deleteSucceed(int position);
     void deleteFailed(int position);

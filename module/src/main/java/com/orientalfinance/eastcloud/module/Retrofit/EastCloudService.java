@@ -2,11 +2,20 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 
 
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
+import com.orientalfinance.eastcloud.module.javabean.History;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Message;
+import com.orientalfinance.eastcloud.module.javabean.SearchHot;
+import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
 
@@ -187,7 +196,8 @@ public interface EastCloudService {
     //itype 451
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody<List<Channel>>> showHistory(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<History>>> showHistory(@Field("s") String zip, @Field("sign") String sign);
+
     //itype 452
     @FormUrlEncoded
     @POST(".")
@@ -207,13 +217,78 @@ public interface EastCloudService {
 
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody<List<Channel>>> showMyCollection(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<Collection>>> showMyCollection(@Field("s") String zip, @Field("sign") String sign);
 
     //itype 456
 
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody> deleteMyCollection(@Field("s") String zip, @Field("sign") String sign);
+
+
+    //itype 501
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> showMyCategory(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 502
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Banner>>> showBanner(@Field("s") String zip, @Field("sign") String sign);
+    //itype 503
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Advertisement>>> showAdvertisement(@Field("s") String zip, @Field("sign") String sign);
+    //itype 504
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<HomepageProgram>>> showCurrentHit(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 505
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<HomepageProgram>>> showProgramList(@Field("s") String zip, @Field("sign") String sign);
+    //itype 506
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<SearchHot>>> showSearchHot(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 507
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<SearchResult>>> showSearchResult(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 508
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Detail>>> showProgramDetail(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype510
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<DetailChannel>>> showDetailChannel(@Field("s") String zip, @Field("sign") String sign);
+
+
+    //itype511
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showChannelCatelog(@Field("s") String zip, @Field("sign") String sign);
+
+
+    //itype 512
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<HomePageChannel>>> showChanneList(@Field("s") String zip, @Field("sign") String sign);
 
 
 }

@@ -18,6 +18,12 @@ import com.orientalfinance.eastcloud.dagger.component.DaggerCurrentHitComponent;
 import com.orientalfinance.eastcloud.dagger.modules.CurrentHitModule;
 import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
 import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Advertisement;
+import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
@@ -149,12 +155,34 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPresenter().start();
+
             }
         });
-        getPresenter().start();
+
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
+        getBanner();
+    }
+
+    private void getBanner() {
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showBanner(requestParam);
+    }
+
+    private void getAd() {
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showAdvertisement(requestParam);
+    }
+
+    private void getCurrentHit() {
+        RequestParam requestParam = new RequestParam(new ShowRequestParam(0, 6));
+        getPresenter().showCurrentHit(new RequestParam(requestParam));
+    }
+
+    private void getProgramList() {
+        HomePageChannel.ShowChannelRequestParam requestParam = new HomePageChannel.ShowChannelRequestParam("" + 0);
+        RequestParam requestParam1 = new RequestParam(requestParam);
+        getPresenter().showProgramList(requestParam1);
     }
 
     @Override
@@ -172,6 +200,26 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     public void onResume() {
         super.onResume();
         mFragmentCurrentHitBinding.atvAdvertisement.start();
+
+    }
+
+    @Override
+    public void showBanner(List<Banner> banners) {
+
+    }
+
+    @Override
+    public void showAdvertisement(List<Advertisement> advertisements) {
+
+    }
+
+    @Override
+    public void showCurrentHit(List<HomepageProgram> advertisements) {
+
+    }
+
+    @Override
+    public void showProgramList(List<HomepageProgram> advertisements) {
 
     }
 }

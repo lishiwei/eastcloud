@@ -1,6 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface ActivityMyCollectionView extends BaseMvpView {
-    public void showCollection(List<Channel> channels);
+    public void showCollection(List<Collection> collections);
 
     public void deleteSucceed(int id);
 }

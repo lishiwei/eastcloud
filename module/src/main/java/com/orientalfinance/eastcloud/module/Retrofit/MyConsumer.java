@@ -30,7 +30,6 @@ public abstract class MyConsumer<T> implements Consumer<T> {
         } else if (t instanceof ConnectException) {
             Log.e(TAG, t.toString());
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "网络连接失败!", Toast.LENGTH_SHORT).show();
-
         }
     }
 }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityEditAddressBinding;
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ActivityEditAddressView;
@@ -59,7 +60,7 @@ public class ActivityEditAddress extends BaseMVPActivity<ActivityEditAddressView
         binding.tvDeleteAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Address.DeleteRequestParam deleteRequestParam = new Address.DeleteRequestParam(address.getId());
+                DeleteRequestParam deleteRequestParam = new DeleteRequestParam(address.getId());
                 getPresenter().deleteAddress(new RequestParam(deleteRequestParam));
             }
         });

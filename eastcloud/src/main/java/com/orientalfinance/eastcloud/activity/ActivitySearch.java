@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -17,11 +18,15 @@ import com.orientalfinance.eastcloud.dagger.component.SearchComponent;
 import com.orientalfinance.eastcloud.dagger.modules.SearchModule;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotSearch;
 import com.orientalfinance.eastcloud.dagger.qualifier.Searched;
-import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.SearchHot;
+import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.mvp.View.SearchView;
 import com.orientalfinance.eastcloud.mvp.View.SearchViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.SearchPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -57,6 +62,16 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
         setSupportActionBar(mActivitySearchBinding.toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showSearchHot(requestParam);
+        mActivitySearchBinding.cetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                SearchResult.SearchRequestParam searchRequestParam = new SearchResult.SearchRequestParam(0, 10, "楚乔传");
+                getPresenter().showSearchResult(new RequestParam(searchRequestParam));
+                return true;
+            }
+        });
     }
 
     @Override
@@ -69,15 +84,6 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
         return DaggerSearchComponent.builder().appComponent(appComponent).searchModule(new SearchModule()).build();
     }
 
-    @Override
-    public void showView(Detail detail) {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -89,7 +95,27 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     }
 
     @Override
-    public void hideLoading() {
+    public void showDialog() {
+
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showSearchHot(List<SearchHot> searchHots) {
+
+    }
+
+    @Override
+    public void showSearchResult(List<SearchResult> searchResults) {
 
     }
 }

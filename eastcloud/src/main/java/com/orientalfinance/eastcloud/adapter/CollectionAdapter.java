@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
 import java.util.List;
@@ -20,16 +20,16 @@ import java.util.List;
 public class CollectionAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Channel> data;
+    private List<Collection> data;
     private boolean isShow = false;
 
-    public CollectionAdapter(Context context, List<Channel> data) {
+    public CollectionAdapter(Context context, List<Collection> data) {
         super();
         this.context = context;
         this.data = data;
     }
 
-    public void setData(List<Channel> data) {
+    public void setData(List<Collection> data) {
         this.data = data;
         notifyDataSetChanged();
 
@@ -69,7 +69,7 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Channel tvShowEntity = data.get(position);
+        Collection tvShowEntity = data.get(position);
         holder.name.setText(tvShowEntity.getChannelName());
         holder.time.setText(tvShowEntity.getProgramTime());
         holder.profile.setText(tvShowEntity.getCurrentProgram());

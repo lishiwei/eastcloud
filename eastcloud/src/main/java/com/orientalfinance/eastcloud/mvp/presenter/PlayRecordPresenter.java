@@ -6,7 +6,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -31,11 +31,11 @@ public class PlayRecordPresenter extends MvpNullObjectBasePresenter<PlayRecordVi
 
     public void showHistory(RequestParam requestParam) {
         getView().showDialog();
-        RemoteDataProxy.showHistory(requestParam).compose(new ListTransform<List<Channel>>()).subscribe(new Consumer<List<Channel>>() {
+        RemoteDataProxy.showHistory(requestParam).compose(new ListTransform<List<History>>()).subscribe(new Consumer<List<History>>() {
             @Override
-            public void accept(@NonNull List<Channel> channels) throws Exception {
+            public void accept(@NonNull List<History> histories) throws Exception {
                 getView().hideDialog();
-                getView().showHistory(channels);
+                getView().showHistory(histories);
             }
         }, new MyConsumer<Throwable>() {
             @Override

@@ -1,8 +1,13 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
+import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.core.MovieRepository;
-import com.orientalfinance.eastcloud.module.core.RequestParam;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Advertisement;
+import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -10,10 +15,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -28,23 +31,67 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
         mMovieRepository = movieRepository;
     }
 
-    //@Inject
-//    public CurrentHitPresenter() {
-//        mMovieRepository = movieRepository;
-//    }
-    public void start() {
+
+    public void showBanner(RequestParam requestParam) {
         getView().showDialog();
-        mMovieRepository.getDatas(new MovieRequestParam(0, 0)).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<List<Movie>>() {
+        RemoteDataProxy.showBanner(requestParam).compose(new ListTransform<List<Banner>>()).subscribe(new Consumer<List<Banner>>() {
             @Override
-            public void accept(List<Movie> movies) throws Exception {
-                getView().showView(movies);
+            public void accept(@NonNull List<Banner> banners) throws Exception {
                 getView().hideDialog();
+                getView().showBanner(banners);
             }
-        }, new Consumer<Throwable>() {
+        }, new MyConsumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
                 getView().hideDialog();
-                getView().showError(throwable.getMessage());
+
+            }
+        });
+    }
+
+    public void showAdvertisement(com.orientalfinance.eastcloud.module.Retrofit.RequestParam requestParam) {
+
+        RemoteDataProxy.showAdvertisement(requestParam).compose(new ListTransform<List<Advertisement>>()).subscribe(new Consumer<List<Advertisement>>() {
+            @Override
+            public void accept(@NonNull List<Advertisement> advertisements) throws Exception {
+                getView().showAdvertisement(advertisements);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
+            }
+        });
+    }
+
+    public void showCurrentHit(RequestParam requestParam) {
+        RemoteDataProxy.showCurrentHit(requestParam).compose(new ListTransform<List<HomepageProgram>>()).subscribe(new Consumer<List<HomepageProgram>>() {
+            @Override
+            public void accept(@NonNull List<HomepageProgram> homepagePrograms) throws Exception {
+                getView().showCurrentHit(homepagePrograms);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
+            }
+        });
+    }
+
+    public void showProgramList(RequestParam requestParam) {
+        RemoteDataProxy.showProgramList(requestParam).compose(new ListTransform<List<HomepageProgram>>()).subscribe(new Consumer<List<HomepageProgram>>() {
+            @Override
+            public void accept(@NonNull List<HomepageProgram> homepagePrograms) throws Exception {
+                getView().showProgramList(homepagePrograms);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
             }
         });
     }
@@ -60,13 +107,5 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
         super.detachView(retainInstance);
     }
 
-    public static final class MovieRequestParam implements RequestParam {
-        int pageSize;
-        int pageNum;
 
-        public MovieRequestParam(int pageSize, int pageNum) {
-            this.pageSize = pageSize;
-            this.pageNum = pageNum;
-        }
-    }
 }

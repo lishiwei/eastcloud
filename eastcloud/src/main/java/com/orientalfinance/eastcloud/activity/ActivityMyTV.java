@@ -12,6 +12,7 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityMyTVComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityMyTVModule;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyTVView;
@@ -63,15 +64,8 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
 
             }
         });
-        TV.ShowTVRequestParam requestParam = new TV.ShowTVRequestParam(0, 10);
-        getPresenter().showTVBox(new RequestParam<TV.ShowTVRequestParam>(requestParam));
-
-//
-//        TV.DelTVRequestParam delTVRequestParam = new TV.DelTVRequestParam("12");
-//        getPresenter().delTVBox(new RequestParam<TV.DelTVRequestParam>(delTVRequestParam));
-
-//        TV.ScanTVRequestParam scanTVRequestParam = new TV.ScanTVRequestParam("5");
-//        getPresenter().scanTVBox(new RequestParam<TV.ScanTVRequestParam>(scanTVRequestParam));
+        ShowRequestParam requestParam = new ShowRequestParam(0, 10);
+        getPresenter().showTVBox(new RequestParam<>(requestParam));
 
         mActivityMyTvBinding.toolbar.setTitle("");
         setSupportActionBar(mActivityMyTvBinding.toolbar);

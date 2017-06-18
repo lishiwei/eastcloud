@@ -28,6 +28,9 @@
         <com.orientalfinance.eastcloud.mvp.View.ClearEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/cet_Search"
+            android:inputType="text"
+
             android:hint="搜搜看您下要的视频吧"
             android:maxLines="1"/>
 

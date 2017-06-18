@@ -187,19 +187,4 @@ public class Address implements Serializable {
                     '}';
         }
     }
-
-    public static class DeleteRequestParam {
-        String id;
-
-        public DeleteRequestParam(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public String toString() {
-            return "DeleteRequestParam{" +
-                    "id='" + id + '\'' +
-                    '}';
-        }
-    }
 }

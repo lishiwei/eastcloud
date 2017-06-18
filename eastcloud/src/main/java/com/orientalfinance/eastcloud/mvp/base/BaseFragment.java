@@ -16,11 +16,10 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.delegate.BaseMvpDelegateCallback;
 import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpDelegate;
 import com.hannesdorfmann.mosby.mvp.delegate.FragmentMvpDelegateImpl;
-import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.orientalfinance.eastcloud.App;
 import com.orientalfinance.eastcloud.dagger.BaseFragmentComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
-
+import com.orientalfinance.eastcloud.view.EastCloudDialog;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -29,9 +28,10 @@ public abstract class BaseFragment<COMPONENT extends BaseFragmentComponent,VIEW 
         implements BaseMvpDelegateCallback<VIEW, PRESENTER>, MvpView {
 protected ViewDataBinding mViewDataBinding;
     protected FragmentMvpDelegate<VIEW, PRESENTER> mvpDelegate;
+    public EastCloudDialog mEastCloudDialog;
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+mEastCloudDialog = new EastCloudDialog(getActivity());
         getMvpDelegate().onActivityCreated(savedInstanceState);
     }
 

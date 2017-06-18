@@ -8,11 +8,20 @@ import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
+import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
+import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
 import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
+import com.orientalfinance.eastcloud.module.javabean.History;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Message;
+import com.orientalfinance.eastcloud.module.javabean.SearchHot;
+import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.module.util.DeviceUtil;
@@ -111,7 +120,7 @@ public class RemoteDataProxy {
      */
     public static Flowable<EastCloudResponseBody> updatePwd(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.UPDATE_PWD);
-       return EastcloudRetrofit.getInstance()
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .updatePwd(sendRequest.getS(), sendRequest.getSign());
     }
@@ -304,16 +313,19 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .deleteFamily(sendRequest.getS(), sendRequest.getSign());
-    }  /**
+    }
+
+    /**
      * 方法描述：查看历史记录
      * itype 451
      */
-    public static Flowable<EastCloudResponseBody<List<Channel>>> showHistory(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<History>>> showHistory(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_WATCH_HISTORY);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showHistory(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：删除历史记录
      * itype 452
@@ -325,6 +337,7 @@ public class RemoteDataProxy {
                 .deleteHistory(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：显示预约
      * itype 453
@@ -335,7 +348,9 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .showAppiontment(sendRequest.getS(), sendRequest.getSign());
 
-    }   /**
+    }
+
+    /**
      * 方法描述：删除预约
      * itype 454
      */
@@ -346,17 +361,19 @@ public class RemoteDataProxy {
                 .deleteAppiontment(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：显示收藏
      * itype 455
      */
-    public static Flowable<EastCloudResponseBody<List<Channel>>> showMyCollection(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<Collection>>> showMyCollection(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_COLLECTION);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showMyCollection(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：删除收藏
      * itype 456
@@ -366,6 +383,134 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .deleteMyCollection(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：删除收藏
+     * itype 501
+     */
+    public static Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showCategory(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_CATEGORY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showChannelCatelog(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述;banner图
+     * itype 502
+     */
+    public static Flowable<EastCloudResponseBody<List<Banner>>> showBanner(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_BANNER);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showBanner(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：广告
+     * itype 503
+     */
+    public static Flowable<EastCloudResponseBody<List<Advertisement>>> showAdvertisement(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_ADVERTISEMENT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showAdvertisement(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：当前热播
+     * itype 504
+     */
+    public static Flowable<EastCloudResponseBody<List<HomepageProgram>>> showCurrentHit(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_CURRENT_HIT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showCurrentHit(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：首页其他栏目
+     * itype 505
+     */
+    public static Flowable<EastCloudResponseBody<List<HomepageProgram>>> showProgramList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_PROGRAM_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showProgramList(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：搜索推荐热词
+     * itype 506
+     */
+    public static Flowable<EastCloudResponseBody<List<SearchHot>>> showSearchHot(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_SEARCH_HOT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showSearchHot(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：首页其他栏目
+     * itype 507
+     */
+    public static Flowable<EastCloudResponseBody<List<SearchResult>>> showSearchResult(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_SEARCH_RESULT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showSearchResult(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：详情页
+     * itype 508
+     */
+    public static Flowable<EastCloudResponseBody<List<Detail>>> showDetailList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_PROGRAM_DETAIL);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showProgramDetail(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：详情页
+     * itype 510
+     */
+    public static Flowable<EastCloudResponseBody<List<DetailChannel>>> showDetailChannel(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_DETAIL_CHANNEL);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showDetailChannel(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+
+    /**
+     * 方法描述：频道分类
+     * itype 511
+     */
+    public static Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showChannelCatelog(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_CHANNEL_CATEGORY);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showChannelCatelog(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：删除收藏
+     * itype 512
+     */
+    public static Flowable<EastCloudResponseBody<List<HomePageChannel>>> showChanneList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_CHANNELLIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showChanneList(sendRequest.getS(), sendRequest.getSign());
 
     }
 
@@ -381,9 +526,8 @@ public class RemoteDataProxy {
         String deviceId = DeviceUtil.getDeviceId();
         requestParam.setVersion(version);
         requestParam.setDeviceId(deviceId);
-        requestParam.setToken(AcacheUtil.getInstance().getUser()==null?null:AcacheUtil.getInstance().getUser().getToken());
+        requestParam.setToken(AcacheUtil.getInstance().getUser() == null ? null : AcacheUtil.getInstance().getUser().getToken());
         requestParam.setItype(itype);
-//        requestParam.setUid("402881ab5ca4a196015ca4a1966a0000");
         Log.e("OKHTTP", "请求参数：" + requestParam.toString());
         return new SendRequest(EncryptUtils.getZip(requestParam), EncryptUtils.encrypt(requestParam));
     }

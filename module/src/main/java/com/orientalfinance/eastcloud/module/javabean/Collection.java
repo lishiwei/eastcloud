@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * 我的收藏 javabean
  */
 
-public class Channel {
+public class Collection {
     String channelLogo;
     @SerializedName("program_id")
     String programId;
@@ -25,7 +25,7 @@ public class Channel {
         return isChecked;
     }
 
-    public Channel(String channelLogo, String programId, String id, String currentProgramBg, String channelName, String currentProgram, String programTime) {
+    public Collection(String channelLogo, String programId, String id, String currentProgramBg, String channelName, String currentProgram, String programTime) {
         this.channelLogo = channelLogo;
         this.programId = programId;
         this.id = id;
@@ -86,7 +86,7 @@ public class Channel {
                 '}';
     }
 
-    public Channel(String currentProgramBg, String channelName, String currentProgram, String channelLogo, String programTime) {
+    public Collection(String currentProgramBg, String channelName, String currentProgram, String channelLogo, String programTime) {
         this.currentProgramBg = currentProgramBg;
         this.channelName = channelName;
         this.currentProgram = currentProgram;
@@ -94,7 +94,7 @@ public class Channel {
         this.programTime = programTime;
     }
 
-    public Channel(String currentProgramBg, String channelName, String currentProgram, String programTime) {
+    public Collection(String currentProgramBg, String channelName, String currentProgram, String programTime) {
         this.currentProgramBg = currentProgramBg;
         this.channelName = channelName;
         this.currentProgram = currentProgram;

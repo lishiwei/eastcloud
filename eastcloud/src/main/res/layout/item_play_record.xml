@@ -7,7 +7,7 @@
 
         <variable
             name="channel"
-            type="com.orientalfinance.eastcloud.module.javabean.Channel"/>
+            type="com.orientalfinance.eastcloud.module.javabean.History"/>
     </data>
 
     <com.mcxtzhang.swipemenulib.SwipeMenuLayout

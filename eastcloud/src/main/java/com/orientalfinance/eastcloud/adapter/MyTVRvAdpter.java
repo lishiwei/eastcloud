@@ -32,21 +32,7 @@ public class MyTVRvAdpter extends RecyclerView.Adapter<MyTVRvAdpter.MyTVViewHold
         ItemMytvBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_mytv, null, true);
         final MyTVViewHolder myTVViewHolder = new MyTVViewHolder(viewDataBinding.getRoot());
         myTVViewHolder.setViewDataBinding(viewDataBinding);
-//        myTVViewHolder.itemView.findViewById(R.id.tv_connect).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mMovieList.get(myTVViewHolder.getLayoutPosition()).getStatus().equals("在线")) {
-//
-//                }
-//            }
-//        });
-//        myTVViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), ActivityTopBoxDetail.class);
-//                v.getContext().startActivity(intent);
-//            }
-//        });
+
         return myTVViewHolder;
     }
 

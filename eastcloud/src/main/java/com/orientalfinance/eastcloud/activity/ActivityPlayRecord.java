@@ -15,9 +15,10 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerPlayRecordComponent;
 import com.orientalfinance.eastcloud.dagger.component.PlayRecordComponent;
 import com.orientalfinance.eastcloud.dagger.modules.PlayRecordModule;
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordView;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordViewState;
@@ -37,7 +38,6 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     PlayRecordRvAdpter mPlayRecordRvAdpter;
     ActivityPlayRecordBinding mActivityPlayRecordBinding;
     MenuItem mMenuItem;
-    List<Channel> mChannels;
     int mDeletePosition;
 
     @Override
@@ -62,7 +62,7 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
             @Override
             public void onDeleteListener(SwipeMenuLayout swipeMenuLayout, int position) {
                 mDeletePosition = position;
-                getPresenter().deleteHistory(new RequestParam(new Channel.DeleteRequestParam(mPlayRecordRvAdpter.getChannelList().get(position).getId())));
+                getPresenter().deleteHistory(new RequestParam(new DeleteRequestParam(mPlayRecordRvAdpter.getChannelList().get(position).getId())));
 
             }
         });
@@ -79,7 +79,7 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
         mActivityPlayRecordBinding.btnSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Channel channel : mPlayRecordRvAdpter.getChannelList()) {
+                for (History channel : mPlayRecordRvAdpter.getChannelList()) {
                     channel.setChecked(true);
                 }
                 mPlayRecordRvAdpter.notifyDataSetChanged();
@@ -88,7 +88,7 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
         mActivityPlayRecordBinding.btnDisSelectedAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Channel channel : mPlayRecordRvAdpter.getChannelList()) {
+                for (History channel : mPlayRecordRvAdpter.getChannelList()) {
                     channel.setChecked(!channel.isChecked());
                 }
                 mPlayRecordRvAdpter.notifyDataSetChanged();
@@ -117,7 +117,7 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     }
 
     @Override
-    public void showHistory(List<Channel> channels) {
+    public void showHistory(List<History> channels) {
 
         mPlayRecordRvAdpter.setChannelList(channels);
     }
@@ -155,9 +155,9 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     }
 
     private void deleteSelectedData() {
-        Iterator<Channel> it = mPlayRecordRvAdpter.getChannelList().iterator();
+        Iterator<History> it = mPlayRecordRvAdpter.getChannelList().iterator();
         while (it.hasNext()) {
-            Channel channel = it.next();
+            History channel = it.next();
             if (channel.isChecked()) {
                 it.remove();
             }

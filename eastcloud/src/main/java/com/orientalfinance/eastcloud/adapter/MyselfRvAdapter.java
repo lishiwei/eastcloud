@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityRecord;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
@@ -16,6 +15,7 @@ import com.orientalfinance.eastcloud.activity.ActivityMyAppointment;
 import com.orientalfinance.eastcloud.activity.ActivityMyBankCard;
 import com.orientalfinance.eastcloud.activity.ActivityMyCollection;
 import com.orientalfinance.eastcloud.activity.ActivityMyTV;
+import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
 import com.orientalfinance.eastcloud.activity.ActivitySuggestReport;
 import com.orientalfinance.eastcloud.module.javabean.ItemMyself;
 
@@ -43,7 +43,7 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
             public void onClick(View v) {
                 switch (itemMyselfViewHolder.getLayoutPosition()) {
                     case 0:
-                        v.getContext().startActivity(new Intent(v.getContext(), AccessibilityRecord.class));
+                        v.getContext().startActivity(new Intent(v.getContext(), ActivityPlayRecord.class));
                         break;
                     case 1:
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyAppointment.class));

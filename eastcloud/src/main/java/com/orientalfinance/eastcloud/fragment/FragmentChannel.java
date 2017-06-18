@@ -1,14 +1,10 @@
 package com.orientalfinance.eastcloud.fragment;
 
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentChannelBinding;
@@ -17,9 +13,13 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.ChannelComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerChannelComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ChannelModules;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ChannelPresenter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,9 +73,42 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentChannelBinding = (FragmentChannelBinding) mViewDataBinding;
-mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager()));
+        mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager()));
         mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
         mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
+
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showChannelCategory(requestParam);
+        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam("0");
+        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+        getPresenter().showChannelList(requestParam1);
+    }
+
+    @Override
+    public void showDialog() {
+        mEastCloudDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+        mEastCloudDialog.hide();
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showChannelCategory(List<HomePageChannel.Category> categories) {
+
+    }
+
+
+
+    @Override
+    public void showChannelList(List<HomePageChannel> channels) {
+
     }
 
     @Override

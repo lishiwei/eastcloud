@@ -6,7 +6,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.mvp.View.ActivityMyCollectionView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -24,11 +24,11 @@ public class ActivityMyCollectionPresenter extends MvpNullObjectBasePresenter
         <ActivityMyCollectionView> {
     public void showCollection(RequestParam requestParam) {
         getView().showDialog();
-        RemoteDataProxy.showMyCollection(requestParam).compose(new ListTransform<List<Channel>>()).subscribe(new Consumer<List<Channel>>() {
+        RemoteDataProxy.showMyCollection(requestParam).compose(new ListTransform<List<Collection>>()).subscribe(new Consumer<List<Collection>>() {
             @Override
-            public void accept(@NonNull List<Channel> channels) throws Exception {
+            public void accept(@NonNull List<Collection> collections) throws Exception {
                 getView().hideDialog();
-                getView().showCollection(channels);
+                getView().showCollection(collections);
             }
         }, new MyConsumer<Throwable>() {
             @Override

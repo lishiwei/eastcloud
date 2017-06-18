@@ -15,7 +15,7 @@ import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ItemPlayRecordBinding;
 import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class PlayRecordRvAdpter extends RecyclerView.Adapter<PlayRecordRvAdpter.PlayRecordViewHolder> {
     private static final String TAG = PlayRecordRvAdpter.class.getSimpleName();
-    List<Channel> mChannelList;
+    List<History> mChannelList;
     public boolean isShow = false;
 OnSwipeDeleteListener mOnSwipeDeleteListener;
 
@@ -64,7 +64,7 @@ OnSwipeDeleteListener mOnSwipeDeleteListener;
         isShow = show;
     }
 
-    public PlayRecordRvAdpter(List<Channel> Channels) {
+    public PlayRecordRvAdpter(List<History> Channels) {
         mChannelList = Channels;
     }
 
@@ -80,13 +80,13 @@ OnSwipeDeleteListener mOnSwipeDeleteListener;
         holder.mCheckBox.setChecked(mChannelList.get(position).isChecked());
     }
 
-    public void setChannelList(List<Channel> ChannelList) {
+    public void setChannelList(List<History> ChannelList) {
 
         mChannelList = ChannelList;
         notifyDataSetChanged();
     }
 
-    public List<Channel> getChannelList() {
+    public List<History> getChannelList() {
         return mChannelList;
     }
 

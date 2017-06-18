@@ -113,39 +113,6 @@ public class TV {
         this.status = status;
     }
 
-    public static class ShowTVRequestParam {
-        int start;
-        int length;
-
-        public ShowTVRequestParam(int start, int length) {
-            this.start = start;
-            this.length = length;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public void setStart(int start) {
-            this.start = start;
-        }
-
-        public int getLength() {
-            return length;
-        }
-
-        public void setLength(int length) {
-            this.length = length;
-        }
-
-        @Override
-        public String toString() {
-            return "ShowTVRequestParam{" +
-                    "start=" + start +
-                    ", length=" + length +
-                    '}';
-        }
-    }
 
     public static class DelTVRequestParam {
         public DelTVRequestParam(String box_id) {

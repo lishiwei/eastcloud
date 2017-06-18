@@ -17,7 +17,7 @@ import com.orientalfinance.eastcloud.adapter.CollectionAdapter;
 import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
-import com.orientalfinance.eastcloud.module.javabean.Channel;
+import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.mvp.View.ActivityMyCollectionView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityMyCollectionPresenter;
@@ -38,7 +38,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
     private static final String TAG = "zxt";
     private ListView mLv;
 
-    private ArrayList<Channel> mChannels = new ArrayList<>();
+    private ArrayList<Collection> mChannels = new ArrayList<>();
     private CollectionAdapter collectionAdapter;
     private TextView editButton;
     private Button selectAll;
@@ -98,7 +98,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Channel channel = mChannels.get(position);
+        Collection channel = mChannels.get(position);
         channel.setChecked(!channel.isChecked());
         collectionAdapter.notifyDataSetChanged();
     }
@@ -140,7 +140,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 反选
      */
     private void disSelectedAllData() {
-        for (Channel tvShowEntity : mChannels) {
+        for (Collection tvShowEntity : mChannels) {
             tvShowEntity.setChecked(!tvShowEntity.isChecked());
         }
         collectionAdapter.notifyDataSetChanged();
@@ -150,7 +150,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 全选
      */
     private void selectAllData() {
-        for (Channel tvShowEntity : mChannels) {
+        for (Collection tvShowEntity : mChannels) {
             tvShowEntity.setChecked(true);
         }
         collectionAdapter.notifyDataSetChanged();
@@ -160,9 +160,9 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
      * 删除所选
      */
     private void deleteSelectedData() {
-        Iterator<Channel> it = mChannels.iterator();
+        Iterator<Collection> it = mChannels.iterator();
         while (it.hasNext()) {
-            Channel tvShowEntity = it.next();
+            Collection tvShowEntity = it.next();
             if (tvShowEntity.isChecked()) {
                 it.remove();
             }
@@ -203,8 +203,8 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
     }
 
     @Override
-    public void showCollection(List<Channel> channels) {
-        collectionAdapter.setData(channels);
+    public void showCollection(List<Collection> collections) {
+        collectionAdapter.setData(collections);
     }
 
 

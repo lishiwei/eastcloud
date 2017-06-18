@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud.module.javabean;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.google.gson.annotations.SerializedName;
 import com.orientalfinance.eastcloud.module.BR;
 
 import java.util.List;
@@ -12,14 +13,26 @@ import java.util.List;
  */
 
 public class Detail extends BaseObservable{
+    @SerializedName("program_id")
+    String programId;
+    @SerializedName("show_img")
     String url;
+    @SerializedName("name")
     String title;
+
     String director;
     String actor;
     String year;
     String times;
     String score;
+
+    @SerializedName("intro")
     String profile;
+    @SerializedName("channel_id")
+    String channelId;
+    @SerializedName("air_time")
+    String airTime;
+
     List<Comment> mComments;
 
     public Detail(String url, String title, String director, String actor, String year, String times, String score, String profile, List<Comment> comments) {
