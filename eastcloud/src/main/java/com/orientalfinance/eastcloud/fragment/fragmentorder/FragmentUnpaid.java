@@ -6,8 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.andview.refreshview.XRefreshView;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.adapter.OrderAdapter;
+import com.orientalfinance.eastcloud.module.javabean.Order;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +30,11 @@ public class FragmentUnpaid extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ListView listView;
+    private ArrayList<Order> orders;
+    private XRefreshView refreshView;
+    private OrderAdapter orderAdapter;
+    private long lastRefreshTime;
 
     public FragmentUnpaid() {
         // Required empty public constructor
@@ -59,8 +70,67 @@ public class FragmentUnpaid extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_unpaid, container, false);
+        View view = inflater.inflate(R.layout.fragment_unpaid, container, false);
+        loadData();
+        initViews(view);
+        return view;
+    }
+
+    private void loadData() {
+        orders = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Order order = new Order();
+            order.setName("杜鹃同款对白春款时尚撞色潮流穿搭2017高档雪纺连衣裙");
+            order.setColor("白色");
+            order.setCount("1");
+            order.setPrice("128");
+            order.setSize("XXXL");
+            order.setLogoUrl("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=715805757,2162331109&fm=26&gp=0.jpg");
+            orders.add(order);
+        }
+    }
+
+    private void initViews(View view) {
+        refreshView = (XRefreshView) view.findViewById(R.id.custom_view);
+        listView = (ListView) view.findViewById(R.id.lv_all_order);
+        orderAdapter = new OrderAdapter(getContext(), orders);
+        listView.setAdapter(orderAdapter);
+        refreshView.setPullRefreshEnable(true);
+        refreshView.setPullLoadEnable(true);
+        refreshView.restoreLastRefreshTime(lastRefreshTime);
+        //当下拉刷新被禁用时，调用这个方法并传入false可以不让头部被下拉
+        refreshView.setMoveHeadWhenDisablePullRefresh(true);
+        refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                Toast.makeText(getActivity(), "上拉加载更多", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+                refreshView.stopRefresh();
+                lastRefreshTime = refreshView.getLastRefreshTime();
+                for (int i = 0; i < 3; i++) {
+                    Order order = new Order();
+                    order.setName("杜鹃同款对白春款时尚撞色潮流穿搭2017高档雪纺连衣裙");
+                    order.setColor("白色");
+                    order.setCount("1");
+                    order.setPrice("128");
+                    order.setSize("XXXL");
+                    order.setLogoUrl("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=715805757,2162331109&fm=26&gp=0.jpg");
+                    orders.add(order);
+                }
+                orderAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onRelease(float direction) {
+                Toast.makeText(getActivity(), "onRelease", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
