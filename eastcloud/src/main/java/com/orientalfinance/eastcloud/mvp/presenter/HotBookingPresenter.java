@@ -11,8 +11,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.functions.Consumer;
-
 /**
  * Created by 29435 on 2017/5/25.
  */
@@ -48,25 +46,16 @@ public class HotBookingPresenter extends MvpNullObjectBasePresenter<HotBookingVi
 
     public void exchangeHotMovie() {
         getView().showExchange();
-        mMovieRepository.getDatas(new CurrentHitPresenter.MovieRequestParam(0, 0)).subscribe(new Consumer<List<Movie>>() {
-            @Override
-            public void accept(List<Movie> movies) throws Exception {
+
                 getView().stopExchange();
                 getView().exchangeHotMovie(getLiveVideoMovie());
-            }
-        });
+
 
     }
 
     public void exchangeHotVariety() {
         getView().showExchange();
-        mMovieRepository.getDatas(new CurrentHitPresenter.MovieRequestParam(0, 0)).subscribe(new Consumer<List<Movie>>() {
-            @Override
-            public void accept(List<Movie> movies) throws Exception {
-                getView().stopExchange();
-                getView().exchangeHotMovie(getLiveVideoMovie());
-            }
-        });
+
     }
 
     @Override

@@ -117,9 +117,23 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         return DaggerActivityDetailComponent.builder().appComponent(appComponent).activityDetailModule(new ActivityDetailModule()).build();
     }
 
+    public void showView(Detail detail) {
+        Log.d(TAG, "showView: " + detail);
+        Log.d(TAG, "showView: " + mDetailRVAdapter.getComments().toString());
+        mActivityDetailBinding.setDetail(detail);
+        // mDetailRVAdapter.setComments(detail.getComments());
+
+    }
 
 
+    public void showLoading() {
 
+    }
+
+
+    public void hideLoading() {
+
+    }
 
 
     /**
@@ -349,9 +363,7 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
 
     @Override
     public void showDetails(List<Detail> details) {
-        Log.d(TAG, "showView: " + details);
-        Log.d(TAG, "showView: " + mDetailRVAdapter.getComments().toString());
-//        mActivityDetailBinding.setDetail(details);
+
     }
 
     @Override
