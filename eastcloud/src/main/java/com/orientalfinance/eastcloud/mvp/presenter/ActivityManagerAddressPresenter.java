@@ -1,13 +1,14 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ManagerAddressView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
-import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.List;
 
@@ -22,21 +23,56 @@ import io.reactivex.functions.Consumer;
 public class ActivityManagerAddressPresenter extends MvpNullObjectBasePresenter<ManagerAddressView> {
 public static String TAG = ActivityManagerAddressPresenter.class.getSimpleName();
     public void getAddress(RequestParam requestParam) {
-        LogUtils.e(TAG, "getAddress: ");
-        getView().showLoading();
+        getView().showDialog();
         RemoteDataProxy.getAddress(requestParam).compose(new ListTransform<List<Address>>())
                 .subscribe(new Consumer<List<Address>>() {
                     @Override
                     public void accept(List<Address> addresses) throws Exception {
-                        getView().hideLoading();
+                        getView().hideDialog();
                         getView().showSuccess(addresses);
                     }
                 }, new MyConsumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         super.accept(throwable);
-                        getView().hideLoading();
+                        getView().hideDialog();
                     }
                 });
+    }
+    public void editAddress(RequestParam requestParam) {
+        getView().showDialog();
+        RemoteDataProxy.editAddress(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                getView().hideDialog();
+                getView().editSuccess();
+
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+
+                getView().hideDialog();
+
+            }
+        });
+    }
+    public void deleteAddress(RequestParam requestParam) {
+        getView().showDialog();
+        RemoteDataProxy.deleteAddress(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                getView().hideDialog();
+                getView().deleteSuccess();
+
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
+
+            }
+        });
     }
 }

@@ -1,7 +1,5 @@
 package com.orientalfinance.eastcloud.module.Retrofit.convert;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -38,7 +36,7 @@ class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
-        Log.d("Network", "response>>" + response);
+
         //httpResult 只解析result字段
         EastCloudResponseBody eastCloudResponseBody = gson.fromJson(response, EastCloudResponseBody.class);
         //

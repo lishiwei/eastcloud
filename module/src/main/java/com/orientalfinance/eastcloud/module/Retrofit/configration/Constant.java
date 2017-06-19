@@ -62,10 +62,12 @@ public class Constant {
         public static final int SHOW_SEARCH_HOT = 506;
         public static final int SHOW_SEARCH_RESULT = 507;
         public static final int SHOW_PROGRAM_DETAIL = 508;
+        public static final int SHOW_DETAIL_COMMENTS = 509;
         public static final int SHOW_DETAIL_CHANNEL = 510;
 
         public static final int SHOW_MY_CHANNEL_CATEGORY = 511;
         public static final int SHOW_MY_CHANNELLIST = 512;
+        public static final int COMMIT_COMMENT = 554;
 
 
     }

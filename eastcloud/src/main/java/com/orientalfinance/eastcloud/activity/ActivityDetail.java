@@ -22,6 +22,8 @@ import com.orientalfinance.eastcloud.dagger.component.ActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.CommentBean;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
@@ -85,6 +87,13 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         //     mActivityDetailBinding.rvDetailComment.setLayoutManager(new FullyLinearLayoutManager(ActivityDetail.this));
         adapter = new CommentAdapter(this, getCommentData(), R.layout.comment_item_list, handler);
         mListData.setAdapter(adapter);
+        Comment.CommentRequestParam commentRequestParam = new Comment.CommentRequestParam("0", "10", "0");
+        RequestParam requestParam = new RequestParam(commentRequestParam);
+        getPresenter().getDetailComments(requestParam);
+
+        Comment.CommitRequestParam commitRequestParam = new Comment.CommitRequestParam("0", "aaaa", "1", "1");
+        getPresenter().commitComment(new RequestParam(commentRequestParam));
+
     }
 
     @Override

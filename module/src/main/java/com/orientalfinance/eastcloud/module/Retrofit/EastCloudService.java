@@ -6,6 +6,7 @@ import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
@@ -151,10 +152,6 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody<List<Address>>> getAddress(@Field("s") String zip, @Field("sign") String sign);
 
-    //itype 360
-    @FormUrlEncoded
-    @POST(".")
-    Call<ResponseResult<List<Address>>> getAddress1(@Field("s") String zip, @Field("sign") String sign);
 
     //itype 361
     @FormUrlEncoded
@@ -270,6 +267,10 @@ public interface EastCloudService {
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<Detail>>> showProgramDetail(@Field("s") String zip, @Field("sign") String sign);
+    //itype 509
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Comment>>> showDetailComments(@Field("s") String zip, @Field("sign") String sign);
 
     //itype510
     @FormUrlEncoded
@@ -290,5 +291,10 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody<List<HomePageChannel>>> showChanneList(@Field("s") String zip, @Field("sign") String sign);
 
+    //itype 551
+
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> commitComment(@Field("s") String zip, @Field("sign") String sign);
 
 }

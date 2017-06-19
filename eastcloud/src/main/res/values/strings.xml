@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyApplication</string>
+    <string name="app_name">东方遥控宝</string>
     <string name="title_recommend">推荐</string>
     <string name="title_channel">频道</string>
     <string name="title_application">应用</string>

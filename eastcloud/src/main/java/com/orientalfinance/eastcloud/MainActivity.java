@@ -1,13 +1,14 @@
 package com.orientalfinance.eastcloud;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -216,14 +217,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @TargetApi(23)
     private void requestPermissions() {
+        if (Build.VERSION.SDK_INT < 23) {
 
-        if (! Settings.canDrawOverlays(getApplicationContext())) {
+            return;
+        }
+
+        if (!Settings.canDrawOverlays(
+
+                getApplicationContext()))
+
+        {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
-            startActivityForResult(intent,10);
+            startActivityForResult(intent, 10);
         }
+
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions
                 .requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
@@ -232,22 +242,24 @@ public class MainActivity extends AppCompatActivity {
                         Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.SYSTEM_ALERT_WINDOW,
                         Manifest.permission.CAMERA)
-                .subscribe(new Consumer<Permission>() {
-                    @Override
-                    public void accept(Permission permission) throws Exception {
+                .
 
-                        if (permission.granted) {
-                            // 用户已经同意该权限
-                            Log.d(TAG, permission.name + " is granted.");
-                        } else if (permission.shouldShowRequestPermissionRationale) {
-                            // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
-                            Log.d(TAG, permission.name + " is denied. More info should be provided.");
-                        } else {
-                            // 用户拒绝了该权限，并且选中『不再询问』
-                            Log.d(TAG, permission.name + " is denied.");
-                        }
-                    }
-                });
+                        subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) throws Exception {
+
+                                if (permission.granted) {
+                                    // 用户已经同意该权限
+                                    Log.d(TAG, permission.name + " is granted.");
+                                } else if (permission.shouldShowRequestPermissionRationale) {
+                                    // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
+                                    Log.d(TAG, permission.name + " is denied. More info should be provided.");
+                                } else {
+                                    // 用户拒绝了该权限，并且选中『不再询问』
+                                    Log.d(TAG, permission.name + " is denied.");
+                                }
+                            }
+                        });
 
     }
 

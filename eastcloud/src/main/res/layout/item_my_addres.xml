@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="address"
-            type="com.orientalfinance.eastcloud.module.javabean.Address" />
+            type="com.orientalfinance.eastcloud.module.javabean.Address"/>
+
+        <import type="com.orientalfinance.eastcloud.utils.MyDataBindingUtils"/>
     </data>
 
 
@@ -17,7 +20,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#999999" />
+            android:background="#999999"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,11 +31,11 @@
 
             <TextView
                 android:id="@+id/tv_user_name"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@{address.userName}"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:text="@{address.userName}"/>
 
             <TextView
                 android:id="@+id/tv_user_phone"
@@ -42,7 +45,7 @@
                 android:gravity="center"
                 android:text="@{address.userPhone}"
                 android:textColor="#999999"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -58,8 +61,8 @@
                 android:layout_width="320dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@{address.address}"
-                android:textSize="14sp" />
+                android:text="@{MyDataBindingUtils.getAddress(address)}"
+                android:textSize="14sp"/>
         </RelativeLayout>
 
 

@@ -1,9 +1,12 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.mvp.View.DetailView;
@@ -64,6 +67,36 @@ public class ActivityDetailPresenter extends MvpNullObjectBasePresenter<DetailVi
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
                 getView().hideDialog();
+            }
+        });
+    }
+
+    public void getDetailComments(RequestParam requestParam) {
+        RemoteDataProxy.showDetailComments(requestParam).compose(new ListTransform<List<Comment>>()).subscribe(new Consumer<List<Comment>>() {
+            @Override
+            public void accept(@NonNull List<Comment> comments) throws Exception {
+
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+
+            }
+        });
+    }
+    public void commitComment(RequestParam requestParam)
+    {
+        RemoteDataProxy.commitComment(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+
             }
         });
     }

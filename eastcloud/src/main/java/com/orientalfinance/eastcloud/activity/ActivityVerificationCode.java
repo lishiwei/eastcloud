@@ -53,7 +53,7 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
             public void onClick() {
                 mPhone = mActivityForgetPassWordBinding.etPhoneNumber.getText().toString();
 
-                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.grey_rectangle));
+                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.grey_rectangle));
                 User.SendCodeRequestParam sendCodeRequestParam = new User.SendCodeRequestParam(mPhone);
 
                 getPresenter().sendVerificationCode(new RequestParam<User.SendCodeRequestParam>(sendCodeRequestParam));
@@ -65,7 +65,7 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
 
             @Override
             public void onFinish() {
-                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getDrawable(R.drawable.bg_movieproperty));
+                mActivityForgetPassWordBinding.tvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_movieproperty));
             }
         });
 

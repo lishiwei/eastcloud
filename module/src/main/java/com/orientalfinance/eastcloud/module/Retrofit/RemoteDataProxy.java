@@ -12,6 +12,7 @@ import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
+import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
@@ -227,16 +228,6 @@ public class RemoteDataProxy {
                 .getAddress(sendRequest.getS(), sendRequest.getSign());
     }
 
-    /**
-     * 方法描述：获取地址
-     * itype 360
-     */
-    public static void getAddress1(RequestParam requestParam, HttpCallBack<List<Address>> httpCallBack) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_ADDRESS_LIST);
-        EastcloudRetrofit.getInstance()
-                .getEastCloudService()
-                .getAddress1(sendRequest.getS(), sendRequest.getSign()).enqueue(httpCallBack);
-    }
 
     /**
      * 方法描述：添加地址
@@ -479,6 +470,17 @@ public class RemoteDataProxy {
     }
     /**
      * 方法描述：详情页
+     * itype 509
+     */
+    public static Flowable<EastCloudResponseBody<List<Comment>>> showDetailComments(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_DETAIL_COMMENTS);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showDetailComments(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：详情页
      * itype 510
      */
     public static Flowable<EastCloudResponseBody<List<DetailChannel>>> showDetailChannel(RequestParam requestParam) {
@@ -488,7 +490,17 @@ public class RemoteDataProxy {
                 .showDetailChannel(sendRequest.getS(), sendRequest.getSign());
 
     }
+    /**
+     * 方法描述：详情页
+     * itype 554
+     */
+    public static Flowable<EastCloudResponseBody> commitComment(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.COMMIT_COMMENT);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .commitComment(sendRequest.getS(), sendRequest.getSign());
 
+    }
 
     /**
      * 方法描述：频道分类

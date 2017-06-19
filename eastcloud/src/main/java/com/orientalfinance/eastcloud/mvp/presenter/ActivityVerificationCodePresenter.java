@@ -11,6 +11,7 @@ import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.VerificationCodeView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 import io.reactivex.annotations.NonNull;
@@ -43,7 +44,7 @@ public class ActivityVerificationCodePresenter extends MvpNullObjectBasePresente
             public void accept(@NonNull Throwable throwable) throws Exception {
 super.accept(throwable);
                 getView().hideGetCode();
-
+                LogUtils.e(TAG, "accept: "+throwable.toString() );
             }
         });
     }

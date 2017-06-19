@@ -3,11 +3,15 @@ package com.orientalfinance.eastcloud.utils;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
 import com.orientalfinance.eastcloud.activity.ActivitySearch;
+import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.view.ExpandTextView;
 
 import javax.inject.Inject;
@@ -32,10 +36,12 @@ public class MyDataBindingUtils {
         Intent intent = new Intent(view.getContext(), ActivitySearch.class);
         view.getContext().startActivity(intent);
     }
+
     @BindingAdapter({"contentText"})
     public static void settext(ExpandTextView expandTextView, String content) {
         expandTextView.setContent(content);
     }
+
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView imageView, String url) {
         ImageLoaders.displayImage(imageView, url);
@@ -56,6 +62,20 @@ public class MyDataBindingUtils {
             return "连接";
         } else {
             return "";
+        }
+    }
+
+    public static SpannableStringBuilder getAddress( Address address) {
+        SpannableStringBuilder builder;
+        if (address.isDefault() == 0) {
+            String s ="[ 默认地址 ]";
+            builder = new SpannableStringBuilder( s+address.getAddress());
+            ForegroundColorSpan modifySpan = new ForegroundColorSpan(Color.RED);
+            builder.setSpan(modifySpan,0,s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return builder;
+        } else {
+            builder = new SpannableStringBuilder( address.getAddress());
+            return builder;
         }
     }
 

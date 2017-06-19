@@ -2,6 +2,7 @@ package com.orientalfinance.eastcloud.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,8 @@ public class ManagerAddressAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, final ViewGroup parent) {
-        ViewHolder viewHolder;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.lv_address_item, null);
             viewHolder = new ViewHolder(convertView);
@@ -68,6 +69,40 @@ public class ManagerAddressAdapter extends BaseAdapter {
         viewHolder.tvPhone.setText(address.getUserPhone());
         viewHolder.tvAddress.setText(address.getAddress());
 
+        viewHolder.cbSettingAddress.setBackground(convertView.getResources().getDrawable(R.drawable.ic_uncheck));
+        viewHolder.cbSettingAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mList.get(position).isDefault()==0)
+                {
+
+                }else {
+                    if (getOnItemCheckedListener() != null) {
+                        getOnItemCheckedListener().OnItemChecked(position);
+                    }
+                }
+
+            }
+        });
+        if (mList.get(position).isDefault()==0)
+        {
+            viewHolder.cbSettingAddress.setBackground(convertView.getResources().getDrawable(R.drawable.check_bg));
+            viewHolder.tvDefaultAddress.setTextColor(Color.RED);
+        }
+        else {
+            viewHolder.cbSettingAddress.setBackground(convertView.getResources().getDrawable(R.drawable.ic_uncheck));
+            viewHolder.tvDefaultAddress.setTextColor(Color.GRAY);
+
+        }
+        viewHolder.ivDeleteAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (getOnItemDeleteListener() != null) {
+                    getOnItemDeleteListener().onItemDelete(position);
+                }
+            }
+        });
         viewHolder.ivEditAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,23 +115,53 @@ public class ManagerAddressAdapter extends BaseAdapter {
         return convertView;
     }
 
+    OnItemCheckedListener mOnItemCheckedListener;
+
+    public void setOnItemCheckedListener(OnItemCheckedListener onItemCheckedListener) {
+        mOnItemCheckedListener = onItemCheckedListener;
+    }
+
+    public OnItemCheckedListener getOnItemCheckedListener() {
+        return mOnItemCheckedListener;
+    }
+
     public static class ViewHolder {
 
-        private ImageView ivSettingAddress;
+        private ImageView cbSettingAddress;
         private final ImageView ivDeleteAddress;
         private final ImageView ivEditAddress;
         private final TextView tvUserName;
         private final TextView tvAddress;
+        private final TextView tvDefaultAddress;
         private final TextView tvPhone;
 
         public ViewHolder(View view) {
             tvUserName = (TextView) view.findViewById(R.id.tv_user_name);
             tvPhone = (TextView) view.findViewById(R.id.tv_user_phone);
             tvAddress = (TextView) view.findViewById(R.id.tv_address);
+            tvDefaultAddress = (TextView) view.findViewById(R.id.tv_defaultAddress);
 
-            ivSettingAddress = (ImageView) view.findViewById(R.id.iv_setting_address);
+            cbSettingAddress = (ImageView) view.findViewById(R.id.cb_setting_address);
             ivDeleteAddress = (ImageView) view.findViewById(R.id.iv_delete_address);
             ivEditAddress = (ImageView) view.findViewById(R.id.iv_edit_address);
         }
+    }
+
+    OnItemDeleteListener mOnItemDeleteListener;
+
+    public void setOnItemDeleteListener(OnItemDeleteListener onItemDeleteListener) {
+        mOnItemDeleteListener = onItemDeleteListener;
+    }
+
+    public OnItemDeleteListener getOnItemDeleteListener() {
+        return mOnItemDeleteListener;
+    }
+
+    public interface OnItemDeleteListener {
+        public void onItemDelete(int position);
+    }
+
+    public interface OnItemCheckedListener {
+        public void OnItemChecked(int position);
     }
 }

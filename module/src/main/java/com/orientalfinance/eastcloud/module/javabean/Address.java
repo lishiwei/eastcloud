@@ -9,7 +9,7 @@ import java.io.Serializable;
  * email:lizy@oriental-finance.com
  */
 
-public class Address implements Serializable {
+public class Address implements Serializable{
 
     String id;
 
@@ -123,6 +123,7 @@ public class Address implements Serializable {
                 ", isDefault=" + isDefault +
                 '}';
     }
+
 
     public static class AddRequestParam {
 
