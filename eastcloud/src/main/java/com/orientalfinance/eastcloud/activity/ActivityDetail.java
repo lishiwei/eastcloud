@@ -6,15 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,14 +24,13 @@ import com.orientalfinance.eastcloud.dagger.component.DaggerActivityDetailCompon
 import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
 import com.orientalfinance.eastcloud.module.javabean.CommentBean;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
+import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.ReplyBean;
-import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.View.ActivityDetailViewState;
-import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
+import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityDetailPresenter;
 import com.orientalfinance.eastcloud.utils.AndroidBug5497Workaround;
-import com.orientalfinance.eastcloud.utils.SoftInputUtil;
 import com.orientalfinance.eastcloud.view.ExpandListView;
 import com.orientalfinance.eastcloud.view.NoTouchLinearLayout;
 
@@ -45,8 +40,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static android.R.id.list;
 
 public class ActivityDetail extends BaseActivity<ActivityDetailComponent, DetailView, ActivityDetailPresenter, ActivityDetailViewState> implements DetailView {
     private static final String TAG = ActivityDetail.class.getSimpleName();
@@ -124,24 +117,9 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         return DaggerActivityDetailComponent.builder().appComponent(appComponent).activityDetailModule(new ActivityDetailModule()).build();
     }
 
-    @Override
-    public void showView(Detail detail) {
-        Log.d(TAG, "showView: " + detail);
-        Log.d(TAG, "showView: " + mDetailRVAdapter.getComments().toString());
-        mActivityDetailBinding.setDetail(detail);
-        // mDetailRVAdapter.setComments(detail.getComments());
 
-    }
 
-    @Override
-    public void showLoading() {
 
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
 
 
     /**
@@ -352,5 +330,32 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
             mLytEdittextVG.setVisibility(View.GONE);
             mLytCommentVG.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void showDialog() {
+
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showDetails(List<Detail> details) {
+        Log.d(TAG, "showView: " + details);
+        Log.d(TAG, "showView: " + mDetailRVAdapter.getComments().toString());
+//        mActivityDetailBinding.setDetail(details);
+    }
+
+    @Override
+    public void showDetailChannels(List<DetailChannel> detailChannels) {
+
     }
 }
