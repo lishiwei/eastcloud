@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
  */
 
 public class LiveVideoRvAdapter extends RecyclerView.Adapter<LiveVideoRvAdapter.LiveVideoViewHolder> {
-    List<Movie> mMovieList;
+    List<HomepageProgram> mMovieList;
 
-    public LiveVideoRvAdapter(List<Movie> movies) {
+    public LiveVideoRvAdapter(List<HomepageProgram> movies) {
         mMovieList = movies;
     }
 
@@ -32,14 +32,14 @@ public class LiveVideoRvAdapter extends RecyclerView.Adapter<LiveVideoRvAdapter.
         return videoViewHolder;
     }
 
-    public void setMovieList(List<Movie> movieList) {
+    public void setProgramList(List<HomepageProgram> movieList) {
         mMovieList = movieList;
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(LiveVideoViewHolder holder, int position) {
-holder.mViewDataBinding.setVariable(BR.movie,mMovieList.get(position));
+holder.mViewDataBinding.setVariable(BR.program,mMovieList.get(position));
     }
 
     @Override

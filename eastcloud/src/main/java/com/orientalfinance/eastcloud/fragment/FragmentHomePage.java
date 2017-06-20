@@ -12,13 +12,15 @@ import com.orientalfinance.eastcloud.adapter.CurrentHitPageAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerHomePageComponent;
 import com.orientalfinance.eastcloud.dagger.component.HomePageComponent;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +28,7 @@ import javax.inject.Inject;
  * create an instance of this fragment.
  */
 public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageView, HomePagePresenter> implements HomepageView {
+    static String TAG = FragmentHomePage.class.getSimpleName();
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home_page;
@@ -46,8 +49,8 @@ public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageVi
     private String mParam2;
     FragmentHomePageBinding mFragmentHomePageBinding;
 
-    @Inject
-    List<String> mImageUrl;
+
+    List<String> mImageUrl = new ArrayList<>();
 
     public FragmentHomePage() {
         // Required empty public constructor
@@ -85,10 +88,46 @@ public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageVi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentHomePageBinding = (FragmentHomePageBinding) mViewDataBinding;
-        mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager()));
+        getCategory();
+    }
+
+    private void getCategory() {
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showCategory(requestParam);
+    }
+
+    @Override
+    public void showDialog() {
+
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showCategory(List<HomePageChannel.Category> categories) {
+        LogUtils.d(TAG, "showCategory: "+categories.toString());
+        List<String> categoryTitle = new ArrayList<>();
+        for (int i = 0; i < categories.size(); i++) {
+
+            categoryTitle.add(categories.get(i).getCateName());
+
+        }
+        if (categoryTitle.size()>5)
+        {
+            for (int i = 5; i < categoryTitle.size() ; i++) {
+                categoryTitle.remove(categoryTitle.get(i));
+            }
+        }
+        mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager(), categoryTitle));
         mFragmentHomePageBinding.tabHomepage.setTabMode(TabLayout.MODE_FIXED);
         mFragmentHomePageBinding.tabHomepage.setupWithViewPager(mFragmentHomePageBinding.vpHomePage);
     }
-
-
 }

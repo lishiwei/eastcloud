@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by 29435 on 2017/6/18.
  */
 
-public class HomepageProgram {
+public class HorizontalProgram {
     @SerializedName("program_id")
     String programId;
     @SerializedName("show_img")
@@ -17,6 +17,9 @@ public class HomepageProgram {
     String programeIntroduce;
     @SerializedName("channel_id")
     String channelId;
+
+    public HorizontalProgram() {
+    }
 
     public String getProgramId() {
         return programId;
@@ -58,10 +61,7 @@ public class HomepageProgram {
         this.channelId = channelId;
     }
 
-    public HomepageProgram() {
-    }
-
-    public HomepageProgram(String programId, String imageUrl, String programeName, String programeIntroduce, String channelId) {
+    public HorizontalProgram(String programId, String imageUrl, String programeName, String programeIntroduce, String channelId) {
         this.programId = programId;
         this.imageUrl = imageUrl;
         this.programeName = programeName;

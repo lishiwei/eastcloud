@@ -9,6 +9,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingPassWordView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 import org.reactivestreams.Publisher;
 
@@ -29,6 +30,10 @@ public class SettingPassWordPresenter extends MvpNullObjectBasePresenter<Setting
 
 
     public void register(RequestParam requestParam) {
+        if (!ValidateUtils.isMobileNO(((User.RegistRequestParam) requestParam.getData()).phone)) {
+            getView().showError("您的手机号输入有误!");
+            return;
+        }
         getView().showRegist();
         RemoteDataProxy.register(requestParam).compose(new FlowableTransformer<EastCloudResponseBody<User>, User>() {
             @Override
@@ -59,6 +64,10 @@ public class SettingPassWordPresenter extends MvpNullObjectBasePresenter<Setting
 
     }
     public void forgetPsd(RequestParam requestParam) {
+        if (!ValidateUtils.isMobileNO(((User.RegistRequestParam) requestParam.getData()).phone)) {
+            getView().showError("您的手机号输入有误!");
+            return;
+        }
         getView().showRegist();
         RemoteDataProxy.forgetPwd(requestParam).compose(new FlowableTransformer<EastCloudResponseBody<User>, User>() {
             @Override
@@ -92,6 +101,10 @@ public class SettingPassWordPresenter extends MvpNullObjectBasePresenter<Setting
 
     }
     public void modifyPsd(RequestParam requestParam) {
+        if (!ValidateUtils.isMobileNO(((User.RegistRequestParam) requestParam.getData()).phone)) {
+            getView().showError("您的手机号输入有误!");
+            return;
+        }
         getView().showRegist();
         RemoteDataProxy.updatePwd(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override

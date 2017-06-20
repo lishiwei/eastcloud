@@ -4,7 +4,6 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
@@ -16,15 +15,12 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.CurrentHitComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerCurrentHitComponent;
 import com.orientalfinance.eastcloud.dagger.modules.CurrentHitModule;
-import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
-import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.Program;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -34,8 +30,6 @@ import com.orientalfinance.eastcloud.utils.MyDataBindingUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,16 +46,14 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     private String mParam1;
     private String mParam2;
     FragmentCurrentHitBinding mFragmentCurrentHitBinding;
-    @Inject
     List<String> mImageUrl;
-    @Inject
-    @CurrentHit
-    CurrentHitRvAdpter mCurrentHitRvAdpter;
-    @Inject
-    @LiveVideo
-    LiveVideoRvAdapter mLiveVideoRvAdapter;
-    List<String> mStringList = new ArrayList<>();
 
+    CurrentHitRvAdpter mCurrentHitRvAdpter ;
+
+    LiveVideoRvAdapter mLiveVideoRvAdapter;
+    List<String> mAdverStringList = new ArrayList<>();
+List<HomepageProgram> mCurrentHitPrograms = new ArrayList<>();
+List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
     public FragmentCurrentHit() {
         // Required empty public constructor
     }
@@ -103,12 +95,6 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         return DaggerCurrentHitComponent.builder().appComponent(appComponent).currentHitModule(new CurrentHitModule()).build();
     }
 
-    @Override
-    public void showView(List<Movie> movies) {
-        mCurrentHitRvAdpter.setMovieList(movies);
-        mLiveVideoRvAdapter.setMovieList(movies);
-        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
-    }
 
     @Override
     public void showDialog() {
@@ -123,15 +109,18 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mStringList.add("aaaaaaa");
-        mStringList.add("bbbbbbbbbbbb");
-        mStringList.add("cccccccccccccc");
-        mStringList.add("dddddddddd");
+        mAdverStringList.add("aaaaaaa");
+        mAdverStringList.add("bbbbbbbbbbbb");
+        mAdverStringList.add("cccccccccccccc");
+        mAdverStringList.add("dddddddddd");
+        mCurrentHitRvAdpter = new CurrentHitRvAdpter(mCurrentHitPrograms );
+        mLiveVideoRvAdapter = new LiveVideoRvAdapter(mLiveVideoPrograms );
+
+        mImageUrl = new ArrayList<>();
         mFragmentCurrentHitBinding = (FragmentCurrentHitBinding) mViewDataBinding;
         mFragmentCurrentHitBinding.setUtils(new MyDataBindingUtils());
         mFragmentCurrentHitBinding.banner.setImageLoader(new GlideImageLoader());
-        mFragmentCurrentHitBinding.banner.setImages(mImageUrl);
-        mFragmentCurrentHitBinding.banner.start();
+
         mFragmentCurrentHitBinding.ryCurrentHit.setAdapter(mCurrentHitRvAdpter);
         mFragmentCurrentHitBinding.ryCurrentHit.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
@@ -139,30 +128,17 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
-//        mFragmentCurrentHitBinding.ryCurrentHit.setOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                int topRowVerticalPosition = (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
-//                mFragmentCurrentHitBinding.scrollview.setEnabled(topRowVerticalPosition >= 0);
-//            }
-//        });
 
-        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
 
-            }
-        });
-
-        mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mStringList);
+        mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
         getBanner();
+
+        getAd();
+        getCurrentHit();
+        getProgramList();
     }
+
 
     private void getBanner() {
         RequestParam requestParam = new RequestParam();
@@ -175,7 +151,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     }
 
     private void getCurrentHit() {
-        RequestParam requestParam = new RequestParam(new ShowRequestParam(0, 6));
+        RequestParam requestParam = new RequestParam(new Program.CurrentHitRequestParam(1, 6,"1"));
         getPresenter().showCurrentHit(new RequestParam(requestParam));
     }
 
@@ -205,21 +181,35 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
 
     @Override
     public void showBanner(List<Banner> banners) {
-
+        mImageUrl.clear();
+        for (int i = 0; i < banners.size(); i++) {
+            mImageUrl.add(banners.get(i).getBannerImage());
+        }
+        mFragmentCurrentHitBinding.banner.setImages(mImageUrl);
+        mFragmentCurrentHitBinding.banner.start();
     }
 
     @Override
     public void showAdvertisement(List<Advertisement> advertisements) {
+        mAdverStringList.clear();
+        mFragmentCurrentHitBinding.atvAdvertisement.stop();
+        for (int i = 0; i < advertisements.size(); i++) {
+            mAdverStringList.add(advertisements.get(i).getAdverName());
+        }
+        mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
+        mFragmentCurrentHitBinding.atvAdvertisement.start();
+    }
+
+    @Override
+    public void showCurrentHit(List<HomepageProgram> programList) {
+        mCurrentHitRvAdpter.setProgramList(programList);
 
     }
 
     @Override
-    public void showCurrentHit(List<HomepageProgram> advertisements) {
+    public void showProgramList(List<HomepageProgram> programList) {
+        mLiveVideoRvAdapter.setProgramList(programList);
 
     }
 
-    @Override
-    public void showProgramList(List<HomepageProgram> advertisements) {
-
-    }
 }

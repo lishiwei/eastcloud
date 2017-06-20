@@ -9,18 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentShangHaiBinding;
 import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
-import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.component.ShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ShangHaiModules;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ShangHaiPresenter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -46,12 +42,7 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent, ShangHaiVi
     FragmentShangHaiBinding mFragmentShangHaiBinding;
     @Inject
     ChannelRvAdapter mChannelRvAdapter;
-    @Inject
-    List<String> mStringList;
-    @Inject
-    List<Movie> mMovieList;
-    @Inject
-    LiveVideoRvAdapter mLiveVideoRvAdapter;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -86,8 +77,7 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent, ShangHaiVi
         mFragmentShangHaiBinding = (FragmentShangHaiBinding) mViewDataBinding;
         mFragmentShangHaiBinding.rvShanghai.setLayoutManager(new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mFragmentShangHaiBinding.rvShanghai.setAdapter(mChannelRvAdapter);
-//        mFragmentShangHaiBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
-//        mFragmentShangHaiBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
+//
     }
 
     @Override

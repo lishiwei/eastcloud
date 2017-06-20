@@ -2,6 +2,8 @@ package com.orientalfinance.eastcloud.module.javabean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by 29435 on 2017/6/18.
  */
@@ -102,10 +104,19 @@ public class HomePageChannel {
     }
 
     public class Category {
-        @SerializedName("cate_id")
+        @SerializedName("id")
         String cateId;
-        @SerializedName("cate_name")
+        @SerializedName("name")
         String cateName;
+        List<Category> child;
+
+        public List<Category> getChild() {
+            return child;
+        }
+
+        public void setChild(List<Category> child) {
+            this.child = child;
+        }
 
         public String getCateId() {
             return cateId;

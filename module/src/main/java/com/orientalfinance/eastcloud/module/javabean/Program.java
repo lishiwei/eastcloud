@@ -1,21 +1,12 @@
 package com.orientalfinance.eastcloud.module.javabean;
 
 import com.google.gson.annotations.SerializedName;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
 
 /**
  * Created by 29435 on 2017/6/18.
  */
 
-/*
-节目
-* result 结果信息 （list）
-channel_code 频道编码
-channel_name 频道名称
-program_list 频道列表:
-3.1 program_id 节目id
-3.2 program_name 节目名称
-3.3 ﻿air_time 播出时间
-* */
 public class Program {
     @SerializedName("program_id")
     String channelId;
@@ -62,4 +53,27 @@ public class Program {
                 ", playTime='" + playTime + '\'' +
                 '}';
     }
+  public static class CurrentHitRequestParam extends ShowRequestParam{
+      String catelog_id;
+
+      public CurrentHitRequestParam(int start, int length, String catelog_id) {
+          super(start, length);
+          this.catelog_id = catelog_id;
+      }
+
+      public String getCatelog_id() {
+          return catelog_id;
+      }
+
+      public void setCatelog_id(String catelog_id) {
+          this.catelog_id = catelog_id;
+      }
+
+      @Override
+      public String toString() {
+          return "CurrentHitRequestParam{" +
+                  "catelog_id='" + catelog_id + '\'' +
+                  '}';
+      }
+  }
 }

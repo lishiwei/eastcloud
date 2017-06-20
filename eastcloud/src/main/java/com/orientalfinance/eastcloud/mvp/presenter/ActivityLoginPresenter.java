@@ -8,6 +8,7 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.LoginView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 import com.orientalfinance.eastcloud.utils.LogUtils;
+import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -19,8 +20,11 @@ public class ActivityLoginPresenter extends MvpNullObjectBasePresenter<LoginView
 
     public void login(RequestParam requestParam) {
         getView().showLogin();
-
-
+User.UserLoginRequestParam userLoginRequestParam = (User.UserLoginRequestParam) requestParam.getData();
+        if (!ValidateUtils.isMobileNO(userLoginRequestParam.getPhone()))
+        {
+            getView().showError("您的手机号码不正确!");
+        }
         RemoteDataProxy.login(requestParam, new HttpCallBack<User>() {
             @Override
             public void OnSuccess(User data) {

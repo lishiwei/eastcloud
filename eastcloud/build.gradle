@@ -104,4 +104,7 @@ dependencies {
     compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.2.5'
     testCompile 'junit:junit:4.12'
     compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
+    compile 'liji.library.dev:citypickerview:1.1.0'
+    compile 'me.drakeet.multitype:multitype:3.0.0'
+
 }

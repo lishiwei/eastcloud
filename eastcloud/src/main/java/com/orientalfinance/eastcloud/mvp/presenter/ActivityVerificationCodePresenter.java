@@ -27,11 +27,12 @@ public class ActivityVerificationCodePresenter extends MvpNullObjectBasePresente
 
     public void sendVerificationCode(RequestParam requestParam) {
 
-        getView().showGetCode();
         if (!ValidateUtils.isMobileNO(((User.SendCodeRequestParam) requestParam.getData()).phone)) {
             getView().showError("您的手机号输入有误!");
             return;
         }
+        getView().showGetCode();
+
 
         RemoteDataProxy.codeSend(requestParam).compose(new ObjectTransform<Message>()).subscribe(new Consumer<Message>() {
             @Override
@@ -50,6 +51,10 @@ super.accept(throwable);
     }
 
     public void verificateCode(RequestParam requestParam) {
+        if (!ValidateUtils.isMobileNO(((User.VerificateCodeRequestParam) requestParam.getData()).phone)) {
+            getView().showError("您的手机号输入有误!");
+            return;
+        }
         getView().showGetCode();
         RemoteDataProxy.validateCode(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override
