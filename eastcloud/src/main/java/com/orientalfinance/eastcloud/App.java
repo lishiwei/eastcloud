@@ -19,6 +19,7 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +34,7 @@ public class App extends Application {
     static App mApp;
     private RemoteDataProxy remoteDataProxy;
     public static WeakHandler mainHandler;
+    public static ArrayList<String> unauthorizedPermissions = new ArrayList<>();
 
     @Override
     public void onCreate() {

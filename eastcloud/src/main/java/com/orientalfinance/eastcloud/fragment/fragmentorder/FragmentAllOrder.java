@@ -104,7 +104,6 @@ public class FragmentAllOrder extends Fragment {
         refreshView.setMoveHeadWhenDisablePullRefresh(true);
         refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
 
-
             @Override
             public void onLoadMore(boolean isSilence) {
                 Toast.makeText(getActivity(), "上拉加载更多", Toast.LENGTH_SHORT).show();
