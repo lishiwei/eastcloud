@@ -2,11 +2,13 @@ package com.orientalfinance.eastcloud.fragment;
 
 
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +20,13 @@ import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.App;
+import com.orientalfinance.eastcloud.adapter.ControllerFragmentAdapter;
+import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerMenu;
+import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerNumber;
 import com.orientalfinance.eastcloud.utils.WeakHandler;
+import com.orientalfinance.eastcloud.view.indictor.PageIndicatorView;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,6 +47,8 @@ public class FragmentRemoteControl extends Fragment {
     private View statusView;
     private WindowManager windowManager;
     private MyHandler handler;
+    private ViewPager viewPager;
+    private PageIndicatorView indicatorView;
 
 
     public FragmentRemoteControl() {
@@ -79,50 +88,59 @@ public class FragmentRemoteControl extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_remote_control, container, false);
         statusView = inflater.inflate(R.layout.header_status, null);
-        RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
-        startPropertyAnim(controllerMenu);
+//        RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
+//        startPropertyAnim(controllerMenu);
         initViews(view);
 
         return view;
     }
 
     private void initViews(View view) {
-        view.findViewById(R.id.img_top).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Top", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        view.findViewById(R.id.img_top).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "Top", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        view.findViewById(R.id.img_right).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        view.findViewById(R.id.img_bottom).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "bottom", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        view.findViewById(R.id.img_left).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        view.findViewById(R.id.img_center).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "center", Toast.LENGTH_SHORT).show();
+//                showStatus();
+//            }
+//        });
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new FragmentControllerMenu());
+        fragments.add(new FragmentControllerNumber());
+        viewPager = (ViewPager) view.findViewById(R.id.vp_remote);
+        viewPager.setAdapter(new ControllerFragmentAdapter(getChildFragmentManager(), fragments));
 
-        view.findViewById(R.id.img_right).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        view.findViewById(R.id.img_bottom).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "bottom", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        view.findViewById(R.id.img_left).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        view.findViewById(R.id.img_center).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "center", Toast.LENGTH_SHORT).show();
-                showStatus();
-            }
-        });
-
+        indicatorView = (PageIndicatorView) view.findViewById(R.id.piv_view_pager);
+        indicatorView.setViewPager(viewPager);
+        indicatorView.setUnselectedColor(Color.parseColor("#999999"));
+        indicatorView.setSelectedColor(Color.parseColor("#333333"));
     }
 
     private void startPropertyAnim(View view) {

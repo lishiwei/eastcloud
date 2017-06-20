@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     public static String HOMEPAGE = "homepage";
     public static String REMOTECONTROL = "remotecontrol";
     private TextView mTitle;
+    Toolbar toolbar;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,25 +64,28 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentHomePage);
                     fragmentTransaction.commitAllowingStateLoss();
                     mTitle.setText("东方遥控宝");
+                    toolbar.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_channel:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentHomePage).hide(mFragmentMySelf).show(mFragmentDashBoard);
                     fragmentTransaction.commitAllowingStateLoss();
                     mTitle.setText(getString(R.string.title_channel));
+                    toolbar.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_application:
                     fragmentTransaction.hide(mFragmentHomePage).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentApplication);
                     fragmentTransaction.commitAllowingStateLoss();
                     mTitle.setText(getString(R.string.title_application));
-
+                    toolbar.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_remotecontrol:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentHomePage).hide(mFragmentDashBoard).hide(mFragmentMySelf).show(mFragmentRemoteControl);
                     fragmentTransaction.commitAllowingStateLoss();
                     mTitle.setText(getString(R.string.title_remote_control));
-
+                    toolbar.setVisibility(View.GONE);
                     return true;
                 case R.id.navigation_myself:
+                    toolbar.setVisibility(View.VISIBLE);
                     if (AcacheUtil.getInstance().getUser() == null) {
                         Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
                         startActivity(intent);
@@ -89,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commitAllowingStateLoss();
                         mTitle.setText(getString(R.string.title_myself));
                     }
-
-
                     return true;
             }
 
@@ -99,18 +102,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
-    private final static String[] MULTI_PERMISSIONS = new String[]{
-
-            Manifest.permission.READ_PHONE_STATE,
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         requestPermissions();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mTitle = (TextView) toolbar.findViewById(R.id.tv_title);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
