@@ -41,6 +41,10 @@ public class Constant {
         public static final int ADD_FAMILY = 366;
         public static final int EDIT_FAMILY = 367;
         public static final int DELETE_FAMILY = 368;
+        public static final int SHOW_BANK_LIST = 369;
+        public static final int CHECK_BANK = 370;
+        public static final int COMMIT_BANK = 371;
+        public static final int EDIT_BANK_PWD = 372;
 
 
         public static final int SHOW_WATCH_HISTORY = 451;

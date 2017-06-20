@@ -3,7 +3,6 @@ package com.orientalfinance.eastcloud.mvp.View;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.List;
 
@@ -12,8 +11,6 @@ import java.util.List;
  */
 
 public interface CurrentHitView extends BaseMvpView {
-
-    void showView(List<Movie> movies);
 
     void showBanner(List<Banner> banners);
 

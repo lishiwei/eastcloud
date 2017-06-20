@@ -9,6 +9,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ManagerAddressView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 import java.util.List;
 
@@ -40,6 +41,12 @@ public static String TAG = ActivityManagerAddressPresenter.class.getSimpleName()
                 });
     }
     public void editAddress(RequestParam requestParam) {
+       Address.EditRequestParam  editRequestParam = (Address.EditRequestParam) requestParam.getData();
+        if (!ValidateUtils.isMobileNO(editRequestParam.getPhone()))
+        {
+            getView().showError("您的手机号码不正确！");
+            return;
+        }
         getView().showDialog();
         RemoteDataProxy.editAddress(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override

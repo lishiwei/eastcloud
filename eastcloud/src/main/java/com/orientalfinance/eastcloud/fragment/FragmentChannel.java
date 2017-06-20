@@ -13,7 +13,6 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.ChannelComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerChannelComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ChannelModules;
-import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -77,11 +76,11 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
         mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
         mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
 
-        RequestParam requestParam = new RequestParam();
-        getPresenter().showChannelCategory(requestParam);
-        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam("0");
-        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
-        getPresenter().showChannelList(requestParam1);
+//        RequestParam requestParam = new RequestParam();
+//        getPresenter().showChannelCategory(requestParam);
+//        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam("0");
+//        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+//        getPresenter().showChannelList(requestParam1);
     }
 
     @Override

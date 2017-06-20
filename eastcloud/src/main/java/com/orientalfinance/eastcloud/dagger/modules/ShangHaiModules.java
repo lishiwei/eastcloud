@@ -2,9 +2,7 @@ package com.orientalfinance.eastcloud.dagger.modules;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.ChannelRvAdapter;
-import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
 import com.orientalfinance.eastcloud.module.javabean.Channel;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +15,6 @@ import dagger.Provides;
  */
 @Module
 public class ShangHaiModules {
-    @Provides
-    public LiveVideoRvAdapter getLiveVideoDapter(List<Movie> movies) {
-        return new LiveVideoRvAdapter(movies);
-    }
-
-    @Provides
-
-    public List<Movie> getLiveVideoMovie() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie(R.drawable.taiguoezuojvzhiwen + "", "泰国恶作剧之吻", "小清新二次元恋爱奋斗史"));
-        movies.add(new Movie(+R.drawable.gujianqitan + "", "古剑奇谭3", "李易峰今晚8:00决战大开始"));
-        movies.add(new Movie(R.drawable.qipashuo + "", "奇葩说", "单亲妈妈到底是利还是弊"));
-        movies.add(new Movie(R.drawable.benpaobaxiongdi + "", "奔跑吧兄弟2", "神秘嘉宾叫嚣大黑牛李晨"));
-        return movies;
-    }
 
     @Provides
     public List<String> getImages() {
@@ -41,7 +24,6 @@ public class ShangHaiModules {
         mImageUrl.add("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2369900843,1093290712&fm=23&gp=0.jpg");
         return mImageUrl;
     }
-
     @Provides
     public ChannelRvAdapter getAdapter(List<Channel> channels) {
         return new ChannelRvAdapter(channels);

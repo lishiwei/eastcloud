@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityDetail;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class CurrentHitRvAdpter extends RecyclerView.Adapter<CurrentHitRvAdpter.CurrentHitViewHolder> {
     private static final String TAG = CurrentHitRvAdpter.class.getSimpleName();
-    List<Movie> mMovieList;
+    List<HomepageProgram> mMovieList;
 
     @Override
     public CurrentHitViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
@@ -39,17 +39,17 @@ public class CurrentHitRvAdpter extends RecyclerView.Adapter<CurrentHitRvAdpter.
         return currentHitViewHolder;
     }
 
-    public CurrentHitRvAdpter(List<Movie> movies) {
+    public CurrentHitRvAdpter(List<HomepageProgram> movies) {
         mMovieList = movies;
     }
 
     @Override
     public void onBindViewHolder(CurrentHitViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: "+mMovieList.get(position));
-        holder.mViewDataBinding.setVariable(BR.movie, mMovieList.get(position));
+        holder.mViewDataBinding.setVariable(BR.program, mMovieList.get(position));
     }
 
-    public void setMovieList(List<Movie> movieList) {
+    public void setProgramList(List<HomepageProgram> movieList) {
         Log.d(TAG, "setMovieList: "+movieList.size());
         mMovieList = movieList;
         notifyDataSetChanged();

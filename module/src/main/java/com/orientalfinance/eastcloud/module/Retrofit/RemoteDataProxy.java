@@ -10,6 +10,7 @@ import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
+import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
@@ -304,6 +305,46 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .deleteFamily(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：编辑家庭成员
+     * itype 369
+     */
+    public static Flowable<EastCloudResponseBody<List<BankCardInfo>>> showBankList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_BANK_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showBankList(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：检查银行卡
+     * itype 370
+     */
+    public static Flowable<EastCloudResponseBody<BankCardInfo>> checkBank(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.CHECK_BANK);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .checkBank(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：提交银行卡
+     * itype 371
+     */
+    public static Flowable<EastCloudResponseBody> commitBank(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.COMMIT_BANK);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .commitBank(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：编辑银行卡信息
+     * itype 372
+     */
+    public static Flowable<EastCloudResponseBody> editBankPwd(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.EDIT_BANK_PWD);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .editBankPwd(sendRequest.getS(), sendRequest.getSign());
     }
 
     /**

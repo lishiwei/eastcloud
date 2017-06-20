@@ -4,6 +4,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
+import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
@@ -189,6 +190,25 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody> deleteFamily(@Field("s") String zip, @Field("sign") String sign);
 
+
+    //itype 369
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<BankCardInfo>>> showBankList(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 370
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<BankCardInfo>> checkBank(@Field("s") String zip, @Field("sign") String sign);
+    //itype 371
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> commitBank(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 372
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody> editBankPwd(@Field("s") String zip, @Field("sign") String sign);
 
     //itype 451
     @FormUrlEncoded

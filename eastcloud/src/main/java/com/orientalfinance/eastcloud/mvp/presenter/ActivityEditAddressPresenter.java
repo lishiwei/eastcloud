@@ -5,8 +5,10 @@ import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ActivityEditAddressView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.ValidateUtils;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -22,6 +24,12 @@ public class ActivityEditAddressPresenter extends MvpNullObjectBasePresenter<Act
     }
 
     public void editAddress(RequestParam requestParam) {
+        Address.EditRequestParam  editRequestParam = (Address.EditRequestParam) requestParam.getData();
+        if (!ValidateUtils.isMobileNO(editRequestParam.getPhone()))
+        {
+            getView().showError("您的手机号码不正确！");
+            return;
+        }
         getView().showDialog();
         RemoteDataProxy.editAddress(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override

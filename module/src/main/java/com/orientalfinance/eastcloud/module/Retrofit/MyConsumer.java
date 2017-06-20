@@ -20,7 +20,7 @@ public abstract class MyConsumer<T> implements Consumer<T> {
 
     @Override
     public void accept(@NonNull T t) throws Exception {
-        Log.e(TAG, "accept: " + t.toString());
+
         if (t instanceof SocketTimeoutException) {
             Log.e(TAG, t.toString());
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "网络连接超时!", Toast.LENGTH_SHORT).show();
@@ -32,6 +32,7 @@ public abstract class MyConsumer<T> implements Consumer<T> {
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "网络连接失败!", Toast.LENGTH_SHORT).show();
         }
         else {
+            ((Exception)t).printStackTrace();
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "请求失败,请稍后重试!", Toast.LENGTH_SHORT).show();
 
         }

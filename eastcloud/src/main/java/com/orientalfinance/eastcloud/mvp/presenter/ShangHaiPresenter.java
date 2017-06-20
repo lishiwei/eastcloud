@@ -13,9 +13,4 @@ public class ShangHaiPresenter extends MvpNullObjectBasePresenter<ShangHaiView> 
     @Inject
     public ShangHaiPresenter() {
     }
-
-
-    public void start() {
-
-    }
 }

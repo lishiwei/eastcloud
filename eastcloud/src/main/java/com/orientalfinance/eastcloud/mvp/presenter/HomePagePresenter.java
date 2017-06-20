@@ -1,9 +1,19 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
+import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by 29435 on 2017/5/25.
@@ -14,17 +24,19 @@ public class HomePagePresenter extends MvpNullObjectBasePresenter<HomepageView> 
     public HomePagePresenter() {
     }
 
-    public void start() {
-
+    public void showCategory(RequestParam requestParam) {
+        RemoteDataProxy.showCategory(requestParam).compose(new ListTransform<List<HomePageChannel.Category>>()).subscribe(new Consumer<List<HomePageChannel.Category>>() {
+            @Override
+            public void accept(@NonNull List<HomePageChannel.Category> categories) throws Exception {
+                getView().showCategory(categories);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+            }
+        });
     }
 
-    @Override
-    public void attachView(HomepageView view) {
 
-    }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-
-    }
 }

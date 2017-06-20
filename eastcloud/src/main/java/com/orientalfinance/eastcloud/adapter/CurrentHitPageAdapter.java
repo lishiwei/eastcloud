@@ -5,10 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentCurrentHit;
-import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentSpecialTopic;
 import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentTVPlay;
-import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentTVStation;
-import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentVariety;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +17,15 @@ import java.util.List;
 public class CurrentHitPageAdapter extends FragmentPagerAdapter {
     List<String> mTabNames = new ArrayList<>();
     List<Fragment> mFragmentList = new ArrayList<>();
-    public CurrentHitPageAdapter(FragmentManager fm) {
+
+    public CurrentHitPageAdapter(FragmentManager fm, List<String> tabNames) {
         super(fm);
-        mTabNames.add("当前热播");
-        mTabNames.add("电视剧");
-        mTabNames.add("专题");
-        mTabNames.add("综艺");
-        mTabNames.add("电视台");
-        mFragmentList.add(FragmentCurrentHit.newInstance("",""));
-        mFragmentList.add(FragmentTVPlay.newInstance("",""));
-        mFragmentList.add(FragmentTVPlay.newInstance("1",""));
-        mFragmentList.add(FragmentTVPlay.newInstance("2",""));
-        mFragmentList.add(FragmentTVPlay.newInstance("3",""));
+        mTabNames = tabNames;
+        mFragmentList.add(FragmentCurrentHit.newInstance("", ""));
+        mFragmentList.add(FragmentTVPlay.newInstance("", ""));
+        mFragmentList.add(FragmentTVPlay.newInstance("1", ""));
+        mFragmentList.add(FragmentTVPlay.newInstance("2", ""));
+        mFragmentList.add(FragmentTVPlay.newInstance("3", ""));
     }
 
     @Override

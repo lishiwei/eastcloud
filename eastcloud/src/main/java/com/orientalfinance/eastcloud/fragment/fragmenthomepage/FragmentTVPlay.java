@@ -3,29 +3,31 @@ package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.support.v7.widget.GridLayoutManager;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentTvplayBinding;
-import com.orientalfinance.eastcloud.adapter.TVPlayRvAdapter;
+import com.orientalfinance.eastcloud.adapter.ProgramHorizontalViewBinder;
+import com.orientalfinance.eastcloud.adapter.ProgramViewBinder;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerTvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.component.TvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.modules.TVPlayModule;
-import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
+import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
+import com.orientalfinance.eastcloud.module.javabean.HorizontalProgram;
+import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.TVPlayPresenter;
-import com.orientalfinance.eastcloud.utils.DensityUtil;
-import com.orientalfinance.eastcloud.utils.GlideImageLoader;
-import com.youth.banner.Banner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,9 +46,12 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
 
     @Inject
     List<String> mStringList;
-    @Inject
-    TVPlayRvAdapter mTVPlayRvAdapter;
+
     FragmentTvplayBinding mFragmentTvplayBinding;
+    @VisibleForTesting
+    MultiTypeAdapter adapter;
+
+    List<Object> items = new ArrayList<>();
 
     public FragmentTVPlay() {
         // Required empty public constructor
@@ -84,22 +89,33 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
         super.onActivityCreated(savedInstanceState);
         mFragmentTvplayBinding = (FragmentTvplayBinding) mViewDataBinding;
 
-        mFragmentTvplayBinding.rvPlay.setAdapter(mTVPlayRvAdapter);
-        mFragmentTvplayBinding.rvPlay.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
-        Banner banner = new Banner(getActivity());
-        banner.setPadding(0, 0, 0, DensityUtil.dp2px(12));
-        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(200)));
-        banner.setImageLoader(new GlideImageLoader());
-        banner.setImages(mStringList);
-        banner.start();
-        mTVPlayRvAdapter.setHeaderView(banner);
+        adapter = new MultiTypeAdapter();
 
-        mFragmentTvplayBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        adapter.register(HorizontalProgram.class, new ProgramHorizontalViewBinder());
+
+        adapter.register(HomepageProgram.class, new ProgramViewBinder());
+
+        final GridLayoutManager layoutManager = new FullyGridLayoutManager(getContext(), 2);
+        GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
+
             @Override
-            public void onRefresh() {
-
+            public int getSpanSize(int position) {
+                Object item = items.get(position);
+                return item instanceof HorizontalProgram ? 2 : 1;
             }
-        });
+        };
+        layoutManager.setSpanSizeLookup(spanSizeLookup);
+        mFragmentTvplayBinding.rvPlay.setLayoutManager(layoutManager);
+        mFragmentTvplayBinding.rvPlay.setAdapter(adapter);
+        for (int i = 0; i < 4; i++) {
+            items.add(new HorizontalProgram());
+            items.add(new HomepageProgram());
+            items.add(new HomepageProgram());
+            items.add(new HomepageProgram());
+            items.add(new HomepageProgram());
+        }
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

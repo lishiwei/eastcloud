@@ -89,7 +89,7 @@ public class FullyGridLayoutManager extends GridLayoutManager {
                     recycler.recycleView(view);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }

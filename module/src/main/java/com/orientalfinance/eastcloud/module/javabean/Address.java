@@ -165,6 +165,62 @@ public class Address implements Serializable{
         String addr;
         String isdefault;
 
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUname() {
+            return uname;
+        }
+
+        public void setUname(String uname) {
+            this.uname = uname;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getZonecode() {
+            return zonecode;
+        }
+
+        public void setZonecode(String zonecode) {
+            this.zonecode = zonecode;
+        }
+
+        public String getZonename() {
+            return zonename;
+        }
+
+        public void setZonename(String zonename) {
+            this.zonename = zonename;
+        }
+
+        public String getAddr() {
+            return addr;
+        }
+
+        public void setAddr(String addr) {
+            this.addr = addr;
+        }
+
+        public String getIsdefault() {
+            return isdefault;
+        }
+
+        public void setIsdefault(String isdefault) {
+            this.isdefault = isdefault;
+        }
+
         public EditRequestParam(String id, String uname, String phone, String zonecode, String zonename, String addr, String isdefault) {
             this.uname = uname;
             this.id = id;

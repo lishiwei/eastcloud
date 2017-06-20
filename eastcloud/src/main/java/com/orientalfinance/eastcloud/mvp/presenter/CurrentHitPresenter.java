@@ -4,7 +4,6 @@ import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.core.MovieRepository;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
@@ -24,11 +23,11 @@ import io.reactivex.functions.Consumer;
 
 public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitView> {
     private static final String TAG = CurrentHitPresenter.class.getSimpleName();
-    MovieRepository mMovieRepository;
+
 
     @Inject
-    public CurrentHitPresenter(MovieRepository movieRepository) {
-        mMovieRepository = movieRepository;
+    public CurrentHitPresenter() {
+
     }
 
 
