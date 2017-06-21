@@ -5,9 +5,7 @@
     android:padding="8dp"
     tools:context="com.orientalfinance.eastcloud.fragment.fragmentorder.FragmentAllOrder">
 
-    <com.andview.refreshview.XRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
+    <com.andview.refreshview.XRefreshView xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
         android:id="@+id/custom_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

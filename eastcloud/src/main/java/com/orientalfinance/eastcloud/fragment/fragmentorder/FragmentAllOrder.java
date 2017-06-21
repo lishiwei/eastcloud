@@ -81,14 +81,14 @@ public class FragmentAllOrder extends Fragment {
     private void loadData() {
         orders = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            Order order = new Order();
-            order.setName("杜鹃同款对白春款时尚撞色潮流穿搭2017高档雪纺连衣裙");
-            order.setColor("白色");
-            order.setCount("1");
-            order.setPrice("128");
-            order.setSize("XXXL");
-            order.setLogoUrl("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=715805757,2162331109&fm=26&gp=0.jpg");
-            orders.add(order);
+//            Order order = new Order();
+//            order.setName("杜鹃同款对白春款时尚撞色潮流穿搭2017高档雪纺连衣裙");
+//            order.setColor("白色");
+//            order.setCount("1");
+//            order.setPrice("128");
+//            order.setSize("XXXL");
+//            order.setLogoUrl("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=715805757,2162331109&fm=26&gp=0.jpg");
+//            orders.add(order);
         }
     }
 
@@ -114,16 +114,7 @@ public class FragmentAllOrder extends Fragment {
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
                 refreshView.stopRefresh();
                 lastRefreshTime = refreshView.getLastRefreshTime();
-                for (int i = 0; i < 3; i++) {
-                    Order order = new Order();
-                    order.setName("杜鹃同款对白春款时尚撞色潮流穿搭2017高档雪纺连衣裙");
-                    order.setColor("白色");
-                    order.setCount("1");
-                    order.setPrice("128");
-                    order.setSize("XXXL");
-                    order.setLogoUrl("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=715805757,2162331109&fm=26&gp=0.jpg");
-                    orders.add(order);
-                }
+
                 orderAdapter.notifyDataSetChanged();
             }
 

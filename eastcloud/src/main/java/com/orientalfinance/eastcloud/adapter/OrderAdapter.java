@@ -23,6 +23,8 @@ public class OrderAdapter extends BaseAdapter {
     private Context mCtx;
     private List<Order> mList;
     private final LayoutInflater layoutInflater;
+    public static int TYPE_JIAOFEI = 1;
+    public static int TYPE_YINGYONG = 2;
 
     public OrderAdapter(Context context, List<Order> list) {
         this.mCtx = context;
@@ -41,6 +43,20 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        String buzi_type = mList.get(position).getBuzi_type();
+        int item_type = 0;
+        if (buzi_type != null) {
+            if (buzi_type.equals("jiaofei")) {
+                item_type = 1;
+            } else if (buzi_type.equals("yingyong")) {
+                item_type = 2;
+            }
+        }
+        return item_type;
+    }
+
+    @Override
     public long getItemId(int position) {
         return position;
     }
@@ -48,6 +64,15 @@ public class OrderAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+        switch (getItemViewType(position)) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+        }
+
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.item_order, null);
             viewHolder = new ViewHolder(convertView);
@@ -55,12 +80,12 @@ public class OrderAdapter extends BaseAdapter {
         } else viewHolder = (ViewHolder) convertView.getTag();
 
         Order order = mList.get(position);
-        Glide.with(mCtx).load(order.getLogoUrl()).placeholder(R.mipmap.ic_launcher).into(viewHolder.ivLog);
-        viewHolder.tvProductName.setText(order.getName());
-        viewHolder.tvProductColor.setText(order.getColor());
-        viewHolder.tvProductCount.setText(order.getCount());
-        viewHolder.tvProductPrice.setText(order.getPrice());
-        viewHolder.tvProductSize.setText(order.getSize());
+//        Glide.with(mCtx).load(order.getLogoUrl()).placeholder(R.mipmap.ic_launcher).into(viewHolder.ivLog);
+//        viewHolder.tvProductName.setText(order.getName());
+//        viewHolder.tvProductColor.setText(order.getColor());
+//        viewHolder.tvProductCount.setText(order.getCount());
+//        viewHolder.tvProductPrice.setText(order.getPrice());
+//        viewHolder.tvProductSize.setText(order.getSize());
 
         return convertView;
     }
