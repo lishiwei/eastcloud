@@ -4,25 +4,35 @@ package com.orientalfinance.eastcloud.fragment;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.App;
 import com.orientalfinance.eastcloud.adapter.ControllerFragmentAdapter;
+import com.orientalfinance.eastcloud.adapter.TVConnectAdapter;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerMenu;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerNumber;
+import com.orientalfinance.eastcloud.module.javabean.TVConnectState;
+import com.orientalfinance.eastcloud.utils.DividerItemDecoration;
 import com.orientalfinance.eastcloud.utils.WeakHandler;
 import com.orientalfinance.eastcloud.view.indictor.PageIndicatorView;
 
@@ -49,6 +59,11 @@ public class FragmentRemoteControl extends Fragment {
     private MyHandler handler;
     private ViewPager viewPager;
     private PageIndicatorView indicatorView;
+    private View mPopWindowView;
+    private PopupWindow mPopWindow;
+    private ArrayList<TVConnectState> mList;
+    private View view;
+    private TextView tvConnectButton;
 
 
     public FragmentRemoteControl() {
@@ -86,7 +101,7 @@ public class FragmentRemoteControl extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_remote_control, container, false);
+        view = inflater.inflate(R.layout.fragment_remote_control, container, false);
         statusView = inflater.inflate(R.layout.header_status, null);
 //        RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
 //        startPropertyAnim(controllerMenu);
@@ -141,6 +156,16 @@ public class FragmentRemoteControl extends Fragment {
         indicatorView.setViewPager(viewPager);
         indicatorView.setUnselectedColor(Color.parseColor("#999999"));
         indicatorView.setSelectedColor(Color.parseColor("#333333"));
+
+        tvConnectButton = (TextView) view.findViewById(R.id.tv_connection);
+
+        initPopupWindow();
+        tvConnectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(mPopWindow);
+            }
+        });
     }
 
     private void startPropertyAnim(View view) {
@@ -184,6 +209,57 @@ public class FragmentRemoteControl extends Fragment {
         ObjectAnimator a = ObjectAnimator.ofFloat(statusView, "translationY", -700, 0);
         a.setDuration(600);
         a.start();
+    }
+
+    private void getData() {
+        mList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            mList.add(new TVConnectState(false, "我家-客厅机顶盒"));
+        }
+    }
+
+    private void initPopupWindow() {
+        getData();
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopWindowView = getActivity().getLayoutInflater().inflate(R.layout.pop_window_layout, null);
+        RecyclerView recyclerView = (RecyclerView) mPopWindowView.findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        final TVConnectAdapter tvConnectAdapter = new TVConnectAdapter(getActivity(), mList);
+        recyclerView.setAdapter(tvConnectAdapter);
+        tvConnectAdapter.setOnConnectListener(new TVConnectAdapter.ConnectListener() {
+            @Override
+            public void onConnectListener(TVConnectAdapter.ViewHolder viewHolder, int position) {
+                tvConnectAdapter.updateData(mList, position);
+            }
+        });
+        mPopWindow = new PopupWindow(mPopWindowView, layoutParams.width, layoutParams.height, true);
+        // 必须在代码中设置一下背景色，点击外面不会隐藏此弹窗
+        mPopWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // Focusable 为False时，不执行则点击外面不会隐藏此弹窗
+        mPopWindow.setOutsideTouchable(true);
+    }
+
+
+    /**
+     * 方法描述：展示PopupWindow
+     */
+    public void showPopupWindow(PopupWindow popupwindow) {
+        if (popupwindow != null && !popupwindow.isShowing()) {
+            popupwindow.showAtLocation(view, Gravity.TOP, 0, 0);
+        }
+    }
+
+    /**
+     * 方法描述：展示PopupWindow
+     */
+    public void dismissPopupWindow(PopupWindow popupwindow) {
+        if (popupwindow != null && popupwindow.isShowing()) {
+            popupwindow.dismiss();
+        }
     }
 
     public class MyHandler extends Handler {
