@@ -27,4 +27,7 @@
         <item>textVisiblePassword</item>
         <item>textWebPassword</item>
     </string-array>
+
+    <!-- 订单信息-->
+    <string name="un_fa_huo">共:%1$s件商品 总计￥:%2$.2f</string>
 </resources>

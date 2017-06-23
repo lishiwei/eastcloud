@@ -1,8 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.orientalfinance.eastcloud.fragment.fragmentorder.FragmentUnReceived">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECECEC"
+    tools:context="com.orientalfinance.eastcloud.fragment.fragmentorder.FragmentUnReceived">
 
     <com.andview.refreshview.XRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,12 +16,10 @@
         xrefreshview:isHeightMatchParent="true"
         xrefreshview:isWidthMatchParent="true">
 
-        <ListView
-            android:id="@+id/lv_all_order"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="#979797"
-            android:dividerHeight="1dp" />
+            android:layout_height="wrap_content" />
 
     </com.andview.refreshview.XRefreshView>
 </FrameLayout>

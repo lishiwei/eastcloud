@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#ECECEC" />
+
+    <RelativeLayout
+        android:id="@+id/rlyyout_price"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_below="@+id/view_line"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/tv_order_info"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="@string/un_fa_huo" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/llyout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@+id/rlyyout_price"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/btn_sales_return"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/order_btn_bg"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="退货" />
+
+        <TextView
+            android:id="@+id/btn_remind_deliver_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginRight="12dp"
+            android:layout_toLeftOf="@id/btn_sales_return"
+            android:background="@drawable/order_btn_bg"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="提醒发货" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_below="@+id/llyout_btn"
+        android:background="#ECECEC" />
+
+</RelativeLayout>
