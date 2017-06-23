@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,8 +6,8 @@
     android:orientation="vertical"
     tools:context="com.orientalfinance.eastcloud.fragment.FragmentRemoteControl">
 
-
     <RelativeLayout
+        android:id="@+id/rllyout_title"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize">
 
@@ -32,48 +32,53 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rlyout_top"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="12dp">
+        android:layout_height="36dp"
+        android:layout_below="@id/rllyout_title"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="18dp">
 
-        <TextView
-            android:id="@+id/text_input"
-            android:layout_width="80dp"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/controller_rect1"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="电视支付"
-            android:textColor="#ffffff" />
+        <ImageView
+            android:id="@+id/iv_tv_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/tv_pay_btn" />
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="60dp"
+
+        <ImageView
+            android:id="@+id/iv_msg_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:background="@drawable/controller_rect1"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="消息通知"
-            android:textColor="#ffffff" />
+            android:background="@drawable/message_notify" />
     </RelativeLayout>
 
 
     <LinearLayout
+        android:id="@+id/llyout_center"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"
+        android:layout_height="320dp"
+        android:layout_below="@id/rlyout_top"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_remote"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="300dp"
+            android:gravity="center_vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_remote"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center" />
+        </RelativeLayout>
 
 
         <com.orientalfinance.eastcloud.view.indictor.PageIndicatorView
@@ -82,101 +87,47 @@
             android:layout_height="16dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp" />
-
-        <!--<FrameLayout-->
-        <!--android:layout_width="240dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_weight="2">-->
-
-        <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/img_center"-->
-        <!--android:layout_width="85dp"-->
-        <!--android:layout_height="85dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:src="@drawable/center_circle"-->
-        <!--app:civ_border_width="0dp" />-->
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/rlout"-->
-        <!--android:layout_width="240dp"-->
-        <!--android:layout_height="240dp"-->
-        <!--android:gravity="center">-->
-
-
-        <!--<ImageView-->
-        <!--android:id="@+id/img_top"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:background="@drawable/top" />-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/img_right"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_toRightOf="@id/img_top"-->
-        <!--android:background="@drawable/c_right" />-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/img_left"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_below="@id/img_top"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:background="@drawable/left" />-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/img_bottom"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_below="@id/img_right"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_toRightOf="@id/img_left"-->
-        <!--android:background="@drawable/bottom" />-->
-        <!--</RelativeLayout>-->
-        <!--</FrameLayout>-->
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llyout_center"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
         android:gravity="center_vertical">
 
-
-        <TextView
-            android:id="@+id/text_menu_home"
+        <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignBaseline="@+id/text_menu_return"
-            android:background="@drawable/controller_oval2"
-            android:gravity="center"
-            android:text="声+"
-            android:textColor="#ffffff" />
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/text_menu_return"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/tv_input" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/controller_rect_2"
-            android:gravity="center"
-            android:text="返回"
-            android:textColor="#ffffff" />
+            android:background="@drawable/tv_tou_ping" />
 
-        <TextView
+        <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignBaseline="@+id/text_menu_return"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:background="@drawable/controller_oval2"
-            android:gravity="center"
-            android:text="声-"
-            android:textColor="#ffffff" />
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/tell_me" />
+        </RelativeLayout>
+
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

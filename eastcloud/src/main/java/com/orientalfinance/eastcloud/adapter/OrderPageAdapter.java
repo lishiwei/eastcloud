@@ -26,7 +26,7 @@ public class OrderPageAdapter extends FragmentPagerAdapter {
         mTabNames.add("待付款");
         mTabNames.add("待发货");
         mTabNames.add("待收货");
-        mTabNames.add("待评价");
+        mTabNames.add("已完成");
 
         mFragmentList.add(FragmentAllOrder.newInstance("1",""));
         mFragmentList.add(FragmentUnpaid.newInstance("2",""));
