@@ -28,17 +28,12 @@ public class SearchPresenter extends MvpNullObjectBasePresenter<SearchView> {
     public SearchPresenter() {
 
     }
-
-    public void start() {
-
-
-    }
-
     public void showSearchHot(RequestParam requestParam) {
         getView().showDialog();
         RemoteDataProxy.showSearchHot(requestParam).compose(new ListTransform<List<SearchHot>>()).subscribe(new Consumer<List<SearchHot>>() {
             @Override
             public void accept(@NonNull List<SearchHot> searchHots) throws Exception {
+             getView().showSearchHot(searchHots);
                 getView().hideDialog();
 
             }

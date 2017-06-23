@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentHomePageBinding;
@@ -18,6 +19,7 @@ import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
 import com.orientalfinance.eastcloud.utils.LogUtils;
+import com.orientalfinance.eastcloud.utils.PrivateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,5 +131,24 @@ public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageVi
         mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager(), categoryTitle));
         mFragmentHomePageBinding.tabHomepage.setTabMode(TabLayout.MODE_FIXED);
         mFragmentHomePageBinding.tabHomepage.setupWithViewPager(mFragmentHomePageBinding.vpHomePage);
+
+        mFragmentHomePageBinding.vpHomePage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+           int m = (int) PrivateUtil.invoke(mFragmentHomePageBinding.tabHomepage, "calculateScrollXForTab", new Class[] { int.class,float.class },
+                        new Object[] { position,positionOffset });
+                LogUtils.d(TAG, "onPageScrolled: "+m);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }

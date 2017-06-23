@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityDetail;
+import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 
 import java.util.List;
@@ -27,12 +28,13 @@ public class CurrentHitRvAdpter extends RecyclerView.Adapter<CurrentHitRvAdpter.
     @Override
     public CurrentHitViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_currenthit, null, false);
-        CurrentHitViewHolder currentHitViewHolder = new CurrentHitViewHolder(viewDataBinding.getRoot());
+        final CurrentHitViewHolder currentHitViewHolder = new CurrentHitViewHolder(viewDataBinding.getRoot());
         currentHitViewHolder.setViewDataBinding(viewDataBinding);
         currentHitViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ActivityDetail.class);
+                intent.putExtra(Constant.VALUE,mMovieList.get(currentHitViewHolder.getLayoutPosition()).getProgramId());
                 v.getContext().startActivity(intent);
             }
         });

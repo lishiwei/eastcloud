@@ -14,13 +14,16 @@ import com.orientalfinance.eastcloud.dagger.component.HotBookingComponent;
 import com.orientalfinance.eastcloud.dagger.modules.HotBookingModule;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
+import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.HotBookingView;
 import com.orientalfinance.eastcloud.mvp.View.HotBookingViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.HotBookingPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,21 +44,14 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         return null;
     }
 
-    @Override
-    public void showExchange() {
-
-    }
-
-    @Override
-    public void stopExchange() {
-
-    }
 
     @Inject
     @HotVariety
     HotBookingRvAdpter mHotVarietyRvAdpter;
 
     ActivityHotBookingBinding mActivityHotBookingBinding;
+    List<AppointmentProgram> mHotMovie = new ArrayList<>();
+    List<AppointmentProgram> mHotVariety = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +65,12 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         ((TextView) mActivityHotBookingBinding.toolbar.findViewById(R.id.textView)).setText("热门预约");
         mActivityHotBookingBinding.toolbar.setTitle("");
         setSupportActionBar(mActivityHotBookingBinding.toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ShowRequestParam showRequestParam = new ShowRequestParam(0, 12);
+        getPresenter().exchangeHotMovie(new RequestParam(showRequestParam));
+        ShowRequestParam showRequestParam1 = new ShowRequestParam(0, 12);
+        getPresenter().exchangeHotVariety(new RequestParam(showRequestParam1));
     }
 
     @Override
@@ -83,29 +83,41 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         return DaggerHotBookingComponent.builder().appComponent(appComponent).hotBookingModule(new HotBookingModule()).build();
     }
 
+
     @Override
-    public void showView() {
+    public void showDialog() {
 
     }
 
     @Override
-    public void exchangeHotMovie(List<Movie> movieList) {
-
-        mHotMovieRvAdpter.setMovieList(movieList);
-    }
-
-    @Override
-    public void exchangeHotVariety(List<Movie> movieList) {
-        mHotVarietyRvAdpter.setMovieList(movieList);
-    }
-
-    @Override
-    public void showLoading() {
+    public void hideDialog() {
 
     }
 
     @Override
-    public void hideLoading() {
+    public void showError(String errorMsg) {
 
     }
+
+    @Override
+    public void exchangeHotMovie(List<AppointmentProgram> appointmentPrograms) {
+        for (int i = 0; i < 6; i++) {
+            mHotMovie.add(appointmentPrograms.get(i));
+
+        }
+        mHotMovieRvAdpter.setProgramList(mHotMovie);
+        mHotMovieRvAdpter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void exchangeHotVariety(List<AppointmentProgram> appointmentPrograms) {
+        for (int i = 6; i < 12; i++) {
+            mHotVariety.add(appointmentPrograms.get(i));
+
+        }
+        mHotVarietyRvAdpter.setProgramList(mHotVariety);
+        mHotVarietyRvAdpter.notifyDataSetChanged();
+    }
+
+
 }

@@ -33,7 +33,7 @@ public class StepsView extends LinearLayout implements StepsViewIndicator.OnDraw
     }
 
     public StepsView(Context context, AttributeSet attrs,
-            int defStyleAttr) {
+                     int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -91,6 +91,7 @@ public class StepsView extends LinearLayout implements StepsViewIndicator.OnDraw
     public StepsView setCompletedPosition(int completedPosition) {
         mCompletedPosition = completedPosition;
         mStepsViewIndicator.setCompletedPosition(mCompletedPosition);
+        mStepsViewIndicator.invalidate();
         return this;
     }
 

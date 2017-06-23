@@ -93,6 +93,10 @@ public class StepsViewIndicator extends View {
         mDrawListener.onReady();
     }
 
+    public float getIntervalWidth() {
+        return mDelta;
+    }
+
     @Override
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = 200;

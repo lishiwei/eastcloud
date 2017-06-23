@@ -36,6 +36,15 @@ public class BankCardInfoRvAdpter extends RecyclerView.Adapter<BankCardInfoRvAdp
         return bankCardViewHolder;
     }
 
+    public void setBankCardInfos(List<BankCardInfo> bankCardInfos) {
+        mBankCardInfos = bankCardInfos;
+notifyDataSetChanged();
+    }
+
+    public List<BankCardInfo> getBankCardInfos() {
+        return mBankCardInfos;
+    }
+
     public BankCardInfoRvAdpter(List<BankCardInfo> movies) {
         mBankCardInfos = movies;
     }

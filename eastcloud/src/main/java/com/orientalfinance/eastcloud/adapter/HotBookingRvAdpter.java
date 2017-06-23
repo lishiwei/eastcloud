@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.orientalfinance.BR;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityBookingDetail;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class HotBookingRvAdpter extends RecyclerView.Adapter<HotBookingRvAdpter.CurrentHitViewHolder> {
     private static final String TAG = HotBookingRvAdpter.class.getSimpleName();
-    List<Movie> mMovieList;
+    List<AppointmentProgram> mProgramList;
 
     @Override
     public CurrentHitViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
@@ -39,24 +39,24 @@ public class HotBookingRvAdpter extends RecyclerView.Adapter<HotBookingRvAdpter.
         return currentHitViewHolder;
     }
 
-    public HotBookingRvAdpter(List<Movie> movies) {
-        mMovieList = movies;
+    public HotBookingRvAdpter(List<AppointmentProgram> programs) {
+        mProgramList = programs;
     }
 
     @Override
     public void onBindViewHolder(CurrentHitViewHolder holder, int position) {
-        holder.mViewDataBinding.setVariable(BR.movie, mMovieList.get(position));
+        holder.mViewDataBinding.setVariable(BR.program, mProgramList.get(position));
     }
 
-    public void setMovieList(List<Movie> movieList) {
-        Log.d(TAG, "setMovieList: "+movieList.size());
-        mMovieList = movieList;
+    public void setProgramList(List<AppointmentProgram> ProgramList) {
+        Log.d(TAG, "setProgramList: "+ProgramList.size());
+        mProgramList = ProgramList;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mMovieList.size();
+        return mProgramList.size();
     }
 
     class CurrentHitViewHolder extends RecyclerView.ViewHolder {

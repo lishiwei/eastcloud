@@ -128,8 +128,6 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
-
-
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
         getBanner();
@@ -151,8 +149,8 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
     }
 
     private void getCurrentHit() {
-        RequestParam requestParam = new RequestParam(new Program.CurrentHitRequestParam(1, 6,"1"));
-        getPresenter().showCurrentHit(new RequestParam(requestParam));
+        RequestParam requestParam = new RequestParam(new Program.CurrentHitRequestParam(0, 6,"1"));
+        getPresenter().showCurrentHit(requestParam);
     }
 
     private void getProgramList() {

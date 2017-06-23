@@ -1,7 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.orientalfinance.eastcloud.module.javabean.Movie;
+import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 
 import java.util.List;
 
@@ -9,13 +8,9 @@ import java.util.List;
  * Created by 29435 on 2017/5/26.
  */
 
-public interface HotBookingView extends MvpView{
+public interface HotBookingView extends BaseMvpView{
 
-    void showView();
-    void showLoading();
-    void hideLoading();
-    void showExchange();
-    void stopExchange();
-    void exchangeHotMovie(List<Movie> movieList);
-    void exchangeHotVariety(List<Movie> movieList);
+
+    void exchangeHotMovie(List<AppointmentProgram> appointmentPrograms);
+    void exchangeHotVariety(List<AppointmentProgram> appointmentPrograms);
 }

@@ -10,6 +10,7 @@ import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
+import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
@@ -306,6 +307,7 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .deleteFamily(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：编辑家庭成员
      * itype 369
@@ -316,6 +318,7 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .showBankList(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：检查银行卡
      * itype 370
@@ -326,6 +329,7 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .checkBank(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：提交银行卡
      * itype 371
@@ -336,6 +340,7 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .commitBank(sendRequest.getS(), sendRequest.getSign());
     }
+
     /**
      * 方法描述：编辑银行卡信息
      * itype 372
@@ -465,6 +470,7 @@ public class RemoteDataProxy {
                 .showCurrentHit(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：首页其他栏目
      * itype 505
@@ -476,6 +482,7 @@ public class RemoteDataProxy {
                 .showProgramList(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：搜索推荐热词
      * itype 506
@@ -487,8 +494,9 @@ public class RemoteDataProxy {
                 .showSearchHot(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
-     * 方法描述：首页其他栏目
+     * 方法描述：显示搜索结果
      * itype 507
      */
     public static Flowable<EastCloudResponseBody<List<SearchResult>>> showSearchResult(RequestParam requestParam) {
@@ -498,6 +506,7 @@ public class RemoteDataProxy {
                 .showSearchResult(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：详情页
      * itype 508
@@ -509,6 +518,7 @@ public class RemoteDataProxy {
                 .showProgramDetail(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：详情页
      * itype 509
@@ -520,6 +530,7 @@ public class RemoteDataProxy {
                 .showDetailComments(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：详情页
      * itype 510
@@ -531,9 +542,10 @@ public class RemoteDataProxy {
                 .showDetailChannel(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
-     * 方法描述：详情页
-     * itype 554
+     * 方法描述:提交评论
+     * itype 551
      */
     public static Flowable<EastCloudResponseBody> commitComment(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.COMMIT_COMMENT);
@@ -556,7 +568,7 @@ public class RemoteDataProxy {
     }
 
     /**
-     * 方法描述：删除收藏
+     * 方法描述：显示频道列表
      * itype 512
      */
     public static Flowable<EastCloudResponseBody<List<HomePageChannel>>> showChanneList(RequestParam requestParam) {
@@ -564,6 +576,42 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showChanneList(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：显示预约的节目
+     * itype 552
+     */
+    public static Flowable<EastCloudResponseBody<List<AppointmentProgram>>> showAppointmentProgram(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_APPOINTMENT_PROGRAM);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showAppointmentProgram(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：添加节目预约
+     * itype 553
+     */
+    public static Flowable<EastCloudResponseBody> addAppointmentProgram(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.ADD_APPOINTMENT_PROGRAM);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .addAppointmentProgram(sendRequest.getS(), sendRequest.getSign());
+
+    }
+
+    /**
+     * 方法描述：增加收藏
+     * itype 554
+     */
+    public static Flowable<EastCloudResponseBody> addCollection(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.ADD_COLLECTION);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .add﻿Collection(sendRequest.getS(), sendRequest.getSign());
 
     }
 

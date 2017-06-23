@@ -168,6 +168,7 @@ public class HomePageChannel {
             this.cate_id = cate_id;
         }
 
+        @SerializedName("catelog_id")
         String cate_id;
     }
 }

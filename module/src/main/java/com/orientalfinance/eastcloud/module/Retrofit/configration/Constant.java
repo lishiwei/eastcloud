@@ -16,6 +16,7 @@ public class Constant {
     public static final String MODIFYPWD = "pwd";
     public static final String REGIST = "regist";
     public static final String FORGET = "forget";
+    public static final String PAYPASSOWRD = "paypassword";
 
     public static class IType {
         public static final int REGISTER = 301;
@@ -71,7 +72,10 @@ public class Constant {
 
         public static final int SHOW_MY_CHANNEL_CATEGORY = 511;
         public static final int SHOW_MY_CHANNELLIST = 512;
-        public static final int COMMIT_COMMENT = 554;
+        public static final int COMMIT_COMMENT = 551;
+        public static final int SHOW_APPOINTMENT_PROGRAM = 552;
+        public static final int ADD_APPOINTMENT_PROGRAM = 553;
+        public static final int ADD_COLLECTION = 554;
 
 
     }

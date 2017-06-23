@@ -13,4 +13,5 @@ public interface DetailView extends BaseMvpView {
 
     public void showDetails(List<Detail> details);
     public void showDetailChannels(List<DetailChannel> detailChannels);
+    public void showCommitSucceed();
 }

@@ -14,11 +14,14 @@ import com.orientalfinance.eastcloud.dagger.component.ActivityBankCardComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityBankCardComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityBankCardModule;
+import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.mvp.View.BankCardView;
 import com.orientalfinance.eastcloud.mvp.View.BankCardViewState;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.BankCardPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -77,5 +80,25 @@ public class ActivityMyBankCard extends BaseActivity<ActivityBankCardComponent, 
     @Override
     protected ActivityBankCardComponent constructComponent(AppComponent appComponent) {
         return DaggerActivityBankCardComponent.builder().appComponent(appComponent).activityBankCardModule(new ActivityBankCardModule(this)).build();
+    }
+
+    @Override
+    public void showDialog() {
+        mEastCloudDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+        mEastCloudDialog.hide();
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showBankCard(List<BankCardInfo> bankCardInfos) {
+        mBankCardInfoRvAdpter.setBankCardInfos(bankCardInfos);
     }
 }

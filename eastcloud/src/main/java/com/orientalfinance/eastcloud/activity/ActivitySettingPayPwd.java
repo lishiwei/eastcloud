@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
+import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.view.LoadingButton;
 import com.orientalfinance.eastcloud.view.MainGuideDialog;
 import com.orientalfinance.eastcloud.view.passwordview.GridPasswordView;
@@ -27,7 +29,7 @@ public class ActivitySettingPayPwd extends AppCompatActivity implements GridPass
     private LoadingButton loadingButton;
     private String passWord;
     private ImageView imageViewBack;
-
+    BankCardInfo mTemBankCardInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class ActivitySettingPayPwd extends AppCompatActivity implements GridPass
         setContentView(R.layout.activity_setting_pay_pwd);
 
         initViews();
+        mTemBankCardInfo = getIntent().getParcelableExtra(Constant.VALUE);
+
     }
 
     private void initViews() {
@@ -105,7 +109,10 @@ public class ActivitySettingPayPwd extends AppCompatActivity implements GridPass
     //请求网络
     @Override
     public void onLoadingClick(LoadingButton view) {
-        startActivity(new Intent(this, ActivityConfirmPayPwd.class));
+        Intent intent = new Intent(this, ActivityConfirmPayPwd.class);
+        intent.putExtra(Constant.VALUE,mTemBankCardInfo);
+        intent.putExtra(Constant.PAYPASSOWRD,passWord);
+        startActivity(intent);
         view.setCompleted();
     }
 

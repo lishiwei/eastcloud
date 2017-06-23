@@ -35,7 +35,14 @@ public class DeviceUtil {
      * 方法描述：获取手机的IMEI号
      */
     public static String getDeviceId() {
-        TelephonyManager tm = (TelephonyManager) ModuleContext.getInstance().getModuleContext().getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getDeviceId();
+        String deviceid;
+        TelephonyManager tm;
+        try {
+            tm = (TelephonyManager) ModuleContext.getInstance().getModuleContext().getSystemService(Context.TELEPHONY_SERVICE);
+            deviceid = tm.getDeviceId();
+        } catch (Exception exception) {
+           deviceid = null;
+        }
+        return deviceid ;
     }
 }

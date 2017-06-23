@@ -46,6 +46,31 @@ public class Detail extends BaseObservable{
         this.profile = profile;
         mComments = comments;
     }
+
+    public String getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(String programId) {
+        this.programId = programId;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    public String getAirTime() {
+        return airTime;
+    }
+
+    public void setAirTime(String airTime) {
+        this.airTime = airTime;
+    }
+
     @Bindable
     public String getUrl() {
         return url;
@@ -148,5 +173,27 @@ public class Detail extends BaseObservable{
                 ", profile='" + profile + '\'' +
                 ", mComments=" + mComments +
                 '}';
+    }
+    public static class ShowDetailRequestParam{
+        String program_id;
+
+        public String getProgram_id() {
+            return program_id;
+        }
+
+        public void setProgram_id(String program_id) {
+            this.program_id = program_id;
+        }
+
+        public ShowDetailRequestParam(String program_id) {
+            this.program_id = program_id;
+        }
+
+        @Override
+        public String toString() {
+            return "ShowDetailRequestParam{" +
+                    "program_id='" + program_id + '\'' +
+                    '}';
+        }
     }
 }

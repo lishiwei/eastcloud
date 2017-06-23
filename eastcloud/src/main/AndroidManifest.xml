@@ -91,6 +91,7 @@
             android:parentActivityName=".eastcloud.MainActivity" />
         <activity
             android:name=".eastcloud.activity.ActivitySearch"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:parentActivityName=".eastcloud.MainActivity" />
         <activity
             android:name=".eastcloud.activity.ActivityPlayRecord"

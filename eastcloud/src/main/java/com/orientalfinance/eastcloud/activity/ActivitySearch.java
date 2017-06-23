@@ -1,12 +1,10 @@
 package com.orientalfinance.eastcloud.activity;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
@@ -49,6 +47,8 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     @Searched
     SearchRvAdapter mSearchedRvAdapter;
     ActivitySearchBinding mActivitySearchBinding;
+    List<String> mSearchHots;
+    List<String> mSearchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,24 +84,14 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
         return DaggerSearchComponent.builder().appComponent(appComponent).searchModule(new SearchModule()).build();
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
-        if (imm.isActive()) {//如果开启
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
-        }
-    }
-
     @Override
     public void showDialog() {
-
+        mEastCloudDialog.show();
     }
 
     @Override
     public void hideDialog() {
-
+        mEastCloudDialog.hide();
     }
 
     @Override
@@ -111,7 +101,11 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
 
     @Override
     public void showSearchHot(List<SearchHot> searchHots) {
-
+        for (int i = 0; i < searchHots.size(); i++) {
+            mSearchHots.add(searchHots.get(i).getHotword());
+        }
+        mHotSearchRvAdapter.setStringList(mSearchHots);
+        mHotSearchRvAdapter.notifyDataSetChanged();
     }
 
     @Override

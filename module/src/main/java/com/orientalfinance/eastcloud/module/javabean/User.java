@@ -26,6 +26,15 @@ public class User implements Serializable {
     private String sign_url;
     private String token;
     private String pwd;
+    private String payPwd;
+
+    public String getPayPwd() {
+        return payPwd;
+    }
+
+    public void setPayPwd(String payPwd) {
+        this.payPwd = payPwd;
+    }
 
     public String getPwd() {
         return pwd;

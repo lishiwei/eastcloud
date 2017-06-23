@@ -75,7 +75,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/et_user_phone"
+                    android:id="@+id/et_UerIDCard"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@null"
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@null"
-                    android:paddingLeft="8dp" />
+                    android:paddingLeft="8dp"/>
             </LinearLayout>
 
 
@@ -134,7 +134,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/et_user_phone_mun"
+                    android:id="@+id/et_user_phone"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@null"

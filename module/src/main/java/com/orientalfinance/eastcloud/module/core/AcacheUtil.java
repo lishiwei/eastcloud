@@ -34,4 +34,8 @@ public class AcacheUtil {
         ACache aCache = ACache.get(mContext);
         return (User) aCache.getAsObject(Constant.USER);
     }
+    public boolean isUserLogin()
+    {
+        return getUser()!=null;
+    }
 }

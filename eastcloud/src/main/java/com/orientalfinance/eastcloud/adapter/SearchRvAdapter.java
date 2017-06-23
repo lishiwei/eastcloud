@@ -35,6 +35,9 @@ public class SearchRvAdapter extends RecyclerView.Adapter<SearchRvAdapter.Search
 
     }
 
+    public void setStringList(List<String> stringList) {
+        mStringList = stringList;
+    }
 
     @Override
     public void onBindViewHolder(SearchViewHolder holder, int position) {

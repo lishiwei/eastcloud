@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityConnectTV;
@@ -214,6 +213,12 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentTransaction != null) {
             fragmentTransaction.commitAllowingStateLoss();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @TargetApi(23)

@@ -85,12 +85,12 @@ public class ActivityDetailPresenter extends MvpNullObjectBasePresenter<DetailVi
             }
         });
     }
-    public void commitComment(RequestParam requestParam)
-    {
+
+    public void commitComment(RequestParam requestParam) {
         RemoteDataProxy.commitComment(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override
             public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
-
+                getView().showCommitSucceed();
             }
         }, new MyConsumer<Throwable>() {
             @Override

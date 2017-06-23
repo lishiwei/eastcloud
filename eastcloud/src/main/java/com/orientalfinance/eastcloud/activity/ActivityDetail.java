@@ -1,28 +1,39 @@
 package com.orientalfinance.eastcloud.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anton46.stepsview.StepsView;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityDetailBinding;
+import com.orientalfinance.databinding.ItemDetailBinding;
 import com.orientalfinance.eastcloud.adapter.CommentAdapter;
+import com.orientalfinance.eastcloud.adapter.DetailPageAdapter;
 import com.orientalfinance.eastcloud.adapter.DetailRVAdapter;
 import com.orientalfinance.eastcloud.dagger.component.ActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerActivityDetailComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ActivityDetailModule;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.CommentBean;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
@@ -33,6 +44,9 @@ import com.orientalfinance.eastcloud.mvp.View.DetailView;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityDetailPresenter;
 import com.orientalfinance.eastcloud.utils.AndroidBug5497Workaround;
+import com.orientalfinance.eastcloud.utils.LogUtils;
+import com.orientalfinance.eastcloud.utils.TimeConstants;
+import com.orientalfinance.eastcloud.utils.TimeUtils;
 import com.orientalfinance.eastcloud.view.ExpandListView;
 import com.orientalfinance.eastcloud.view.NoTouchLinearLayout;
 
@@ -59,7 +73,12 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
     private String comment = "";        //记录对话框中的内容
     private int position;                //记录回复评论的索引
     private boolean isReply;            //是否是回复，true代表回复
-
+    String programId;
+    String channelId;
+    DetailPageAdapter mDetailPageAdapter;
+    List<View> mViews = new ArrayList<>();
+    List<String> strings = new ArrayList<>();
+    List<Detail> mDetails;
     @Override
     public boolean hasToolBar() {
         return false;
@@ -80,8 +99,8 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         setSupportActionBar(mActivityDetailBinding.toolbar);
         ((TextView) mActivityDetailBinding.toolbar.findViewById(R.id.tv_toolbar)).setText("影视详情");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getPresenter().start();
+        Detail.ShowDetailRequestParam detailRequestParam = new Detail.ShowDetailRequestParam(getIntent().getStringExtra(Constant.VALUE));
+        getPresenter().getDetail(new RequestParam(detailRequestParam));
         initViews();
 //        mActivityDetailBinding.rvDetailComment.setAdapter(mDetailRVAdapter);
         //     mActivityDetailBinding.rvDetailComment.setLayoutManager(new FullyLinearLayoutManager(ActivityDetail.this));
@@ -91,8 +110,9 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         RequestParam requestParam = new RequestParam(commentRequestParam);
         getPresenter().getDetailComments(requestParam);
 
-        Comment.CommitRequestParam commitRequestParam = new Comment.CommitRequestParam("0", "aaaa", "1", "1");
-        getPresenter().commitComment(new RequestParam(commentRequestParam));
+
+        List<String> strings = new ArrayList<>();
+
 
     }
 
@@ -114,11 +134,60 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
 
         ClickListener cl = new ClickListener();
         mSendBut.setOnClickListener(cl);
-        mLytCommentVG.setOnClickListener(cl);
 
-        //SoftInputUtil.controlKeyboardLayout(viewById, mCommentEdittext);
 
+        mDetailPageAdapter = new DetailPageAdapter(mViews);
+        mActivityDetailBinding.vpDetail.setAdapter(mDetailPageAdapter);
+
+        mActivityDetailBinding.vpDetail.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                LogUtils.d(TAG, "onPageScrolled: position" + position);
+                LogUtils.d(TAG, "onPageScrolled:positionOffset " + positionOffset);
+                LogUtils.d(TAG, "onPageScrolled:positionOffsetPixels " + positionOffsetPixels);
+                if (mActivityDetailBinding.flStepview.getChildAt(0) != null) {
+                    mActivityDetailBinding.flStepview.getChildAt(0).scrollTo((int) ((position + positionOffset) * 300), 0);
+
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ((StepsView) mActivityDetailBinding.flStepview.getChildAt(0)).setCompletedPosition(position);
+                mActivityDetailBinding.etvProfileContent.setContent(mDetails.get(position).getProfile());
+                if (TimeUtils.getTimeSpan(mDetails.get(position).getAirTime(), TimeUtils.getNowString(), TimeConstants.SEC) > 0) {
+                    mActivityDetailBinding.btnAction.setText("预约");
+                    mActivityDetailBinding.btnAction.setClickable(true);
+                    mActivityDetailBinding.btnAction.setEnabled(true);
+                } else {
+                    mActivityDetailBinding.btnAction.setText("在电视上观看");
+                    mActivityDetailBinding.btnAction.setClickable(false);
+                    mActivityDetailBinding.btnAction.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        if (AcacheUtil.getInstance().isUserLogin()) {
+            mActivityDetailBinding.commentVgLyt.setText("评论一下");
+            mLytCommentVG.setOnClickListener(cl);
+
+        } else {
+            mActivityDetailBinding.commentVgLyt.setText("登录才可以评论");
+            mActivityDetailBinding.commentVgLyt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(ActivityDetail.this, ActivityLogin.class));
+                }
+            });
+        }
+//
     }
+
+
 
 
     @Override
@@ -270,6 +339,10 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         list.add(0, bean);//加载到list的最前面
         adapter.addMap(count);
         count++;
+
+        Comment.CommitRequestParam commitRequestParam = new Comment.CommitRequestParam("0", "aaaa", "1", "1");
+        getPresenter().commitComment(new RequestParam(commitRequestParam));
+
         adapter.notifyDataSetChanged();
     }
 
@@ -373,10 +446,39 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
     @Override
     public void showDetails(List<Detail> details) {
 
+
+        strings.add("");
+
+        mDetails = details;
+        for (int i = 0; i < details.size(); i++) {
+            ItemDetailBinding itemDetailBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.item_detail, null, false);
+            itemDetailBinding.setDetail(details.get(i));
+            mViews.add(itemDetailBinding.getRoot());
+            strings.add(details.get(i).getTitle() + "\n" + details.get(i).getTimes());
+        }
+        strings.add("");
+        mDetailPageAdapter.notifyDataSetChanged();
+        StepsView stepview = new StepsView(getBaseContext());
+        stepview.setLayoutParams(new FrameLayout.LayoutParams(300 * strings.size(), ViewGroup.LayoutParams.WRAP_CONTENT));
+        stepview.setLabels(strings.toArray(new String[strings.size()]))
+                .setBarColorIndicator(getResources().getColor(R.color.material_blue_grey_800))
+                .setProgressColorIndicator(Color.GRAY)
+                .setLabelColorIndicator(Color.GRAY)
+                .setCompletedPosition(1)
+                .drawView();
+
+        mActivityDetailBinding.flStepview.addView(stepview);
     }
+
+
 
     @Override
     public void showDetailChannels(List<DetailChannel> detailChannels) {
+
+    }
+
+    @Override
+    public void showCommitSucceed() {
 
     }
 }

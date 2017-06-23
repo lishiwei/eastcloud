@@ -18,6 +18,8 @@ import io.reactivex.functions.Consumer;
 public abstract class MyConsumer<T> implements Consumer<T> {
     static String TAG = MyConsumer.class.getSimpleName();
 
+
+
     @Override
     public void accept(@NonNull T t) throws Exception {
 
