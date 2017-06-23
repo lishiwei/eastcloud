@@ -7,11 +7,11 @@ import android.content.Context;
  * Created by 29435 on 2017/6/13.
  */
 
-public class EastCloudDialog {
+public class EastCloudProgressDialog {
     ProgressDialog mDialog;
 //    Context mContext;
 
-    public EastCloudDialog(Context context) {
+    public EastCloudProgressDialog(Context context) {
 //        mContext = context;
         mDialog = new ProgressDialog(context);
         mDialog.setTitle("加载中...");

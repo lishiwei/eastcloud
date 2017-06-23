@@ -25,7 +25,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.delegate.ActivityMvpDelegate;
 import com.hannesdorfmann.mosby.mvp.delegate.ActivityMvpDelegateCallback;
 import com.hannesdorfmann.mosby.mvp.delegate.ActivityMvpDelegateImpl;
-import com.orientalfinance.eastcloud.view.EastCloudDialog;
+import com.orientalfinance.eastcloud.view.EastCloudProgressDialog;
 
 /**
  * An Activity that uses an {@link MvpPresenter} to implement a Model-View-Presenter
@@ -40,12 +40,12 @@ public abstract class BaseMVPActivity<V extends MvpView, P extends MvpPresenter<
     protected ActivityMvpDelegate mvpDelegate;
     protected P presenter;
     protected boolean retainInstance;
-    protected EastCloudDialog mEastCloudDialog;
+    protected EastCloudProgressDialog mEastCloudProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEastCloudDialog = new EastCloudDialog(this);
+        mEastCloudProgressDialog = new EastCloudProgressDialog(this);
         getMvpDelegate().onCreate(savedInstanceState);
 
     }
@@ -54,7 +54,7 @@ public abstract class BaseMVPActivity<V extends MvpView, P extends MvpPresenter<
     protected void onDestroy() {
         super.onDestroy();
         getMvpDelegate().onDestroy();
-        mEastCloudDialog.dismiss();
+        mEastCloudProgressDialog.dismiss();
     }
 
     @Override

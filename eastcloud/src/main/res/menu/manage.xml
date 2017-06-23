@@ -5,7 +5,7 @@
     <item
         android:id="@+id/manage"
         app:showAsAction="always"
-        android:title="管理"
+        android:title="清空"
         />
 
 </menu>

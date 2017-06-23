@@ -13,11 +13,14 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.ChannelComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerChannelComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ChannelModules;
+import com.orientalfinance.eastcloud.fragment.fragmentchannel.FragmentShangHai;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ChannelPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,25 +75,21 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentChannelBinding = (FragmentChannelBinding) mViewDataBinding;
-        mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager()));
-        mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
-        mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
 
-//        RequestParam requestParam = new RequestParam();
-//        getPresenter().showChannelCategory(requestParam);
-//        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam("0");
-//        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
-//        getPresenter().showChannelList(requestParam1);
+
+        RequestParam requestParam = new RequestParam();
+        getPresenter().showChannelCategory(requestParam);
+
     }
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override
@@ -100,10 +99,30 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
 
     @Override
     public void showChannelCategory(List<HomePageChannel.Category> categories) {
-
+        mHomePageChannels = categories;
+        List<String> tabTitle = new ArrayList<>();
+        List<Fragment> mFragmentList = new ArrayList<>();
+        if (categories.size() < 4) {
+            return;
+        }
+        mFragmentList.add(FragmentShangHai.newInstance(categories.get(0).getCateId(), ""));
+        mFragmentList.add(FragmentShangHai.newInstance(categories.get(1).getCateId(), ""));
+        mFragmentList.add(FragmentShangHai.newInstance(categories.get(2).getCateId(), ""));
+        mFragmentList.add(FragmentShangHai.newInstance(categories.get(3).getCateId(), ""));
+        for (int i = 0; i < categories.size(); i++) {
+            if (i < 4) {
+                tabTitle.add(categories.get(i).getCateName());
+            }
+            mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager(), tabTitle, mFragmentList));
+            mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
+            mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
+        }
+        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
+        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+        getPresenter().showChannelList(requestParam1);
     }
 
-
+    List<HomePageChannel.Category> mHomePageChannels;
 
     @Override
     public void showChannelList(List<HomePageChannel> channels) {

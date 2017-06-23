@@ -74,7 +74,7 @@ public class ActivityEditAddress extends BaseMVPActivity<ActivityEditAddressView
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class ActivityEditAddress extends BaseMVPActivity<ActivityEditAddressView
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

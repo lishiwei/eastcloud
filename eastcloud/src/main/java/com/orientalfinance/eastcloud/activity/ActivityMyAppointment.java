@@ -68,12 +68,12 @@ List<Appointment> mAppointments = new ArrayList<>();
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

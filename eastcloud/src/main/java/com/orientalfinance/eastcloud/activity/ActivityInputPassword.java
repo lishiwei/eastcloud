@@ -86,12 +86,12 @@ public class ActivityInputPassword extends BaseMVPActivity<SettingPassWordView, 
 
     @Override
     public void showRegist() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideRegist() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

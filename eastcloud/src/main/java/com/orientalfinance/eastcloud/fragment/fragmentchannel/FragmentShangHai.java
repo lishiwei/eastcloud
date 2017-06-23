@@ -13,10 +13,14 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.component.ShangHaiComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ShangHaiModules;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.ShangHaiView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ShangHaiPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -76,8 +80,9 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent, ShangHaiVi
         super.onActivityCreated(savedInstanceState);
         mFragmentShangHaiBinding = (FragmentShangHaiBinding) mViewDataBinding;
         mFragmentShangHaiBinding.rvShanghai.setLayoutManager(new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mFragmentShangHaiBinding.rvShanghai.setAdapter(mChannelRvAdapter);
-//
+        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(mParam1);
+        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+        getPresenter().showChannelList(requestParam1);
     }
 
     @Override
@@ -90,4 +95,25 @@ public class FragmentShangHai extends BaseFragment<ShangHaiComponent, ShangHaiVi
         return DaggerShangHaiComponent.builder().appComponent(appComponent).shangHaiModules(new ShangHaiModules()).build();
     }
 
+    @Override
+    public void showDialog() {
+
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showChannelList(List<HomePageChannel> homePageChannels) {
+//        mChannelRvAdapter
+        mFragmentShangHaiBinding.rvShanghai.setAdapter(mChannelRvAdapter);
+
+    }
 }

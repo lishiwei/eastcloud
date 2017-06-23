@@ -63,12 +63,12 @@ public class ActivityFamilyMember extends BaseActivity<FamilyMemberComponent, Fa
 
     @Override
     public void showDialog() {
-mEastCloudDialog.show();
+mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-mEastCloudDialog.hide();
+mEastCloudProgressDialog.hide();
     }
 
     @Override

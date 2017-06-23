@@ -7,8 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.luck.picture.lib.model.FunctionOptions;
-import com.luck.picture.lib.model.PictureConfig;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
 import com.orientalfinance.eastcloud.activity.ActivityFamilyMember;
@@ -24,10 +22,6 @@ import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.MyselfPresenter;
-import com.orientalfinance.eastcloud.utils.ImageLoaders;
-import com.yalantis.ucrop.entity.LocalMedia;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -134,41 +128,10 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
                 startActivity(intent);
             }
         });
-        final FunctionOptions functionOptions = new FunctionOptions.Builder().setEnableCrop(true).setMaxSelectNum(1).create();
-        mFragmentMySelfBinding.ivUserAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PictureConfig.getInstance().init(functionOptions).openPhoto(getActivity(), resultCallback);
-            }
-        });
+
+
 
     }
 
-    private PictureConfig.OnSelectResultCallback resultCallback = new PictureConfig.OnSelectResultCallback() {
-        @Override
-        public void onSelectSuccess(List<LocalMedia> resultList) {
-
-            // 多选回调
-            String path;
-            LocalMedia media = resultList.get(0);
-            if (media.isCut() && !media.isCompressed()) {
-                // 裁剪过
-                path = media.getCutPath();
-            } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
-                // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
-                path = media.getCompressPath();
-            } else {
-                // 原图地址
-                path = media.getPath();
-            }
-            ImageLoaders.displayCircleImage(mFragmentMySelfBinding.ivUserAvatar, path);
-
-        }
-
-        @Override
-        public void onSelectSuccess(LocalMedia media) {
-
-        }
-    };
 
 }

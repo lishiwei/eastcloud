@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.mvp.View.ActivityMyCollectionView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityMyCollectionPresenter;
+import com.orientalfinance.eastcloud.view.MainGuideDialog;
 import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
 import java.util.ArrayList;
@@ -93,6 +95,19 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
                 getPresenter().deleteCollection(new RequestParam(deleteRequestParam));
             }
         });
+        mMainGuideDialog  = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                mChannels.clear();
+                collectionAdapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).create();
     }
 
 
@@ -102,28 +117,33 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
         channel.setChecked(!channel.isChecked());
         collectionAdapter.notifyDataSetChanged();
     }
-
+    MainGuideDialog mMainGuideDialog ;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_del:
-                /**
-                 * 此为控制编辑状态的Button,需要根据当前页面状态来改变状态,
-                 * 因为要实现控制ChekBox是否显示,而CheckBox只能从适配器中获取到，
-                 * 所以通过在CustomAdapter中设置一个标记,在此处调用CustomAdapter中的方法改变该标记,
-                 * 同时通知CustomAdapter数据发生了改变,强制调用getView去刷新界面
-                 *
-                 */
-                boolean isShow = collectionAdapter.isShow();//从适配器里面查看当前页面状态
-                collectionAdapter.setShow(!isShow);//点击以后改变CustomAdapter中的标记
-                collectionAdapter.notifyDataSetChanged();//通知适配器数据更新了,改变界面
+             if (!mMainGuideDialog.isShowing())
+             {
+                 mMainGuideDialog.show();
+             }
 
-                if (listViewState) {
-                    changeState2Edit();
-                } else {
-                    deleteSelectedData();//标记状态下点击该Button要删除选中的数据
-                    changeState2Normal();
-                }
+//                /**
+//                 * 此为控制编辑状态的Button,需要根据当前页面状态来改变状态,
+//                 * 因为要实现控制ChekBox是否显示,而CheckBox只能从适配器中获取到，
+//                 * 所以通过在CustomAdapter中设置一个标记,在此处调用CustomAdapter中的方法改变该标记,
+//                 * 同时通知CustomAdapter数据发生了改变,强制调用getView去刷新界面
+//                 *
+//                 */
+//                boolean isShow = collectionAdapter.isShow();//从适配器里面查看当前页面状态
+//                collectionAdapter.setShow(!isShow);//点击以后改变CustomAdapter中的标记
+//                collectionAdapter.notifyDataSetChanged();//通知适配器数据更新了,改变界面
+//
+//                if (listViewState) {
+//                    changeState2Edit();
+//                } else {
+//                    deleteSelectedData();//标记状态下点击该Button要删除选中的数据
+//                    changeState2Normal();
+//                }
                 break;
 
             case R.id.select_all_btn:
@@ -189,12 +209,12 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

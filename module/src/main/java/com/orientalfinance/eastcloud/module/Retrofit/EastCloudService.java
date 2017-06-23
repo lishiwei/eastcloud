@@ -104,9 +104,10 @@ public interface EastCloudService {
     /**
      * 方法描述：个人信息修改
      */
-    @Headers({"Content-Type: application/x-www-form-urlencoded"})
-    @POST("eidtMemberInfo")
-    Call<ResponseResult> updateUserInfo(@Body SendRequest request);
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody>modifyUserInfo(@Field("s") String zip, @Field("sign") String sign);
+
 
     /**
      * 方法描述：意见反馈

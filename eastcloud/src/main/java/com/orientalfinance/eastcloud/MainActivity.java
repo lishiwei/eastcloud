@@ -22,6 +22,7 @@ import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityConnectTV;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
 import com.orientalfinance.eastcloud.activity.ActivityPlayRecord;
+import com.orientalfinance.eastcloud.activity.ActivitySetting;
 import com.orientalfinance.eastcloud.fragment.FragmentApplication;
 import com.orientalfinance.eastcloud.fragment.FragmentChannel;
 import com.orientalfinance.eastcloud.fragment.FragmentHomePage;
@@ -57,6 +58,27 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (item.getItemId()!=R.id.navigation_myself)
+            {
+                findViewById(R.id.iv_ScanCode).setBackground(getResources().getDrawable(R.drawable.scancode));
+                findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, ActivityConnectTV.class);
+                        startActivity(intent);
+                    }
+                });
+            }else {
+                findViewById(R.id.iv_ScanCode).setBackground(getResources().getDrawable(R.drawable.setting));
+                findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, ActivitySetting.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -64,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.commitAllowingStateLoss();
                     mTitle.setText("东方遥控宝");
                     toolbar.setVisibility(View.VISIBLE);
+
                     return true;
                 case R.id.navigation_channel:
                     fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentHomePage).hide(mFragmentMySelf).show(mFragmentDashBoard);
@@ -92,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.hide(mFragmentApplication).hide(mFragmentRemoteControl).hide(mFragmentDashBoard).hide(mFragmentHomePage).show(mFragmentMySelf);
                         fragmentTransaction.commitAllowingStateLoss();
                         mTitle.setText(getString(R.string.title_myself));
+
                     }
+
                     return true;
             }
 
@@ -135,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.iv_ScanCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                scanCode();
                 Intent intent = new Intent(MainActivity.this, ActivityConnectTV.class);
                 startActivity(intent);
             }

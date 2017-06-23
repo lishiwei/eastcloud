@@ -101,7 +101,7 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
 
     @Override
     public void showGetCode() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class ActivityVerificationCode extends BaseMVPActivity<VerificationCodeVi
 
     @Override
     public void hideGetCode() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override
