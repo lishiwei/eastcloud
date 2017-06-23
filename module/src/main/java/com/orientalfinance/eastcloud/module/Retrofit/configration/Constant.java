@@ -76,8 +76,11 @@ public class Constant {
         public static final int SHOW_APPOINTMENT_PROGRAM = 552;
         public static final int ADD_APPOINTMENT_PROGRAM = 553;
         public static final int ADD_COLLECTION = 554;
+    }
 
-
+    public static class OrderC {
+        public static final String YYB = "Y";
+        public static final String JFB = "J";
     }
 
 }
