@@ -25,8 +25,8 @@ public class ActivityAddAddressPresenter extends MvpNullObjectBasePresenter<Acti
 
     public void addAddress(RequestParam requestParam) {
 
-        Address.EditRequestParam  editRequestParam = (Address.EditRequestParam) requestParam.getData();
-        if (!ValidateUtils.isMobileNO(editRequestParam.getPhone()))
+        Address.AddRequestParam  addRequestParam = (Address.AddRequestParam) requestParam.getData();
+        if (!ValidateUtils.isMobileNO(addRequestParam.getPhone()))
         {
             getView().showError("您的手机号码不正确！");
             return;

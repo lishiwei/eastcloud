@@ -101,6 +101,7 @@
             android:parentActivityName=".eastcloud.activity.ActivityHotBooking" />
         <activity
             android:name=".eastcloud.activity.ActivitySetting"
+            android:launchMode="singleTask"
             android:parentActivityName=".eastcloud.MainActivity" />
         <activity
             android:name=".eastcloud.activity.ActivityLogin"

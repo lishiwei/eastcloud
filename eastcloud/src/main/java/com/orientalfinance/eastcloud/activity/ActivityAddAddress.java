@@ -1,9 +1,11 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ActivityAddAddressView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddAddressPresenter;
+import com.orientalfinance.eastcloud.utils.KeyboardUtils;
 
 /**
  * Created by lzy on 2017/6/14.
@@ -70,6 +73,8 @@ public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, 
         mAddAddressBinding.etUserAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                KeyboardUtils.hideSoftInput(ActivityAddAddress.this);
                 mAddAddressBinding.cityPicker.setVisibility(View.VISIBLE);
                 mAddAddressBinding.cityPicker.setOnSelectedListener(new CityPicker.OnSelectedListener() {
                     @Override
@@ -81,15 +86,19 @@ public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, 
             }
         });
     }
-
+public void hideInput()
+{
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+}
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

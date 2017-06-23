@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivitySearchBinding;
+import com.orientalfinance.eastcloud.adapter.SearchResultRvAdapter;
 import com.orientalfinance.eastcloud.adapter.SearchRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerSearchComponent;
@@ -48,7 +50,8 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
     SearchRvAdapter mSearchedRvAdapter;
     ActivitySearchBinding mActivitySearchBinding;
     List<String> mSearchHots;
-    List<String> mSearchResults;
+    @Inject
+    SearchResultRvAdapter mSearchResultRvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +70,13 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
         mActivitySearchBinding.cetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                SearchResult.SearchRequestParam searchRequestParam = new SearchResult.SearchRequestParam(0, 10, "楚乔传");
+                SearchResult.SearchRequestParam searchRequestParam = new SearchResult.SearchRequestParam(0, 10, mActivitySearchBinding.cetSearch.getText().toString());
                 getPresenter().showSearchResult(new RequestParam(searchRequestParam));
                 return true;
             }
         });
+        mActivitySearchBinding.rvSearchResult.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -86,12 +91,12 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override
@@ -110,6 +115,10 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
 
     @Override
     public void showSearchResult(List<SearchResult> searchResults) {
-
+        mActivitySearchBinding.llSearch.setVisibility(View.INVISIBLE);
+        mActivitySearchBinding.rvSearchResult.setVisibility(View.VISIBLE);
+        mActivitySearchBinding.rvSearchResult.setLayoutManager(new GridLayoutManager(this, 2));
+        mSearchResultRvAdapter.setSearchResults(searchResults);
+        mActivitySearchBinding.rvSearchResult.setAdapter(mSearchResultRvAdapter);
     }
 }

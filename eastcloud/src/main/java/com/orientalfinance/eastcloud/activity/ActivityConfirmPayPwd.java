@@ -123,12 +123,12 @@ public class ActivityConfirmPayPwd extends BaseMVPActivity<ConfirmPayPwdView, Co
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

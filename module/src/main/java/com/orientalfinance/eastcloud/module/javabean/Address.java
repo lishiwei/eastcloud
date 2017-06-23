@@ -143,6 +143,10 @@ public class Address implements Serializable{
             this.isdefault = isdefault;
         }
 
+        public String getPhone() {
+            return phone;
+        }
+
         @Override
         public String toString() {
             return "AddRequestParam{" +

@@ -6,29 +6,25 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
-import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.utils.LogUtils;
-import com.orientalfinance.eastcloud.view.EastCloudDialog;
-
-import io.reactivex.functions.Consumer;
+import com.orientalfinance.eastcloud.view.EastCloudProgressDialog;
 
 public class ActivitySuggestReport extends AppCompatActivity {
-    EastCloudDialog mEastCloudDialog;
+    EastCloudProgressDialog mEastCloudProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggest_report);
-        mEastCloudDialog = new EastCloudDialog(this);
+        mEastCloudProgressDialog = new EastCloudProgressDialog(this);
         findViewById(R.id.btn_Suggest).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                mEastCloudDialog.show();
+                mEastCloudProgressDialog.show();
                 SuggestRequestParam suggestRequestParam = new SuggestRequestParam();
                 suggestRequestParam.setContent("您好");
                 RequestParam requestParam = new RequestParam(suggestRequestParam);
@@ -70,7 +66,7 @@ public class ActivitySuggestReport extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mEastCloudDialog.dismiss();
+        mEastCloudProgressDialog.dismiss();
     }
 
     class SuggestRequestParam {

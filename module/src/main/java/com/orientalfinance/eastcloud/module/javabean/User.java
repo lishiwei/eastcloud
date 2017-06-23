@@ -213,5 +213,61 @@ public class User implements Serializable {
                     '}';
         }
     }
+    public static class ModifyRequestParam{
+        String real_name;
+        String nick_name;
+        String id_card;
+        String msg_push;
+        String phone;
 
+        public String getReal_name() {
+            return real_name;
+        }
+
+        public void setReal_name(String real_name) {
+            this.real_name = real_name;
+        }
+
+        public String getNick_name() {
+            return nick_name;
+        }
+
+        public void setNick_name(String nick_name) {
+            this.nick_name = nick_name;
+        }
+
+        public String getId_card() {
+            return id_card;
+        }
+
+        public void setId_card(String id_card) {
+            this.id_card = id_card;
+        }
+
+        public String getMsg_push() {
+            return msg_push;
+        }
+
+        public void setMsg_push(String msg_push) {
+            this.msg_push = msg_push;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        @Override
+        public String toString() {
+            return "ModifyRequestParam{" +
+                    "nick_name='" + nick_name + '\'' +
+                    ", id_card='" + id_card + '\'' +
+                    ", msg_push='" + msg_push + '\'' +
+                    ", phone='" + phone + '\'' +
+                    '}';
+        }
+    }
 }

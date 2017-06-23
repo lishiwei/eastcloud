@@ -64,6 +64,7 @@
 
                     <ImageView
                         android:layout_width="80dp"
+                        android:id="@+id/iv_UserAvatar"
                         android:layout_height="80dp"
                         app:circleImageUrl="@{url}"
                         />
@@ -226,6 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:id="@+id/tv_BirthDay"
                         android:text="1990-10-02"
                         android:textColor="#999999"
                         android:textSize="16sp"/>
@@ -336,6 +338,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="清除缓存"
+                        android:id="@+id/tv_ClearCache"
+                        android:onClick="@{handler.onclick}"
                         android:textColor="#333333"
                         android:textSize="18sp"/>
 
@@ -396,10 +400,12 @@
                     android:background="#cccccc"/>
                 <Button
                     android:layout_marginTop="24dp"
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_gravity="center"
                     android:layout_height="50dp"
                     android:text=" 退出登录"
+                    android:id="@+id/btn_Quit"
+                    android:onClick="@{handler.onclick}"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/oval"/>
             </LinearLayout>

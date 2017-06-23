@@ -159,11 +159,13 @@ public class RemoteDataProxy {
     /**
      * 方法描述：个人信息修改
      */
-    public static void editUserInfo(RequestParam requestParam, HttpCallBack httpCallBack) {
-        EastcloudRetrofit.getInstance()
+    public static Flowable<EastCloudResponseBody> modifyUserInfo(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_INFO_UPDATE);
+
+       return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .updateUserInfo(requestParamWrap(requestParam, 352))
-                .enqueue(httpCallBack);
+                .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
+
     }
 
     /**

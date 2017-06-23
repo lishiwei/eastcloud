@@ -28,6 +28,10 @@ public class ChannelRvAdapter extends RecyclerView.Adapter<ChannelRvAdapter.Chan
         mChannels = channels;
     }
 
+    public void setChannels(List<Channel> channels) {
+        mChannels = channels;
+    }
+
     @Override
     public ChannelViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 

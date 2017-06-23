@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.activity;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +25,7 @@ import com.orientalfinance.eastcloud.mvp.View.PlayRecordView;
 import com.orientalfinance.eastcloud.mvp.View.PlayRecordViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.PlayRecordPresenter;
-import com.orientalfinance.eastcloud.utils.LogUtils;
+import com.orientalfinance.eastcloud.view.MainGuideDialog;
 import com.orientalfinance.eastcloud.view.OnSwipeDeleteListener;
 
 import java.util.Iterator;
@@ -94,6 +95,20 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
                 mPlayRecordRvAdpter.notifyDataSetChanged();
             }
         });
+
+        mMainGuideDialog  = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                mPlayRecordRvAdpter.getChannelList().clear();
+                mPlayRecordRvAdpter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).create();
     }
 
     @Override
@@ -108,12 +123,12 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
 
     @Override
     public void showDialog() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override
@@ -134,22 +149,27 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     }
 
     private boolean isEditableState = true;//当前界面状态,初始进入为ListView，即非编辑的状态,true
-
+MainGuideDialog mMainGuideDialog;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.manage) {
-            mMenuItem = item;
-            item.setTitle("删除");
-            boolean isShow = mPlayRecordRvAdpter.isShow();
-            mPlayRecordRvAdpter.setShow(!isShow);
-            LogUtils.d(TAG, "onOptionsItemSelected: " + mPlayRecordRvAdpter.isShow);
-            mPlayRecordRvAdpter.notifyDataSetChanged();
-            if (isEditableState) {
-                changeState2Edit();
-            } else {
-                deleteSelectedData();
-                changeState2Normal();
-            }
+
+if (!mMainGuideDialog.isShowing())
+{
+    mMainGuideDialog.show();
+}
+//            mMenuItem = item;
+//            item.setTitle("删除");
+//            boolean isShow = mPlayRecordRvAdpter.isShow();
+//            mPlayRecordRvAdpter.setShow(!isShow);
+//            LogUtils.d(TAG, "onOptionsItemSelected: " + mPlayRecordRvAdpter.isShow);
+//            mPlayRecordRvAdpter.notifyDataSetChanged();
+//            if (isEditableState) {
+//                changeState2Edit();
+//            } else {
+//                deleteSelectedData();
+//                changeState2Normal();
+//            }
         }
         return super.onOptionsItemSelected(item);
     }

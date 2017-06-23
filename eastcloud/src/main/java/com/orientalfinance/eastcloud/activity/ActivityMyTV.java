@@ -34,8 +34,8 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
 
     @Override
     public void showDelectTVBox() {
-        mEastCloudDialog.setTitle("删除中...");
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.setTitle("删除中...");
+        mEastCloudProgressDialog.show();
     }
 
     @Override
@@ -96,12 +96,12 @@ public class ActivityMyTV extends BaseActivity<ActivityMyTVComponent, MyTVView, 
 
     @Override
     public void showLoading() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideLoading() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override

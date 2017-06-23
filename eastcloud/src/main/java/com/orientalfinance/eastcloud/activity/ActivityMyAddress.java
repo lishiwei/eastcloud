@@ -51,7 +51,6 @@ public class ActivityMyAddress extends BaseMVPActivity<ActivityMyAddressView, Ac
         mMyAddressAdapter = new MyAddressAdapter(mAddressList);
         activityMyAddressBinding.rcMyAddress.setLayoutManager(new LinearLayoutManager(this));
         activityMyAddressBinding.rcMyAddress.setAdapter(mMyAddressAdapter);
-
         activityMyAddressBinding.tvManageAddress.setOnClickListener(this);
 
     }
@@ -66,7 +65,7 @@ public class ActivityMyAddress extends BaseMVPActivity<ActivityMyAddressView, Ac
 
     @Override
     public void showLoading() {
-        mEastCloudDialog.show();
+        mEastCloudProgressDialog.show();
     }
 
     @Override
@@ -81,7 +80,7 @@ public class ActivityMyAddress extends BaseMVPActivity<ActivityMyAddressView, Ac
 
     @Override
     public void hideLoading() {
-        mEastCloudDialog.hide();
+        mEastCloudProgressDialog.hide();
     }
 
     @Override
