@@ -3,17 +3,28 @@ package com.orientalfinance.eastcloud.fragment.fragmentorder;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.andview.refreshview.XRefreshView;
 import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.adapter.OrderAdapter;
+import com.orientalfinance.eastcloud.adapter.OrderListAdapter;
 import com.orientalfinance.eastcloud.module.javabean.Order;
+import com.orientalfinance.eastcloud.utils.OrderUtils;
+import com.orientalfinance.eastcloud.view.order.ItemOrderBottom;
+import com.orientalfinance.eastcloud.view.order.ItemOrderIn;
+import com.orientalfinance.eastcloud.view.order.ItemOrderTop;
+import com.orientalfinance.eastcloud.view.order.OrderLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +45,8 @@ public class FragmentUndelivery extends Fragment {
     private ListView listView;
     private OrderAdapter orderAdapter;
     private long lastRefreshTime;
+    private RecyclerView recyclerView;
+    private ArrayList<OrderLayout> orderLayouts;
 
 
     public FragmentUndelivery() {
@@ -70,12 +83,96 @@ public class FragmentUndelivery extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_undelivery, container, false);;
+        View view = inflater.inflate(R.layout.fragment_fragment_undelivery, container, false);
+
+        initData();
+        initViews(view);
 
         return view;
     }
 
 
+    /**
+     * 设置数据
+     */
+    private void initData() {
+        //TODO 最外层数据-一般是从接口获取
+        List<Order> orderList = OrderUtils.loadData();
+        orderLayouts = new ArrayList<OrderLayout>();
+        for (int k = 0; k < orderList.size(); k++) {
+            Order order = orderList.get(k);
+            List<Order.Goods> goodsList = order.getGoodsList();
+            if (order.getOrder_status().equals("待发货")) {
+
+
+                ItemOrderTop itemOrderTop = new ItemOrderTop(order);
+                orderLayouts.add(itemOrderTop);
+                if (goodsList == null) {
+                    //没有订单
+                } else {
+                    //中间for循环，将数据循环读取后存到订单中间部分
+                    //TODO 设置中间数据
+                    for (int j = 0; j < goodsList.size(); j++) {
+                        Order.Goods goods = new Order.Goods();
+                        goods.setGoods_name(goodsList.get(j).getGoods_name());
+                        goods.setGoods_spec(goodsList.get(j).getGoods_spec());
+                        //goods.setGoodsSize(goodsList.get(j).get());
+                        goods.setGoods_price(goodsList.get(j).getGoods_price());
+                        goods.setGoods_num(goodsList.get(j).getGoods_num());
+                        goods.setGoods_img(goodsList.get(j).getGoods_img());
+                        //需要的数据直接传
+                        ItemOrderIn orderIMiddle = new ItemOrderIn(order, goods);
+                        orderLayouts.add(orderIMiddle);
+                        Log.i("myLog", "orderLayouts =" + orderLayouts);
+                    }
+                }
+
+
+                //外部第二个循环，将数据循环读取后存到订单底部
+                //TODO 设置底部数据-需要的数据直接传
+                ItemOrderBottom orderBottom = new ItemOrderBottom(order);
+                orderLayouts.add(orderBottom);
+
+            }
+        }
+
+    }
+
+    private void initViews(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        OrderListAdapter adapter = new OrderListAdapter(this.getActivity(), orderLayouts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
+        orderAdapter = new OrderAdapter(getContext(), orders);
+
+        refreshView = (XRefreshView) view.findViewById(R.id.custom_view);
+
+        refreshView.setPullRefreshEnable(true);
+        refreshView.setPullLoadEnable(false);
+        refreshView.restoreLastRefreshTime(lastRefreshTime);
+        //当下拉刷新被禁用时，调用这个方法并传入false可以不让头部被下拉
+        refreshView.setMoveHeadWhenDisablePullRefresh(true);
+        refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                Toast.makeText(getActivity(), "上拉加载更多", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+                refreshView.stopRefresh();
+                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onRelease(float direction) {
+                Toast.makeText(getActivity(), "onRelease", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }
