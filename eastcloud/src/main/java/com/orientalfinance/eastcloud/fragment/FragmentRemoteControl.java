@@ -18,22 +18,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
-import com.orientalfinance.eastcloud.App;
 import com.orientalfinance.eastcloud.adapter.ControllerFragmentAdapter;
 import com.orientalfinance.eastcloud.adapter.TVConnectAdapter;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerMenu;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerNumber;
 import com.orientalfinance.eastcloud.module.javabean.TVConnectState;
 import com.orientalfinance.eastcloud.utils.DividerItemDecoration;
-import com.orientalfinance.eastcloud.utils.WeakHandler;
+import com.orientalfinance.eastcloud.utils.OnPageChangeListener;
 import com.orientalfinance.eastcloud.view.indictor.PageIndicatorView;
 
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ import java.util.TimerTask;
  * Use the {@link FragmentRemoteControl#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentRemoteControl extends Fragment {
+public class FragmentRemoteControl extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -100,7 +97,7 @@ public class FragmentRemoteControl extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        //showStatus();
         view = inflater.inflate(R.layout.fragment_remote_control, container, false);
         statusView = inflater.inflate(R.layout.header_status, null);
 //        RelativeLayout controllerMenu = (RelativeLayout) view.findViewById(R.id.rlout);
@@ -111,69 +108,51 @@ public class FragmentRemoteControl extends Fragment {
     }
 
     private void initViews(View view) {
-//        view.findViewById(R.id.img_top).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "Top", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        view.findViewById(R.id.img_right).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        view.findViewById(R.id.img_bottom).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "bottom", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        view.findViewById(R.id.img_left).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        view.findViewById(R.id.img_center).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "center", Toast.LENGTH_SHORT).show();
-//                showStatus();
-//            }
-//        });
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new FragmentControllerMenu());
         fragments.add(new FragmentControllerNumber());
         viewPager = (ViewPager) view.findViewById(R.id.vp_remote);
         viewPager.setAdapter(new ControllerFragmentAdapter(getChildFragmentManager(), fragments));
-
+        viewPager.addOnPageChangeListener(new OnPageChangeListener(viewPager));
         indicatorView = (PageIndicatorView) view.findViewById(R.id.piv_view_pager);
         indicatorView.setViewPager(viewPager);
         indicatorView.setUnselectedColor(Color.parseColor("#999999"));
         indicatorView.setSelectedColor(Color.parseColor("#333333"));
 
         tvConnectButton = (TextView) view.findViewById(R.id.tv_connection);
-
         initPopupWindow();
-        tvConnectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        tvConnectButton.setOnClickListener(this);
+        view.findViewById(R.id.iv_tv_pay).setOnClickListener(this);
+        view.findViewById(R.id.iv_msg_notify).setOnClickListener(this);
+        view.findViewById(R.id.iv_input).setOnClickListener(this);
+        view.findViewById(R.id.iv_tou_ping).setOnClickListener(this);
+        view.findViewById(R.id.iv_tell_me).setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_connection:
                 showPopupWindow(mPopWindow);
-            }
-        });
+                break;
+            case R.id.iv_tv_pay:
+                Toast.makeText(getActivity(), "电视支付", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_msg_notify:
+                Toast.makeText(getActivity(), "讯息通知", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_input:
+                Toast.makeText(getActivity(), "手动输入", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_tou_ping:
+                Toast.makeText(getActivity(), "投屏设置", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_tell_me:
+                Toast.makeText(getActivity(), "语音输入", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
-
-    private void startPropertyAnim(View view) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(view, "rotation", 0f, 45f);
-        anim.setDuration(10);
-        anim.start();
-    }
-
 
     private void showStatus() {
         handler = new MyHandler();
@@ -261,6 +240,7 @@ public class FragmentRemoteControl extends Fragment {
             popupwindow.dismiss();
         }
     }
+
 
     public class MyHandler extends Handler {
         @Override

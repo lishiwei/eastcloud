@@ -5,7 +5,6 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-
     <RelativeLayout
         android:id="@+id/rlyout_menu"
         android:layout_width="match_parent"
@@ -29,6 +28,7 @@
             android:gravity="bottom">
 
             <ImageView
+                android:id="@+id/iv_exit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/tv_exit_2" />
@@ -44,6 +44,7 @@
             android:gravity="bottom">
 
             <ImageView
+                android:id="@+id/iv_voice_minus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/tv_voice_minus_2" />
@@ -60,6 +61,7 @@
             android:gravity="bottom">
 
             <ImageView
+                android:id="@+id/iv_retur"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/tv_return_2" />
@@ -85,27 +87,31 @@
                 <ImageView
                     android:id="@+id/iv_left_top"
                     android:layout_width="105dp"
-                    android:layout_height="105dp" />
+                    android:layout_height="105dp"
+                    android:background="@drawable/remote_menu_top" />
 
                 <ImageView
                     android:id="@+id/iv_right_top"
                     android:layout_width="105dp"
                     android:layout_height="105dp"
-                    android:layout_toRightOf="@+id/iv_left_top" />
+                    android:layout_toRightOf="@+id/iv_left_top"
+                    android:background="@drawable/remote_menu_right_bg" />
 
                 <ImageView
                     android:id="@+id/iv_below_left"
                     android:layout_width="105dp"
                     android:layout_height="105dp"
                     android:layout_below="@+id/iv_left_top"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:background="@drawable/remote_menu_left_bg" />
 
                 <ImageView
                     android:id="@+id/iv_below_right"
                     android:layout_width="105dp"
                     android:layout_height="105dp"
                     android:layout_below="@+id/iv_right_top"
-                    android:layout_toRightOf="@+id/iv_below_left" />
+                    android:layout_toRightOf="@+id/iv_below_left"
+                    android:background="@drawable/remote_menu_bottom" />
 
                 <ImageView
                     android:id="@+id/iv_center"
@@ -115,6 +121,7 @@
                     android:background="@drawable/ok" />
 
                 <TextView
+                    android:id="@+id/tv_center_ok"
                     android:layout_width="105dp"
                     android:layout_height="105dp"
                     android:layout_centerInParent="true"
@@ -125,56 +132,6 @@
             </RelativeLayout>
 
         </FrameLayout>
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/llyout_voice_plus"-->
-        <!--android:layout_width="70dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/tv_voice_plus" />-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="70dp"-->
-        <!--android:layout_marginLeft="70dp"-->
-        <!--android:gravity="center">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/tv_voice_minus" />-->
-        <!--</RelativeLayout>-->
-
-
-        <!--<RelativeLayout-->
-        <!--android:layout_width="70dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_toRightOf="@+id/flyout_center"-->
-        <!--android:gravity="center">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/tv_return" />-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@+id/flyout_center"-->
-        <!--android:layout_marginLeft="70dp"-->
-        <!--android:gravity="center">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/tv_exit" />-->
-        <!--</RelativeLayout>-->
 
     </RelativeLayout>
 

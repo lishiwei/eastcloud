@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_Action"
                     android:layout_marginTop="4dp"
-                    android:text="@{program.}"
+
                     android:textColor="#ffffff" />
 
                 <ImageView

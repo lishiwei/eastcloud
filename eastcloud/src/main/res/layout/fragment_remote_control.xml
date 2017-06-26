@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,103 +32,132 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rlyout_top"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/rllyout_title"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginTop="18dp">
-
-        <ImageView
-            android:id="@+id/iv_tv_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/tv_pay_btn" />
-
-
-        <ImageView
-            android:id="@+id/iv_msg_notify"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/message_notify" />
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:id="@+id/llyout_center"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_below="@id/rlyout_top"
-        android:layout_gravity="center"
-        android:layout_marginTop="12dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vp_remote"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center" />
+            <RelativeLayout
+                android:id="@+id/rlyout_top"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp">
+
+                <RelativeLayout
+                    android:layout_width="320dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/iv_tv_pay"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/tv_pay_btn" />
+
+                    <ImageView
+                        android:id="@+id/iv_msg_notify"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/message_notify" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llyout_center"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:layout_below="@id/rlyout_top"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:gravity="center_vertical">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_remote"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center" />
+                </RelativeLayout>
+
+
+                <com.orientalfinance.eastcloud.view.indictor.PageIndicatorView
+                    android:id="@+id/piv_view_pager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@+id/llyout_center"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical">
+
+                <RelativeLayout
+                    android:layout_width="320dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+
+                    <RelativeLayout
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_input"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_alignParentLeft="true"
+                            android:background="@drawable/tv_input_bg" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_tou_ping"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/tv_tou_ping_bg" />
+
+                    <RelativeLayout
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_tell_me"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/tell_me_bg" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
         </RelativeLayout>
+    </ScrollView>
 
 
-        <com.orientalfinance.eastcloud.view.indictor.PageIndicatorView
-            android:id="@+id/piv_view_pager"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llyout_center"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp"
-        android:gravity="center_vertical">
-
-        <RelativeLayout
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/tv_input" />
-        </RelativeLayout>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/tv_tou_ping" />
-
-        <RelativeLayout
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/tell_me" />
-        </RelativeLayout>
-
-    </RelativeLayout>
 </RelativeLayout>
