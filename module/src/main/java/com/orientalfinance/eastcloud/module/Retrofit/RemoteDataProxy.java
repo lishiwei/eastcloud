@@ -168,6 +168,18 @@ public class RemoteDataProxy {
 
     }
 
+
+    /**
+     * 方法描述：个人信息修改
+     */
+    public static Flowable<EastCloudResponseBody> getApplication(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_INFO_UPDATE);
+
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
+
+    }
     /**
      * 方法描述：显示已绑定的机顶盒
      * itype 355

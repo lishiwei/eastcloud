@@ -14,6 +14,6 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context).load((String)path).error(R.drawable.moyu).into(imageView);
+        Glide.with(context).load((String)path).placeholder(R.drawable.loading).error(R.drawable.loaderrorlarge).centerCrop().into(imageView);
     }
 }

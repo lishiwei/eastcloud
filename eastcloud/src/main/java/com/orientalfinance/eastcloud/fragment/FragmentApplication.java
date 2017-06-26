@@ -91,5 +91,18 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
         return DaggerApplicationComponent.builder().appComponent(appComponent).applicationModule(new ApplicationModule()).build();
     }
 
+    @Override
+    public void showDialog() {
 
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
 }

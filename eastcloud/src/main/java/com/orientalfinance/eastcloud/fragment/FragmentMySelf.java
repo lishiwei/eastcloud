@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
-import com.orientalfinance.eastcloud.activity.ActivityFamilyMember;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
 import com.orientalfinance.eastcloud.activity.ActivityMyOrder;
 import com.orientalfinance.eastcloud.adapter.MyselfRvAdapter;
@@ -17,13 +17,25 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerMyselfComponent;
 import com.orientalfinance.eastcloud.dagger.component.MyselfComponent;
 import com.orientalfinance.eastcloud.dagger.modules.MyselfModule;
+import com.orientalfinance.eastcloud.module.Retrofit.configration.Constant;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.MyselfPresenter;
+import com.orientalfinance.eastcloud.utils.ClickHandler;
+import com.orientalfinance.eastcloud.utils.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Timed;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,8 +104,7 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
     @Override
     public void onResume() {
         super.onResume();
-        if (AcacheUtil.getInstance().getUser()!=null)
-        {
+        if (AcacheUtil.getInstance().getUser() != null) {
             mFragmentMySelfBinding.tvUserName.setText(AcacheUtil.getInstance().getUser().getName() == null ? AcacheUtil.getInstance().getUser().getPhone() : AcacheUtil.getInstance().getUser().getName());
 
         }
@@ -107,13 +118,6 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
         mFragmentMySelfBinding.setAvatarUrl("" + R.drawable.myself);
         mFragmentMySelfBinding.rvMyself.setAdapter(mMyselfRvAdapter);
         mFragmentMySelfBinding.rvMyself.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
-        mFragmentMySelfBinding.flHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityFamilyMember.class);
-                startActivity(intent);
-            }
-        });
         mFragmentMySelfBinding.tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,17 +125,67 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
                 startActivity(intent);
             }
         });
-        mFragmentMySelfBinding.flOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityMyOrder.class);
-                startActivity(intent);
-            }
-        });
 
+        mFragmentMySelfBinding.setClickHandler(mClickHandler);
+      final List<Integer> integerList = new ArrayList<>();
+        RxView.clicks(getView().findViewById(R.id.fl_All_Order)).create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(1);
+            }
+        }).timestamp().subscribe(new Consumer<Timed<Integer>>() {
+            @Override
+            public void accept(@NonNull Timed<Integer> integerTimed) throws Exception {
+                LogUtils.d(TAG, "accept: time" + integerTimed.time());
+                LogUtils.d(TAG, "accept:value( " + integerTimed.value());
+                if (integerTimed.time() - time < 1000) {
+                    integerList.add(integerTimed.value());
+
+                } else {
+                    integerList.add(integerTimed.value());
+                    LogUtils.d(TAG, "accept: integerList" + integerList.toString());
+
+                }
+                time = integerTimed.time();
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                LogUtils.d(TAG, "accept: "+throwable.toString());
+            }
+        });;
 
 
     }
 
+    final List<Integer> integerList = new ArrayList<>();
+    static long time;
+    ClickHandler mClickHandler = new ClickHandler() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), ActivityMyOrder.class);
+            switch (view.getId()) {
+                case R.id.fl_All_Order:
+                    intent.putExtra(Constant.VALUE, Constant.ALLORDER);
 
+
+
+                    break;
+                case R.id.fl_UnPaid:
+                    intent.putExtra(Constant.VALUE, Constant.UNPAID);
+                    break;
+                case R.id.fl_Undelivery:
+                    intent.putExtra(Constant.VALUE, Constant.UNDELIVERY);
+                    break;
+                case R.id.fl_UnRecieved:
+                    intent.putExtra(Constant.VALUE, Constant.UNRECIEVED);
+                    break;
+                case R.id.fl_Succeed:
+                    intent.putExtra(Constant.VALUE, Constant.SUCCEED);
+                    break;
+            }
+//            startActivity(intent);
+        }
+    };
 }

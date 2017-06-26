@@ -11,7 +11,7 @@
             type="String"/>
         <variable
         name="handler"
-        type="com.orientalfinance.eastcloud.activity.ActivitySetting.ClickHandler"/>
+        type="com.orientalfinance.eastcloud.utils.ClickHandler"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/ll_RealName"
 
-                    android:onClick="@{handler.onclick}"
+                    android:onClick="@{handler.onClick}"
                     android:paddingBottom="12dp"
                     android:paddingTop="12dp">
 
@@ -131,7 +131,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/ll_NickName"
 
-                    android:onClick="@{handler.onclick}"
+                    android:onClick="@{handler.onClick}"
                     android:paddingBottom="12dp"
                     android:paddingTop="12dp">
 
@@ -252,7 +252,7 @@
                     android:paddingBottom="12dp"
                     android:id="@+id/ll_PhoneNumber"
 
-                    android:onClick="@{handler.onclick}"
+                    android:onClick="@{handler.onClick}"
                     android:paddingTop="12dp">
 
                     <TextView
@@ -339,7 +339,7 @@
                         android:layout_weight="1"
                         android:text="清除缓存"
                         android:id="@+id/tv_ClearCache"
-                        android:onClick="@{handler.onclick}"
+                        android:onClick="@{handler.onClick}"
                         android:textColor="#333333"
                         android:textSize="18sp"/>
 
@@ -405,7 +405,7 @@
                     android:layout_height="50dp"
                     android:text=" 退出登录"
                     android:id="@+id/btn_Quit"
-                    android:onClick="@{handler.onclick}"
+                    android:onClick="@{handler.onClick}"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/oval"/>
             </LinearLayout>

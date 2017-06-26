@@ -52,6 +52,7 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyCollection.class));
                         break;
                     case 3:
+                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
                         break;
                     case 4:
                         v.getContext().startActivity(new Intent(v.getContext(), ActivityMyAddress.class));
@@ -62,10 +63,9 @@ public class MyselfRvAdapter extends RecyclerView.Adapter<MyselfRvAdapter.ItemMy
                     case 6:
                         break;
                     case 7:
-                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivityMyTV.class));
+                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivitySuggestReport.class));
                         break;
                     case 8:
-                        parent.getContext().startActivity(new Intent(parent.getContext(), ActivitySuggestReport.class));
                         break;
 
                 }

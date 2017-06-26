@@ -29,35 +29,39 @@ public class HotBookingPresenter extends MvpNullObjectBasePresenter<HotBookingVi
 
 
     public void exchangeHotMovie(RequestParam requestParam) {
-        getView().showDialog();
+
+        getView().showExchangeHotMovie();
         RemoteDataProxy.showAppointmentProgram(requestParam).compose(new ListTransform<List<AppointmentProgram>>()).subscribe(new Consumer<List<AppointmentProgram>>() {
             @Override
             public void accept(@NonNull List<AppointmentProgram> appointmentPrograms) throws Exception {
-                getView().hideDialog();
+                getView().stopExchangeHotMovie();
                 getView().exchangeHotMovie(appointmentPrograms);
             }
         }, new MyConsumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
-                getView().hideDialog();
+                getView().stopExchangeHotMovie();
+
             }
         });
     }
 
     public void exchangeHotVariety(RequestParam requestParam) {
-        getView().showDialog();
+
+        getView().showHotVariety();
+
         RemoteDataProxy.showAppointmentProgram(requestParam).compose(new ListTransform<List<AppointmentProgram>>()).subscribe(new Consumer<List<AppointmentProgram>>() {
             @Override
             public void accept(@NonNull List<AppointmentProgram> appointmentPrograms) throws Exception {
-                getView().hideDialog();
+                getView().stopHotVariety();
                 getView().exchangeHotMovie(appointmentPrograms);
             }
         }, new MyConsumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
-                getView().hideDialog();
+                getView().stopHotVariety();
             }
         });
     }

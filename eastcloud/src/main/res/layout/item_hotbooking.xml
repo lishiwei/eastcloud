@@ -32,6 +32,7 @@
                 android:background="#40000000"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
+                android:id="@+id/ll_Action"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="8dp">
@@ -39,13 +40,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_Action"
                     android:layout_marginTop="4dp"
-                    android:text="预约"
+                    android:text="@{program.}"
                     android:textColor="#ffffff" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/iv_Action"
                     android:layout_marginLeft="8dp"
                     android:background="@drawable/star" />
             </LinearLayout>

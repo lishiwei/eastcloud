@@ -107,5 +107,5 @@ dependencies {
     compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
     compile 'liji.library.dev:citypickerview:1.1.0'
     compile 'me.drakeet.multitype:multitype:3.0.0'
-
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 }

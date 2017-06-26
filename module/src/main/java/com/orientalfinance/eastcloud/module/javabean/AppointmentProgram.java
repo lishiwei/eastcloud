@@ -19,6 +19,7 @@ public class AppointmentProgram {
     String channelId;
     @SerializedName("appoint_id")
     String appointId;
+    String appointStatus;
 
     public AppointmentProgram(String imageUrl,String programId,  String programeName, String programeIntroduce, String channelId, String appointId) {
         this.programId = programId;

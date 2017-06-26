@@ -11,10 +11,10 @@ import com.orientalfinance.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentUnEvaluation#newInstance} factory method to
+ * Use the {@link FragmentSucceed#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentUnEvaluation extends Fragment {
+public class FragmentSucceed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +25,7 @@ public class FragmentUnEvaluation extends Fragment {
     private String mParam2;
 
 
-    public FragmentUnEvaluation() {
+    public FragmentSucceed() {
         // Required empty public constructor
     }
 
@@ -38,8 +38,8 @@ public class FragmentUnEvaluation extends Fragment {
      * @return A new instance of fragment FragmentUnEvaluation.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentUnEvaluation newInstance(String param1, String param2) {
-        FragmentUnEvaluation fragment = new FragmentUnEvaluation();
+    public static FragmentSucceed newInstance(String param1, String param2) {
+        FragmentSucceed fragment = new FragmentSucceed();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

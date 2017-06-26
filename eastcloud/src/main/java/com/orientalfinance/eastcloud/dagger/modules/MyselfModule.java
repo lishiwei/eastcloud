@@ -26,10 +26,10 @@ public class MyselfModule {
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的收藏"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的应用"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的地址"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "绑定银行卡"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的银行卡"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "分享好友"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的电视"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "意见反馈"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "客服电话"));
         return itemMyselfs;
     }
 

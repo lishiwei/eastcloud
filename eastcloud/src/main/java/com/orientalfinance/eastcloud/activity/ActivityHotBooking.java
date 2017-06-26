@@ -3,6 +3,10 @@ package com.orientalfinance.eastcloud.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orientalfinance.R;
@@ -22,11 +26,14 @@ import com.orientalfinance.eastcloud.mvp.View.HotBookingView;
 import com.orientalfinance.eastcloud.mvp.View.HotBookingViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.HotBookingPresenter;
+import com.orientalfinance.eastcloud.utils.ClickHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static com.orientalfinance.R.id.textView;
 
 public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBookingView, HotBookingPresenter, HotBookingViewState> implements HotBookingView {
 
@@ -43,8 +50,8 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     public String getToolBarTitle() {
         return null;
     }
-
-
+    RotateAnimation mHotBookingRotateAnimation;
+    RotateAnimation mHotVarietyRotateAnimation;
     @Inject
     @HotVariety
     HotBookingRvAdpter mHotVarietyRvAdpter;
@@ -52,6 +59,22 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     ActivityHotBookingBinding mActivityHotBookingBinding;
     List<AppointmentProgram> mHotMovie = new ArrayList<>();
     List<AppointmentProgram> mHotVariety = new ArrayList<>();
+    ClickHandler mClickHandler = new ClickHandler() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.ll_HotBooking:
+                    ShowRequestParam showRequestParam = new ShowRequestParam(0, 5);
+
+                    getPresenter().exchangeHotMovie(new RequestParam(showRequestParam));
+                    break;
+                case R.id.ll_HotVariety:
+                    ShowRequestParam showRequestParam1 = new ShowRequestParam(6, 11);
+                    getPresenter().exchangeHotVariety(new RequestParam(showRequestParam1));
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +85,27 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         mActivityHotBookingBinding.rvHotMovie.setAdapter(mHotMovieRvAdpter);
         mActivityHotBookingBinding.rvHotVariety.setLayoutManager(new FullyGridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
         mActivityHotBookingBinding.rvHotVariety.setAdapter(mHotVarietyRvAdpter);
-        ((TextView) mActivityHotBookingBinding.toolbar.findViewById(R.id.textView)).setText("热门预约");
+        mActivityHotBookingBinding.setClickHandler(mClickHandler);
+        ((TextView) mActivityHotBookingBinding.toolbar.findViewById(textView)).setText("热门预约");
         mActivityHotBookingBinding.toolbar.setTitle("");
         setSupportActionBar(mActivityHotBookingBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ShowRequestParam showRequestParam = new ShowRequestParam(0, 12);
+
+        mHotBookingRotateAnimation = new RotateAnimation(0, 360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        mHotBookingRotateAnimation.setDuration(1000);
+        mHotBookingRotateAnimation.setRepeatMode(Animation.RESTART);
+        mHotBookingRotateAnimation.setRepeatCount(Animation.INFINITE);
+        mHotVarietyRotateAnimation = new RotateAnimation(0, 360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        mHotVarietyRotateAnimation.setDuration(1000);
+        mHotVarietyRotateAnimation.setRepeatMode(Animation.RESTART);
+        mHotVarietyRotateAnimation.setRepeatCount(Animation.INFINITE);
+        ShowRequestParam showRequestParam = new ShowRequestParam(0, 5);
+
         getPresenter().exchangeHotMovie(new RequestParam(showRequestParam));
-        ShowRequestParam showRequestParam1 = new ShowRequestParam(0, 12);
-        getPresenter().exchangeHotVariety(new RequestParam(showRequestParam1));
+        ShowRequestParam showRequestParam1 = new ShowRequestParam(6, 11);
+
+        getPresenter().exchangeHotMovie(new RequestParam(showRequestParam1));
     }
 
     @Override
@@ -119,5 +154,27 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         mHotVarietyRvAdpter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showExchangeHotMovie() {
+        ImageView imageView = (ImageView) findViewById(R.id.iv_HotBooking);
 
+        imageView.startAnimation(mHotBookingRotateAnimation);
+    }
+
+    @Override
+    public void showHotVariety() {
+        ImageView imageView = (ImageView) findViewById(R.id.iv_HotVariety);
+
+        imageView.startAnimation(mHotVarietyRotateAnimation);
+    }
+
+    @Override
+    public void stopExchangeHotMovie() {
+        mHotBookingRotateAnimation.cancel();
+    }
+
+    @Override
+    public void stopHotVariety() {
+        mHotVarietyRotateAnimation.cancel();
+    }
 }

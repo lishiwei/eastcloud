@@ -20,6 +20,7 @@ import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.SettingView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.SettingPresenter;
+import com.orientalfinance.eastcloud.utils.ClickHandler;
 import com.orientalfinance.eastcloud.utils.ImageLoaders;
 import com.orientalfinance.eastcloud.view.BottomPopWindow;
 import com.yalantis.ucrop.entity.LocalMedia;
@@ -38,7 +39,7 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
     ActivitySettingBinding mActivitySettingBinding;
     ClickHandler mClickHandler = new ClickHandler() {
         @Override
-        public void onclick(View v) {
+        public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.ll_NickName:
                     Intent intent = new Intent(ActivitySetting.this, ActivitySettingModify.class);
@@ -174,10 +175,6 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
         return new SettingPresenter();
     }
 
-
-    public interface ClickHandler {
-        void onclick(View v);
-    }
 
     private PictureConfig.OnSelectResultCallback resultCallback = new PictureConfig.OnSelectResultCallback() {
         @Override

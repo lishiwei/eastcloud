@@ -17,6 +17,11 @@ public class Constant {
     public static final String REGIST = "regist";
     public static final String FORGET = "forget";
     public static final String PAYPASSOWRD = "paypassword";
+    public static final String ALLORDER = "allOrder";
+    public static final String UNPAID = "unPaid";
+    public static final String UNDELIVERY = "unDelivery";
+    public static final String UNRECIEVED = "unRecieved";
+    public static final String SUCCEED = "succeed";
 
     public static class IType {
         public static final int REGISTER = 301;
