@@ -134,66 +134,11 @@ public class RemoteNumberAdapter extends RecyclerView.Adapter<RemoteNumberAdapte
         timerTask.stopTimer();
         if (channelValueCallback != null) {
             channelValueCallback.onChannelValue(stringBuffer.toString());
-            stringBuffer.delete(0,stringBuffer.length());
+            stringBuffer.delete(0, stringBuffer.length());
         }
     }
 
     public interface ChannelValueCallback {
         void onChannelValue(String value);
     }
-
-//    public class TimerTask {
-//        private boolean isRunning;
-//        private Timer timer;
-//        private java.util.TimerTask timerTask;
-//        private Handler handler = new Handler(Looper.getMainLooper()) {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//                if (msg.what == 1) {
-//                    isRunning = false;
-//                }
-//            }
-//        };
-//
-//        public TimerTask() {
-//            isRunning = false;
-//        }
-//
-//        public void startTimerTask() {
-//            if (timer == null) {
-//                timer = new Timer();
-//            }
-//            if (timerTask == null) {
-//                timerTask = new java.util.TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        Message message = new Message();
-//                        message.what = 1;
-//                        handler.sendMessage(message);
-//                    }
-//                };
-//            }
-//            if (timer != null && timerTask != null) {
-//                isRunning = true;
-//                timer.schedule(timerTask, 1000);
-//            }
-//        }
-//
-//        public void stopTimer() {
-//            isRunning = false;
-//            if (timer != null) {
-//                timer.cancel();
-//                timer = null;
-//            }
-//            if (timerTask != null) {
-//                timerTask.cancel();
-//                timerTask = null;
-//            }
-//        }
-//
-//        public boolean isRunning() {
-//            return isRunning;
-//        }
-//    }
 }

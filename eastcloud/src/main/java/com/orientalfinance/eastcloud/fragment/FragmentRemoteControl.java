@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +24,29 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
+import com.hannesdorfmann.mosby.mvp.MvpPresenter;
+import com.luck.picture.lib.model.FunctionOptions;
+import com.luck.picture.lib.model.PictureConfig;
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.activity.ActivitySetting;
 import com.orientalfinance.eastcloud.adapter.ControllerFragmentAdapter;
 import com.orientalfinance.eastcloud.adapter.TVConnectAdapter;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerMenu;
 import com.orientalfinance.eastcloud.fragment.remotecontroller.FragmentControllerNumber;
+import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.TVConnectState;
+import com.orientalfinance.eastcloud.mvp.View.FragmentRemoteControlView;
+import com.orientalfinance.eastcloud.mvp.presenter.FragmentRemoteControlPresenter;
 import com.orientalfinance.eastcloud.utils.DividerItemDecoration;
 import com.orientalfinance.eastcloud.utils.OnPageChangeListener;
 import com.orientalfinance.eastcloud.view.indictor.PageIndicatorView;
+import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +55,14 @@ import java.util.TimerTask;
  * Use the {@link FragmentRemoteControl#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentRemoteControl extends Fragment implements View.OnClickListener {
+public class FragmentRemoteControl extends MvpFragment<FragmentRemoteControlView, FragmentRemoteControlPresenter> implements View.OnClickListener
+        , FragmentRemoteControlView {
+    public static final int TV_PAY = 1;
+    public static final int MSG_NOTIFY = 2;
+    public static final int MANUAL_INPUT = 3;
+    public static final int TV_TOU = 4;
+    public static final int TV_VOICE_INPUT = 5;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,10 +82,15 @@ public class FragmentRemoteControl extends Fragment implements View.OnClickListe
     private View view;
     private TextView tvConnectButton;
 
-
     public FragmentRemoteControl() {
         // Required empty public constructor
     }
+
+    @Override
+    public FragmentRemoteControlPresenter createPresenter() {
+        return new FragmentRemoteControlPresenter();
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -93,6 +118,7 @@ public class FragmentRemoteControl extends Fragment implements View.OnClickListe
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,17 +153,19 @@ public class FragmentRemoteControl extends Fragment implements View.OnClickListe
         view.findViewById(R.id.iv_input).setOnClickListener(this);
         view.findViewById(R.id.iv_tou_ping).setOnClickListener(this);
         view.findViewById(R.id.iv_tell_me).setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
+        //RequestParam<Object> objectRequestParam = new RequestParam<>();
         switch (v.getId()) {
             case R.id.tv_connection:
                 showPopupWindow(mPopWindow);
                 break;
             case R.id.iv_tv_pay:
                 Toast.makeText(getActivity(), "电视支付", Toast.LENGTH_SHORT).show();
+                getPresenter().requestNet(TV_PAY);
+
                 break;
             case R.id.iv_msg_notify:
                 Toast.makeText(getActivity(), "讯息通知", Toast.LENGTH_SHORT).show();
@@ -146,6 +174,22 @@ public class FragmentRemoteControl extends Fragment implements View.OnClickListe
                 Toast.makeText(getActivity(), "手动输入", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_tou_ping:
+                final FunctionOptions functionOptions = new FunctionOptions.Builder()
+                        .setEnableCrop(false)
+                        .setMaxSelectNum(1)
+                        .create();
+                PictureConfig.getInstance().init(functionOptions).openPhoto(getActivity(), new PictureConfig.OnSelectResultCallback() {
+                    @Override
+                    public void onSelectSuccess(List<LocalMedia> list) {
+                        Toast.makeText(getActivity(), "路径：" + list.get(0).getPath(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSelectSuccess(LocalMedia localMedia) {
+
+                    }
+                });
+
                 Toast.makeText(getActivity(), "投屏设置", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_tell_me:
@@ -239,6 +283,16 @@ public class FragmentRemoteControl extends Fragment implements View.OnClickListe
         if (popupwindow != null && popupwindow.isShowing()) {
             popupwindow.dismiss();
         }
+    }
+
+    @Override
+    public void onSuccess(String successMsg) {
+        Toast.makeText(getActivity(), successMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onError(String errorMsg) {
+        Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
     }
 
 

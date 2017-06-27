@@ -106,7 +106,7 @@ public interface EastCloudService {
      */
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody>modifyUserInfo(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody> modifyUserInfo(@Field("s") String zip, @Field("sign") String sign);
 
 
     /**
@@ -202,6 +202,7 @@ public interface EastCloudService {
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<BankCardInfo>> checkBank(@Field("s") String zip, @Field("sign") String sign);
+
     //itype 371
     @FormUrlEncoded
     @POST(".")
@@ -289,6 +290,7 @@ public interface EastCloudService {
     @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<Detail>>> showProgramDetail(@Field("s") String zip, @Field("sign") String sign);
+
     //itype 509
     @FormUrlEncoded
     @POST(".")
@@ -332,6 +334,10 @@ public interface EastCloudService {
 
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody> add﻿Collection(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody> addCollection(@Field("s") String zip, @Field("sign") String sign);
+
+    @Multipart
+    @POST(".")
+    Call<ResponseResult> controller(@PartMap Map<String, RequestBody> params);
 
 }

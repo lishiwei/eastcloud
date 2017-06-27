@@ -33,7 +33,7 @@ public class EastcloudRetrofit {
         retrofit = new Retrofit.Builder().client(mOkHttpClient)
                 .addConverterFactory(MyGsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(API.BASE_URL)
+                .baseUrl(API.BASE_URL01)
                 .build();
         return retrofit;
     }

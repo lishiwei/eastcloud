@@ -162,7 +162,7 @@ public class RemoteDataProxy {
     public static Flowable<EastCloudResponseBody> modifyUserInfo(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_INFO_UPDATE);
 
-       return EastcloudRetrofit.getInstance()
+        return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
 
@@ -180,6 +180,7 @@ public class RemoteDataProxy {
                 .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
 
     }
+
     /**
      * 方法描述：显示已绑定的机顶盒
      * itype 355
@@ -625,8 +626,23 @@ public class RemoteDataProxy {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.ADD_COLLECTION);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .add﻿Collection(sendRequest.getS(), sendRequest.getSign());
+                .addCollection(sendRequest.getS(), sendRequest.getSign());
+    }
 
+    /**
+     * 方法描述：遥控器请求接口（650）
+     */
+    public static void controller(RequestParam requestParam, File file, HttpCallBack httpCallBack) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.TV_CONTROLLER);
+
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("s", toRequestBody(sendRequest.getS()));
+        map.put("sign", toRequestBody(sendRequest.getSign()));
+        if (file != null) {
+            RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+            map.put("file\"; filename=\"" + file.getName(), fileBody);
+        }
+        EastcloudRetrofit.getInstance().getEastCloudService().controller(map).enqueue(httpCallBack);
     }
 
     public static RequestBody toRequestBody(String value) {

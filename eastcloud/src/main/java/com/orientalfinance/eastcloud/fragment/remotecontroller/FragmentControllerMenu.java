@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
+import com.orientalfinance.eastcloud.module.Retrofit.HttpCallBack;
+import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.ControllerRequest;
 
 /**
  * Created by lzy on 2017/6/20.
@@ -72,31 +75,77 @@ public class FragmentControllerMenu extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.iv_voice_plus:
                 Toast.makeText(getActivity(), "音量+++++", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("vup");
                 break;
             case R.id.iv_voice_minus:
                 Toast.makeText(getActivity(), "音量-----", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("vdown");
                 break;
             case R.id.iv_left_top:
                 Toast.makeText(getActivity(), "top", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("up");
                 break;
             case R.id.iv_below_left:
                 Toast.makeText(getActivity(), "left", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("left");
                 break;
             case R.id.iv_below_right:
                 Toast.makeText(getActivity(), "bottom", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("down");
                 break;
             case R.id.iv_right_top:
                 Toast.makeText(getActivity(), "right", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("right");
                 break;
             case R.id.iv_center:
                 Toast.makeText(getActivity(), "center", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("ok");
                 break;
             case R.id.iv_exit:
                 Toast.makeText(getActivity(), "退出", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("quit");
                 break;
             case R.id.iv_retur:
                 Toast.makeText(getActivity(), "返回", Toast.LENGTH_SHORT).show();
+                realQuestWithNoFile("back");
                 break;
         }
+    }
+
+    /**
+     * 音量+ 		   vup
+     音量- 		   vdown
+     退出  		   quit
+     返回  		   back
+     上键  		   up
+     下键  		   down
+     左    		   left
+     右    		   right
+     OK    		   ok
+     *（星号）    	   asterisk
+     #（井号）    	   hashtag
+     */
+    private void realQuestWithNoFile(String value) {
+        ControllerRequest controllerRequest = new ControllerRequest();
+        controllerRequest.setKey("key");
+        controllerRequest.setContent(value);
+        RequestParam<ControllerRequest> requestParam = new RequestParam<>(controllerRequest);
+
+        RemoteDataProxy.controller(requestParam, null, new HttpCallBack() {
+            @Override
+            public void OnSuccess(Object data) {
+                Toast.makeText(getActivity(), "支付成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(getActivity(), "支付失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+        });
     }
 }
