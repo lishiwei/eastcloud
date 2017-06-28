@@ -8,8 +8,9 @@ import java.io.Serializable;
  */
 
 public class ControllerRequest implements Serializable {
-    private String key;
-    private String content;
+    private String mac_addr;  //机顶盒MAC地址
+    private String key;        //key用于服务端路由（为固定的几个值）
+    private String content;    //遥控器按键内容
 
     public ControllerRequest() {
     }
@@ -17,6 +18,20 @@ public class ControllerRequest implements Serializable {
     public ControllerRequest(String key, String content) {
         this.key = key;
         this.content = content;
+    }
+
+    public ControllerRequest(String mac_addr, String key, String content) {
+        this.mac_addr = mac_addr;
+        this.key = key;
+        this.content = content;
+    }
+
+    public String getMac_addr() {
+        return mac_addr;
+    }
+
+    public void setMac_addr(String mac_addr) {
+        this.mac_addr = mac_addr;
     }
 
     public String getKey() {
@@ -38,7 +53,8 @@ public class ControllerRequest implements Serializable {
     @Override
     public String toString() {
         return "ControllerRequest{" +
-                "key='" + key + '\'' +
+                "mac_addr='" + mac_addr + '\'' +
+                ", key='" + key + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

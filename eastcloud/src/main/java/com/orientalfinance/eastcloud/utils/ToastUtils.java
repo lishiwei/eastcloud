@@ -1,6 +1,11 @@
 package com.orientalfinance.eastcloud.utils;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.ColorInt;
@@ -16,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.App;
 
 import java.lang.ref.WeakReference;
@@ -29,20 +35,96 @@ import java.lang.ref.WeakReference;
  * </pre>
  */
 public final class ToastUtils {
-
+    @ColorInt
+    private static int ERROR_COLOR = Color.parseColor("#D50000");
+    @ColorInt
+    private static int INFO_COLOR = Color.parseColor("#3F51B5");
+    @ColorInt
+    private static int SUCCESS_COLOR = Color.parseColor("#388E3C");
+    @ColorInt
+    private static int WARNING_COLOR = Color.parseColor("#FFA900");
     private static final int DEFAULT_COLOR = 0x12000000;
     private static Toast sToast;
-    private static int gravity         = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
-    private static int xOffset         = 0;
-    private static int yOffset         = (int) (64 * App.getApp().getResources().getDisplayMetrics().density + 0.5);
+    private static int gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+    private static int xOffset = 0;
+    private static int yOffset = (int) (64 * App.getApp().getResources().getDisplayMetrics().density + 0.5);
     private static int backgroundColor = DEFAULT_COLOR;
-    private static int bgResource      = -1;
-    private static int messageColor    = DEFAULT_COLOR;
+    private static int bgResource = -1;
+    private static int messageColor = DEFAULT_COLOR;
     private static WeakReference<View> sViewWeakReference;
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     private ToastUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+    static void setBackground(@NonNull View view, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+            view.setBackground(drawable);
+        else
+            view.setBackgroundDrawable(drawable);
+    }
+
+    static Drawable tintIcon(@NonNull Drawable drawable, @ColorInt int tintColor) {
+        drawable.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN);
+        return drawable;
+    }
+
+    static Drawable tint9PatchDrawableFrame(@NonNull Context context, @ColorInt int tintColor) {
+        final NinePatchDrawable toastDrawable = (NinePatchDrawable) getDrawable(context, R.drawable.toast_frame);
+        return tintIcon(toastDrawable, tintColor);
+    }
+
+    static Drawable getDrawable(@NonNull Context context, @DrawableRes int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            return context.getDrawable(id);
+        else
+            return context.getResources().getDrawable(id);
+    }
+
+    public static void showSuccess(String successMsg) {
+        Toast toast = Toast.makeText(App.getApp(), "", Toast.LENGTH_SHORT);
+        View view = toast.getView();
+        // toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setText(successMsg);
+        Drawable drawable = tint9PatchDrawableFrame(App.getApp(), SUCCESS_COLOR);
+        setBackground(view, drawable);
+        toast.show();
+    }
+
+
+    public static void showError(String failureMsg) {
+        Toast toast = Toast.makeText(App.getApp(), "", Toast.LENGTH_SHORT);
+        View view = toast.getView();
+        //toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setText(failureMsg);
+        Drawable drawable = tint9PatchDrawableFrame(App.getApp(), ERROR_COLOR);
+        setBackground(view, drawable);
+        toast.show();
+    }
+
+    public static void showWarning(String warningMsg) {
+        Toast toast = Toast.makeText(App.getApp(), "", Toast.LENGTH_SHORT);
+        View view = toast.getView();
+        //toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setText(warningMsg);
+        Drawable drawable = tint9PatchDrawableFrame(App.getApp(), WARNING_COLOR);
+        setBackground(view, drawable);
+        toast.show();
+    }
+
+    public static void showInfo(String info) {
+        Toast toast = Toast.makeText(App.getApp(), "", Toast.LENGTH_SHORT);
+        View view = toast.getView();
+       // toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setText(info);
+        Drawable drawable = tint9PatchDrawableFrame(App.getApp(), INFO_COLOR);
+        setBackground(view, drawable);
+        toast.show();
     }
 
     /**
