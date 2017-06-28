@@ -1,8 +1,10 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
 
+import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
@@ -62,6 +64,38 @@ public class HotBookingPresenter extends MvpNullObjectBasePresenter<HotBookingVi
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
                 getView().stopHotVariety();
+            }
+        });
+    }
+
+    public void addAppointment(RequestParam requestParam) {
+        RemoteDataProxy.addAppointmentProgram(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                getView().showSucceed();
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+            }
+        });
+    }
+    public void deleteAppointment(RequestParam requestParam) {
+        getView().showDialog();
+        RemoteDataProxy.deleteAppointment(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+            @Override
+            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                getView().hideDialog();
+                getView().showSucceed();
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
+                getView().hideDialog();
+                getView().deleteFailed(0);
+
             }
         });
     }

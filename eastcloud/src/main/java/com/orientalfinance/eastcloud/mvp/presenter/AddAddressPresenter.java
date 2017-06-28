@@ -17,7 +17,7 @@ import io.reactivex.functions.Consumer;
  * email:lizy@oriental-finance.com
  */
 
-public class ActivityAddAddressPresenter extends MvpNullObjectBasePresenter<ActivityAddAddressView> {
+public class AddAddressPresenter extends MvpNullObjectBasePresenter<ActivityAddAddressView> {
 
     public void start() {
 

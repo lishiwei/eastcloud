@@ -7,11 +7,10 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.ActivityAddBankCardSuccessBinding;
 import com.orientalfinance.eastcloud.mvp.View.ActivityAddBankCardSuccessView;
-import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddBankCardSuccessPresenter;
+import com.orientalfinance.eastcloud.mvp.presenter.AddBankCardSuccessPresenter;
 
 /**
  * Created by lzy on 2017/6/14.
@@ -19,14 +18,14 @@ import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddBankCardSuccessPre
  */
 
 public class ActivityAddBankCardSuccess extends MvpActivity<ActivityAddBankCardSuccessView,
-        ActivityAddBankCardSuccessPresenter> {
+        AddBankCardSuccessPresenter> {
 
     private ActivityAddBankCardSuccessBinding bankCardSuccessBinding;
 
     @NonNull
     @Override
-    public ActivityAddBankCardSuccessPresenter createPresenter() {
-        return new ActivityAddBankCardSuccessPresenter();
+    public AddBankCardSuccessPresenter createPresenter() {
+        return new AddBankCardSuccessPresenter();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud.module.Retrofit;
 
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
+import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
@@ -20,6 +21,7 @@ import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.SearchHot;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
+import com.orientalfinance.eastcloud.module.javabean.Token;
 import com.orientalfinance.eastcloud.module.javabean.User;
 
 import java.util.List;
@@ -42,6 +44,12 @@ import retrofit2.http.PartMap;
 
 public interface EastCloudService {
 
+    /**
+     * 方法描述：更新token
+     */
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<Token>> tokenFresh(@Field("s") String zip, @Field("sign") String sign);
 
     /**
      * 方法描述：注册
@@ -339,5 +347,10 @@ public interface EastCloudService {
     @Multipart
     @POST(".")
     Call<ResponseResult> controller(@PartMap Map<String, RequestBody> params);
+
+    //itype 750
+    @Multipart
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Application>>> showAppList(@Field("s") String zip, @Field("sign") String sign);
 
 }

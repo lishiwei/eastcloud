@@ -19,6 +19,7 @@ import com.orientalfinance.eastcloud.dagger.modules.SearchModule;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotSearch;
 import com.orientalfinance.eastcloud.dagger.qualifier.Searched;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.SearchHot;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.mvp.View.SearchView;
@@ -70,12 +71,23 @@ public class ActivitySearch extends BaseActivity<SearchComponent, SearchView, Se
         mActivitySearchBinding.cetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                AcacheUtil.getInstance().AddHistory(mActivitySearchBinding.cetSearch.getText().toString());
+                mSearchedRvAdapter.getStringList().add(mActivitySearchBinding.cetSearch.getText().toString());
+                mSearchedRvAdapter.notifyDataSetChanged();
                 SearchResult.SearchRequestParam searchRequestParam = new SearchResult.SearchRequestParam(0, 10, mActivitySearchBinding.cetSearch.getText().toString());
                 getPresenter().showSearchResult(new RequestParam(searchRequestParam));
                 return true;
             }
         });
         mActivitySearchBinding.rvSearchResult.setVisibility(View.INVISIBLE);
+        mActivitySearchBinding.ivClearHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchedRvAdapter.getStringList().clear();
+                mSearchedRvAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 

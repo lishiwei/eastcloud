@@ -3,6 +3,7 @@ package com.orientalfinance.eastcloud.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -18,6 +19,7 @@ import com.orientalfinance.eastcloud.dagger.component.HotBookingComponent;
 import com.orientalfinance.eastcloud.dagger.modules.HotBookingModule;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.ShowRequestParam;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
@@ -27,6 +29,7 @@ import com.orientalfinance.eastcloud.mvp.View.HotBookingViewState;
 import com.orientalfinance.eastcloud.mvp.base.BaseActivity;
 import com.orientalfinance.eastcloud.mvp.presenter.HotBookingPresenter;
 import com.orientalfinance.eastcloud.utils.ClickHandler;
+import com.orientalfinance.eastcloud.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,7 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     public String getToolBarTitle() {
         return null;
     }
+
     RotateAnimation mHotBookingRotateAnimation;
     RotateAnimation mHotVarietyRotateAnimation;
     @Inject
@@ -81,7 +85,7 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         super.onCreate(savedInstanceState);
 
         mActivityHotBookingBinding = DataBindingUtil.setContentView(this, R.layout.activity_hot_booking);
-        mActivityHotBookingBinding.rvHotMovie.setLayoutManager(new FullyGridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
+        mActivityHotBookingBinding.rvHotMovie.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mActivityHotBookingBinding.rvHotMovie.setAdapter(mHotMovieRvAdpter);
         mActivityHotBookingBinding.rvHotVariety.setLayoutManager(new FullyGridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
         mActivityHotBookingBinding.rvHotVariety.setAdapter(mHotVarietyRvAdpter);
@@ -92,11 +96,11 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        mHotBookingRotateAnimation = new RotateAnimation(0, 360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        mHotBookingRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         mHotBookingRotateAnimation.setDuration(1000);
         mHotBookingRotateAnimation.setRepeatMode(Animation.RESTART);
         mHotBookingRotateAnimation.setRepeatCount(Animation.INFINITE);
-        mHotVarietyRotateAnimation = new RotateAnimation(0, 360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        mHotVarietyRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         mHotVarietyRotateAnimation.setDuration(1000);
         mHotVarietyRotateAnimation.setRepeatMode(Animation.RESTART);
         mHotVarietyRotateAnimation.setRepeatCount(Animation.INFINITE);
@@ -106,6 +110,22 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
         ShowRequestParam showRequestParam1 = new ShowRequestParam(6, 11);
 
         getPresenter().exchangeHotMovie(new RequestParam(showRequestParam1));
+
+        mHotMovieRvAdpter.setOnAddAppointmentListener(new HotBookingRvAdpter.OnAddAppointmentListener() {
+            @Override
+            public void onAddAppointment(String program_id) {
+                AppointmentProgram.AddAppointmentRequestParam addAppointmentRequestParam = new AppointmentProgram.AddAppointmentRequestParam(program_id, "1");
+                getPresenter().addAppointment(new RequestParam(addAppointmentRequestParam));
+            }
+        });
+        mHotMovieRvAdpter.setOnCancelAppointmentListener(new HotBookingRvAdpter.OnCancelAppointmentListener() {
+            @Override
+            public void onCancelAppointment(String program_id) {
+
+                DeleteRequestParam deleteRequestParam = new DeleteRequestParam(program_id);
+                getPresenter().deleteAppointment(new RequestParam(deleteRequestParam));
+            }
+        });
     }
 
     @Override
@@ -121,17 +141,17 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
 
     @Override
     public void showDialog() {
-
+mEastCloudProgressDialog.show();
     }
 
     @Override
     public void hideDialog() {
-
+mEastCloudProgressDialog.hide();
     }
 
     @Override
     public void showError(String errorMsg) {
-
+        ToastUtils.showShort(errorMsg);
     }
 
     @Override
@@ -176,5 +196,15 @@ public class ActivityHotBooking extends BaseActivity<HotBookingComponent, HotBoo
     @Override
     public void stopHotVariety() {
         mHotVarietyRotateAnimation.cancel();
+    }
+
+    @Override
+    public void showSucceed() {
+        mHotMovieRvAdpter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void deleteFailed(int position) {
+
     }
 }

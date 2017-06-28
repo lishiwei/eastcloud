@@ -4,6 +4,7 @@ import com.orientalfinance.eastcloud.adapter.SearchResultRvAdapter;
 import com.orientalfinance.eastcloud.adapter.SearchRvAdapter;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotSearch;
 import com.orientalfinance.eastcloud.dagger.qualifier.Searched;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 
 import java.util.ArrayList;
@@ -20,19 +21,14 @@ public class SearchModule {
 
     @Provides
     public List<String> getData() {
-        List<String> strings = new ArrayList<>();
-        strings.add("择天记");
-        strings.add("外科风云");
-        strings.add("人民的名义");
-        strings.add("继承人");
-        strings.add("继承人");
-        return strings;
+        AcacheUtil.getInstance().getHistory();
+        return AcacheUtil.getInstance().getHistory();
     }
 
     @HotSearch
     @Provides
-    public SearchRvAdapter getHotSearchAdapter(List<String> strings) {
-        return new SearchRvAdapter(strings);
+    public SearchRvAdapter getHotSearchAdapter() {
+        return new SearchRvAdapter(new ArrayList<String>());
     }
 
 

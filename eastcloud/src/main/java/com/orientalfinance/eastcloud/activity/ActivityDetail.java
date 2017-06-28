@@ -46,7 +46,7 @@ import com.orientalfinance.eastcloud.mvp.presenter.ActivityDetailPresenter;
 import com.orientalfinance.eastcloud.utils.AndroidBug5497Workaround;
 import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.orientalfinance.eastcloud.utils.TimeConstants;
-import com.orientalfinance.eastcloud.utils.TimeUtils;
+import com.orientalfinance.eastcloud.module.core.TimeUtils;
 import com.orientalfinance.eastcloud.view.ExpandListView;
 import com.orientalfinance.eastcloud.view.NoTouchLinearLayout;
 

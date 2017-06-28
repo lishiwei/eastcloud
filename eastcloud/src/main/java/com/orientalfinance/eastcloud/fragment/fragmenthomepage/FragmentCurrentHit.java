@@ -1,14 +1,19 @@
 package com.orientalfinance.eastcloud.fragment.fragmenthomepage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.Toast;
 
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
+import com.orientalfinance.eastcloud.activity.ActivityLogin;
 import com.orientalfinance.eastcloud.adapter.CurrentHitRvAdpter;
 import com.orientalfinance.eastcloud.adapter.LiveVideoRvAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
@@ -27,6 +32,7 @@ import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 import com.orientalfinance.eastcloud.utils.GlideImageLoader;
 import com.orientalfinance.eastcloud.utils.MyDataBindingUtils;
+import com.orientalfinance.eastcloud.view.ItemIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +54,13 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     FragmentCurrentHitBinding mFragmentCurrentHitBinding;
     List<String> mImageUrl;
 
-    CurrentHitRvAdpter mCurrentHitRvAdpter ;
+    CurrentHitRvAdpter mCurrentHitRvAdpter;
 
     LiveVideoRvAdapter mLiveVideoRvAdapter;
     List<String> mAdverStringList = new ArrayList<>();
-List<HomepageProgram> mCurrentHitPrograms = new ArrayList<>();
-List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
+    List<HomepageProgram> mCurrentHitPrograms = new ArrayList<>();
+    List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
+
     public FragmentCurrentHit() {
         // Required empty public constructor
     }
@@ -109,12 +116,9 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdverStringList.add("aaaaaaa");
-        mAdverStringList.add("bbbbbbbbbbbb");
-        mAdverStringList.add("cccccccccccccc");
-        mAdverStringList.add("dddddddddd");
-        mCurrentHitRvAdpter = new CurrentHitRvAdpter(mCurrentHitPrograms );
-        mLiveVideoRvAdapter = new LiveVideoRvAdapter(mLiveVideoPrograms );
+
+        mCurrentHitRvAdpter = new CurrentHitRvAdpter(mCurrentHitPrograms);
+        mLiveVideoRvAdapter = new LiveVideoRvAdapter(mLiveVideoPrograms);
 
         mImageUrl = new ArrayList<>();
         mFragmentCurrentHitBinding = (FragmentCurrentHitBinding) mViewDataBinding;
@@ -125,15 +129,40 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         mFragmentCurrentHitBinding.ryCurrentHit.setLayoutManager(new FullyGridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         mFragmentCurrentHitBinding.rvLiveVideo.setAdapter(mLiveVideoRvAdapter);
         mFragmentCurrentHitBinding.rvLiveVideo.setLayoutManager(new FullyGridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false));
+        mFragmentCurrentHitBinding.ryCurrentHit.setItemAnimator(new DefaultItemAnimator());
         mFragmentCurrentHitBinding.scrollview.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
+        mFragmentCurrentHitBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getAd();
+                getBanner();
+                getProgramList();
+                getCurrentHit(0, 6);
+                tokenRefresh();
+            }
+        });
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
+        mFragmentCurrentHitBinding.iiCurrentHit.setIndicatorText("正在热播");
+        mFragmentCurrentHitBinding.iiCurrentHit.setOnIndicatorClickListener(new ItemIndicator.OnIndicatorClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentHit(0, 6);
+            }
+        });
+        mFragmentCurrentHitBinding.iiLiveVideo.setIndicatorText("频道直播");
+        mFragmentCurrentHitBinding.iiLiveVideo.setOnIndicatorClickListener(new ItemIndicator.OnIndicatorClickListener() {
+            @Override
+            public void onClick(View v) {
+                getProgramList();
+            }
+        });
         getBanner();
 
         getAd();
-        getCurrentHit();
+        getCurrentHit(0, 6);
         getProgramList();
     }
 
@@ -148,8 +177,8 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         getPresenter().showAdvertisement(requestParam);
     }
 
-    private void getCurrentHit() {
-        RequestParam requestParam = new RequestParam(new Program.CurrentHitRequestParam(0, 6,"1"));
+    private void getCurrentHit(int start, int lenght) {
+        RequestParam requestParam = new RequestParam(new Program.CurrentHitRequestParam(start, lenght, "1"));
         getPresenter().showCurrentHit(requestParam);
     }
 
@@ -157,6 +186,10 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         HomePageChannel.ShowChannelRequestParam requestParam = new HomePageChannel.ShowChannelRequestParam("" + 0);
         RequestParam requestParam1 = new RequestParam(requestParam);
         getPresenter().showProgramList(requestParam1);
+    }
+
+    private void tokenRefresh() {
+        getPresenter().tokenRefresh(new RequestParam());
     }
 
     @Override
@@ -185,6 +218,7 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         }
         mFragmentCurrentHitBinding.banner.setImages(mImageUrl);
         mFragmentCurrentHitBinding.banner.start();
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
@@ -196,18 +230,30 @@ List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
         }
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
+
     }
 
     @Override
     public void showCurrentHit(List<HomepageProgram> programList) {
+        mFragmentCurrentHitBinding.iiCurrentHit.stopRefresh();
         mCurrentHitRvAdpter.setProgramList(programList);
-
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
     @Override
     public void showProgramList(List<HomepageProgram> programList) {
-        mLiveVideoRvAdapter.setProgramList(programList);
+        if (programList.size() >= 1) {
+            mFragmentCurrentHitBinding.setProgram(programList.get(0));
+            mLiveVideoRvAdapter.setProgramList(programList.subList(1,programList.size()-1));
+        }
 
+        mFragmentCurrentHitBinding.iiLiveVideo.stopRefresh();
+        mFragmentCurrentHitBinding.scrollview.setRefreshing(false);
     }
 
+    @Override
+    public void refreshTokenError() {
+        startActivity(new Intent(getActivity(), ActivityLogin.class));
+    }
 }

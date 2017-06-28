@@ -16,7 +16,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.mvp.View.ActivityAddAddressView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
-import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddAddressPresenter;
+import com.orientalfinance.eastcloud.mvp.presenter.AddAddressPresenter;
 import com.orientalfinance.eastcloud.utils.KeyboardUtils;
 
 /**
@@ -24,7 +24,7 @@ import com.orientalfinance.eastcloud.utils.KeyboardUtils;
  * email:lizy@oriental-finance.com
  */
 
-public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, ActivityAddAddressPresenter> implements ActivityAddAddressView {
+public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, AddAddressPresenter> implements ActivityAddAddressView {
 
     private static final java.lang.String TAG = ActivityAddAddress.class.getSimpleName();
     private ActivityAddAddressBinding mAddAddressBinding;
@@ -34,8 +34,8 @@ public class ActivityAddAddress extends BaseMVPActivity<ActivityAddAddressView, 
 
     @NonNull
     @Override
-    public ActivityAddAddressPresenter createPresenter() {
-        return new ActivityAddAddressPresenter();
+    public AddAddressPresenter createPresenter() {
+        return new AddAddressPresenter();
     }
 
     @Override

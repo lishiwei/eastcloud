@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentMySelfBinding;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
@@ -24,18 +23,8 @@ import com.orientalfinance.eastcloud.mvp.View.MyselfView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.MyselfPresenter;
 import com.orientalfinance.eastcloud.utils.ClickHandler;
-import com.orientalfinance.eastcloud.utils.LogUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Timed;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,40 +116,8 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
         });
 
         mFragmentMySelfBinding.setClickHandler(mClickHandler);
-      final List<Integer> integerList = new ArrayList<>();
-        RxView.clicks(getView().findViewById(R.id.fl_All_Order)).create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
-                e.onNext(1);
-            }
-        }).timestamp().subscribe(new Consumer<Timed<Integer>>() {
-            @Override
-            public void accept(@NonNull Timed<Integer> integerTimed) throws Exception {
-                LogUtils.d(TAG, "accept: time" + integerTimed.time());
-                LogUtils.d(TAG, "accept:value( " + integerTimed.value());
-                if (integerTimed.time() - time < 1000) {
-                    integerList.add(integerTimed.value());
-
-                } else {
-                    integerList.add(integerTimed.value());
-                    LogUtils.d(TAG, "accept: integerList" + integerList.toString());
-
-                }
-                time = integerTimed.time();
-
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                LogUtils.d(TAG, "accept: "+throwable.toString());
-            }
-        });;
-
 
     }
-
-    final List<Integer> integerList = new ArrayList<>();
-    static long time;
     ClickHandler mClickHandler = new ClickHandler() {
         @Override
         public void onClick(View view) {
@@ -168,7 +125,6 @@ public class FragmentMySelf extends BaseFragment<MyselfComponent, MyselfView, My
             switch (view.getId()) {
                 case R.id.fl_All_Order:
                     intent.putExtra(Constant.VALUE, Constant.ALLORDER);
-
 
 
                     break;

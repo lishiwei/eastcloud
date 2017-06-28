@@ -8,7 +8,7 @@ import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
  * email:lizy@oriental-finance.com
  */
 
-public class ActivityAddBankCardSuccessPresenter extends MvpNullObjectBasePresenter<ActivityAddBankCardSuccessView> {
+public class AddBankCardSuccessPresenter extends MvpNullObjectBasePresenter<ActivityAddBankCardSuccessView> {
 
     public void start() {
 

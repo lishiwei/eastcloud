@@ -87,11 +87,15 @@ public class AutoTextView extends TextSwitcher implements
     }
 
     public void setText() {
-        setText(mStringList.get(mCurrentNumber));
-        mCurrentNumber++;
-        if (mCurrentNumber == mStringList.size()) {
-            mCurrentNumber = 0;
+        if (mStringList.size() != 0)
+        {
+            setText(mStringList.get(mCurrentNumber));
+            mCurrentNumber++;
+            if (mCurrentNumber == mStringList.size()) {
+                mCurrentNumber = 0;
+            }
         }
+
     }
 
     private void init() {

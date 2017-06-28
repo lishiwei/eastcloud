@@ -89,4 +89,37 @@ public class AppointmentProgram {
                 ", appointId='" + appointId + '\'' +
                 '}';
     }
+    public static class AddAppointmentRequestParam{
+        String program_id;
+        String mac_id;
+
+        public AddAppointmentRequestParam(String program_id, String mac_id) {
+            this.program_id = program_id;
+            this.mac_id = mac_id;
+        }
+
+        public String getProgram_id() {
+            return program_id;
+        }
+
+        public void setProgram_id(String program_id) {
+            this.program_id = program_id;
+        }
+
+        public String getMac_id() {
+            return mac_id;
+        }
+
+        public void setMac_id(String mac_id) {
+            this.mac_id = mac_id;
+        }
+
+        @Override
+        public String toString() {
+            return "AddAppointmentRequestParam{" +
+                    "program_id='" + program_id + '\'' +
+                    ", mac_id='" + mac_id + '\'' +
+                    '}';
+        }
+    }
 }

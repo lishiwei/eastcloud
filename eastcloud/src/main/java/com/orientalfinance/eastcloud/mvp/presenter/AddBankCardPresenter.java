@@ -19,7 +19,7 @@ import io.reactivex.functions.Consumer;
  * email:lizy@oriental-finance.com
  */
 
-public class ActivityAddBankCardPresenter extends MvpNullObjectBasePresenter<ActivityAddBankCardView> {
+public class AddBankCardPresenter extends MvpNullObjectBasePresenter<ActivityAddBankCardView> {
 
     public void getVerificationCode(RequestParam requestParam) {
         RemoteDataProxy.codeSend(requestParam).compose(new ObjectTransform<Message>()).subscribe(new Consumer<Message>() {

@@ -22,8 +22,11 @@ public class Constant {
     public static final String UNDELIVERY = "unDelivery";
     public static final String UNRECIEVED = "unRecieved";
     public static final String SUCCEED = "succeed";
+    public static final String SEARCHHISTORY = "searchHistory";
+    public static final String TOKENREFRESHTIME = "tokenRefresh";
 
     public static class IType {
+        public static final int TOKENFEFRESH = 50;
         public static final int REGISTER = 301;
         public static final int CODE_SEND = 302;
         public static final int VALIDATE_CODE = 303;
@@ -83,6 +86,8 @@ public class Constant {
         public static final int ADD_COLLECTION = 554;
 
         public static final int TV_CONTROLLER = 650;
+
+        public static final int SHOW_APP_LIST = 750;
     }
 
     public static class OrderC {

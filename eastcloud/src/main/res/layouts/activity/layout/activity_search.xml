@@ -40,17 +40,40 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
+                android:id="@+id/ll_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_search"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/Indicator"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
                     android:layout_height="wrap_content"
-                    android:text="搜索历史"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/Indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="搜索历史"/>
+
+                    <android.support.v4.widget.Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_clearHistory"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/clear"/>
+                </LinearLayout>
+
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_History"

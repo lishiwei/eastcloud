@@ -15,7 +15,10 @@ public interface CurrentHitView extends BaseMvpView {
     void showBanner(List<Banner> banners);
 
     void showAdvertisement(List<Advertisement> advertisements);
+
     void showCurrentHit(List<HomepageProgram> advertisements);
+
     void showProgramList(List<HomepageProgram> advertisements);
 
+    void refreshTokenError();
 }

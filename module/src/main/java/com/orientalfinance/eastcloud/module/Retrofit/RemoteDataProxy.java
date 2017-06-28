@@ -9,6 +9,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.encrypt.EncryptUtils;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
 import com.orientalfinance.eastcloud.module.javabean.Address;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
+import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
@@ -26,6 +27,7 @@ import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.SearchHot;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
+import com.orientalfinance.eastcloud.module.javabean.Token;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.module.util.DeviceUtil;
 
@@ -61,7 +63,16 @@ public class RemoteDataProxy {
         }
         return remoteDataProxy;
     }
+    /**
+     * 方法描述：更新token(itype=50)
+     */
+    public static Flowable<EastCloudResponseBody<Token>> tokenFresh(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.TOKENFEFRESH);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .tokenFresh(sendRequest.getS(), sendRequest.getSign());
 
+    }
     /**
      * 方法描述：注册(itype=301)
      */
@@ -649,6 +660,16 @@ public class RemoteDataProxy {
         return RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), value);
     }
 
+    /**
+     * 方法描述：增加收藏
+     * itype 750
+     */
+    public static Flowable<EastCloudResponseBody<List<Application>>> showAppList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_APP_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showAppList(sendRequest.getS(), sendRequest.getSign());
+    }
     /**
      * 方法描述：重新包装request参数
      */

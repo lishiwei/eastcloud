@@ -104,9 +104,9 @@ public class HomePageChannel {
     }
 
     public class Category {
-        @SerializedName("id")
+        @SerializedName("cate_id")
         String cateId;
-        @SerializedName("name")
+        @SerializedName("cate_name")
         String cateName;
         List<Category> child;
 

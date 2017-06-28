@@ -19,6 +19,7 @@ import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ChannelPresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
     private String mParam1;
     private String mParam2;
     FragmentChannelBinding mFragmentChannelBinding;
+    private static String TAG = FragmentChannel.class.getSimpleName();
 
     public FragmentChannel() {
         // Required empty public constructor
@@ -84,12 +86,12 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
 
     @Override
     public void showDialog() {
-        mEastCloudProgressDialog.show();
+
     }
 
     @Override
     public void hideDialog() {
-        mEastCloudProgressDialog.hide();
+
     }
 
     @Override
@@ -99,23 +101,22 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
 
     @Override
     public void showChannelCategory(List<HomePageChannel.Category> categories) {
+        LogUtils.d(TAG, "showChannelCategory: " + categories.toString());
         mHomePageChannels = categories;
         List<String> tabTitle = new ArrayList<>();
         List<Fragment> mFragmentList = new ArrayList<>();
-        if (categories.size() < 4) {
-            return;
-        }
-        mFragmentList.add(FragmentShangHai.newInstance(categories.get(0).getCateId(), ""));
-        mFragmentList.add(FragmentShangHai.newInstance(categories.get(1).getCateId(), ""));
-        mFragmentList.add(FragmentShangHai.newInstance(categories.get(2).getCateId(), ""));
-        mFragmentList.add(FragmentShangHai.newInstance(categories.get(3).getCateId(), ""));
         for (int i = 0; i < categories.size(); i++) {
-            if (i < 4) {
-                tabTitle.add(categories.get(i).getCateName());
-            }
-            mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager(), tabTitle, mFragmentList));
-            mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
-            mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
+            mFragmentList.add(FragmentShangHai.newInstance(categories.get(i).getCateId(), ""));
+        }
+        for (int i = 0; i < categories.size(); i++) {
+            tabTitle.add(categories.get(i).getCateName());
+        }
+        mFragmentChannelBinding.vpChannel.setAdapter(new ChannelPageAdapter(getChildFragmentManager(), tabTitle, mFragmentList));
+        mFragmentChannelBinding.tabChannel.setupWithViewPager(mFragmentChannelBinding.vpChannel);
+        mFragmentChannelBinding.tabChannel.setTabMode(TabLayout.MODE_FIXED);
+        if (categories.get(0)==null)
+        {
+            return;
         }
         HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
         RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
@@ -126,7 +127,7 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
 
     @Override
     public void showChannelList(List<HomePageChannel> channels) {
-
+        LogUtils.d(TAG, "showChannelList: "+channels.toString());
     }
 
     @Override

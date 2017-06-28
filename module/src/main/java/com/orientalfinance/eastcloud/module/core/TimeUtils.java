@@ -1,4 +1,4 @@
-package com.orientalfinance.eastcloud.utils;
+package com.orientalfinance.eastcloud.module.core;
 
 import java.text.DateFormat;
 import java.text.ParseException;

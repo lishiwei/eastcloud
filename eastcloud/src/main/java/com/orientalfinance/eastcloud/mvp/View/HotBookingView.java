@@ -11,12 +11,20 @@ import java.util.List;
 public interface HotBookingView extends BaseMvpView {
 
     void showExchangeHotMovie();
+
     void stopExchangeHotMovie();
 
     void showHotVariety();
+
     void stopHotVariety();
 
     void exchangeHotMovie(List<AppointmentProgram> appointmentPrograms);
 
     void exchangeHotVariety(List<AppointmentProgram> appointmentPrograms);
+
+    public void showSucceed();
+
+//    public void deleteSucceed(int position);
+//
+    public void deleteFailed(int position);
 }

@@ -19,10 +19,10 @@ import com.orientalfinance.eastcloud.module.javabean.Message;
 import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.ActivityAddBankCardView;
 import com.orientalfinance.eastcloud.mvp.base.BaseMVPActivity;
-import com.orientalfinance.eastcloud.mvp.presenter.ActivityAddBankCardPresenter;
+import com.orientalfinance.eastcloud.mvp.presenter.AddBankCardPresenter;
 import com.orientalfinance.eastcloud.view.MSGCountTimeView;
 
-public class ActivityAddBankCard extends BaseMVPActivity<ActivityAddBankCardView, ActivityAddBankCardPresenter>
+public class ActivityAddBankCard extends BaseMVPActivity<ActivityAddBankCardView, AddBankCardPresenter>
         implements ActivityAddBankCardView, View.OnClickListener {
 
     private ActivityAddBankCardBinding viewDataBinding;
@@ -66,8 +66,8 @@ public class ActivityAddBankCard extends BaseMVPActivity<ActivityAddBankCardView
 
     @NonNull
     @Override
-    public ActivityAddBankCardPresenter createPresenter() {
-        return new ActivityAddBankCardPresenter();
+    public AddBankCardPresenter createPresenter() {
+        return new AddBankCardPresenter();
     }
 
     @Override

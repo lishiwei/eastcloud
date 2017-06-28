@@ -2,13 +2,19 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.core.AcacheUtil;
+import com.orientalfinance.eastcloud.module.core.TimeUtils;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
+import com.orientalfinance.eastcloud.module.javabean.Token;
+import com.orientalfinance.eastcloud.module.javabean.User;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 
 import java.util.List;
 
@@ -30,6 +36,32 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
 
     }
 
+
+    public void tokenRefresh(final RequestParam requestParam) {
+
+        if (AcacheUtil.getInstance().getTokenRefreshEnable()) {
+
+            LogUtils.d(TAG, "tokenRefresh: ");
+            RemoteDataProxy.tokenFresh(requestParam)
+                    .compose(new ObjectTransform<Token>()).subscribe(new Consumer<Token>() {
+                @Override
+                public void accept(@NonNull Token token) throws Exception {
+                    LogUtils.d(TAG, "accept: " + token.toString());
+                    User user = AcacheUtil.getInstance().getUser();
+                    user.setToken(token.getToken());
+                    AcacheUtil.getInstance().putUser(user);
+                    AcacheUtil.getInstance().putTokenRefreshTime(TimeUtils.getNowString());
+                }
+            }, new MyConsumer<Throwable>() {
+                @Override
+                public void accept(@NonNull Throwable throwable) throws Exception {
+                    super.accept(throwable);
+                    LogUtils.d(TAG, "accept: "+throwable.getMessage());
+                    getView().refreshTokenError();
+                }
+            });
+        }
+    }
 
     public void showBanner(RequestParam requestParam) {
         getView().showDialog();

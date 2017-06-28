@@ -9,6 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.orientalfinance.R;
 import com.orientalfinance.eastcloud.activity.ActivityHotBooking;
 import com.orientalfinance.eastcloud.activity.ActivitySearch;
 import com.orientalfinance.eastcloud.module.javabean.Address;
@@ -57,6 +58,16 @@ public class MyDataBindingUtils {
         ImageLoaders.displayImage(imageView, src);
     }
 
+    @BindingAdapter({"appointSrc"})
+    public static void loadAppointImage(ImageView imageView, String appointId) {
+
+        if (appointId == null) {
+            ImageLoaders.displayImage(imageView, R.drawable.star);
+        } else {
+            ImageLoaders.displayImage(imageView, R.drawable.stared);
+        }
+    }
+
     public static String getStatus(String status) {
         if (status.equals("在线")) {
             return "连接";
@@ -65,16 +76,24 @@ public class MyDataBindingUtils {
         }
     }
 
-    public static SpannableStringBuilder getAddress( Address address) {
+    public static String getAppointText(String appointId) {
+        if (appointId == null) {
+            return "预约";
+        } else {
+            return "取消预约";
+        }
+    }
+
+    public static SpannableStringBuilder getAddress(Address address) {
         SpannableStringBuilder builder;
         if (address.isDefault() == 0) {
-            String s ="[ 默认地址 ]";
-            builder = new SpannableStringBuilder( s+address.getAddress());
+            String s = "[ 默认地址 ]";
+            builder = new SpannableStringBuilder(s + address.getAddress());
             ForegroundColorSpan modifySpan = new ForegroundColorSpan(Color.RED);
-            builder.setSpan(modifySpan,0,s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(modifySpan, 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return builder;
         } else {
-            builder = new SpannableStringBuilder( address.getAddress());
+            builder = new SpannableStringBuilder(address.getAddress());
             return builder;
         }
     }
@@ -86,4 +105,5 @@ public class MyDataBindingUtils {
             return Color.GRAY;
         }
     }
+
 }

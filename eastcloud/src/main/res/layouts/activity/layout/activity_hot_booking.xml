@@ -47,6 +47,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
@@ -61,10 +62,10 @@
                     <LinearLayout
                         android:id="@+id/ll_HotBooking"
                         android:layout_width="wrap_content"
-                        android:onClick="@{clickHandler.onClick}"
-
                         android:layout_height="wrap_content"
+
                         android:layout_gravity="end|center"
+                        android:onClick="@{clickHandler.onClick}"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -86,16 +87,18 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_hotMovie"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:nestedScrollingEnabled="false">
                 </android.support.v7.widget.RecyclerView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
+                        style="@style/Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
@@ -117,8 +120,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="wrap_content"
                             android:id="@+id/iv_HotVariety"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/refresh"/>
 
@@ -135,8 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="500dp"
-
-                    android:nestedScrollingEnabled="false">
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
