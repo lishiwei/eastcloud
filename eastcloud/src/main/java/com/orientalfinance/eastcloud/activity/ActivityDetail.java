@@ -109,11 +109,6 @@ public class ActivityDetail extends BaseActivity<ActivityDetailComponent, Detail
         Comment.CommentRequestParam commentRequestParam = new Comment.CommentRequestParam("0", "10", "0");
         RequestParam requestParam = new RequestParam(commentRequestParam);
         getPresenter().getDetailComments(requestParam);
-
-
-        List<String> strings = new ArrayList<>();
-
-
     }
 
     @Override

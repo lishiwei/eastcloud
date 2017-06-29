@@ -13,8 +13,10 @@ import com.orientalfinance.eastcloud.adapter.CurrentHitPageAdapter;
 import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerHomePageComponent;
 import com.orientalfinance.eastcloud.dagger.component.HomePageComponent;
+import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentCurrentHit;
+import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentTVPlay;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.HomePagePresenter;
@@ -114,21 +116,20 @@ public class FragmentHomePage extends BaseFragment<HomePageComponent, HomepageVi
     }
 
     @Override
-    public void showCategory(List<HomePageChannel.Category> categories) {
+    public void showCategory(List<RecommandCategory> categories) {
         LogUtils.d(TAG, "showCategory: "+categories.toString());
-        List<String> categoryTitle = new ArrayList<>();
+        List<Fragment> fragmentList = new ArrayList<>();
         for (int i = 0; i < categories.size(); i++) {
+            if (i==0)
+            {
+                fragmentList.add(FragmentCurrentHit.newInstance((ArrayList<RecommandCategory>) categories.get(i).getChild(),""));
+            }
+            else {
+                fragmentList.add(FragmentTVPlay.newInstance(categories.get(i).getChild().toString(),""));
 
-            categoryTitle.add(categories.get(i).getCateName());
-
-        }
-        if (categoryTitle.size()>5)
-        {
-            for (int i = 5; i < categoryTitle.size() ; i++) {
-                categoryTitle.remove(categoryTitle.get(i));
             }
         }
-        mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager(), categoryTitle));
+        mFragmentHomePageBinding.vpHomePage.setAdapter(new CurrentHitPageAdapter(getChildFragmentManager(), categories,fragmentList));
         mFragmentHomePageBinding.tabHomepage.setTabMode(TabLayout.MODE_FIXED);
         mFragmentHomePageBinding.tabHomepage.setupWithViewPager(mFragmentHomePageBinding.vpHomePage);
 

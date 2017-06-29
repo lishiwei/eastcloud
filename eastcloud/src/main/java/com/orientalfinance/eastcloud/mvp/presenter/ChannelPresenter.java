@@ -4,6 +4,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
@@ -31,9 +32,9 @@ public class ChannelPresenter extends MvpNullObjectBasePresenter<ChannelView> {
 
     public void showChannelCategory(RequestParam requestParam) {
         getView().showDialog();
-        RemoteDataProxy.showChannelCatelog(requestParam).compose(new ListTransform<List<HomePageChannel.Category>>()).subscribe(new Consumer<List<HomePageChannel.Category>>() {
+        RemoteDataProxy.showChannelCatelog(requestParam).compose(new ListTransform<List<ChannelCategory>>()).subscribe(new Consumer<List<ChannelCategory>>() {
             @Override
-            public void accept(@NonNull List<HomePageChannel.Category> catalogs) throws Exception {
+            public void accept(@NonNull List<ChannelCategory> catalogs) throws Exception {
                 getView().hideDialog();
                 getView().showChannelCategory(catalogs);
             }

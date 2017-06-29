@@ -4,7 +4,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
-import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -25,9 +25,9 @@ public class HomePagePresenter extends MvpNullObjectBasePresenter<HomepageView> 
     }
 
     public void showCategory(RequestParam requestParam) {
-        RemoteDataProxy.showCategory(requestParam).compose(new ListTransform<List<HomePageChannel.Category>>()).subscribe(new Consumer<List<HomePageChannel.Category>>() {
+        RemoteDataProxy.showCategory(requestParam).compose(new ListTransform<List<RecommandCategory>>()).subscribe(new Consumer<List<RecommandCategory>>() {
             @Override
-            public void accept(@NonNull List<HomePageChannel.Category> categories) throws Exception {
+            public void accept(@NonNull List<RecommandCategory> categories) throws Exception {
                 getView().showCategory(categories);
             }
         }, new MyConsumer<Throwable>() {

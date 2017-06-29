@@ -24,7 +24,7 @@ public class MyselfModule {
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "观看历史"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的预约"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的收藏"));
-        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的应用"));
+        itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的电视"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的地址"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "我的银行卡"));
         itemMyselfs.add(new ItemMyself(R.drawable.setting, "分享好友"));

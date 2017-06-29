@@ -16,156 +16,156 @@
     </data>
 
     <android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/scrollview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.orientalfinance.eastcloud.fragment.FragmentCurrentHit">
+            android:layout_height="match_parent">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.orientalfinance.eastcloud.fragment.FragmentCurrentHit">
 
-                <TextView
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/oval"
-                    android:hint="欢乐颂第二季"
-                    android:onClick="@{utils.onSearchClick}"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:background="@drawable/oval"
-                    android:onClick="@{utils.onClick}"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:text="预约"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
-                    android:background="@drawable/louder"/>
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
-                <com.orientalfinance.eastcloud.view.AutoTextView
-                    android:id="@+id/atv_Advertisement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp">
+                    <TextView
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/oval"
+                        android:hint="欢乐颂第二季"
+                        android:onClick="@{utils.onSearchClick}"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:textSize="14sp"/>
 
-                </com.orientalfinance.eastcloud.view.AutoTextView>
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:background="@drawable/oval"
+                        android:onClick="@{utils.onClick}"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="预约"
+                        android:textSize="14sp"/>
+                </LinearLayout>
 
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
 
-
-<com.orientalfinance.eastcloud.view.ItemIndicator
-    android:layout_width="match_parent"
-    android:id="@+id/ii_CurrentHit"
-    android:layout_height="50dp">
-</com.orientalfinance.eastcloud.view.ItemIndicator>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ry_CurrentHit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:minHeight="460dp"
-                android:nestedScrollingEnabled="false"
-                >
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="#30000000">
-            </View>
-
-            <com.orientalfinance.eastcloud.view.ItemIndicator
-                android:layout_width="match_parent"
-                android:id="@+id/ii_LiveVideo"
-                android:layout_height="50dp">
-            </com.orientalfinance.eastcloud.view.ItemIndicator>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_height="200dp"/>
 
-                    android:layout_marginRight="12dp"
-                    app:imageUrl="@{program.imageUrl}"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/louder"/>
+
+                    <com.orientalfinance.eastcloud.view.AutoTextView
+                        android:id="@+id/atv_Advertisement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp">
+
+                    </com.orientalfinance.eastcloud.view.AutoTextView>
+                </LinearLayout>
+
+
+                <com.orientalfinance.eastcloud.view.ItemIndicator
+                    android:id="@+id/ii_CurrentHit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                </com.orientalfinance.eastcloud.view.ItemIndicator>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ry_CurrentHit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:minHeight="460dp"
+                    android:nestedScrollingEnabled="false"
+                    >
+                </android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#30000000">
+                </View>
+
+                <com.orientalfinance.eastcloud.view.ItemIndicator
+                    android:id="@+id/ii_LiveVideo"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                </com.orientalfinance.eastcloud.view.ItemIndicator>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginLeft="12dp"
+
+                        android:layout_marginRight="12dp"
+                        app:imageUrl="@{program.imageUrl}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:layout_marginTop="130dp"
+                        android:text="点击次：7888"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp"/>
+
+                </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="300dp"
-                    android:layout_marginTop="130dp"
-                    android:text="点击次：7888"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp"/>
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="@={program.programeName}"
+                    android:textSize="16sp"/>
 
-            </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="@={program.programeIntroduce}"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="12dp"
-                android:text="@={program.programeName}"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="12dp"
-                android:text="@={program.programeIntroduce}"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_LiveVideo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:nestedScrollingEnabled="false">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_LiveVideo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:nestedScrollingEnabled="false">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

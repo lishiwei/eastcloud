@@ -14,6 +14,7 @@ import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
@@ -24,6 +25,7 @@ import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Message;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.module.javabean.SearchHot;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
@@ -179,18 +181,6 @@ public class RemoteDataProxy {
 
     }
 
-
-    /**
-     * 方法描述：个人信息修改
-     */
-    public static Flowable<EastCloudResponseBody> getApplication(RequestParam requestParam) {
-        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_INFO_UPDATE);
-
-        return EastcloudRetrofit.getInstance()
-                .getEastCloudService()
-                .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
-
-    }
 
     /**
      * 方法描述：显示已绑定的机顶盒
@@ -450,14 +440,14 @@ public class RemoteDataProxy {
     }
 
     /**
-     * 方法描述：删除收藏
+     * 方法描述：
      * itype 501
      */
-    public static Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showCategory(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<RecommandCategory>>> showCategory(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_CATEGORY);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .showChannelCatelog(sendRequest.getS(), sendRequest.getSign());
+                .showMyCategory(sendRequest.getS(), sendRequest.getSign());
 
     }
 
@@ -585,7 +575,7 @@ public class RemoteDataProxy {
      * 方法描述：频道分类
      * itype 511
      */
-    public static Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showChannelCatelog(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<List<ChannelCategory>>> showChannelCatelog(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MY_CHANNEL_CATEGORY);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()

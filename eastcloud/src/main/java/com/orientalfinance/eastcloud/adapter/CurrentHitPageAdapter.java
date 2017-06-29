@@ -4,8 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentCurrentHit;
-import com.orientalfinance.eastcloud.fragment.fragmenthomepage.FragmentTVPlay;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +17,14 @@ public class CurrentHitPageAdapter extends FragmentPagerAdapter {
     List<String> mTabNames = new ArrayList<>();
     List<Fragment> mFragmentList = new ArrayList<>();
 
-    public CurrentHitPageAdapter(FragmentManager fm, List<String> tabNames) {
+    public CurrentHitPageAdapter(FragmentManager fm, List<RecommandCategory> tabNames, List<Fragment> fragments) {
         super(fm);
-        mTabNames = tabNames;
-        mFragmentList.add(FragmentCurrentHit.newInstance("", ""));
-        mFragmentList.add(FragmentTVPlay.newInstance("", ""));
-        mFragmentList.add(FragmentTVPlay.newInstance("1", ""));
-        mFragmentList.add(FragmentTVPlay.newInstance("2", ""));
-        mFragmentList.add(FragmentTVPlay.newInstance("3", ""));
+        for (int i = 0; i < tabNames.size(); i++) {
+            mTabNames.add(tabNames.get(i).getCateName());
+        }
+        mFragmentList = fragments;
+
+
     }
 
     @Override

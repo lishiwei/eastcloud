@@ -30,11 +30,11 @@ List<Appointment> mAppointments = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","","aaaaa","aaaa","aaa","aaaaa"));
-        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","","aaaaa","aaaa","aaa","aaaaa"));
-        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","","aaaaa","aaaa","aaa","aaaaa"));
-        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","","aaaaa","aaaa","aaa","aaaaa"));
-        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","","aaaaa","aaaa","aaa","aaaaa"));
+        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","1","aaaaa","aaaa","aaa","aaaaa"));
+        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","1","aaaaa","aaaa","aaa","aaaaa"));
+        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","1","aaaaa","aaaa","aaa","aaaaa"));
+        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","1","aaaaa","aaaa","aaa","aaaaa"));
+        mAppointments.add(new Appointment("东方卫视",R.drawable.qipashuo+"","奇葩说","1","aaaaa","aaaa","aaa","aaaaa"));
 
         mActivityMyAppointmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_appointment);
         mMyAppointmentRvAdpter = new MyAppointmentRvAdpter(mAppointments);

@@ -1,12 +1,14 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
+import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
-import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.mvp.View.ApplicationView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,12 +22,13 @@ import io.reactivex.functions.Consumer;
 public class ApplicationPresenter extends MvpNullObjectBasePresenter<ApplicationView> {
     @Inject
     public ApplicationPresenter() {
+
     }
 
     public void getApplication(RequestParam requestParam) {
-        RemoteDataProxy.getApplication(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+        RemoteDataProxy.showAppList(requestParam).compose(new ListTransform<List<Application>>()).subscribe(new Consumer<List<Application>>() {
             @Override
-            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+            public void accept(@NonNull List<Application> applications) throws Exception {
 
             }
         }, new MyConsumer<Throwable>() {

@@ -13,11 +13,17 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.ApplicationComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerApplicationComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ApplicationModule;
+import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.mvp.View.ApplicationView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ApplicationPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+
+import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +43,7 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
     @Inject
     HotApplicationRvAdapter mHotApplicationRvAdapter;
     FragmentApplicationBinding mFragmentApplicationBinding;
+    List<Object> items = new ArrayList<>();
 
     public FragmentApplication() {
         // Required empty public constructor
@@ -74,11 +81,12 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
         super.onActivityCreated(savedInstanceState);
         mFragmentApplicationBinding = (FragmentApplicationBinding) mViewDataBinding;
         mFragmentApplicationBinding.rvHotApplication.setAdapter(mHotApplicationRvAdapter);
+
         mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        mFragmentApplicationBinding.rvAllApplication.setAdapter(mHotApplicationRvAdapter);
-        mFragmentApplicationBinding.rvAllApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        mFragmentApplicationBinding.rvMyApplication.setAdapter(mHotApplicationRvAdapter);
-        mFragmentApplicationBinding.rvMyApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+//        mFragmentApplicationBinding.rvAllApplication.setAdapter(mHotApplicationRvAdapter);
+//        mFragmentApplicationBinding.rvAllApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+//        mFragmentApplicationBinding.rvMyApplication.setAdapter(mHotApplicationRvAdapter);
+//        mFragmentApplicationBinding.rvMyApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
@@ -104,5 +112,12 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
     @Override
     public void showError(String errorMsg) {
 
+    }
+
+    @Override
+    public void showAppList(List<Application> applications) {
+//        items = applications;
+        MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter();
+        multiTypeAdapter.setItems(items);
     }
 }

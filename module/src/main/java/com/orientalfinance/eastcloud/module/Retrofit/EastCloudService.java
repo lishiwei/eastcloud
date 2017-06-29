@@ -8,6 +8,7 @@ import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
+import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
@@ -18,6 +19,7 @@ import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Message;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.module.javabean.SearchHot;
 import com.orientalfinance.eastcloud.module.javabean.SearchResult;
 import com.orientalfinance.eastcloud.module.javabean.TV;
@@ -258,7 +260,7 @@ public interface EastCloudService {
 
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody> showMyCategory(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<RecommandCategory>>> showMyCategory(@Field("s") String zip, @Field("sign") String sign);
 
     //itype 502
 
@@ -314,7 +316,7 @@ public interface EastCloudService {
 
     @FormUrlEncoded
     @POST(".")
-    Flowable<EastCloudResponseBody<List<HomePageChannel.Category>>> showChannelCatelog(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<List<ChannelCategory>>> showChannelCatelog(@Field("s") String zip, @Field("sign") String sign);
 
 
     //itype 512

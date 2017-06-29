@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
+import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface ChannelView extends BaseMvpView {
-    public void showChannelCategory(List<HomePageChannel.Category> categories);
+    public void showChannelCategory(List<ChannelCategory> categories);
 
     public void showChannelList(List<HomePageChannel> channels);
 }

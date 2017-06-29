@@ -15,6 +15,7 @@ import com.orientalfinance.eastcloud.dagger.component.DaggerChannelComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ChannelModules;
 import com.orientalfinance.eastcloud.fragment.fragmentchannel.FragmentShangHai;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.mvp.View.ChannelView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -100,7 +101,7 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
     }
 
     @Override
-    public void showChannelCategory(List<HomePageChannel.Category> categories) {
+    public void showChannelCategory(List<ChannelCategory> categories) {
         LogUtils.d(TAG, "showChannelCategory: " + categories.toString());
         mHomePageChannels = categories;
         List<String> tabTitle = new ArrayList<>();
@@ -118,12 +119,12 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
         {
             return;
         }
-        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
-        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
-        getPresenter().showChannelList(requestParam1);
+//        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
+//        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+//        getPresenter().showChannelList(requestParam1);
     }
 
-    List<HomePageChannel.Category> mHomePageChannels;
+    List<ChannelCategory> mHomePageChannels;
 
     @Override
     public void showChannelList(List<HomePageChannel> channels) {

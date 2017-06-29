@@ -2,24 +2,47 @@ package com.orientalfinance.eastcloud.module.javabean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by 29435 on 2017/5/26.
  */
 
 public class Application {
+        String appType;
+        List<Application> appList ;
     @SerializedName("url")
     String url;
     @SerializedName("intro")
     String name;
     @SerializedName("icon")
-    String iconUrl;
+    String icon;
 
-    public String getIconUrl() {
-        return iconUrl;
+    @SerializedName("app_id")
+    String appId;
+
+    public String getAppType() {
+        return appType;
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public List<Application> getAppList() {
+        return appList;
+    }
+
+    public void setAppList(List<Application> appList) {
+        this.appList = appList;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getName() {
@@ -30,26 +53,49 @@ public class Application {
         this.name = name;
     }
 
-    public String getUrl() {
-
-        return url;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     @Override
     public String toString() {
         return "Application{" +
-                "url='" + url + '\'' +
+                "appType='" + appType + '\'' +
+                ", appList=" + appList +
+                ", url='" + url + '\'' +
                 ", name='" + name + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
+                ", icon='" + icon + '\'' +
+                ", appId='" + appId + '\'' +
                 '}';
     }
+    public static class Indicator{
+        String appType;
 
-    public Application(String url, String name) {
-        this.url = url;
-        this.name = name;
+        public String getAppType() {
+            return appType;
+        }
+
+        public void setAppType(String appType) {
+            this.appType = appType;
+        }
+
+        @Override
+        public String toString() {
+            return "Indicator{" +
+                    "appType='" + appType + '\'' +
+                    '}';
+        }
     }
 }

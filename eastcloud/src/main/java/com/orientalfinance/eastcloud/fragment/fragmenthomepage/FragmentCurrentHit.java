@@ -11,6 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.orientalfinance.R;
 import com.orientalfinance.databinding.FragmentCurrentHitBinding;
 import com.orientalfinance.eastcloud.activity.ActivityLogin;
@@ -26,15 +29,19 @@ import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.Program;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.mvp.View.CurrentHitView;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.CurrentHitPresenter;
 import com.orientalfinance.eastcloud.utils.GlideImageLoader;
+import com.orientalfinance.eastcloud.utils.LogUtils;
 import com.orientalfinance.eastcloud.utils.MyDataBindingUtils;
 import com.orientalfinance.eastcloud.view.ItemIndicator;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,9 +54,10 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = FragmentCurrentHit.class.getSimpleName();
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private ArrayList<RecommandCategory> mParam1;
     private String mParam2;
     FragmentCurrentHitBinding mFragmentCurrentHitBinding;
     List<String> mImageUrl;
@@ -60,6 +68,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     List<String> mAdverStringList = new ArrayList<>();
     List<HomepageProgram> mCurrentHitPrograms = new ArrayList<>();
     List<HomepageProgram> mLiveVideoPrograms = new ArrayList<>();
+    List<RecommandCategory> mRecommandCategoryList;
 
     public FragmentCurrentHit() {
         // Required empty public constructor
@@ -74,10 +83,10 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
      * @return A new instance of fragment FragmentCurrentHit.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentCurrentHit newInstance(String param1, String param2) {
+    public static FragmentCurrentHit newInstance(ArrayList<RecommandCategory> param1, String param2) {
         FragmentCurrentHit fragment = new FragmentCurrentHit();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putParcelableArrayList(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -87,9 +96,12 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getParcelableArrayList(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LogUtils.d(TAG, "onCreate: " + mParam1);
+
+
     }
 
     @Override
@@ -145,14 +157,14 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
         });
         mFragmentCurrentHitBinding.atvAdvertisement.setStringList(mAdverStringList);
         mFragmentCurrentHitBinding.atvAdvertisement.start();
-        mFragmentCurrentHitBinding.iiCurrentHit.setIndicatorText("正在热播");
+        mFragmentCurrentHitBinding.iiCurrentHit.setIndicatorText(mParam1.get(0).getCateName());
         mFragmentCurrentHitBinding.iiCurrentHit.setOnIndicatorClickListener(new ItemIndicator.OnIndicatorClickListener() {
             @Override
             public void onClick(View v) {
                 getCurrentHit(0, 6);
             }
         });
-        mFragmentCurrentHitBinding.iiLiveVideo.setIndicatorText("频道直播");
+        mFragmentCurrentHitBinding.iiLiveVideo.setIndicatorText(mParam1.get(1).getCateName());
         mFragmentCurrentHitBinding.iiLiveVideo.setOnIndicatorClickListener(new ItemIndicator.OnIndicatorClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,7 +257,7 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     public void showProgramList(List<HomepageProgram> programList) {
         if (programList.size() >= 1) {
             mFragmentCurrentHitBinding.setProgram(programList.get(0));
-            mLiveVideoRvAdapter.setProgramList(programList.subList(1,programList.size()-1));
+            mLiveVideoRvAdapter.setProgramList(programList.subList(1, programList.size() - 1));
         }
 
         mFragmentCurrentHitBinding.iiLiveVideo.stopRefresh();
@@ -255,5 +267,49 @@ public class FragmentCurrentHit extends BaseFragment<CurrentHitComponent, Curren
     @Override
     public void refreshTokenError() {
         startActivity(new Intent(getActivity(), ActivityLogin.class));
+    }
+
+    public <T> List<T> jsonToList(String json, Class<T[]> clazz) {
+        Gson gson = new Gson();
+        T[] array = gson.fromJson(json, clazz);
+        return Arrays.asList(array);
+    }
+
+    public class DataFactory {
+        public Object getInstanceByJson(Class<?> clazz, String json) {
+            Object obj = null;
+            Gson gson = new Gson();
+            obj = gson.fromJson(json, clazz);
+            return obj;
+        }
+
+        /**
+         * @param json
+         * @param clazz
+         * @return
+         * @author I321533
+         */
+        public <T> List<T> jsonToList(String json, Class<T[]> clazz) {
+            Gson gson = new Gson();
+            T[] array = gson.fromJson(json, clazz);
+            return Arrays.asList(array);
+        }
+
+        /**
+         * @param json
+         * @param clazz
+         * @return
+         */
+        public <T> ArrayList<T> jsonToArrayList(String json, Class<T> clazz) {
+            Type type = new TypeToken<ArrayList<JsonObject>>() {
+            }.getType();
+            ArrayList<JsonObject> jsonObjects = new Gson().fromJson(json, type);
+
+            ArrayList<T> arrayList = new ArrayList<>();
+            for (JsonObject jsonObject : jsonObjects) {
+                arrayList.add(new Gson().fromJson(jsonObject, clazz));
+            }
+            return arrayList;
+        }
     }
 }
