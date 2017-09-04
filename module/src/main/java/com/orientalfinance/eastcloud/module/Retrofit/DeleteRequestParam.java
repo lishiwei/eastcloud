@@ -11,6 +11,9 @@ public class DeleteRequestParam {
         this.id = id;
     }
 
+    public DeleteRequestParam() {
+    }
+
     public String getId() {
         return id;
     }

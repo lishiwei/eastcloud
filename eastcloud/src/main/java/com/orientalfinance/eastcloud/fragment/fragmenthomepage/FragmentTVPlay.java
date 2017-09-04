@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.orientalfinance.R;
@@ -15,8 +16,11 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerTvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.component.TvPlayComponent;
 import com.orientalfinance.eastcloud.dagger.modules.TVPlayModule;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
 import com.orientalfinance.eastcloud.module.javabean.HorizontalProgram;
+import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.mvp.View.FullyGridLayoutManager;
 import com.orientalfinance.eastcloud.mvp.View.TVPlayView;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
@@ -41,7 +45,7 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private ArrayList<RecommandCategory> mParam1;
     private String mParam2;
 
     @Inject
@@ -66,10 +70,10 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
      * @return A new instance of fragment FragmentTVPlay.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentTVPlay newInstance(String param1, String param2) {
+    public static FragmentTVPlay newInstance(ArrayList<RecommandCategory> param1, String param2) {
         FragmentTVPlay fragment = new FragmentTVPlay();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putParcelableArrayList(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +83,7 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getParcelableArrayList(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -90,6 +94,7 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
         mFragmentTvplayBinding = (FragmentTvplayBinding) mViewDataBinding;
 
         adapter = new MultiTypeAdapter();
+
 
         adapter.register(HorizontalProgram.class, new ProgramHorizontalViewBinder());
 
@@ -107,15 +112,22 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         mFragmentTvplayBinding.rvPlay.setLayoutManager(layoutManager);
         mFragmentTvplayBinding.rvPlay.setAdapter(adapter);
-        for (int i = 0; i < 4; i++) {
-            items.add(new HorizontalProgram());
-            items.add(new HomepageProgram());
-            items.add(new HomepageProgram());
-            items.add(new HomepageProgram());
-            items.add(new HomepageProgram());
-        }
         adapter.setItems(items);
-        adapter.notifyDataSetChanged();
+        mFragmentTvplayBinding.scrollview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+            }
+        });
+        getData();
+    }
+
+    private void getData() {
+        for (int i = 0; i < mParam1.size(); i++) {
+            HomePageChannel.ShowChannelRequestParam requestParam = new HomePageChannel.ShowChannelRequestParam(mParam1.get(i).getCateId());
+            RequestParam requestParam1 = new RequestParam(requestParam);
+            getPresenter().showProgramList(requestParam1);
+        }
     }
 
     @Override
@@ -128,5 +140,43 @@ public class FragmentTVPlay extends BaseFragment<TvPlayComponent, TVPlayView, TV
         return DaggerTvPlayComponent.builder().appComponent(appComponent).tVPlayModule(new TVPlayModule()).build();
     }
 
+    @Override
+    public void showDialog() {
 
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showProgramList(String categoryId, List<HomepageProgram> programList) {
+
+        if (mFragmentTvplayBinding.scrollview.isRefreshing())
+        {
+            mFragmentTvplayBinding.scrollview.setRefreshing(false);
+        }
+
+        HorizontalProgram horizontalProgram = null;
+        if (programList.get(0) == null) {
+            return;
+        }
+        horizontalProgram = new HorizontalProgram(programList.get(0));
+        for (int i = 0; i < mParam1.size(); i++) {
+            if (mParam1.get(i).getCateId().equals(categoryId)) {
+
+                horizontalProgram.setCategoryName(mParam1.get(i).getCateName());
+                items.add(horizontalProgram);
+                break;
+            }
+        }
+        items.addAll(programList.subList(1, programList.size() - 1));
+        adapter.notifyDataSetChanged();
+    }
 }

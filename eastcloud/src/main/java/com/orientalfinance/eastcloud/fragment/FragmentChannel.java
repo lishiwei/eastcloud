@@ -119,9 +119,9 @@ public class FragmentChannel extends BaseFragment<ChannelComponent, ChannelView,
         {
             return;
         }
-//        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
-//        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
-//        getPresenter().showChannelList(requestParam1);
+        HomePageChannel.ShowChannelRequestParam showChannelRequestParam = new HomePageChannel.ShowChannelRequestParam(categories.get(0).getCateId());
+        RequestParam requestParam1 = new RequestParam(showChannelRequestParam);
+        getPresenter().showChannelList(requestParam1);
     }
 
     List<ChannelCategory> mHomePageChannels;

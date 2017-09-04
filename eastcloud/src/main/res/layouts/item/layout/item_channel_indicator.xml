@@ -22,5 +22,6 @@
     android:text="@{application.appType}"
    />
 
+
     </FrameLayout>
 </layout>

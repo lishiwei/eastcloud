@@ -18,5 +18,5 @@ public interface MyTVView extends MvpView {
 
     void showError(String errorMsg);
     void showDelectTVBox();
-    void delectSucceed();
+    void delectSucceed(int id);
 }

@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
@@ -40,14 +41,18 @@ public class ActivityMyCollectionPresenter extends MvpNullObjectBasePresenter
         });
     }
 
-    public void deleteCollection(RequestParam requestParam) {
+    public void deleteCollection(final RequestParam requestParam) {
         getView().showDialog();
         RemoteDataProxy.deleteMyCollection(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override
             public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
                 getView().hideDialog();
-                getView().deleteSucceed(0);
-
+                DeleteRequestParam deleteRequestParam = (DeleteRequestParam) requestParam.getData();
+                if (deleteRequestParam.getId() == null) {
+                    getView().deleteSucceed(-1);
+                } else {
+                    getView().deleteSucceed(Integer.valueOf(deleteRequestParam.getId()));
+                }
             }
         }, new MyConsumer<Throwable>() {
             @Override

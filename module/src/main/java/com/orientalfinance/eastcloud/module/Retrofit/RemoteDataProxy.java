@@ -12,15 +12,16 @@ import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
+import com.orientalfinance.eastcloud.module.javabean.AvatarUrl;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
+import com.orientalfinance.eastcloud.module.javabean.CheckVersionResult;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
 import com.orientalfinance.eastcloud.module.javabean.DetailChannel;
 import com.orientalfinance.eastcloud.module.javabean.FamilyMember;
-import com.orientalfinance.eastcloud.module.javabean.FilePostResult;
 import com.orientalfinance.eastcloud.module.javabean.History;
 import com.orientalfinance.eastcloud.module.javabean.HomePageChannel;
 import com.orientalfinance.eastcloud.module.javabean.HomepageProgram;
@@ -73,6 +74,16 @@ public class RemoteDataProxy {
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .tokenFresh(sendRequest.getS(), sendRequest.getSign());
+
+    }
+    /**
+     * 方法描述：更新token(itype=201)
+     */
+    public static Flowable<EastCloudResponseBody<CheckVersionResult>>checkVersion(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.CHECKVERSION);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .checkVersion(sendRequest.getS(), sendRequest.getSign());
 
     }
     /**
@@ -140,20 +151,20 @@ public class RemoteDataProxy {
                 .getEastCloudService()
                 .updatePwd(sendRequest.getS(), sendRequest.getSign());
     }
-
-    /**
-     * 方法描述：上传头像
-     */
-    public static void uploadHead(File file, HttpCallBack<FilePostResult> httpCallBack) {
-        SendRequest sendRequest = requestParamWrap(new RequestParam(), Constant.IType.AVATAR_UPLOAD);
-
-        HashMap<String, RequestBody> map = new HashMap<>();
-        map.put("s", toRequestBody(sendRequest.getS()));
-        map.put("sign", toRequestBody(sendRequest.getSign()));
-        RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
-        map.put("file\"; filename=\"" + file.getName(), fileBody);
-        EastcloudRetrofit.getInstance().getEastCloudService().uploadHeader(map).enqueue(httpCallBack);
-    }
+//
+//    /**
+//     * 方法描述：上传头像
+//     */
+//    public static Flowable uploadHead(File file, HttpCallBack<FilePostResult> httpCallBack) {
+//        SendRequest sendRequest = requestParamWrap(new RequestParam(), Constant.IType.AVATAR_UPLOAD);
+//
+//        HashMap<String, RequestBody> map = new HashMap<>();
+//        map.put("s", toRequestBody(sendRequest.getS()));
+//        map.put("sign", toRequestBody(sendRequest.getSign()));
+//        RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+//        map.put("file\"; filename=\"" + file.getName(), fileBody);
+//        EastcloudRetrofit.getInstance().getEastCloudService().uploadHeader(map).enqueue(httpCallBack);
+//    }
 
     /**
      * 方法描述：修改头像
@@ -172,12 +183,21 @@ public class RemoteDataProxy {
     /**
      * 方法描述：个人信息修改
      */
-    public static Flowable<EastCloudResponseBody> modifyUserInfo(RequestParam requestParam) {
+    public static Flowable<EastCloudResponseBody<AvatarUrl>> modifyUserInfo(RequestParam requestParam, File file) {
+
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.USER_INFO_UPDATE);
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("s", toRequestBody(sendRequest.getS()));
+        map.put("sign", toRequestBody(sendRequest.getSign()));
+        if (file!=null)
+        {
+            RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+            map.put("file\"; filename=\"" + file.getName(), fileBody);
+        }
 
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
-                .modifyUserInfo(sendRequest.getS(), sendRequest.getSign());
+                .modifyUserInfo(map);
 
     }
 
@@ -654,11 +674,32 @@ public class RemoteDataProxy {
      * 方法描述：增加收藏
      * itype 750
      */
+    public static Flowable<EastCloudResponseBody<List<Banner>>> showAppBanner(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_APP_BANNER);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showAppBanner(sendRequest.getS(), sendRequest.getSign());
+    }
+    /**
+     * 方法描述：增加收藏
+     * itype 751
+     */
     public static Flowable<EastCloudResponseBody<List<Application>>> showAppList(RequestParam requestParam) {
         SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_APP_LIST);
         return EastcloudRetrofit.getInstance()
                 .getEastCloudService()
                 .showAppList(sendRequest.getS(), sendRequest.getSign());
+    }
+
+    /**
+     * 方法描述：增加收藏
+     * itype 750
+     */
+    public static Flowable<EastCloudResponseBody<List<Message>>> showMessageList(RequestParam requestParam) {
+        SendRequest sendRequest = requestParamWrap(requestParam, Constant.IType.SHOW_MESSAGE_LIST);
+        return EastcloudRetrofit.getInstance()
+                .getEastCloudService()
+                .showMessage(sendRequest.getS(), sendRequest.getSign());
     }
     /**
      * 方法描述：重新包装request参数

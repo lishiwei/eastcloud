@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
@@ -47,13 +48,22 @@ public class PlayRecordPresenter extends MvpNullObjectBasePresenter<PlayRecordVi
 
     }
 
-    public void deleteHistory(RequestParam requestParam) {
+    public void deleteHistory(final RequestParam requestParam) {
         getView().showDialog();
         RemoteDataProxy.deleteHistory(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
             @Override
             public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+                DeleteRequestParam deleteRequestParam = (DeleteRequestParam) requestParam.getData();
+
                 getView().hideDialog();
-                getView().deleteSucceed(0);
+                if (deleteRequestParam.getId() == null) {
+                    getView().deleteSucceed(-1);
+
+                }
+                else {
+                    getView().deleteSucceed(Integer.valueOf(deleteRequestParam.getId()));
+                }
+
             }
         }, new MyConsumer<Throwable>() {
             @Override

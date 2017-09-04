@@ -5,9 +5,9 @@ import com.orientalfinance.eastcloud.dagger.qualifier.CurrentHit;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotMovie;
 import com.orientalfinance.eastcloud.dagger.qualifier.HotVariety;
 import com.orientalfinance.eastcloud.dagger.qualifier.LiveVideo;
-import com.orientalfinance.eastcloud.module.core.MovieLocalDataSource;
-import com.orientalfinance.eastcloud.module.core.MovieRemoteDataSource;
-import com.orientalfinance.eastcloud.module.core.MovieRepository;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramLocalDataSource;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramRemoteDataSource;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramRepository;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class HotBookingModule {
     }
 
     @Provides
-    public MovieRepository getRespository() {
-        return new MovieRepository(new MovieLocalDataSource(), new MovieRemoteDataSource());
+    public HomePageProgramRepository getRespository() {
+        return new HomePageProgramRepository(new HomePageProgramLocalDataSource(), new HomePageProgramRemoteDataSource());
     }
 
     @Provides

@@ -1,5 +1,6 @@
 package com.orientalfinance.eastcloud.mvp.View;
 
+import com.orientalfinance.eastcloud.module.javabean.CheckVersionResult;
 import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
 
 public interface HomepageView extends BaseMvpView {
     public void showCategory(List<RecommandCategory> categories);
-
+public void checkVersionSucceed(CheckVersionResult checkVersionResult);
 }

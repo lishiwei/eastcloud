@@ -6,4 +6,5 @@ package com.orientalfinance.eastcloud.mvp.View;
 
 public interface SettingView extends BaseMvpView {
     public void showSucceed();
+    public void updateAvatarSucceed(String path);
 }

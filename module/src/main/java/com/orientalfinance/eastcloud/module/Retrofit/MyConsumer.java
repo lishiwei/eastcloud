@@ -33,6 +33,9 @@ public abstract class MyConsumer<T> implements Consumer<T> {
             Log.e(TAG, t.toString());
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "网络连接失败!", Toast.LENGTH_SHORT).show();
         }
+        else if (t instanceof NullPointerException) {
+            ((Exception)t).printStackTrace();
+        }
         else {
             ((Exception)t).printStackTrace();
             Toast.makeText(ModuleContext.getInstance().getModuleContext(), "请求失败,请稍后重试!", Toast.LENGTH_SHORT).show();

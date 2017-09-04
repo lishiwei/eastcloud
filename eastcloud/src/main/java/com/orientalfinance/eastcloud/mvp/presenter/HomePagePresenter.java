@@ -2,8 +2,10 @@ package com.orientalfinance.eastcloud.mvp.presenter;
 
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
+import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.CheckVersionResult;
 import com.orientalfinance.eastcloud.module.javabean.RecommandCategory;
 import com.orientalfinance.eastcloud.mvp.View.HomepageView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
@@ -38,5 +40,18 @@ public class HomePagePresenter extends MvpNullObjectBasePresenter<HomepageView> 
         });
     }
 
+    public void checkVersion(RequestParam requestParam) {
+        RemoteDataProxy.checkVersion(requestParam).compose(new ObjectTransform<CheckVersionResult>()).subscribe(new Consumer<CheckVersionResult>() {
+            @Override
+            public void accept(@NonNull CheckVersionResult checkVersionResult) throws Exception {
+                getView().checkVersionSucceed(checkVersionResult);
+            }
+        }, new MyConsumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                super.accept(throwable);
 
+            }
+        });
+    }
 }

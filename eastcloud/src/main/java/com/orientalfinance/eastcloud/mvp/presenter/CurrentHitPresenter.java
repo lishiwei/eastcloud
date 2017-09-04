@@ -6,6 +6,7 @@ import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.core.AcacheUtil;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramRepository;
 import com.orientalfinance.eastcloud.module.core.TimeUtils;
 import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
@@ -30,9 +31,10 @@ import io.reactivex.functions.Consumer;
 public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitView> {
     private static final String TAG = CurrentHitPresenter.class.getSimpleName();
 
+    HomePageProgramRepository mHomePageProgramRepository;
 
     @Inject
-    public CurrentHitPresenter() {
+    public CurrentHitPresenter(HomePageProgramRepository homePageProgramRepository) {
 
     }
 
@@ -56,7 +58,7 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
                 @Override
                 public void accept(@NonNull Throwable throwable) throws Exception {
                     super.accept(throwable);
-                    LogUtils.d(TAG, "accept: "+throwable.getMessage());
+                    LogUtils.d(TAG, "accept: " + throwable.getMessage());
                     getView().refreshTokenError();
                 }
             });
@@ -112,11 +114,15 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
         });
     }
 
-    public void showProgramList(RequestParam requestParam) {
-        RemoteDataProxy.showProgramList(requestParam).compose(new ListTransform<List<HomepageProgram>>()).subscribe(new Consumer<List<HomepageProgram>>() {
+    public void showProgramList(final RequestParam requestParam) {
+
+
+        mHomePageProgramRepository.getDatas(requestParam).subscribe(new Consumer<List<HomepageProgram>>() {
             @Override
             public void accept(@NonNull List<HomepageProgram> homepagePrograms) throws Exception {
+
                 getView().showProgramList(homepagePrograms);
+
             }
         }, new MyConsumer<Throwable>() {
             @Override
@@ -125,6 +131,22 @@ public class CurrentHitPresenter extends MvpNullObjectBasePresenter<CurrentHitVi
                 getView().hideDialog();
             }
         });
+
+
+//        RemoteDataProxy.showProgramList(requestParam).compose(new ListTransform<List<HomepageProgram>>()).subscribe(new Consumer<List<HomepageProgram>>() {
+//            @Override
+//            public void accept(@NonNull List<HomepageProgram> homepagePrograms) throws Exception {
+//
+//                getView().showProgramList(homepagePrograms);
+//
+//            }
+//        }, new MyConsumer<Throwable>() {
+//            @Override
+//            public void accept(@NonNull Throwable throwable) throws Exception {
+//                super.accept(throwable);
+//                getView().hideDialog();
+//            }
+//        });
     }
 
     @Override

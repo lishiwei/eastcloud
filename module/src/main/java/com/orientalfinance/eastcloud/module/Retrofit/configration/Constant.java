@@ -24,9 +24,12 @@ public class Constant {
     public static final String SUCCEED = "succeed";
     public static final String SEARCHHISTORY = "searchHistory";
     public static final String TOKENREFRESHTIME = "tokenRefresh";
+    public static final String ANDROID = "2";
+
 
     public static class IType {
         public static final int TOKENFEFRESH = 50;
+        public static final int CHECKVERSION = 201;
         public static final int REGISTER = 301;
         public static final int CODE_SEND = 302;
         public static final int VALIDATE_CODE = 303;
@@ -87,7 +90,10 @@ public class Constant {
 
         public static final int TV_CONTROLLER = 650;
 
-        public static final int SHOW_APP_LIST = 750;
+        public static final int SHOW_APP_BANNER = 750;
+        public static final int SHOW_APP_LIST = 751;
+
+        public static final int SHOW_MESSAGE_LIST = 751;
     }
 
     public static class OrderC {

@@ -1,6 +1,7 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
 
+import com.orientalfinance.eastcloud.module.Retrofit.DeleteRequestParam;
 import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
@@ -51,7 +52,7 @@ public class MyTvPresenter extends MvpNullObjectBasePresenter<MyTVView> {
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         super.accept(throwable);
                         getView().hideLoading();
-                        LogUtils.e(TAG, "accept: "+throwable.toString());
+                        LogUtils.e(TAG, "accept: " + throwable.toString());
                     }
                 });
 
@@ -70,7 +71,13 @@ public class MyTvPresenter extends MvpNullObjectBasePresenter<MyTVView> {
                     @Override
                     public void accept(String s) throws Exception {
                         getView().hideLoading();
-                        getView().delectSucceed();
+                        DeleteRequestParam deleteRequestParam = (DeleteRequestParam) requestParam.getData();
+                        if (deleteRequestParam.getId() == null) {
+                            getView().delectSucceed(-1);
+                        } else {
+                            getView().delectSucceed(Integer.valueOf(deleteRequestParam.getId()));
+                        }
+
                     }
                 }, new MyConsumer<Throwable>() {
                     @Override

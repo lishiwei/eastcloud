@@ -4,6 +4,7 @@ package com.orientalfinance.eastcloud.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.orientalfinance.R;
@@ -13,8 +14,11 @@ import com.orientalfinance.eastcloud.dagger.component.AppComponent;
 import com.orientalfinance.eastcloud.dagger.component.ApplicationComponent;
 import com.orientalfinance.eastcloud.dagger.component.DaggerApplicationComponent;
 import com.orientalfinance.eastcloud.dagger.modules.ApplicationModule;
+import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
 import com.orientalfinance.eastcloud.module.javabean.Application;
+import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.mvp.View.ApplicationView;
+import com.orientalfinance.eastcloud.mvp.View.FullyLinearLayoutManager;
 import com.orientalfinance.eastcloud.mvp.base.BaseFragment;
 import com.orientalfinance.eastcloud.mvp.presenter.ApplicationPresenter;
 
@@ -22,8 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,8 +45,8 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
     @Inject
     HotApplicationRvAdapter mHotApplicationRvAdapter;
     FragmentApplicationBinding mFragmentApplicationBinding;
-    List<Object> items = new ArrayList<>();
 
+    List<String> mImageUrl = new ArrayList<>();
     public FragmentApplication() {
         // Required empty public constructor
     }
@@ -80,13 +82,34 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFragmentApplicationBinding = (FragmentApplicationBinding) mViewDataBinding;
-        mFragmentApplicationBinding.rvHotApplication.setAdapter(mHotApplicationRvAdapter);
 
-        mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mFragmentApplicationBinding.rvHotApplication.setAdapter(mHotApplicationRvAdapter);
+mImageUrl.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495789067895&di=d9384b70b7a09110f641283579a68059&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1221%2F20161221024159122.jpg");
+mImageUrl.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495789067895&di=d9384b70b7a09110f641283579a68059&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1221%2F20161221024159122.jpg");
+mImageUrl.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495789067895&di=d9384b70b7a09110f641283579a68059&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1221%2F20161221024159122.jpg");
+        mHotApplicationRvAdapter.setImageUrl(mImageUrl);
+        mFragmentApplicationBinding.rvHotApplication.setLayoutManager(new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mFragmentApplicationBinding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getApplicationBanner();
+                getApplicationList();
+            }
+        });
 //        mFragmentApplicationBinding.rvAllApplication.setAdapter(mHotApplicationRvAdapter);
 //        mFragmentApplicationBinding.rvAllApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 //        mFragmentApplicationBinding.rvMyApplication.setAdapter(mHotApplicationRvAdapter);
 //        mFragmentApplicationBinding.rvMyApplication.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+    }
+
+    public void getApplicationList() {
+        RequestParam requestParam = new RequestParam();
+        getPresenter().getApplicationList(requestParam);
+    }
+
+    public void getApplicationBanner() {
+        RequestParam requestParam = new RequestParam();
+        getPresenter().getApplicationBanner(requestParam);
     }
 
     @Override
@@ -111,13 +134,35 @@ public class FragmentApplication extends BaseFragment<ApplicationComponent, Appl
 
     @Override
     public void showError(String errorMsg) {
-
+        stopRefresh();
     }
 
     @Override
     public void showAppList(List<Application> applications) {
 //        items = applications;
-        MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter();
-        multiTypeAdapter.setItems(items);
+
+//        MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter();
+//        multiTypeAdapter.setItems(items);
+        stopRefresh();
+    }
+
+    public void stopRefresh() {
+        if (mFragmentApplicationBinding.refresh != null && mFragmentApplicationBinding.refresh.isRefreshing()) {
+            mFragmentApplicationBinding.refresh.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void showAppBanner(List<Banner> banners) {
+
+        mImageUrl.clear();
+        for (int i = 0; i < banners.size(); i++) {
+            mImageUrl.add(banners.get(i).getBannerImage());
+        }
+
+        mHotApplicationRvAdapter.setImageUrl(mImageUrl);
+//        mFragmentApplicationBinding.banner.setImages(mImageUrl);
+//        mFragmentApplicationBinding.banner.start();
+        stopRefresh();
     }
 }

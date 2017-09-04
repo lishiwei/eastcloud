@@ -49,6 +49,7 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
     private LinearLayout title_ll;
     private boolean listViewState = true;//当前界面状态,初始进入为ListView，即非编辑的状态,设为true
     String mDeleteId;
+    int mPosition;
 
     @NonNull
     @Override
@@ -91,17 +92,18 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
         collectionAdapter.setOnSwipeDeleteListener(new OnSwipeDeleteListener() {
             @Override
             public void onDeleteListener(SwipeMenuLayout swipeMenuLayout, int position) {
+                mPosition = position;
                 mDeleteId = mChannels.get(position).getId();
                 DeleteRequestParam deleteRequestParam = new DeleteRequestParam(mDeleteId);
                 getPresenter().deleteCollection(new RequestParam(deleteRequestParam));
             }
         });
-        mMainGuideDialog  = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        mMainGuideDialog = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                mChannels.clear();
-                collectionAdapter.notifyDataSetChanged();
+                DeleteRequestParam deleteRequestParam = new DeleteRequestParam();
+                getPresenter().deleteCollection(new RequestParam(deleteRequestParam));
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -122,15 +124,16 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
         channel.setChecked(!channel.isChecked());
         collectionAdapter.notifyDataSetChanged();
     }
-    MainGuideDialog mMainGuideDialog ;
+
+    MainGuideDialog mMainGuideDialog;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_del:
-             if (!mMainGuideDialog.isShowing())
-             {
-                 mMainGuideDialog.show();
-             }
+                if (!mMainGuideDialog.isShowing()) {
+                    mMainGuideDialog.show();
+                }
 
 //                /**
 //                 * 此为控制编辑状态的Button,需要根据当前页面状态来改变状态,
@@ -236,6 +239,11 @@ public class ActivityMyCollection extends BaseMVPActivity<ActivityMyCollectionVi
     @Override
     public void deleteSucceed(int id) {
         Toast.makeText(this, "删除成功!", Toast.LENGTH_SHORT).show();
-
+        if (id == -1) {
+            mChannels.clear();
+        } else {
+            mChannels.remove(mPosition);
+        }
+        collectionAdapter.notifyDataSetChanged();
     }
 }

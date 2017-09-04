@@ -31,11 +31,9 @@ public class ActivityDetailPresenter extends MvpNullObjectBasePresenter<DetailVi
     public ActivityDetailPresenter(Detail detail) {
         mDetail = detail;
     }
-
     public void start() {
 
     }
-
     public void getDetail(RequestParam requestParam) {
         getView().showDialog();
         RemoteDataProxy.showDetailList(requestParam).compose(new ListTransform<List<Detail>>()).subscribe(new Consumer<List<Detail>>() {

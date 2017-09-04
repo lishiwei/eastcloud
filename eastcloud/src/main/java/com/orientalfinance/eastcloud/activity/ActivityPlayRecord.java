@@ -96,12 +96,13 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
             }
         });
 
-        mMainGuideDialog  = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        mMainGuideDialog = new MainGuideDialog.Builder(this).setTitle("提示").setMessage("清空观看历史？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                mPlayRecordRvAdpter.getChannelList().clear();
-                mPlayRecordRvAdpter.notifyDataSetChanged();
+                DeleteRequestParam deleteRequestParam = new DeleteRequestParam();
+                getPresenter().deleteHistory(new RequestParam(deleteRequestParam));
+
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -149,15 +150,15 @@ public class ActivityPlayRecord extends BaseActivity<PlayRecordComponent, PlayRe
     }
 
     private boolean isEditableState = true;//当前界面状态,初始进入为ListView，即非编辑的状态,true
-MainGuideDialog mMainGuideDialog;
+    MainGuideDialog mMainGuideDialog;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.manage) {
 
-if (!mMainGuideDialog.isShowing())
-{
-    mMainGuideDialog.show();
-}
+            if (!mMainGuideDialog.isShowing()) {
+                mMainGuideDialog.show();
+            }
 //            mMenuItem = item;
 //            item.setTitle("删除");
 //            boolean isShow = mPlayRecordRvAdpter.isShow();
@@ -191,7 +192,14 @@ if (!mMainGuideDialog.isShowing())
     }
 
     @Override
-    public void deleteFailed(int position) {
+    public void deleteFailed(int id) {
+        if (id == -1) {
+            mPlayRecordRvAdpter.getChannelList().clear();
+            mPlayRecordRvAdpter.notifyDataSetChanged();
+        } else {
+            mPlayRecordRvAdpter.getChannelList().remove(mDeletePosition);
+            mPlayRecordRvAdpter.notifyDataSetChanged();
+        }
         Toast.makeText(this, "删除失败!", Toast.LENGTH_SHORT).show();
     }
 

@@ -6,9 +6,11 @@ import com.orientalfinance.eastcloud.module.javabean.Advertisement;
 import com.orientalfinance.eastcloud.module.javabean.Application;
 import com.orientalfinance.eastcloud.module.javabean.Appointment;
 import com.orientalfinance.eastcloud.module.javabean.AppointmentProgram;
+import com.orientalfinance.eastcloud.module.javabean.AvatarUrl;
 import com.orientalfinance.eastcloud.module.javabean.BankCardInfo;
 import com.orientalfinance.eastcloud.module.javabean.Banner;
 import com.orientalfinance.eastcloud.module.javabean.ChannelCategory;
+import com.orientalfinance.eastcloud.module.javabean.CheckVersionResult;
 import com.orientalfinance.eastcloud.module.javabean.Collection;
 import com.orientalfinance.eastcloud.module.javabean.Comment;
 import com.orientalfinance.eastcloud.module.javabean.Detail;
@@ -60,6 +62,14 @@ public interface EastCloudService {
     @POST(".")
     Flowable<EastCloudResponseBody<User>> register(@Field("s") String zip, @Field("sign") String sign);
 
+    /**
+     * 方法描述：注册
+     * itype 201
+     */
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<CheckVersionResult>> checkVersion(@Field("s") String zip, @Field("sign") String sign);
+
 
     /**
      * 方法描述：发送验证码
@@ -102,7 +112,7 @@ public interface EastCloudService {
      */
     @Multipart
     @POST("uploadFile")
-    Call<ResponseResult<FilePostResult>> uploadHeader(@PartMap Map<String, RequestBody> params);
+    Flowable<ResponseResult<FilePostResult>> uploadHeader(@PartMap Map<String, RequestBody> params);
 
     /**
      * 方法描述：修改头像
@@ -114,9 +124,9 @@ public interface EastCloudService {
     /**
      * 方法描述：个人信息修改
      */
-    @FormUrlEncoded
+    @Multipart
     @POST(".")
-    Flowable<EastCloudResponseBody> modifyUserInfo(@Field("s") String zip, @Field("sign") String sign);
+    Flowable<EastCloudResponseBody<AvatarUrl>> modifyUserInfo(@PartMap Map<String, RequestBody> params);
 
 
     /**
@@ -350,9 +360,20 @@ public interface EastCloudService {
     @POST(".")
     Call<ResponseResult> controller(@PartMap Map<String, RequestBody> params);
 
+
     //itype 750
-    @Multipart
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Banner>>> showAppBanner(@Field("s") String zip, @Field("sign") String sign);
+   //itype 751
+   @FormUrlEncoded
     @POST(".")
     Flowable<EastCloudResponseBody<List<Application>>> showAppList(@Field("s") String zip, @Field("sign") String sign);
+
+    //itype 751
+    @FormUrlEncoded
+    @POST(".")
+    Flowable<EastCloudResponseBody<List<Message>>> showMessage(@Field("s") String zip, @Field("sign") String sign);
+
 
 }

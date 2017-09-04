@@ -1,4 +1,5 @@
 package com.orientalfinance.eastcloud.utils;
+
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -310,8 +311,64 @@ public class ValidateUtils {
 //        System.out.println(cc.IDCardValidate(IDCardNum));
 //        // System.out.println(cc.isDate("1996-02-29"));
 //    }
-    /*********************************** 身份证验证结束 ****************************************/
 
+    /*********************************** 身份证验证结束 ****************************************/
+    public static boolean matcherRealName(String value) {
+        String regex = "^([\\u4e00-\\u9fa5]+|([a-zA-Z]+\\s?)+)$";
+        return testRegex(regex, value);
+    }
+
+    public static boolean matcherPhoneNum(String value) {
+        String regex = "^(\\+?\\d{2}-?)?(1[0-9])\\d{9}$";
+        return testRegex(regex, value);
+    }
+
+    public static boolean matcherAccount(String value) {
+        String regex = "[\\u4e00-\\u9fa5a-zA-Z0-9\\-]{4,20}";
+        return testRegex(regex, value);
+    }
+
+    public static boolean matcherPassword(String value) {
+        String regex = "^[a-zA-Z0-9]{6,12}$";
+        return testRegex(regex, value);
+    }
+
+    public static boolean matcherPassword2(String value) {
+        String regex = "(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}";
+        return testRegex(regex, value);
+    }
+
+
+    public static boolean matcherEmail(String value) {
+//      String regex = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)" +
+//                "+[a-zA-Z]{2,}$";
+        String regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+" +
+                "(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+" +
+                "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+        return testRegex(regex, value);
+    }
+
+    public static boolean matcherIP(String value) {
+        String regex = "\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\" +
+                "d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\" +
+                "d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b";
+        return testRegex(regex, value.toLowerCase());
+    }
+
+    public static boolean matcherUrl(String value) {
+        //String regex = "^(([hH][tT]{2}[pP][sS]?)|([fF][tT][pP]))\\:\\/\\/[wW]{3}\\.[\\w-]+\\.\\w{2,4}(\\/.*)?$";
+        String regex = "^(([hH][tT]{2}[pP][sS]?)|([fF][tT][pP]))\\:\\/\\/[\\w-]+\\.\\w{2,4}(\\/.*)?$";
+        return testRegex(regex, value.toLowerCase());
+    }
+
+    public static boolean testRegex(String regex, String inputValue) {
+        return Pattern.compile(regex).matcher(inputValue).matches();
+    }
+
+    public static boolean checkPostcode(String postcode) {
+        String regex = "[1-9]\\d{5}";
+        return Pattern.matches(regex, postcode);
+    }
 }
 
 

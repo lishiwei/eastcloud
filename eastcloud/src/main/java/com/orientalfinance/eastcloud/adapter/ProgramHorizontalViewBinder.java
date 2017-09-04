@@ -31,7 +31,9 @@ public class ProgramHorizontalViewBinder extends ItemViewBinder<HorizontalProgra
 
     @Override
     protected void onBindViewHolder(@NonNull ProgramHorizontalViewHolder holder, @NonNull HorizontalProgram item) {
+
         holder.getItemProgramBinding().setVariable(BR.horizontalprogram, item);
+
     }
 
     static class ProgramHorizontalViewHolder extends RecyclerView.ViewHolder {

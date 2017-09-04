@@ -34,6 +34,9 @@ public class BankCardInfo implements Parcelable {
     @SerializedName("card_type")
     String cardType;
 
+    public BankCardInfo() {
+    }
+
     public BankCardInfo(String bankName, String bankProperty, String bankNumber, String bankLogo) {
         this.bankName = bankName;
         this.bankProperty = bankProperty;

@@ -1,6 +1,12 @@
 package com.orientalfinance.eastcloud.dagger.modules;
 
+import com.orientalfinance.eastcloud.dagger.qualifier.PerFragment;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramLocalDataSource;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramRemoteDataSource;
+import com.orientalfinance.eastcloud.module.core.HomePageProgramRepository;
+
 import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by 29435 on 2017/5/26.
@@ -23,11 +29,11 @@ public class CurrentHitModule {
 //        return new CurrentHitRvAdpter(movies);
 //    }
 //
-//    @Provides
-//    @PerFragment
-//    public MovieRepository getRespository() {
-//        return new MovieRepository(new MovieLocalDataSource(), new MovieRemoteDataSource());
-//    }
+    @Provides
+    @PerFragment
+    public HomePageProgramRepository getRespository() {
+        return new HomePageProgramRepository(new HomePageProgramLocalDataSource(), new HomePageProgramRemoteDataSource());
+    }
 //
 //    @Provides
 //    @LiveVideo

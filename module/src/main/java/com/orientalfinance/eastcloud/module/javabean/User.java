@@ -113,7 +113,8 @@ public class User implements Serializable {
                 ", pwd='" + pwd + '\'' +
                 '}';
     }
-    public  static  class UserLoginRequestParam{
+
+    public static class UserLoginRequestParam {
         String phone;
 
         @Override
@@ -148,8 +149,9 @@ public class User implements Serializable {
 
         String pwd;
     }
-    public static class SendCodeRequestParam{
-      public   String phone;
+
+    public static class SendCodeRequestParam {
+        public String phone;
 
         public SendCodeRequestParam(String phone) {
             this.phone = phone;
@@ -162,9 +164,11 @@ public class User implements Serializable {
                     '}';
         }
     }
-    public static class VerificateCodeRequestParam extends SendCodeRequestParam{
+
+    public static class VerificateCodeRequestParam extends SendCodeRequestParam {
         String code;
         String msgId;
+
         public VerificateCodeRequestParam(String phone, String code, String msgId
         ) {
             super(phone);
@@ -197,8 +201,9 @@ public class User implements Serializable {
             this.msgId = msgId;
         }
     }
-    public static class RegistRequestParam extends SendCodeRequestParam{
-        String pwd ;
+
+    public static class RegistRequestParam extends SendCodeRequestParam {
+        String pwd;
 
         public RegistRequestParam(String phone, String pwd) {
             super(phone);
@@ -213,12 +218,17 @@ public class User implements Serializable {
                     '}';
         }
     }
-    public static class ModifyRequestParam{
-        String real_name;
+
+    public static class ModifyRequestParam {
+
         String nick_name;
+        String real_name;
         String id_card;
         String msg_push;
         String phone;
+        String file;
+        String sex;
+        String push_alias;
 
         public String getReal_name() {
             return real_name;
@@ -227,6 +237,31 @@ public class User implements Serializable {
         public void setReal_name(String real_name) {
             this.real_name = real_name;
         }
+
+        public String getSex() {
+            return sex;
+        }
+
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
+
+        public String getPush_alias() {
+            return push_alias;
+        }
+
+        public void setPush_alias(String push_alias) {
+            this.push_alias = push_alias;
+        }
+
+        public String getFile() {
+            return file;
+        }
+
+        public void setFile(String file) {
+            this.file = file;
+        }
+
 
         public String getNick_name() {
             return nick_name;

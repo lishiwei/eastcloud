@@ -1,5 +1,8 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
+import android.graphics.ComposeShader;
+import android.graphics.PorterDuffXfermode;
+
 import com.orientalfinance.eastcloud.module.Retrofit.ListTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
@@ -48,6 +51,7 @@ public class ChannelPresenter extends MvpNullObjectBasePresenter<ChannelView> {
     }
 
     public void showChannelList(RequestParam requestParam) {
+        ComposeShader composeShader = new ComposeShader(null, null, new PorterDuffXfermode(null));
         getView().showDialog();
         RemoteDataProxy.showChanneList(requestParam).compose(new ListTransform<List<HomePageChannel>>()).subscribe(new Consumer<List<HomePageChannel>>() {
             @Override

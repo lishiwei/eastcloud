@@ -12,6 +12,6 @@ public interface PlayRecordView extends BaseMvpView {
 
     void showHistory(List<History> histories);
 
-    void deleteSucceed(int position);
+    void deleteSucceed(int id);
     void deleteFailed(int position);
 }

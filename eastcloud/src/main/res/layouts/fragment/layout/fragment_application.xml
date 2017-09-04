@@ -1,62 +1,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-
-    <LinearLayout
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants"
-        tools:context="com.orientalfinance.eastcloud.fragment.FragmentApplication">
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+        android:layout_height="match_parent">
 
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_margin="12dp"
-            android:textColor="#000000"
-            android:text="热门应用"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_HotApplication"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_margin="12dp"
-            android:textColor="#000000"
-            android:text="全部应用"/>
+            <LinearLayout
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_AllApplication"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_margin="12dp"
-            android:textColor="#000000"
-            android:text="我的应用"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context="com.orientalfinance.eastcloud.fragment.FragmentApplication">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_MyApplication"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-</ScrollView>
+                <!--<com.youth.banner.Banner-->
+                    <!--android:id="@+id/banner"-->
+
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"/>-->
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_HotApplication"
+                    android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </layout>

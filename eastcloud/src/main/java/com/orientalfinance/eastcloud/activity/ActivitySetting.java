@@ -25,6 +25,7 @@ import com.orientalfinance.eastcloud.utils.ImageLoaders;
 import com.orientalfinance.eastcloud.view.BottomPopWindow;
 import com.yalantis.ucrop.entity.LocalMedia;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -71,7 +72,7 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
                     });
                     break;
                 case R.id.btn_Quit:
-                    getPresenter().quitLogin(new RequestParam());
+//                    getPresenter().quitLogin(new RequestParam());
                     break;
             }
         }
@@ -163,7 +164,7 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
                     modifyRequestParam.setMsg_push("1");
 
                 }
-                getPresenter().modifyUserInfo(new RequestParam(modifyRequestParam));
+                getPresenter().modifyUserInfo(new RequestParam(modifyRequestParam),null);
             }
         });
 
@@ -193,7 +194,11 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
                 // 原图地址
                 path = media.getPath();
             }
-            ImageLoaders.displayCircleImage(mActivitySettingBinding.ivUserAvatar, path);
+            File file = new File(path);
+
+            getPresenter().modifyUserInfo(new RequestParam(),file);
+
+
 
         }
 
@@ -222,5 +227,10 @@ public class ActivitySetting extends BaseMVPActivity<SettingView, SettingPresent
     @Override
     public void showError(String errorMsg) {
 
+    }
+
+    @Override
+    public void updateAvatarSucceed(String path) {
+        ImageLoaders.displayCircleImage(mActivitySettingBinding.ivUserAvatar, path);
     }
 }

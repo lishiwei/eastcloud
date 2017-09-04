@@ -17,8 +17,24 @@ public class HorizontalProgram {
     String programeIntroduce;
     @SerializedName("channel_id")
     String channelId;
+String categoryName;
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 
     public HorizontalProgram() {
+    }
+    public HorizontalProgram(HomepageProgram homepageProgram) {
+        setChannelId(homepageProgram.channelId);
+        setProgrameIntroduce(homepageProgram.programeIntroduce);
+        setImageUrl(homepageProgram.imageUrl);
+        setProgrameName(homepageProgram.programeName);
+        setProgramId(homepageProgram.programId);
     }
 
     public String getProgramId() {

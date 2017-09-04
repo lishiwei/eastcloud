@@ -25,6 +25,20 @@ public class Application {
         return appType;
     }
 
+    public Application() {
+    }
+
+    public Application(String appType) {
+        this.appType = appType;
+    }
+
+    public Application(String url, String name, String icon, String appId) {
+        this.url = url;
+        this.name = name;
+        this.icon = icon;
+        this.appId = appId;
+    }
+
     public void setAppType(String appType) {
         this.appType = appType;
     }

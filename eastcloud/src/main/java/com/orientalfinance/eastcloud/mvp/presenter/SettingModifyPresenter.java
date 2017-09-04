@@ -1,10 +1,10 @@
 package com.orientalfinance.eastcloud.mvp.presenter;
 
-import com.orientalfinance.eastcloud.module.Retrofit.EastCloudResponseBody;
 import com.orientalfinance.eastcloud.module.Retrofit.MyConsumer;
-import com.orientalfinance.eastcloud.module.Retrofit.NullTransform;
+import com.orientalfinance.eastcloud.module.Retrofit.ObjectTransform;
 import com.orientalfinance.eastcloud.module.Retrofit.RemoteDataProxy;
 import com.orientalfinance.eastcloud.module.Retrofit.RequestParam;
+import com.orientalfinance.eastcloud.module.javabean.AvatarUrl;
 import com.orientalfinance.eastcloud.mvp.View.SettingModifyView;
 import com.orientalfinance.eastcloud.mvp.base.MvpNullObjectBasePresenter;
 
@@ -19,9 +19,9 @@ public class SettingModifyPresenter extends MvpNullObjectBasePresenter<SettingMo
 
     public void modifyUserInfo(RequestParam requestParam) {
         getView().showDialog();
-        RemoteDataProxy.modifyUserInfo(requestParam).compose(new NullTransform()).subscribe(new Consumer<EastCloudResponseBody>() {
+        RemoteDataProxy.modifyUserInfo(requestParam,null).compose(new ObjectTransform<AvatarUrl>()).subscribe(new Consumer<AvatarUrl>() {
             @Override
-            public void accept(@NonNull EastCloudResponseBody eastCloudResponseBody) throws Exception {
+            public void accept(@NonNull AvatarUrl avatarUrl) throws Exception {
                 getView().hideDialog();
                 getView().showSucceed();
             }
@@ -30,6 +30,10 @@ public class SettingModifyPresenter extends MvpNullObjectBasePresenter<SettingMo
             public void accept(@NonNull Throwable throwable) throws Exception {
                 super.accept(throwable);
                 getView().hideDialog();
+                if (throwable instanceof NullPointerException)
+                {
+                    getView().showSucceed();
+                }
             }
         });
     }
